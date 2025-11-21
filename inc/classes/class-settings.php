@@ -54,14 +54,14 @@ if ( ! class_exists( 'Kava_Settings' ) ) {
 		 * @access public
 		 * @var    null
 		 */
-		public $available_modules_conditions = array();
+		public $available_modules_conditions = [];
 
 		/**
 		 * Page config
 		 *
 		 * @var array
 		 */
-		public $settings_page_config = array();
+		public $settings_page_config = [];
 
 		/**
 		 * Ajax action
@@ -79,10 +79,10 @@ if ( ! class_exists( 'Kava_Settings' ) ) {
 				return;
 			}
 
-			add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ), 0 );
-			add_action( 'admin_menu',            array( $this, 'register_page' ), 99 );
+			add_action( 'admin_enqueue_scripts', [ $this, 'admin_enqueue_scripts' ], 0 );
+			add_action( 'admin_menu',            [ $this, 'register_page' ], 99 );
 
-			add_action( "wp_ajax_{$this->ajax_action}", array( $this, 'save_settings' ) );
+			add_action( "wp_ajax_{$this->ajax_action}", [ $this, 'save_settings' ] );
 		}
 
 		/**
@@ -113,7 +113,7 @@ if ( ! class_exists( 'Kava_Settings' ) ) {
 				wp_enqueue_script(
 					'kava-admin-script',
 					get_parent_theme_file_uri( 'assets/js/admin.js' ),
-					array( 'cx-vue-ui' ),
+					[ 'cx-vue-ui' ],
 					kava_theme()->version(),
 					true
 				);
@@ -134,9 +134,9 @@ if ( ! class_exists( 'Kava_Settings' ) ) {
 		public function get_settings_page_link() {
 
 			return add_query_arg(
-				array(
+				[
 					'page' => $this->key,
-				),
+				],
 				esc_url( admin_url( 'admin.php' ) )
 			);
 
@@ -152,10 +152,10 @@ if ( ! class_exists( 'Kava_Settings' ) ) {
 		public function get( $setting, $default = false ) {
 
 			if ( null === $this->settings ) {
-				$this->settings = get_option( $this->key, array() );
+				$this->settings = get_option( $this->key, [] );
 			}
 
-			return isset( $this->settings[ $setting ] ) ? $this->settings[ $setting ] : $default;
+			return $this->settings[ $setting ] ?? $default;
 		}
 
 		/**
@@ -170,7 +170,7 @@ if ( ! class_exists( 'Kava_Settings' ) ) {
 				esc_html__( 'Theme', 'kava' ),
 				'manage_options',
 				$this->key,
-				array( $this, 'render_page' ),
+				[ $this, 'render_page' ],
 				get_theme_file_uri( 'assets/images/kava-theme-icon.svg' ),
 				100
 			);
@@ -196,58 +196,58 @@ if ( ! class_exists( 'Kava_Settings' ) ) {
 
 			$available_modules_value = array_merge(
 				$default_available_modules,
-				$this->get( 'available_modules', array() )
+				$this->get( 'available_modules', [] )
 			);
 
-			$this->settings_page_config = array(
+			$this->settings_page_config = [
 				'action'   => $this->ajax_action,
-				'messages' => array(
+				'messages' => [
 					'saveSuccess' => esc_html__( 'Saved', 'kava' ),
 					'saveError'   => esc_html__( 'Error', 'kava' ),
-				),
-				'settingsData' => array(
-					'disable_content_container_archive_cpt' => array(
+				],
+				'settingsData' => [
+					'disable_content_container_archive_cpt' => [
 						'value'   => $this->get( 'disable_content_container_archive_cpt', $default_disable_container_archive_cpt ),
 						'options' => $this->prepare_options_list( $this->get_post_types( true ) ),
-					),
-					'disable_content_container_single_cpt' => array(
+					],
+					'disable_content_container_single_cpt' => [
 						'value'   => $this->get( 'disable_content_container_single_cpt', $default_disable_container_single_cpt ),
 						'options' => $this->prepare_options_list( $this->get_post_types() ),
-					),
-					'single_post_template' => array(
+					],
+					'single_post_template' => [
 						'value'   => $this->get( 'single_post_template', 'default' ),
 						'options' => $this->prepare_options_list( $this->get_single_post_templates() ),
-					),
-					'available_modules' => array(
+					],
+					'available_modules' => [
 						'value'   => $available_modules_value,
 						'options' => $this->prepare_options_list( $this->get_available_modules() ),
-					),
+					],
 					'available_modules_conditions' => $this->available_modules_conditions,
-					'enable_theme_customize_options' => array(
+					'enable_theme_customize_options' => [
 						'value' => $this->get( 'enable_theme_customize_options', 'true' ),
-					),
-					'enqueue_theme_styles' => array(
+					],
+					'enqueue_theme_styles' => [
 						'value' => $this->get( 'enqueue_theme_styles', 'true' ),
-					),
-					'enqueue_theme_js_scripts' => array(
+					],
+					'enqueue_theme_js_scripts' => [
 						'value' => $this->get( 'enqueue_theme_js_scripts', 'true' ),
-					),
-					'enqueue_dynamic_css' => array(
+					],
+					'enqueue_dynamic_css' => [
 						'value' => $this->get( 'enqueue_dynamic_css', 'true' ),
-					),
-					'cache_dynamic_css' => array(
+					],
+					'cache_dynamic_css' => [
 						'value' => $this->get( 'cache_dynamic_css', 'false' ),
-					),
-				),
-			);
+					],
+				],
+			];
 		}
 
 		public function save_settings() {
 
 			if ( ! isset( $_REQUEST['action'] ) || $this->ajax_action !== $_REQUEST['action'] || empty( $_REQUEST['options'] ) ) {
-				wp_send_json_error( array(
+				wp_send_json_error( [
 					'message' => esc_html__( 'Server Error', 'kava' )
-				) );
+				] );
 				return;
 			}
 
@@ -259,12 +259,12 @@ if ( ! class_exists( 'Kava_Settings' ) ) {
 				return;
 			}
 
-			$current = get_option( $this->key, array() );
+			$current = get_option( $this->key, [] );
 
 			if ( is_wp_error( $current ) ) {
-				wp_send_json_error( array(
+				wp_send_json_error( [
 					'message' => esc_html__( 'Server Error', 'kava' )
-				) );
+				] );
 
 				return;
 			}
@@ -277,9 +277,9 @@ if ( ! class_exists( 'Kava_Settings' ) ) {
 
 			update_option( $this->key, $current );
 
-			wp_send_json_success( array(
+			wp_send_json_success( [
 				'message' => esc_html__( 'Settings have been saved', 'kava' )
-			) );
+			] );
 		}
 
 		/**
@@ -288,15 +288,15 @@ if ( ! class_exists( 'Kava_Settings' ) ) {
 		 * @param  array $options
 		 * @return array
 		 */
-		public function prepare_options_list( $options = array() ) {
+		public function prepare_options_list( $options = [] ) {
 
-			$result = array();
+			$result = [];
 
 			foreach ( $options as $slug => $label ) {
-				$result[] = array(
+				$result[] = [
 					'value' => $slug,
 					'label' => $label,
-				);
+				];
 			}
 
 			return $result;
@@ -309,9 +309,9 @@ if ( ! class_exists( 'Kava_Settings' ) ) {
 		 * @param  mixed $default
 		 * @return array
 		 */
-		public function prepare_default_values_list( $options = array(), $default = 'false' ) {
+		public function prepare_default_values_list( $options = [], $default = 'false' ) {
 
-			$result = array();
+			$result = [];
 
 			foreach ( $options as $slug => $label ) {
 				$result[ $slug ] = $default;
@@ -327,13 +327,13 @@ if ( ! class_exists( 'Kava_Settings' ) ) {
 		 * @return array
 		 */
 		public function get_post_types( $is_archive_list = false ) {
-			$args = array(
+			$args = [
 				'show_in_nav_menus' => true,
-			);
+			];
 
 			$post_types = get_post_types( $args, 'objects' );
 
-			$result = array();
+			$result = [];
 
 			if ( empty( $post_types ) ) {
 				return $result;
@@ -359,7 +359,7 @@ if ( ! class_exists( 'Kava_Settings' ) ) {
 		 * @return array
 		 */
 		public function get_single_post_templates() {
-			$default_template = array( 'default' => apply_filters( 'default_page_template_title', esc_html__( 'Default Template', 'kava' ) ) );
+			$default_template = [ 'default' => apply_filters( 'default_page_template_title', esc_html__( 'Default Template', 'kava' ) ) ];
 
 			if ( ! function_exists( 'get_page_templates' ) ) {
 				return $default_template;
@@ -387,7 +387,7 @@ if ( ! class_exists( 'Kava_Settings' ) ) {
 		public function get_available_modules() {
 
 			if (  null === $this->available_modules ) {
-				$this->available_modules = array();
+				$this->available_modules = [];
 
 				$this->parse_available_modules( kava_get_allowed_modules() );
 			}
@@ -395,26 +395,24 @@ if ( ! class_exists( 'Kava_Settings' ) ) {
 			return $this->available_modules;
 		}
 
-		public function parse_available_modules( $modules = array(), $parent = null ) {
+		public function parse_available_modules( $modules = [], $parent = null ) {
 
-			$disabled_modules = apply_filters( 'kava-theme/disabled-modules', array() );
+			$disabled_modules = apply_filters( 'kava-theme/disabled-modules', [] );
 
-			$modules_labels_map = array(
+			$modules_labels_map = [
 				'woo' => 'WooCommerce',
-			);
+			];
 
 			foreach ( $modules as $module => $childs ) {
 				if ( ! in_array( $module, $disabled_modules ) ) {
-					$this->available_modules[ $module ] = isset( $modules_labels_map[ $module ] ) ?
-						$modules_labels_map[ $module ] :
-						ucwords( str_replace( '-', ' ', $module ) );
+					$this->available_modules[ $module ] = $modules_labels_map[ $module ] ?? ucwords( str_replace( '-', ' ', $module ) );
 
 					if ( ! empty( $parent ) ) {
-						$this->available_modules_conditions[ $module ] = array(
+						$this->available_modules_conditions[ $module ] = [
 							'compare' => 'equal',
 							'input'   => $parent,
 							'value'   => 'true',
-						);
+						];
 					}
 
 					if ( ! empty( $childs ) ) {

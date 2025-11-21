@@ -24,7 +24,7 @@ if ( ! class_exists( 'Kava_Widget_Area' ) ) {
 		 * @since 1.0.0
 		 * @var   array
 		 */
-		public $widgets_settings = array();
+		public $widgets_settings = [];
 
 		/**
 		 * Public holder thats save widgets state during page loading.
@@ -32,7 +32,7 @@ if ( ! class_exists( 'Kava_Widget_Area' ) ) {
 		 * @since 1.0.0
 		 * @var   array
 		 */
-		public $active_sidebars = array();
+		public $active_sidebars = [];
 
 		/**
 		 * Constructor.
@@ -41,8 +41,8 @@ if ( ! class_exists( 'Kava_Widget_Area' ) ) {
 		 * @since 1.0.1 Removed argument in constructor.
 		 */
 		function __construct() {
-			add_action( 'widgets_init',            array( $this, 'register' ) );
-			add_action( 'kava-theme/widget-area/render', array( $this, 'render' ) );
+			add_action( 'widgets_init',            [ $this, 'register' ] );
+			add_action( 'kava-theme/widget-area/render', [ $this, 'render' ] );
 		}
 
 		/**
@@ -56,7 +56,7 @@ if ( ! class_exists( 'Kava_Widget_Area' ) ) {
 
 			foreach ( $this->widgets_settings as $id => $settings ) {
 
-				register_sidebar( array(
+				register_sidebar( [
 					'name'          => $settings['name'],
 					'id'            => $id,
 					'description'   => $settings['description'],
@@ -64,7 +64,7 @@ if ( ! class_exists( 'Kava_Widget_Area' ) ) {
 					'after_widget'  => $settings['after_widget'],
 					'before_title'  => $settings['before_title'],
 					'after_title'   => $settings['after_title'],
-				) );
+				] );
 
 				if ( isset( $settings['is_global'] ) ) {
 					$wp_registered_sidebars[ $id ]['is_global'] = $settings['is_global'];
@@ -111,10 +111,10 @@ if ( ! class_exists( 'Kava_Widget_Area' ) ) {
 			}
 
 			$area_id        = apply_filters( 'kava-theme/widget_area/rendering_current', $area_id );
-			$before_wrapper = isset( $this->widgets_settings[ $area_id ]['before_wrapper'] ) ? $this->widgets_settings[ $area_id ]['before_wrapper'] : '<div id="%1$s" %2$s>';
-			$after_wrapper  = isset( $this->widgets_settings[ $area_id ]['after_wrapper'] ) ? $this->widgets_settings[ $area_id ]['after_wrapper'] : '</div>';
+			$before_wrapper = $this->widgets_settings[ $area_id ]['before_wrapper'] ?? '<div id="%1$s" %2$s>';
+			$after_wrapper  = $this->widgets_settings[ $area_id ]['after_wrapper'] ?? '</div>';
 
-			$classes = array( $area_id, 'widget-area' );
+			$classes = [ $area_id, 'widget-area' ];
 			$classes = apply_filters( 'kava-theme/widget_area/classes', $classes, $area_id );
 
 			if ( is_array( $classes ) ) {

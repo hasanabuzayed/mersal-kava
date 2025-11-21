@@ -60,7 +60,7 @@ function kava_extra_body_classes( $classes ) {
 	}
 
 	// Adds a options-based classes.
-	$options_based_classes = array();
+	$options_based_classes = [];
 
 	$layout      = kava_theme()->customizer->get_value( 'container_type' );
 	$blog_layout = kava_theme()->customizer->get_value( 'blog_layout_type' );
@@ -125,12 +125,12 @@ function kava_modify_comment_form( $args ) {
  * @param  array $fonts Fonts List.
  * @return array
  */
-function kava_modify_fonts_list( $fonts = array() ) {
+	function kava_modify_fonts_list( $fonts = [] ) {
 
-	$fonts = array_merge(
-		array(
-			'-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif' => esc_html__( 'Default System Font', 'kava' ),
-		),
+		$fonts = array_merge(
+			[
+				'-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif' => esc_html__( 'Default System Font', 'kava' ),
+			],
 		$fonts
 	);
 

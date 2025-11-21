@@ -32,17 +32,17 @@ function kava_related_posts() {
 		return;
 	}
 
-	$post_terms  = array();
+	$post_terms  = [];
 	$post_number = kava_theme()->customizer->get_value( 'related_posts_count' );
 
 	$post_terms = wp_list_pluck( $terms, 'term_id' );
 
-	$post_args = array(
+	$post_args = [
 		'post_type'    => 'post',
 		'tag__in'      => $post_terms,
 		'numberposts'  => ( int ) $post_number,
-		'post__not_in' => array( $post->ID ),
-	);
+		'post__not_in' => [ $post->ID ],
+	];
 
 	$posts = get_posts( $post_args );
 
@@ -52,7 +52,7 @@ function kava_related_posts() {
 
 	$holder_view_dir = locate_template( 'template-parts/content-related-post.php', false, false );
 
-	$settings = array(
+	$settings = [
 		'block_title'     => 'related_posts_block_title',
 		'title_visible'   => 'related_posts_title',
 		'image_visible'   => 'related_posts_image',
@@ -60,7 +60,7 @@ function kava_related_posts() {
 		'author_visible'  => 'related_posts_author',
 		'date_visible'    => 'related_posts_publish_date',
 		'layout_columns'  => 'related_posts_grid',
-	);
+	];
 
 	foreach ( $settings as $setting_key => $setting_value ) {
 		$settings[ $setting_key ] = kava_theme()->customizer->get_value( $setting_value );
@@ -81,7 +81,7 @@ function kava_related_posts() {
 
 			setup_postdata( $post );
 
-			$image = ( $settings['image_visible'] ) ? kava_post_thumbnail( 'kava-thumb-s', array( 'echo' => false ) ) : '';
+			$image = ( $settings['image_visible'] ) ? kava_post_thumbnail( 'kava-thumb-s', [ 'echo' => false ] ) : '';
 
 			$title = ( $settings['title_visible'] ) ? sprintf(
 				'<h6 class="entry-title"><a href="%s" rel="bookmark">%s</a></h6>',
@@ -91,9 +91,9 @@ function kava_related_posts() {
 
 			$excerpt = ( $settings['excerpt_visible'] ) ? get_the_excerpt() : '';
 
-			$author = ( $settings['author_visible'] ) ? kava_posted_by( array( 'echo' => false ) ) : '';
+			$author = ( $settings['author_visible'] ) ? kava_posted_by( [ 'echo' => false ] ) : '';
 
-			$date = ( $settings['date_visible'] ) ? kava_posted_on( array( 'echo' => false ) ) : '';
+			$date = ( $settings['date_visible'] ) ? kava_posted_on( [ 'echo' => false ] ) : '';
 
 			require( $holder_view_dir );
 		}

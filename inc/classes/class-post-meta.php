@@ -30,13 +30,13 @@ if ( ! class_exists( 'Kava_Post_Meta' ) ) {
 		 *
 		 * @var array
 		 */
-		private $options = array();
+		private $options = [];
 
 		/**
 		 * Constructor for the class
 		 */
 		public function __construct() {
-			add_action( 'init', array( $this, 'init_post_meta' ) );
+			add_action( 'init', [ $this, 'init_post_meta' ] );
 		}
 
 		/**
@@ -44,7 +44,7 @@ if ( ! class_exists( 'Kava_Post_Meta' ) ) {
 		 *
 		 * @param $options
 		 */
-		public function add_options( array $options = array() ) {
+		public function add_options( array $options = [] ) {
 			$this->options[] = $options;
 		}
 
@@ -56,7 +56,7 @@ if ( ! class_exists( 'Kava_Post_Meta' ) ) {
 			foreach ( $this->options as $options ) {
 
 				if ( ! isset( $options['builder_cb'] ) ) {
-					$options['builder_cb'] = array( $this, 'get_interface_builder' );
+					$options['builder_cb'] = [ $this, 'get_interface_builder' ];
 				}
 
 				new Cherry_X_Post_Meta( $options );
@@ -68,10 +68,10 @@ if ( ! class_exists( 'Kava_Post_Meta' ) ) {
 			$builder_data = kava_theme()->framework->get_included_module_data( 'cherry-x-interface-builder.php' );
 
 			return new CX_Interface_Builder(
-				array(
+				[
 					'path' => $builder_data['path'],
 					'url'  => $builder_data['url'],
-				)
+				]
 			);
 		}
 

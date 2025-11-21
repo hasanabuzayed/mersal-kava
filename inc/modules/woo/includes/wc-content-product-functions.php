@@ -70,9 +70,9 @@ if ( ! function_exists( 'kava_wc_loop_add_to_cart_link' ) ) {
 	function kava_wc_loop_add_to_cart_link( $html, $product, $args ) {
 		$html = sprintf( '<a href="%s" data-quantity="%s" class="%s" %s><span class="button-text">%s</span></a>',
 			esc_url( $product->add_to_cart_url() ),
-			esc_attr( isset( $args['quantity'] ) ? $args['quantity'] : 1 ),
-			esc_attr( isset( $args['class'] ) ? $args['class'] : 'button' ),
-			isset( $args['attributes'] ) ? wc_implode_html_attributes( $args['attributes'] ) : '',
+			esc_attr( $args['quantity'] ?? 1 ),
+			esc_attr( $args['class'] ?? 'button' ),
+			$args['attributes'] ?? '',
 			esc_html( $product->add_to_cart_text() )
 		);
 

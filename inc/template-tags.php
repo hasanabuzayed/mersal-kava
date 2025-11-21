@@ -11,12 +11,12 @@ if ( ! function_exists( 'kava_post_excerpt' ) ) :
 	/**
 	 * Prints HTML with excerpt.
 	 */
-	function kava_post_excerpt( $args = array() ) {
-		$default_args = array(
+	function kava_post_excerpt( $args = [] ) {
+		$default_args = [
 			'before' => '<div class="entry-content">',
 			'after'  => '</div>',
 			'echo'   => true
-		);
+		];
 		$args = wp_parse_args( $args, $default_args );
 
 		$post_excerpt_enable = kava_theme()->customizer->get_value( 'blog_post_excerpt' );
@@ -57,17 +57,17 @@ if ( ! function_exists( 'kava_posted_on' ) ) :
 	/**
 	 * Prints HTML with meta information for the current post-date/time.
 	 */
-	function kava_posted_on( $args = array() ) {
+	function kava_posted_on( $args = [] ) {
 		if ( 'post' === get_post_type() ) {
 
-			$default_args = array(
+			$default_args = [
 				'prefix' => '',
 				'format' => '',
 				'before' => '<span class="posted-on">',
 				'after'  => '</span>',
 				'echo'   => true
-			);
-			$args = wp_parse_args( $args, $default_args );
+		];
+		$args = wp_parse_args( $args, $default_args );
 
 			$option_name = ! is_singular( 'post' ) ? 'blog_post_publish_date' : 'single_post_publish_date';
 			$post_publish_date_enable = kava_theme()->customizer->get_value( $option_name );
@@ -92,11 +92,11 @@ if ( ! function_exists( 'kava_posted_on' ) ) :
 					$args['before'] . $args['prefix'] . ' ' . $posted_on . $args['after']
 				);
 
-				$allowed_html = array(
-					'time' => array(
+				$allowed_html = [
+					'time' => [
 						'datetime' => true,
-					),
-				);
+					],
+				];
 
 				if ( $args['echo'] ) {
 					echo wp_kses( $date_output, kava_kses_post_allowed_html( $allowed_html ) );
@@ -113,16 +113,16 @@ if ( ! function_exists( 'kava_posted_by' ) ) :
 	/**
 	 * Prints HTML with meta information for the current author.
 	 */
-	function kava_posted_by( $args = array() ) {
+	function kava_posted_by( $args = [] ) {
 		if ( 'post' === get_post_type() ) {
 
-			$default_args = array(
+			$default_args = [
 				'prefix' => __( 'By', 'kava' ),
 				'before' => '<span class="byline">',
 				'after'  => '</span>',
 				'echo'   => true
-			);
-			$args = wp_parse_args( $args, $default_args );
+		];
+		$args = wp_parse_args( $args, $default_args );
 
 			$option_name = ! is_singular( 'post' ) ? 'blog_post_author' : 'single_post_author';
 			$post_author_enable = kava_theme()->customizer->get_value( $option_name );
@@ -139,16 +139,16 @@ if ( ! function_exists( 'kava_posted_in' ) ) :
 	/**
 	 * Prints HTML with meta information for the current categories.
 	 */
-	function kava_posted_in( $args = array() ) {
+	function kava_posted_in( $args = [] ) {
 		if ( 'post' === get_post_type() ) {
 
-			$default_args = array(
+			$default_args = [
 				'prefix'    => '',
 				'delimiter' => ', ',
 				'before'    => '<span class="cat-links">',
 				'after'     => '</span>'
-			);
-			$args = wp_parse_args( $args, $default_args );
+		];
+		$args = wp_parse_args( $args, $default_args );
 
 			$option_name = ! is_singular( 'post' ) ? 'blog_post_categories' : 'single_post_categories';
 			$post_categories_enable = kava_theme()->customizer->get_value( $option_name );
@@ -179,16 +179,16 @@ if ( ! function_exists( 'kava_post_tags' ) ) :
 	/**
 	 * Prints HTML with meta information for the current tags.
 	 */
-	function kava_post_tags( $args = array() ) {
+	function kava_post_tags( $args = [] ) {
 		if ( 'post' === get_post_type() ) {
 
-			$default_args = array(
+			$default_args = [
 				'prefix'    => '',
 				'delimiter' => ', ',
 				'before'    => '<span class="tags-links">',
 				'after'     => '</span>'
-			);
-			$args = wp_parse_args( $args, $default_args );
+		];
+		$args = wp_parse_args( $args, $default_args );
 
 			$option_name = ! is_singular( 'post' ) ? 'blog_post_tags' : 'single_post_tags';
 			$post_tags_enable = kava_theme()->customizer->get_value( $option_name );
@@ -219,7 +219,7 @@ if ( ! function_exists( 'kava_post_comments' ) ) :
 	/**
 	 * Prints HTML with meta information for the current comments.
 	 */
-	function kava_post_comments( $args = array() ) {
+	function kava_post_comments( $args = [] ) {
 		if ( 'post' === get_post_type() ) {
 
 			$option_name = ! is_singular( 'post' ) ? 'blog_post_comments' : 'single_post_comments';
@@ -228,11 +228,11 @@ if ( ! function_exists( 'kava_post_comments' ) ) :
 			if ( $post_comments_enable && ! post_password_required() && comments_open() ) {
 				global $post;
 
-				$default_args = array(
+				$default_args = [
 					'class'   => 'comments-link',
 					'prefix'  => '',
 					'postfix' => '',
-				);
+				];
 
 				$args = wp_parse_args( $args, $default_args );
 
@@ -261,14 +261,14 @@ if ( ! function_exists( 'kava_get_post_author' ) ) :
 	/*
 	* Display a post author.
 	*/
-	function kava_get_post_author( $args = array() ) {
-		$default_args = array(
+	function kava_get_post_author( $args = [] ) {
+		$default_args = [
 			'prefix' => '',
 			'before' => '<span class="author">',
 			'after'  => '</span>',
 			'link'   => true,
 			'echo'   => true
-		);
+		];
 		$args = wp_parse_args( $args, $default_args );
 
 		global $post;
@@ -304,11 +304,11 @@ if ( ! function_exists( 'kava_get_post_author_avatar' ) ) :
 	/*
 	* Display a post author avatar.
 	*/
-	function kava_get_post_author_avatar( $args = array() ) {
-		$default_args = array(
+	function kava_get_post_author_avatar( $args = [] ) {
+		$default_args = [
 			'size' => 140,
 			'echo' => true
-		);
+		];
 		$args = wp_parse_args( $args, $default_args );
 
 		global $post;
@@ -319,12 +319,12 @@ if ( ! function_exists( 'kava_get_post_author_avatar' ) ) :
 			get_avatar( get_the_author_meta( 'user_email', $author_id ), $args['size'], '', esc_attr( get_the_author_meta( 'nickname', $author_id ) ) )
 		);
 
-		$allowed_html = array(
-			'img' => array(
+		$allowed_html = [
+			'img' => [
 				'srcset' => true,
-			),
-			'noscript' => array(),
-		);
+			],
+			'noscript' => [],
+		];
 
 		if ( $args['echo'] ) {
 			echo wp_kses( $avatar_output, kava_kses_post_allowed_html( $allowed_html ) );
@@ -338,11 +338,11 @@ if ( ! function_exists( 'kava_get_author_meta' ) ) :
 	/*
 	* Display author meta.
 	*/
-	function kava_get_author_meta( $args = array() ) {
-		$default_args = array(
+	function kava_get_author_meta( $args = [] ) {
+		$default_args = [
 			'field' => 'description',
 			'echo'  => true
-		);
+		];
 		$args = wp_parse_args( $args, $default_args );
 
 		global $post;
@@ -362,11 +362,11 @@ if ( ! function_exists( 'kava_get_author_meta' ) ) :
 endif;
 
 if ( ! function_exists( 'kava_post_link' ) ) :
-	function kava_post_link( $args = array() ) {
+	function kava_post_link( $args = [] ) {
 
-		$default_args = array(
+		$default_args = [
 			'class' => '',
-		);
+		];
 
 		$args = wp_parse_args( $args, $default_args );
 
@@ -406,11 +406,11 @@ if ( ! function_exists( 'kava_edit_link' ) ) :
 				wp_kses(
 					/* translators: %s: Name of current post. Only visible to screen readers */
 					__( 'Edit <span class="screen-reader-text">%s</span>', 'kava' ),
-					array(
-						'span' => array(
-							'class' => array(),
-						),
-					)
+					[
+						'span' => [
+							'class' => [],
+						],
+					]
 				),
 				get_the_title()
 			),
@@ -427,17 +427,17 @@ if ( ! function_exists( 'kava_post_thumbnail' ) ) :
  * Wraps the post thumbnail in an anchor element on index views, or a div
  * element when on single views.
  */
-function kava_post_thumbnail( $image_size = 'post-thumbnail', $args = array() ) {
+function kava_post_thumbnail( $image_size = 'post-thumbnail', $args = [] ) {
 	if ( post_password_required() || is_attachment() || ! has_post_thumbnail() ) {
 		return;
 	}
 
-	$default_args = array(
+	$default_args = [
 		'link'       => true,
 		'class'      => 'post-thumbnail',
 		'link-class' => 'post-thumbnail__link',
 		'echo'       => true,
-	);
+	];
 	$args = wp_parse_args( $args, $default_args );
 
 	$image_size = apply_filters(
@@ -460,16 +460,16 @@ function kava_post_thumbnail( $image_size = 'post-thumbnail', $args = array() ) 
 		$thumb
 	);
 
-	$allowed_html = array(
-		'a' => array(
+	$allowed_html = [
+		'a' => [
 			'aria-hidden' => true,
-		),
-		'img' => array(
+		],
+		'img' => [
 			'srcset' => true,
 			'sizes'  => true,
-		),
-		'noscript' => array(),
-	);
+		],
+		'noscript' => [],
+	];
 
 	if ( $args['echo'] ) {
 		echo $thumb;
@@ -630,7 +630,7 @@ function kava_is_top_panel_visible() {
 
 		$conditions = apply_filters(
 			'kava-theme/header/top-panel-visibility-conditions',
-			array( $site_description, $social )
+			[ $site_description, $social ]
 		);
 
 		foreach ( $conditions as $condition ) {

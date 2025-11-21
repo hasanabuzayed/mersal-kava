@@ -19,13 +19,13 @@ function kava_main_menu() {
 	<nav id="site-navigation" class="<?php echo join( ' ', $classes ); ?>" role="navigation">
 		<div class="main-navigation-inner">
 		<?php
-			$args = apply_filters( 'kava-theme/menu/main-menu-args', array(
+			$args = apply_filters( 'kava-theme/menu/main-menu-args', [
 				'theme_location'   => 'main',
 				'container'        => '',
 				'menu_id'          => 'main-menu',
 				'fallback_cb'      => 'kava_set_nav_menu',
 				'fallback_message' => esc_html__( 'Set main menu', 'kava' ),
-			) );
+			] );
 
 			wp_nav_menu( $args );
 		?>
@@ -43,7 +43,7 @@ function kava_main_menu() {
 function kava_footer_menu() { ?>
 	<nav id="footer-navigation" class="footer-menu" role="navigation">
 	<?php
-		$args = apply_filters( 'kava-theme/menu/footer-menu-args', array(
+		$args = apply_filters( 'kava-theme/menu/footer-menu-args', [
 			'theme_location'   => 'footer',
 			'container'        => '',
 			'menu_id'          => 'footer-menu-items',
@@ -51,7 +51,7 @@ function kava_footer_menu() { ?>
 			'depth'            => 1,
 			'fallback_cb'      => '__return_empty_string',
 			'fallback_message' => esc_html__( 'Set footer menu', 'kava' ),
-		) );
+		] );
 
 		wp_nav_menu( $args );
 	?>
@@ -72,7 +72,7 @@ function kava_get_social_list( $context, $type = 'icon' ) {
 	static $instance = 0;
 	$instance++;
 
-	$container_class = array( 'social-list' );
+	$container_class = [ 'social-list' ];
 
 	if ( ! empty( $context ) ) {
 		$container_class[] = sprintf( 'social-list--%s', sanitize_html_class( $context ) );
@@ -80,7 +80,7 @@ function kava_get_social_list( $context, $type = 'icon' ) {
 
 	$container_class[] = sprintf( 'social-list--%s', sanitize_html_class( $type ) );
 
-	$args = apply_filters( 'kava-theme/social/list-args', array(
+	$args = apply_filters( 'kava-theme/social/list-args', [
 		'theme_location'   => 'social',
 		'container'        => 'div',
 		'container_class'  => join( ' ', $container_class ),
@@ -92,7 +92,7 @@ function kava_get_social_list( $context, $type = 'icon' ) {
 		'echo'             => false,
 		'fallback_cb'      => 'kava_set_nav_menu',
 		'fallback_message' => esc_html__( 'Set social menu', 'kava' ),
-	), $context, $type );
+	], $context, $type );
 
 	return wp_nav_menu( $args );
 }

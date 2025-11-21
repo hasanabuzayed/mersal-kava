@@ -12,15 +12,15 @@
 
 if ( ! function_exists( 'kava_get_allowed_modules' ) ) {
 	function kava_get_allowed_modules() {
-		return apply_filters( 'kava-theme/allowed-modules', array(
-			'blog-layouts'    => array(),
-			'breadcrumbs'     => array(),
-			//'crocoblock'      => array(),
-			'post-formats'    => array(),
-			'woo'             => array(
-				'woo-breadcrumbs' => array(),
-				'woo-page-title'  => array(),
-			),
-		) );
+		return apply_filters( 'kava-theme/allowed-modules', [
+			'blog-layouts'    => [],
+			'breadcrumbs'     => [],
+			//'crocoblock'      => [],
+			'post-formats'    => [],
+			'woo'             => [
+				'woo-breadcrumbs' => [],
+				'woo-page-title'  => [],
+			],
+		] );
 	}
 }

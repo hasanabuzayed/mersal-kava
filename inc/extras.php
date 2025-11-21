@@ -79,10 +79,10 @@ function kava_maybe_need_rewrite_mod() {
  */
 function kava_render_macros( $string ) {
 
-	$macros = apply_filters( 'kava-theme/data_macros', array(
+	$macros = apply_filters( 'kava-theme/data_macros', [
 		'/%%year%%/' => date( 'Y' ),
 		'/%%date%%/' => date( get_option( 'date_format' ) ),
-	) );
+	] );
 
 	return preg_replace( array_keys( $macros ), array_values( $macros ), $string );
 }
@@ -134,13 +134,13 @@ function kava_render_icons_callback( $matches ) {
  * @return array
  */
 function kava_get_render_icons_set() {
-	return apply_filters( 'kava-theme/icons/icons-set', array(
+	return apply_filters( 'kava-theme/icons/icons-set', [
 		'fa'       => '<i class="fa-solid fa-%s"></i>',
 		'fa-solid' => '<i class="fa-solid fa-%s"></i>',
 		'fa-regular' => '<i class="fa-regular fa-%s"></i>',
 		'fa-brands' => '<i class="fa-brands fa-%s"></i>',
 		'material' => '<i class="material-icons">%s</i>',
-	) );
+	] );
 }
 
 /**
@@ -159,10 +159,10 @@ function kava_render_theme_url( $url ) {
  * @return string
  */
 function kava_justify_thumbnail_size( $mask = 0, $thumbnail_size = 'post-thumbnail', $justify_size='kava-thumb-justify', $justify_size_1 = 'kava-thumb-justify', $justify_size_2 = 'kava-thumb-justify-2') {
-	$mask_list = array(
-		array( $justify_size_1, $justify_size_2, $justify_size_2, $justify_size_1, $justify_size_1, $justify_size_1, $justify_size_1 ),
-		array( $justify_size_1, $justify_size_1, $justify_size_2, $justify_size_2, $justify_size_1, $justify_size_1, $justify_size_1, $justify_size_2, $justify_size_1 )
-	);
+	$mask_list = [
+		[ $justify_size_1, $justify_size_2, $justify_size_2, $justify_size_1, $justify_size_1, $justify_size_1, $justify_size_1 ],
+		[ $justify_size_1, $justify_size_1, $justify_size_2, $justify_size_2, $justify_size_1, $justify_size_1, $justify_size_1, $justify_size_2, $justify_size_1 ]
+	];
 
 	global $wp_query;
 	$image_size_index = $wp_query->current_post % count( $mask_list[$mask] );
@@ -195,7 +195,7 @@ function kava_get_post_style() {
  *
  * @return array
  */
-function kava_kses_post_allowed_html( $additional_allowed_html = array() ) {
+function kava_kses_post_allowed_html( $additional_allowed_html = [] ) {
 	$allowed_html = wp_kses_allowed_html( 'post' );
 
 	if ( ! empty( $additional_allowed_html ) ) {

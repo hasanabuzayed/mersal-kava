@@ -61,11 +61,11 @@ if ( ! class_exists( 'Kava_Dynamic_CSS_File' ) ) {
 		 * @return void
 		 */
 		public function __construct() {
-			add_action( 'after_setup_theme',  array( $this, 'maybe_create_css_file' ), 11 );
-			add_action( 'after_setup_theme',  array( $this, 'remove_print_inline_style' ), 20 );
-			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_dynamic_css' ) );
+			add_action( 'after_setup_theme',  [ $this, 'maybe_create_css_file' ], 11 );
+			add_action( 'after_setup_theme',  [ $this, 'remove_print_inline_style' ], 20 );
+			add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_dynamic_css' ] );
 
-			add_action( 'customize_save_after', array( $this, 'remove_css_file' ) );
+			add_action( 'customize_save_after', [ $this, 'remove_css_file' ] );
 		}
 
 		/**
@@ -138,7 +138,7 @@ if ( ! class_exists( 'Kava_Dynamic_CSS_File' ) ) {
 			wp_enqueue_style(
 				'kava-theme-dynamic-style',
 				$this->dynamic_css_url(),
-				array( 'kava-theme-style' ),
+				[ 'kava-theme-style' ],
 				filemtime( $this->dynamic_css_path() )
 			);
 		}
@@ -160,7 +160,7 @@ if ( ! class_exists( 'Kava_Dynamic_CSS_File' ) ) {
 				return;
 			}
 
-			remove_action( 'wp_enqueue_scripts', array( kava_theme()->dynamic_css, 'add_inline_css' ), 99 );
+			remove_action( 'wp_enqueue_scripts', [ kava_theme()->dynamic_css, 'add_inline_css' ], 99 );
 		}
 
 		/**

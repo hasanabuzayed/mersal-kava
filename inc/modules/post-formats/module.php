@@ -15,7 +15,7 @@ if ( ! class_exists( 'Kava_Post_Formats_Module' ) ) {
 	 */
 	class Kava_Post_Formats_Module extends Kava_Module_Base {
 
-		private $post_formats = array( 'gallery', 'image', 'link', 'quote', 'video', 'audio' );
+		private $post_formats = [ 'gallery', 'image', 'link', 'quote', 'video', 'audio' ];
 
 		/**
 		 * Module ID
@@ -32,14 +32,14 @@ if ( ! class_exists( 'Kava_Post_Formats_Module' ) ) {
 		 * @return void
 		 */
 		public function actions() {
-			add_action( 'after_setup_theme', array( $this, 'support_post_formats' ), 6 );
-			add_action( 'after_setup_theme', array( $this, 'add_meta_options' ), 6 );
+			add_action( 'after_setup_theme', [ $this, 'support_post_formats' ], 6 );
+			add_action( 'after_setup_theme', [ $this, 'add_meta_options' ], 6 );
 
-			add_action( 'wp_enqueue_scripts', array( $this, 'register_assets' ), 9 );
+			add_action( 'wp_enqueue_scripts', [ $this, 'register_assets' ], 9 );
 
 			// Register default post formats
 			foreach ( $this->post_formats as $format ) {
-				add_action( 'kava_post_format_' . $format, array( $this, 'post_format_' . $format ) );
+				add_action( 'kava_post_format_' . $format, [ $this, 'post_format_' . $format ] );
 			}
 		}
 
@@ -49,8 +49,8 @@ if ( ! class_exists( 'Kava_Post_Formats_Module' ) ) {
 		 * @return void
 		 */
 		public function filters() {
-			add_filter( 'kava-theme/assets-depends/script', array( $this, 'add_depends_scripts' ) );
-			add_filter( 'kava-theme/assets-depends/styles', array( $this, 'add_depends_styles' ) );
+			add_filter( 'kava-theme/assets-depends/script', [ $this, 'add_depends_scripts' ] );
+			add_filter( 'kava-theme/assets-depends/styles', [ $this, 'add_depends_styles' ] );
 		}
 
 		/**
@@ -68,7 +68,7 @@ if ( ! class_exists( 'Kava_Post_Formats_Module' ) ) {
 			wp_register_script(
 				'magnific-popup',
 				get_theme_file_uri( 'assets/lib/magnific-popup/jquery.magnific-popup.min.js' ),
-				array( 'jquery' ),
+				[ 'jquery' ],
 				'1.1.0',
 				true
 			);
@@ -77,7 +77,7 @@ if ( ! class_exists( 'Kava_Post_Formats_Module' ) ) {
 			wp_register_script(
 				'swiper',
 				'https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js',
-				array(), // Swiper v12 doesn't require jQuery
+				[], // Swiper v12 doesn't require jQuery
 				'12.0.3',
 				true
 			);
@@ -85,7 +85,7 @@ if ( ! class_exists( 'Kava_Post_Formats_Module' ) ) {
 			wp_register_style(
 				'magnific-popup',
 				get_theme_file_uri( 'assets/lib/magnific-popup/magnific-popup.min.css' ),
-				array(),
+				[],
 				'1.1.0'
 			);
 
@@ -93,7 +93,7 @@ if ( ! class_exists( 'Kava_Post_Formats_Module' ) ) {
 			wp_register_style(
 				'swiper',
 				'https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css',
-				array(),
+				[],
 				'12.0.3'
 			);
 		}
@@ -105,7 +105,7 @@ if ( ! class_exists( 'Kava_Post_Formats_Module' ) ) {
 		 *
 		 * @return array
 		 */
-		public function add_depends_scripts( $depends_scripts = array() ) {
+		public function add_depends_scripts( $depends_scripts = [] ) {
 			if ( is_singular( 'post' ) ) {
 				array_push( $depends_scripts, 'magnific-popup', 'swiper' );
 			}
@@ -120,7 +120,7 @@ if ( ! class_exists( 'Kava_Post_Formats_Module' ) ) {
 		 *
 		 * @return array
 		 */
-		public function add_depends_styles( $depends_styles = array() ) {
+		public function add_depends_styles( $depends_styles = [] ) {
 			if ( is_singular( 'post' ) ) {
 				array_push( $depends_styles, 'magnific-popup', 'swiper' );
 			}
@@ -132,75 +132,75 @@ if ( ! class_exists( 'Kava_Post_Formats_Module' ) ) {
 		 * Add meta options
 		 */
 		public function add_meta_options() {
-			kava_post_meta()->add_options( array(
+			kava_post_meta()->add_options( [
 				'id'            => 'kava-extra-post-type-settings',
 				'title'         => esc_html__( 'Post Formats Settings', 'kava' ),
-				'page'          => array( 'post' ),
+				'page'          => [ 'post' ],
 				'context'       => 'normal',
 				'priority'      => 'high',
 				'callback_args' => false,
-				'fields'        => array(
-					'post_formats' => array(
+				'fields'        => [
+					'post_formats' => [
 						'type' => 'component-tab-horizontal',
-					),
-					'gallery_tab' => array(
+					],
+					'gallery_tab' => [
 						'type'   => 'settings',
 						'parent' => 'post_formats',
 						'title'  => esc_html__( 'Gallery', 'kava' ),
-					),
-					'kava_extra_gallery_images' => array(
+					],
+					'kava_extra_gallery_images' => [
 						'type'               => 'media',
 						'parent'             => 'gallery_tab',
 						'title'              => esc_html__( 'Image Gallery', 'kava' ),
 						'description'        => esc_html__( 'Choose image(s) for the gallery. This setting is used for your gallery post formats.', 'kava' ),
 						'library_type'       => 'image',
 						'upload_button_text' => esc_html__( 'Set Gallery Images', 'kava' ),
-					),
-					'link_tab' => array(
+					],
+					'link_tab' => [
 						'type'   => 'settings',
 						'parent' => 'post_formats',
 						'title'  => esc_html__( 'Link', 'kava' ),
-					),
-					'kava_extra_link' => array(
+					],
+					'kava_extra_link' => [
 						'type'        => 'text',
 						'parent'      => 'link_tab',
 						'title'       => esc_html__( 'Link URL', 'kava' ),
 						'description' => esc_html__( 'Enter your external url. This setting is used for your link post formats.', 'kava' ),
-					),
-					'kava_extra_link_target' => array(
+					],
+					'kava_extra_link_target' => [
 						'type'        => 'select',
 						'parent'      => 'link_tab',
 						'title'       => esc_html__( 'Link Target', 'kava' ),
 						'description' => esc_html__( 'Choose your target for the url. This setting is used for your link post formats.', 'kava' ),
 						'value'       => '_blank',
-						'options'     => array(
+						'options'     => [
 							'_blank' => 'Blank',
 							'_self'  => 'Self',
-						),
-					),
-					'quote_tab' => array(
+						],
+					],
+					'quote_tab' => [
 						'type'   => 'settings',
 						'parent' => 'post_formats',
 						'title'  => esc_html__( 'Quote', 'kava' ),
-					),
-					'kava_extra_quote_text' => array(
+					],
+					'kava_extra_quote_text' => [
 						'type'        => 'textarea',
 						'parent'      => 'quote_tab',
 						'title'       => esc_html__( 'Quote', 'kava' ),
 						'description' => esc_html__( 'Enter your quote. This setting is used for your quote post formats.', 'kava' ),
-					),
-					'kava_extra_quote_cite' => array(
+					],
+					'kava_extra_quote_cite' => [
 						'type'        => 'text',
 						'parent'      => 'quote_tab',
 						'title'       => esc_html__( 'Cite', 'kava' ),
 						'description' => esc_html__( 'Enter the quote source. This setting is used for your quote post formats.', 'kava' ),
-					),
-					'audio_tab' => array(
+					],
+					'audio_tab' => [
 						'type'   => 'settings',
 						'parent' => 'post_formats',
 						'title'  => esc_html__( 'Audio', 'kava' ),
-					),
-					'kava_extra_audio' => array(
+					],
+					'kava_extra_audio' => [
 						'type'               => 'media',
 						'parent'             => 'audio_tab',
 						'title'              => esc_html__( 'Audio', 'kava' ),
@@ -208,49 +208,49 @@ if ( ! class_exists( 'Kava_Post_Formats_Module' ) ) {
 						'library_type'       => 'audio',
 						'multi_upload'       => false,
 						'upload_button_text' => esc_html__( 'Set audio', 'kava' ),
-					),
-					'kava_extra_audio_loop' => array(
+					],
+					'kava_extra_audio_loop' => [
 						'type'        => 'switcher',
 						'parent'      => 'audio_tab',
 						'title'       => esc_html__( 'Loop', 'kava' ),
 						'description' => esc_html__( 'Allows for the looping of media.', 'kava' ),
 						'value'       => false,
-					),
-					'kava_extra_audio_autoplay' => array(
+					],
+					'kava_extra_audio_autoplay' => [
 						'type'        => 'switcher',
 						'parent'      => 'audio_tab',
 						'title'       => esc_html__( 'Autoplay', 'kava' ),
 						'description' => esc_html__( 'Causes the media to automatically play as soon as the media file is ready.', 'kava' ),
 						'value'       => false,
-					),
-					'kava_extra_audio_preload' => array(
+					],
+					'kava_extra_audio_preload' => [
 						'type'        => 'switcher',
 						'parent'      => 'audio_tab',
 						'title'       => esc_html__( 'Preload', 'kava' ),
 						'description' => esc_html__( 'Specifies if and how the audio should be loaded when the page loads.', 'kava' ),
 						'value'       => false,
-					),
-					'video_tab' => array(
+					],
+					'video_tab' => [
 						'type'        => 'settings',
 						'parent'      => 'post_formats',
 						'title'       => esc_html__( 'Video', 'kava' ),
-					),
-					'kava_extra_video_type' => array(
+					],
+					'kava_extra_video_type' => [
 						'type'        => 'radio',
 						'parent'      => 'video_tab',
 						'title'       => esc_html__( 'Video Source Type', 'kava' ),
 						'description' => esc_html__( 'Choose video source type. This setting is used for your video post formats.', 'kava' ),
 						'value'       => 'library',
-						'options'     => array(
-							'library'  => array(
+						'options'     => [
+							'library'  => [
 								'label' => esc_html__( 'Media Library', 'kava' ),
-							),
-							'external' => array(
+							],
+							'external' => [
 								'label' => esc_html__( 'External Video', 'kava' ),
-							),
-						),
-					),
-					'kava_extra_video_library' => array(
+							],
+						],
+					],
+					'kava_extra_video_library' => [
 						'type'               => 'media',
 						'parent'             => 'video_tab',
 						'title'              => esc_html__( 'Library Video', 'kava' ),
@@ -258,20 +258,20 @@ if ( ! class_exists( 'Kava_Post_Formats_Module' ) ) {
 						'library_type'       => 'video',
 						'multi_upload'       => false,
 						'upload_button_text' => esc_html__( 'Set Video', 'kava' ),
-						'conditions'         => array(
+						'conditions'         => [
 							'kava_extra_video_type' => 'library',
-						),
-					),
-					'kava_extra_video_external' => array(
+						],
+					],
+					'kava_extra_video_external' => [
 						'type'        => 'text',
 						'parent'      => 'video_tab',
 						'title'       => esc_html__( 'External Video URL', 'kava' ),
 						'description' => esc_html__( 'Enter a URL that is compatible with WP built-in oEmbed feature. This setting is used for your video post formats.', 'kava' ),
-						'conditions'  => array(
+						'conditions'  => [
 							'kava_extra_video_type' => 'external',
-						),
-					),
-					'kava_extra_video_poster' => array(
+						],
+					],
+					'kava_extra_video_poster' => [
 						'type'               => 'media',
 						'parent'             => 'video_tab',
 						'title'              => esc_html__( 'Video Poster', 'kava' ),
@@ -279,8 +279,8 @@ if ( ! class_exists( 'Kava_Post_Formats_Module' ) ) {
 						'library_type'       => 'image',
 						'multi_upload'       => false,
 						'upload_button_text' => esc_html__( 'Set Poster', 'kava' ),
-					),
-					'kava_extra_video_width' => array(
+					],
+					'kava_extra_video_width' => [
 						'type'        => 'stepper',
 						'parent'      => 'video_tab',
 						'title'       => esc_html__( 'Width', 'kava' ),
@@ -288,8 +288,8 @@ if ( ! class_exists( 'Kava_Post_Formats_Module' ) ) {
 						'value'       => 770,
 						'max_value'   => 1200,
 						'min_value'   => 100,
-					),
-					'kava_extra_video_height' => array(
+					],
+					'kava_extra_video_height' => [
 						'type'        => 'stepper',
 						'parent'      => 'video_tab',
 						'title'       => esc_html__( 'Height', 'kava' ),
@@ -297,33 +297,33 @@ if ( ! class_exists( 'Kava_Post_Formats_Module' ) ) {
 						'value'       => 480,
 						'max_value'   => 1200,
 						'min_value'   => 100,
-					),
-					'kava_extra_video_loop' => array(
+					],
+					'kava_extra_video_loop' => [
 						'type'        => 'switcher',
 						'parent'      => 'video_tab',
 						'title'       => esc_html__( 'Loop', 'kava' ),
 						'description' => esc_html__( 'Allows for the looping of media.', 'kava' ),
 						'value'       => false,
-					),
-					'kava_extra_video_autoplay' => array(
+					],
+					'kava_extra_video_autoplay' => [
 						'type'        => 'switcher',
 						'parent'      => 'video_tab',
 						'title'       => esc_html__( 'Autoplay', 'kava' ),
 						'description' => esc_html__( 'Causes the media to automatically play as soon as the media file is ready.', 'kava' ),
 						'value'       => false,
-						'conditions'  => array(
+						'conditions'  => [
 							'kava_extra_video_loop' => 'true',
-						),
-					),
-					'kava_extra_video_preload' => array(
+						],
+					],
+					'kava_extra_video_preload' => [
 						'type'        => 'switcher',
 						'parent'      => 'video_tab',
 						'title'       => esc_html__( 'Preload', 'kava' ),
 						'description' => esc_html__( 'Specifies if and how the video should be loaded when the page loads.', 'kava' ),
 						'value'       => false,
-					),
-				),
-			) );
+					],
+				],
+			] );
 		}
 
 		/**
@@ -332,13 +332,13 @@ if ( ! class_exists( 'Kava_Post_Formats_Module' ) ) {
 		 * @since  1.0.0
 		 * @param  array $args Set of arguments.
 		 */
-		public function post_format_image( $args = array() ) {
+		public function post_format_image( $args = [] ) {
 			$post_id = get_the_ID();
 
 			if ( has_post_thumbnail( $post_id ) ) {
-				$default_args = array(
+				$default_args = [
 					'size' => 'thumbnail',
-				);
+				];
 
 				$args = wp_parse_args( $args, $default_args );
 
@@ -359,15 +359,15 @@ if ( ! class_exists( 'Kava_Post_Formats_Module' ) ) {
 		 * @since  1.0.0
 		 * @param  array $args Set of arguments.
 		 */
-		public function post_format_gallery( $args = array() ) {
+		public function post_format_gallery( $args = [] ) {
 			$post_id = get_the_ID();
 
 			$gallery_images = get_post_meta( $post_id, 'kava_extra_gallery_images', true );
 
 			if ( $gallery_images ) {
-				$default_args = array(
+				$default_args = [
 					'size' => 'thumbnail',
-				);
+				];
 
 				$args = wp_parse_args( $args, $default_args );
 
@@ -419,7 +419,7 @@ if ( ! class_exists( 'Kava_Post_Formats_Module' ) ) {
 			}
 
 			if ( $video ) {
-				$gallery_attr = array(
+				$gallery_attr = [
 					'src'      => $video,
 					'poster'   => wp_get_attachment_url( get_post_meta( $post_id, 'kava_extra_video_poster', true ) ),
 					'loop'     => get_post_meta( $post_id, 'kava_extra_video_loop', true ),
@@ -427,7 +427,7 @@ if ( ! class_exists( 'Kava_Post_Formats_Module' ) ) {
 					'preload'  => filter_var( get_post_meta( $post_id, 'kava_extra_video_preload', true ), FILTER_VALIDATE_BOOLEAN ) ? 'auto' : 'none',
 					'width'    => get_post_meta( $post_id, 'kava_extra_video_width', true ),
 					'height'   => get_post_meta( $post_id, 'kava_extra_video_height', true ),
-				);
+				];
 
 				echo wp_video_shortcode( $gallery_attr );
 			}
@@ -483,17 +483,17 @@ if ( ! class_exists( 'Kava_Post_Formats_Module' ) ) {
 		 * @since  1.0.0
 		 * @param  array $args Set of arguments.
 		 */
-		public function post_format_audio( $args = array() ) {
+		public function post_format_audio( $args = [] ) {
 			$post_id = get_the_ID();
 			$audio = get_post_meta( $post_id, 'kava_extra_audio', true );
 
 			if ( $audio ) {
-				$attr = array(
+				$attr = [
 					'src'      => wp_get_attachment_url( $audio ),
 					'loop'     => get_post_meta( $post_id, 'kava_extra_audio_loop', true ),
 					'autoplay' => get_post_meta( $post_id, 'kava_extra_audio_autoplay', true ),
 					'preload'  => filter_var( get_post_meta( $post_id, 'kava_extra_audio_preload', true ), FILTER_VALIDATE_BOOLEAN ) ? 'auto' : 'none',
-				);
+				];
 
 				echo wp_audio_shortcode( $attr );
 			}

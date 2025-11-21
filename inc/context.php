@@ -137,7 +137,7 @@ function kava_footer_class( $classes = null ) {
  * @param  array $classes Additional classes.
  * @return void
  */
-function kava_primary_content_class( $classes = array() ) {
+function kava_primary_content_class( $classes = [] ) {
 	echo kava_get_layout_classes( 'content', $classes );
 }
 
@@ -148,7 +148,7 @@ function kava_primary_content_class( $classes = array() ) {
  * @param  array $classes Additional classes.
  * @return void
  */
-function kava_secondary_content_class( $classes = array() ) {
+function kava_secondary_content_class( $classes = [] ) {
 	echo kava_get_layout_classes( 'sidebar', $classes );
 }
 
@@ -160,7 +160,7 @@ function kava_secondary_content_class( $classes = array() ) {
  * @param  array  $classes Additional classes.
  * @return string
  */
-function kava_get_layout_classes( $layout = 'content', $classes = array() ) {
+function kava_get_layout_classes( $layout = 'content', $classes = [] ) {
 	$sidebar_position = kava_theme()->sidebar_position;
 	$sidebar_width    = kava_theme()->customizer->get_value( 'sidebar_width' );
 
@@ -169,7 +169,7 @@ function kava_get_layout_classes( $layout = 'content', $classes = array() ) {
 		$sidebar_width = 0;
 	}
 
-	$layout_classes = ! empty( kava_theme()->layout[ $sidebar_position ][ $sidebar_width ][ $layout ] ) ? kava_theme()->layout[ $sidebar_position ][ $sidebar_width ][ $layout ] : array();
+	$layout_classes = ! empty( kava_theme()->layout[ $sidebar_position ][ $sidebar_width ][ $layout ] ) ? kava_theme()->layout[ $sidebar_position ][ $sidebar_width ][ $layout ] : [];
 
 	if ( ! empty( $classes ) ) {
 		$layout_classes = array_merge( $layout_classes, $classes );
@@ -209,7 +209,7 @@ function kava_posts_list_class( $classes = null ) {
  * @param  array $classes Additional classes.
  * @return void
  */
-function kava_site_branding_class( $classes = array() ) {
+function kava_site_branding_class( $classes = [] ) {
 	$classes[] = 'site-branding';
 
 	echo 'class="' . join( ' ', $classes ) . '"';
