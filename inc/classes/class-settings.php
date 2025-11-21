@@ -30,7 +30,7 @@ if (!class_exists("Kava_Settings")) {
          *
          * @var string
          */
-        public $key = "kava-extra-settings";
+        public readonly string $key;
 
         /**
          * Settings
@@ -74,6 +74,8 @@ if (!class_exists("Kava_Settings")) {
          */
         public function __construct()
         {
+            $this->key = "kava-extra-settings";
+            
             if (!$this->is_enabled()) {
                 return;
             }

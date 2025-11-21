@@ -44,7 +44,7 @@ if ( ! class_exists( 'Kava_Theme_Setup' ) ) {
 		 *
 		 * @var string
 		 */
-		public $version;
+		public readonly string $version;
 
 		/**
 		 * Framework component

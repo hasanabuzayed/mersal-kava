@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 /**
  * Kava_Dynamic_CSS_File class
  *

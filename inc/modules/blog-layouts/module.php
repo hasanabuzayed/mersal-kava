@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 /**
  * Blog layouts module
  */
@@ -22,38 +24,49 @@ if ( ! class_exists( 'Kava_Blog_Layouts_Module' ) ) {
 		private $sidebar_enabled = true;
 		private $fullwidth_enabled = true;
 
-		/**
-		 * Sidebar list.
-		 */
-	private $sidebar_list = [
-		'default'          => [ 'default','v2','v3','v4','v5','v6','v8','v10' ],
-		'creative'         => [ 'v3','v5','v8' ],
-		'grid'             => [ 'v3','v10' ],
-		'masonry'          => [ 'v3','v5','v6','v7','v10' ],
-		'vertical-justify' => [],
-	];
+	/**
+	 * Sidebar list.
+	 */
+	private readonly array $sidebar_list;
 
 	/**
 	 * Fullwidth list.
 	 */
-	private $fullwidth_list = [
-		'default'          => [ 'v9' ],
-		'grid'             => [ 'v4','v5','v9' ],
-		'masonry'          => [ 'v4','v9' ],
-		'vertical-justify' => [ 'v4','v5','v6','v9','v10' ],
-		'creative'         => [ 'default','v2' ]
-	];
+	private readonly array $fullwidth_list;
 
-		/**
-		 * Module ID
-		 *
-		 * @return string
-		 */
-		public function module_id(): string {
+	/**
+	 * Constructor
+	 */
+	public function __construct( array $childs = [] ) {
+		$this->sidebar_list = [
+			'default'          => [ 'default','v2','v3','v4','v5','v6','v8','v10' ],
+			'creative'         => [ 'v3','v5','v8' ],
+			'grid'             => [ 'v3','v10' ],
+			'masonry'          => [ 'v3','v5','v6','v7','v10' ],
+			'vertical-justify' => [],
+		];
 
-			return 'blog-layouts';
+		$this->fullwidth_list = [
+			'default'          => [ 'v9' ],
+			'grid'             => [ 'v4','v5','v9' ],
+			'masonry'          => [ 'v4','v9' ],
+			'vertical-justify' => [ 'v4','v5','v6','v9','v10' ],
+			'creative'         => [ 'default','v2' ]
+		];
 
-		}
+		parent::__construct( $childs );
+	}
+
+	/**
+	 * Module ID
+	 *
+	 * @return string
+	 */
+	public function module_id(): string {
+
+		return 'blog-layouts';
+
+	}
 
 		/**
 		 * Module filters

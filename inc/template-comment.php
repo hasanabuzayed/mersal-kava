@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 /**
  * Functions for handling how comments are displayed and used on the site.
  *

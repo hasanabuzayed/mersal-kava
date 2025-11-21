@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 /**
  * Contextual functions for the header, footer, content and sidebar classes.
  *
