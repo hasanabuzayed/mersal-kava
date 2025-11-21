@@ -6,95 +6,95 @@
  */
 
 // If this file is called directly, abort.
-if ( ! defined( 'WPINC' ) ) {
-	die;
+if (!defined("WPINC")) {
+    die();
 }
 
-if ( ! class_exists( 'Kava_Post_Meta' ) ) {
+if (!class_exists("Kava_Post_Meta")) {
+    /**
+     * Define Kava_Post_Meta class
+     */
+    class Kava_Post_Meta
+    {
+        /**
+         * A reference to an instance of this class.
+         *
+         * @since 1.0.0
+         * @var   Kava_Post_Meta
+         */
+        private static $instance = null;
 
-	/**
-	 * Define Kava_Post_Meta class
-	 */
-	class Kava_Post_Meta {
+        /**
+         * Mata options
+         *
+         * @var array
+         */
+        private $options = [];
 
-		/**
-		 * A reference to an instance of this class.
-		 *
-		 * @since 1.0.0
-		 * @var   Kava_Post_Meta
-		 */
-		private static $instance = null;
+        /**
+         * Constructor for the class
+         */
+        public function __construct()
+        {
+            add_action("init", [$this, "init_post_meta"]);
+        }
 
-		/**
-		 * Mata options
-		 *
-		 * @var array
-		 */
-		private $options = [];
+        /**
+         * Add meta options
+         *
+         * @param array $options
+         */
+        public function add_options(array $options = []): void
+        {
+            $this->options[] = $options;
+        }
 
-		/**
-		 * Constructor for the class
-		 */
-		public function __construct() {
-			add_action( 'init', [ $this, 'init_post_meta' ] );
-		}
+        /**
+         * Init meta
+         */
+        public function init_post_meta(): void
+        {
+            foreach ($this->options as $options) {
+                if (!isset($options["builder_cb"])) {
+                    $options["builder_cb"] = [$this, "get_interface_builder"];
+                }
 
-		/**
-		 * Add meta options
-		 *
-		 * @param array $options
-		 */
-		public function add_options( array $options = [] ): void {
-			$this->options[] = $options;
-		}
+                new Cherry_X_Post_Meta($options);
+            }
+        }
 
-		/**
-		 * Init meta
-		 */
-		public function init_post_meta(): void {
+        public function get_interface_builder(): mixed
+        {
+            $builder_data = kava_theme()->framework->get_included_module_data(
+                "cherry-x-interface-builder.php",
+            );
 
-			foreach ( $this->options as $options ) {
+            return new CX_Interface_Builder([
+                "path" => $builder_data["path"],
+                "url" => $builder_data["url"],
+            ]);
+        }
 
-				if ( ! isset( $options['builder_cb'] ) ) {
-					$options['builder_cb'] = [ $this, 'get_interface_builder' ];
-				}
-
-				new Cherry_X_Post_Meta( $options );
-			}
-		}
-
-		public function get_interface_builder(): mixed {
-
-			$builder_data = kava_theme()->framework->get_included_module_data( 'cherry-x-interface-builder.php' );
-
-			return new CX_Interface_Builder(
-				[
-					'path' => $builder_data['path'],
-					'url'  => $builder_data['url'],
-				]
-			);
-		}
-
-		/**
-		 * Returns the instance.
-		 *
-		 * @since  1.0.0
-		 * @return self
-		 */
-		public static function get_instance(): self {
-
-			// If the single instance hasn't been set, set it now.
-			if ( null == self::$instance ) {
-				self::$instance = new self;
-			}
-			return self::$instance;
-		}
-	}
-
+        /**
+         * Returns the instance.
+         *
+         * @since  1.0.0
+         * @return self
+         */
+        public static function get_instance(): self
+        {
+            // If the single instance hasn't been set, set it now.
+            if (null == self::$instance) {
+                self::$instance = new self();
+            }
+            return self::$instance;
+        }
+    }
 }
 
-function kava_post_meta(): Kava_Post_Meta {
-	return Kava_Post_Meta::get_instance();
+function kava_post_meta(): Kava_Post_Meta
+{
+    return Kava_Post_Meta::get_instance();
 }
 
 kava_post_meta();

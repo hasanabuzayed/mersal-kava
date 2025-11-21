@@ -17,10 +17,10 @@
 		<div class="justify-item-wrap">
 			<div class="entry-meta__top">
 				<?php
-					kava_posted_in( array(
+					kava_posted_in( [
 						'prefix' => '',
 						'delimiter' => ''
-					) );
+					]);
 					kava_post_tags();
 				?>
 			</div><!-- .entry-meta -->
@@ -38,12 +38,12 @@
 				<div class="entry-meta">
 					<?php
 					kava_posted_by();
-					kava_posted_on( array(
+					kava_posted_on( [
 						'prefix' => __( 'Posted ', 'kava' ),
-					) );
-					kava_post_comments( array(
+					]);
+					kava_post_comments( [
 						'postfix' => __( 'comments', 'kava' ),
-					) );
+					]);
 					?>
 				</div>
 			</footer><!-- .entry-footer -->

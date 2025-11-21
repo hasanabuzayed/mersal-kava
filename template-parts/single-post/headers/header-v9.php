@@ -22,21 +22,21 @@ $is_author_block_enabled = kava_theme()->customizer->get_value( 'single_author_b
 							if ( ! $is_author_block_enabled ) {
 								kava_posted_by();
 							}
-							kava_posted_in( array(
+							kava_posted_in( [
 								'prefix'  => __( 'In', 'kava' ),
-							) );
-							kava_posted_on( array(
+							]);
+							kava_posted_on( [
 								'prefix'  => __( 'Posted', 'kava' ),
-							) );
-							kava_post_comments( array(
+							]);
+							kava_post_comments( [
 								'postfix' => __( 'Comment(s)', 'kava' ),
-							) );
+							]);
 						?>
 					</div><!-- .entry-meta -->
 				</header><!-- .entry-header -->
 			</div>
 		</div>
 	</div>
-	<?php kava_post_thumbnail( 'kava-thumb-xl', array( 'link' => false ) ); ?>
+	<?php kava_post_thumbnail( 'kava-thumb-xl', [ 'link' => false ] ); ?>
 </div>
 

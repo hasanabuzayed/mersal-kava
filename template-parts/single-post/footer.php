@@ -11,9 +11,9 @@
 
 <footer class="entry-footer">
 	<div class="entry-meta"><?php
-		kava_post_tags ( array(
+		kava_post_tags ( [
 			'prefix'    => __( 'Tags:', 'kava' ),
 			'delimiter' => ''
-		) );
+		] );
 	?></div>
 </footer><!-- .entry-footer -->

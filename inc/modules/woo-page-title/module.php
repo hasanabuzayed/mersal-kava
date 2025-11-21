@@ -32,7 +32,7 @@ if ( ! class_exists( 'Kava_Woo_Page_Title_Module' ) ) {
 		public function actions(): void {
 			remove_action( 'woocommerce_archive_description', 'woocommerce_taxonomy_archive_description', 10 );
 			remove_action( 'woocommerce_archive_description', 'woocommerce_product_archive_description', 10 );
-			add_action( 'woocommerce_before_main_content', array( $this, 'get_woo_page_title' ), 1 );
+			add_action( 'woocommerce_before_main_content', [ $this, 'get_woo_page_title' ], 1 );
 		}
 
 		/**

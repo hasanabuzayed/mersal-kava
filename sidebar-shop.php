@@ -9,7 +9,7 @@
 ?>
 
 <?php if ( is_active_sidebar( 'sidebar-shop' ) && 'none' !== kava_theme()->sidebar_position ) : ?>
-	<aside id="secondary" <?php kava_secondary_content_class( array( 'widget-area' ) ); ?>>
+	<aside id="secondary" <?php kava_secondary_content_class( ['widget-area'] ); ?>>
 	  <?php dynamic_sidebar( 'sidebar-shop' ); ?>
 	</aside><!-- #secondary -->
 <?php endif;

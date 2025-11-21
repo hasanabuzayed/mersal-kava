@@ -13,12 +13,12 @@
 	<header class="entry-header">
 		<div class="entry-meta"><?php
 			kava_posted_by();
-			kava_posted_in( array(
+			kava_posted_in( [
 				'prefix' => __( 'In', 'kava' ),
-			) );
-			kava_posted_on( array(
+			] );
+			kava_posted_on( [
 				'prefix' => __( 'Posted', 'kava' )
-			) );
+			] );
 		?></div><!-- .entry-meta -->
 		<?php the_title( '<h4 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h4>' ); ?>
 	</header><!-- .entry-header -->

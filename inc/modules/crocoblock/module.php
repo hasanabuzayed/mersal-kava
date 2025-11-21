@@ -41,8 +41,8 @@ if ( ! class_exists( 'Kava_Crocoblock_Module' ) ) {
 				return;
 			}
 
-			add_action( 'init', array( $this, 'plugins_wizard_config' ), 0 );
-			add_action( 'init', array( $this, 'data_importer_config' ), 0 );
+	add_action( 'init', [ $this, 'plugins_wizard_config' ], 0 );
+	add_action( 'init', [ $this, 'data_importer_config' ], 0 );
 		}
 
 		/**
@@ -56,14 +56,14 @@ if ( ! class_exists( 'Kava_Crocoblock_Module' ) ) {
 				return;
 			}
 
-			$advanced_import = array(
-				'from_path' => $this->api . 'wizard-skins.json'
-			);
+	$advanced_import = [
+		'from_path' => $this->api . 'wizard-skins.json'
+	];
 
-			jet_data_importer_register_config( array(
-				'xml'             => false,
-				'advanced_import' => $advanced_import,
-			) );
+	jet_data_importer_register_config( [
+		'xml'             => false,
+		'advanced_import' => $advanced_import,
+	] );
 
 		}
 
@@ -78,18 +78,18 @@ if ( ! class_exists( 'Kava_Crocoblock_Module' ) ) {
 				return;
 			}
 
-			$plugins = array(
+			$plugins = [
 				'get_from' => $this->api . 'wizard-plugins.json'
-			);
+			];
 
-			$skins = array(
+			$skins = [
 				'get_from' => $this->api . 'wizard-skins.json',
-			);
+			];
 
-			jet_plugins_wizard_register_config( array(
+			jet_plugins_wizard_register_config( [
 				'plugins' => $plugins,
 				'skins'   => $skins,
-			) );
+			] );
 
 		}
 

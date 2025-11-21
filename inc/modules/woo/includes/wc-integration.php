@@ -196,7 +196,7 @@ if ( ! function_exists( 'kava_wc_header_cart' ) ) {
 				</div>
 				<div class="header-cart__content">
 			<?php
-			$instance = array( 'title' => esc_html__( 'My cart', 'kava' ) );
+			$instance = [ 'title' => esc_html__( 'My cart', 'kava' ) ];
 			the_widget( 'WC_Widget_Cart', $instance );
 			?>
 				</div>

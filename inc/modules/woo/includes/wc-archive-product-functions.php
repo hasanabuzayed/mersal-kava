@@ -59,21 +59,10 @@ if ( ! function_exists( 'kava_wc_product_loop_start' ) ) {
 			'xl' => wc_get_loop_prop( 'columns' ),
 		];
 
-		switch ( $context ) {
-			case 'related':
-				$columns['xl'] = 4;
-				$columns['lg'] = 4;
-				break;
-			case 'up-sells':
-				$columns['xl'] = 4;
-				$columns['lg'] = 4;
-				break;
-			case 'cross-sells':
-				$columns['xl'] = 4;
-				$columns['lg'] = 4;
-				break;
-			default:
-				break;
+		// Use match expression for context-based column settings (PHP 8.0+)
+		if ( in_array( $context, [ 'related', 'up-sells', 'cross-sells' ], true ) ) {
+			$columns['xl'] = 4;
+			$columns['lg'] = 4;
 		}
 
 		if( $columns['md'] > $columns['lg'] ){

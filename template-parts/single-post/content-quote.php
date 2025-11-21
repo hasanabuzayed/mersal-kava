@@ -13,10 +13,10 @@
 
 <div class="entry-content">
 	<?php the_content(); ?>
-	<?php wp_link_pages( array(
+	<?php wp_link_pages( [
 		'before'      => '<div class="page-links">' . esc_html__( 'Pages:', 'kava' ),
 		'after'       => '</div>',
 		'link_before' => '<span>',
 		'link_after'  => '</span>',
-	) ); ?>
+	] ); ?>
 </div><!-- .entry-content -->

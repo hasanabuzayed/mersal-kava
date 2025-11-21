@@ -481,14 +481,14 @@ if ( ! class_exists( 'Kava_Theme_Setup' ) ) {
 		 *
 		 * @return void
 		 */
-		public function enqueue_admin_assets() {
-			wp_enqueue_style(
-				'kava-theme-admin-css',
-				get_parent_theme_file_uri( 'assets/css/admin.css' ),
-				false,
-				$this->version()
-			);
-		}
+	public function enqueue_admin_assets(): void {
+		wp_enqueue_style(
+			'kava-theme-admin-css',
+			get_parent_theme_file_uri( 'assets/css/admin.css' ),
+			false,
+			$this->version()
+		);
+	}
 
 		/**
 		 * Do Elementor or Jet Theme Core location

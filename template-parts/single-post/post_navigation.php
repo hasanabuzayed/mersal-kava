@@ -9,7 +9,7 @@
 
 echo '<div class="post-navigation-container">';
 
-the_post_navigation( array(
+the_post_navigation( [
 	'prev_text' => sprintf( '
 		<div class="screen-reader-text">%1$s</div>
 		<i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
@@ -26,6 +26,6 @@ the_post_navigation( array(
 		esc_html__( 'Next', 'kava' ),
 		'%title'
 	),
-) );
+] );
 
 echo '</div>';

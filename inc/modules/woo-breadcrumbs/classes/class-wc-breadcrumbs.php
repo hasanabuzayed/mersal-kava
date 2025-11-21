@@ -20,7 +20,7 @@ class Kava_WC_Breadcrumbs extends CX_Breadcrumbs {
 
 		if ( is_singular( 'product' ) ) {
 			$this->add_single_product();
-		} elseif ( is_tax( array( 'product_cat', 'product_tag' ) ) ) {
+		} elseif ( is_tax( [ 'product_cat', 'product_tag' ] ) ) {
 			$this->add_product_tax();
 		}
 

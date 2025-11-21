@@ -36,18 +36,18 @@
 			<div>
 				<?php
 					kava_posted_by();
-					kava_posted_on( array(
+					kava_posted_on( [
 						'prefix' => __( 'Posted', 'kava' )
-					) );
-					kava_post_comments( array(
+					]);
+					kava_post_comments( [
 						'postfix' => __( 'Comment(s)', 'kava' )
-					) );
+					]);
 				?>
 			</div>
 			<?php
-				kava_post_tags( array(
+				kava_post_tags( [
 					'prefix' => __( 'Tags:', 'kava' )
-				) );
+				]);
 				kava_post_link();
 			?>
 		</div>

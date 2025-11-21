@@ -16,12 +16,12 @@ get_header();
 			if ( ! kava_theme()->do_location( 'single' ) ) {
 				the_content();
 			}
-			wp_link_pages( array(
+			wp_link_pages( [
 				'before'      => '<div class="page-links">' . esc_html__( 'Pages:', 'kava' ),
 				'after'       => '</div>',
 				'link_before' => '<span>',
 				'link_after'  => '</span>',
-			) );
+			] );
 		?></article><!-- #post-<?php the_ID(); ?> --><?php
 
 	endwhile; // End of the loop.

@@ -19,13 +19,13 @@
 				<div class="entry-meta">
 					<?php
 					kava_posted_by();
-					kava_posted_in( array(
+					kava_posted_in( [
 						'prefix' => __( 'In', 'kava' ),
 						'delimiter' => ', '
-					) );
-					kava_posted_on( array(
+					]);
+					kava_posted_on( [
 						'prefix' => '',
-					) );
+					]);
 					?>
 				</div><!-- .entry-meta -->
 				<h4 class="entry-title"><?php
@@ -46,9 +46,9 @@
 						if( $post_more_btn_enabled || $post_comments_enabled ) {
 							?><div class="space-between-content"><?php
 							kava_post_link();
-							kava_post_comments( array(
+							kava_post_comments( [
 								'postfix' => __( 'comments', 'kava' ),
-							) );
+							]);
 							kava_post_tags();
 							?></div><?php
 						}

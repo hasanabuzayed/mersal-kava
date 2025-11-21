@@ -25,12 +25,12 @@
 			<div class="entry-meta">
 				<?php
 					kava_posted_by();
-					kava_posted_in( array(
+					kava_posted_in( [
 						'prefix' => __( 'In', 'kava' ),
-					) );
-					kava_posted_on( array(
+					]);
+					kava_posted_on( [
 						'prefix' => __( 'Posted', 'kava' )
-					) );
+					]);
 				?>
 			</div><!-- .entry-meta -->
 		</header><!-- .entry-header -->
@@ -40,16 +40,16 @@
 		<footer class="entry-footer">
 			<div class="entry-meta">
 				<?php
-					kava_post_tags( array(
+					kava_post_tags( [
 						'prefix' => __( 'Tags:', 'kava' )
-					) );
+					]);
 				?>
 				<div><?php
 					kava_post_link();
-					kava_post_comments( array(
+					kava_post_comments( [
 						'prefix' => '<i class="fa-solid fa-comment" aria-hidden="true"></i>',
 						'class'  => 'comments-button'
-					) );
+					]);
 				?></div>
 			</div>
 			<?php kava_edit_link(); ?>

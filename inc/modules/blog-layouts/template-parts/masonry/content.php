@@ -15,11 +15,11 @@
 		<div class="entry-meta">
 			<?php
 			kava_posted_by();
-			kava_posted_in( array(
+			kava_posted_in( [
 				'prefix' => __( 'In', 'kava' ),
 				'delimiter' => ', '
 			) ); 
-			kava_posted_on( array(
+			kava_posted_on( [
 				'prefix' => __( 'Posted', 'kava' ),
 			) ); 
 			?>

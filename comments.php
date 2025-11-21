@@ -41,12 +41,12 @@ if ( post_password_required() ) {
 
 		<ol class="comment-list">
 			<?php
-				wp_list_comments( array(
-					'style'       => 'ol',
-					'avatar_size' => 50,
-					'short_ping'  => true,
-					'callback'    => 'kava_rewrite_comment_item',
-				) );
+			wp_list_comments( [
+				'style'       => 'ol',
+				'avatar_size' => 50,
+				'short_ping'  => true,
+				'callback'    => 'kava_rewrite_comment_item',
+			] );
 			?>
 		</ol><!-- .comment-list -->
 

@@ -6,299 +6,324 @@
  */
 
 // If this file is called directly, abort.
-if ( ! defined( 'WPINC' ) ) {
-	die;
+if (!defined("WPINC")) {
+    die();
 }
 
-if ( ! class_exists( 'Kava_Dynamic_CSS_File' ) ) {
+if (!class_exists("Kava_Dynamic_CSS_File")) {
+    /**
+     * Define Kava_Dynamic_CSS_File class
+     */
+    class Kava_Dynamic_CSS_File
+    {
+        /**
+         * A reference to an instance of this class.
+         *
+         * @since  1.0.0
+         * @access private
+         * @var    Kava_Dynamic_CSS_File
+         */
+        private static $instance = null;
 
-	/**
-	 * Define Kava_Dynamic_CSS_File class
-	 */
-	class Kava_Dynamic_CSS_File {
+        /**
+         * Check cache dynamic css is enabled.
+         *
+         * @since  1.0.0
+         * @access private
+         * @var    null|bool
+         */
+        private $is_cache_dynamic_css = null;
 
-		/**
-		 * A reference to an instance of this class.
-		 *
-		 * @since  1.0.0
-		 * @access private
-		 * @var    Kava_Dynamic_CSS_File
-		 */
-		private static $instance = null;
+        /**
+         * Dynamic CSS directory path.
+         *
+         * @since  1.0.0
+         * @access private
+         * @var    null|string
+         */
+        private $dynamic_dir = null;
 
-		/**
-		 * Check cache dynamic css is enabled.
-		 *
-		 * @since  1.0.0
-		 * @access private
-		 * @var    null|bool
-		 */
-		private $is_cache_dynamic_css = null;
+        /**
+         * Dynamic CSS directory url.
+         *
+         * @since  1.0.0
+         * @access private
+         * @var    null|string
+         */
+        private $dynamic_url = null;
 
-		/**
-		 * Dynamic CSS directory path.
-		 *
-		 * @since  1.0.0
-		 * @access private
-		 * @var    null|string
-		 */
-		private $dynamic_dir = null;
+        /**
+         * Constructor for the class
+         *
+         * @since  1.0.0
+         * @access public
+         * @return void
+         */
+        public function __construct()
+        {
+            add_action(
+                "after_setup_theme",
+                [$this, "maybe_create_css_file"],
+                11,
+            );
+            add_action(
+                "after_setup_theme",
+                [$this, "remove_print_inline_style"],
+                20,
+            );
+            add_action("wp_enqueue_scripts", [$this, "enqueue_dynamic_css"]);
 
-		/**
-		 * Dynamic CSS directory url.
-		 *
-		 * @since  1.0.0
-		 * @access private
-		 * @var    null|string
-		 */
-		private $dynamic_url = null;
+            add_action("customize_save_after", [$this, "remove_css_file"]);
+        }
 
-		/**
-		 * Constructor for the class
-		 *
-		 * @since  1.0.0
-		 * @access public
-		 * @return void
-		 */
-		public function __construct() {
-			add_action( 'after_setup_theme',  [ $this, 'maybe_create_css_file' ], 11 );
-			add_action( 'after_setup_theme',  [ $this, 'remove_print_inline_style' ], 20 );
-			add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_dynamic_css' ] );
+        /**
+         * Check cache dynamic css is enabled.
+         *
+         * @since  1.0.0
+         * @access public
+         * @return bool
+         */
+        public function is_cache_dynamic_css(): bool
+        {
+            if (null !== $this->is_cache_dynamic_css) {
+                return $this->is_cache_dynamic_css;
+            }
 
-			add_action( 'customize_save_after', [ $this, 'remove_css_file' ] );
-		}
+            $enqueue_dynamic_css = kava_settings()->get(
+                "enqueue_dynamic_css",
+                "true",
+            );
+            $cache_dynamic_css = kava_settings()->get(
+                "cache_dynamic_css",
+                "false",
+            );
 
-		/**
-		 * Check cache dynamic css is enabled.
-		 *
-		 * @since  1.0.0
-		 * @access public
-		 * @return bool
-		 */
-		public function is_cache_dynamic_css(): bool {
+            $this->is_cache_dynamic_css =
+                filter_var($enqueue_dynamic_css, FILTER_VALIDATE_BOOLEAN) &&
+                filter_var($cache_dynamic_css, FILTER_VALIDATE_BOOLEAN) &&
+                !is_customize_preview();
 
-			if ( null !== $this->is_cache_dynamic_css ) {
-				return $this->is_cache_dynamic_css;
-			}
+            return $this->is_cache_dynamic_css;
+        }
 
-			$enqueue_dynamic_css = kava_settings()->get( 'enqueue_dynamic_css', 'true' );
-			$cache_dynamic_css   = kava_settings()->get( 'cache_dynamic_css', 'false' );
+        /**
+         * Maybe create Dynamic CSS file
+         *
+         * @since  1.0.0
+         * @access public
+         * @return void
+         */
+        public function maybe_create_css_file(): void
+        {
+            if (!$this->is_cache_dynamic_css()) {
+                return;
+            }
 
-			$this->is_cache_dynamic_css =
-				filter_var( $enqueue_dynamic_css, FILTER_VALIDATE_BOOLEAN )
-				&& filter_var( $cache_dynamic_css, FILTER_VALIDATE_BOOLEAN )
-				&& ! is_customize_preview();
+            if (!$this->ensure_dynamic_dir()) {
+                return;
+            }
 
-			return $this->is_cache_dynamic_css;
-		}
+            if ($this->dynamic_css_exists()) {
+                return;
+            }
 
-		/**
-		 * Maybe create Dynamic CSS file
-		 *
-		 * @since  1.0.0
-		 * @access public
-		 * @return void
-		 */
-		public function maybe_create_css_file(): void {
+            $css = kava_theme()->dynamic_css->get_inline_css();
 
-			if ( ! $this->is_cache_dynamic_css() ) {
-				return;
-			}
+            file_put_contents(
+                $this->dynamic_css_path(),
+                htmlspecialchars_decode($css),
+            );
+        }
 
-			if ( ! $this->ensure_dynamic_dir() ) {
-				return;
-			}
+        /**
+         * Enqueue Dynamic CSS File
+         *
+         * @since  1.0.0
+         * @access public
+         * @return void
+         */
+        public function enqueue_dynamic_css(): void
+        {
+            if (!$this->is_cache_dynamic_css()) {
+                return;
+            }
 
-			if ( $this->dynamic_css_exists() ) {
-				return;
-			}
+            if (!$this->dynamic_css_exists()) {
+                return;
+            }
 
-			$css = kava_theme()->dynamic_css->get_inline_css();
+            wp_enqueue_style(
+                "kava-theme-dynamic-style",
+                $this->dynamic_css_url(),
+                ["kava-theme-style"],
+                filemtime($this->dynamic_css_path()),
+            );
+        }
 
-			file_put_contents( $this->dynamic_css_path(), htmlspecialchars_decode( $css ) );
-		}
+        /**
+         * Remove print inline Dynamic CSS.
+         *
+         * @since  1.0.0
+         * @access public
+         * @return void
+         */
+        public function remove_print_inline_style(): void
+        {
+            if (!$this->is_cache_dynamic_css()) {
+                return;
+            }
 
-		/**
-		 * Enqueue Dynamic CSS File
-		 *
-		 * @since  1.0.0
-		 * @access public
-		 * @return void
-		 */
-		public function enqueue_dynamic_css(): void {
+            if (!$this->dynamic_css_exists()) {
+                return;
+            }
 
-			if ( ! $this->is_cache_dynamic_css() ) {
-				return;
-			}
+            remove_action(
+                "wp_enqueue_scripts",
+                [kava_theme()->dynamic_css, "add_inline_css"],
+                99,
+            );
+        }
 
-			if ( ! $this->dynamic_css_exists() ) {
-				return;
-			}
+        /**
+         * Remove CSS file on options save
+         *
+         * @since  1.0.0
+         * @access public
+         * @return void
+         */
+        public function remove_css_file(): void
+        {
+            if ($this->dynamic_css_exists()) {
+                unlink($this->dynamic_css_path());
+            }
+        }
 
-			wp_enqueue_style(
-				'kava-theme-dynamic-style',
-				$this->dynamic_css_url(),
-				[ 'kava-theme-style' ],
-				filemtime( $this->dynamic_css_path() )
-			);
-		}
+        /**
+         * Check if Dynamic CSS file exists
+         *
+         * @since  1.0.0
+         * @access public
+         * @return bool
+         */
+        public function dynamic_css_exists(): bool
+        {
+            return file_exists($this->dynamic_css_path());
+        }
 
-		/**
-		 * Remove print inline Dynamic CSS.
-		 *
-		 * @since  1.0.0
-		 * @access public
-		 * @return void
-		 */
-		public function remove_print_inline_style(): void {
+        /**
+         * Return path to Dynamic CSS file
+         *
+         * @since  1.0.0
+         * @access public
+         * @return string
+         */
+        public function dynamic_css_path(): string
+        {
+            return $this->dynamic_dir() . "dynamic-style.css";
+        }
 
-			if ( ! $this->is_cache_dynamic_css() ) {
-				return;
-			}
+        /**
+         * Return url to Dynamic CSS file
+         *
+         * @since  1.0.0
+         * @access public
+         * @return string
+         */
+        public function dynamic_css_url(): string
+        {
+            return $this->dynamic_url() . "dynamic-style.css";
+        }
 
-			if ( ! $this->dynamic_css_exists() ) {
-				return;
-			}
+        /**
+         * Returns Dynamic CSS directory URL
+         *
+         * @since  1.0.0
+         * @access public
+         * @return string
+         */
+        public function dynamic_url(): string
+        {
+            if (null !== $this->dynamic_url) {
+                return $this->dynamic_url;
+            }
 
-			remove_action( 'wp_enqueue_scripts', [ kava_theme()->dynamic_css, 'add_inline_css' ], 99 );
-		}
+            $upload_dir = wp_upload_dir();
+            $upload_base_dir = $upload_dir["baseurl"];
+            $this->dynamic_url = trailingslashit($upload_base_dir) . "kava/";
 
-		/**
-		 * Remove CSS file on options save
-		 *
-		 * @since  1.0.0
-		 * @access public
-		 * @return void
-		 */
-		public function remove_css_file(): void {
-			if ( $this->dynamic_css_exists() ) {
-				unlink( $this->dynamic_css_path() );
-			}
-		}
+            if (is_ssl()) {
+                $this->dynamic_url = set_url_scheme($this->dynamic_url);
+            }
 
-		/**
-		 * Check if Dynamic CSS file exists
-		 *
-		 * @since  1.0.0
-		 * @access public
-		 * @return bool
-		 */
-		public function dynamic_css_exists(): bool {
-			return file_exists( $this->dynamic_css_path() );
-		}
+            return $this->dynamic_url;
+        }
 
-		/**
-		 * Return path to Dynamic CSS file
-		 *
-		 * @since  1.0.0
-		 * @access public
-		 * @return string
-		 */
-		public function dynamic_css_path(): string {
-			return $this->dynamic_dir() . 'dynamic-style.css';
-		}
+        /**
+         * Returns Dynamic CSS directory path
+         *
+         * @since  1.0.0
+         * @access public
+         * @return string
+         */
+        public function dynamic_dir(): string
+        {
+            if (null !== $this->dynamic_dir) {
+                return $this->dynamic_dir;
+            }
 
-		/**
-		 * Return url to Dynamic CSS file
-		 *
-		 * @since  1.0.0
-		 * @access public
-		 * @return string
-		 */
-		public function dynamic_css_url(): string {
-			return $this->dynamic_url() . 'dynamic-style.css';
-		}
+            $upload_dir = wp_upload_dir();
+            $upload_base_dir = $upload_dir["basedir"];
+            $this->dynamic_dir = trailingslashit($upload_base_dir) . "kava/";
 
-		/**
-		 * Returns Dynamic CSS directory URL
-		 *
-		 * @since  1.0.0
-		 * @access public
-		 * @return string
-		 */
-		public function dynamic_url(): string {
+            return $this->dynamic_dir;
+        }
 
-			if ( null !== $this->dynamic_url ) {
-				return $this->dynamic_url;
-			}
+        /**
+         * Ensure that CSS directory exists and try to create if not.
+         *
+         * @since  1.0.0
+         * @access public
+         * @return bool
+         */
+        public function ensure_dynamic_dir(): bool
+        {
+            if (file_exists($this->dynamic_dir())) {
+                return true;
+            } else {
+                return mkdir($this->dynamic_dir());
+            }
+        }
 
-			$upload_dir        = wp_upload_dir();
-			$upload_base_dir   = $upload_dir['baseurl'];
-			$this->dynamic_url = trailingslashit( $upload_base_dir ) . 'kava/';
+        /**
+         * Returns the instance.
+         *
+         * @since  1.0.0
+         * @access public
+         * @return self
+         */
+        public static function get_instance(): self
+        {
+            // If the single instance hasn't been set, set it now.
+            if (null == self::$instance) {
+                self::$instance = new self();
+            }
 
-			if ( is_ssl() ) {
-				$this->dynamic_url = set_url_scheme( $this->dynamic_url );
-			}
-
-			return $this->dynamic_url;
-		}
-
-		/**
-		 * Returns Dynamic CSS directory path
-		 *
-		 * @since  1.0.0
-		 * @access public
-		 * @return string
-		 */
-		public function dynamic_dir(): string {
-
-			if ( null !== $this->dynamic_dir ) {
-				return $this->dynamic_dir;
-			}
-
-			$upload_dir        = wp_upload_dir();
-			$upload_base_dir   = $upload_dir['basedir'];
-			$this->dynamic_dir = trailingslashit( $upload_base_dir ) . 'kava/';
-
-			return $this->dynamic_dir;
-		}
-
-		/**
-		 * Ensure that CSS directory exists and try to create if not.
-		 *
-		 * @since  1.0.0
-		 * @access public
-		 * @return bool
-		 */
-		public function ensure_dynamic_dir(): bool {
-
-			if ( file_exists( $this->dynamic_dir() ) ) {
-				return true;
-			} else {
-				return mkdir( $this->dynamic_dir() );
-			}
-		}
-
-		/**
-		 * Returns the instance.
-		 *
-		 * @since  1.0.0
-		 * @access public
-		 * @return self
-		 */
-		public static function get_instance(): self {
-			// If the single instance hasn't been set, set it now.
-			if ( null == self::$instance ) {
-				self::$instance = new self;
-			}
-
-			return self::$instance;
-		}
-	}
-
+            return self::$instance;
+        }
+    }
 }
 
-if ( ! function_exists( 'kava_dynamic_css_file' ) ) {
-
-	/**
-	 * Returns instance of Kava_Dynamic_CSS_File
-	 *
-	 * @since  1.0.0
-	 * @return Kava_Dynamic_CSS_File
-	 */
-	function kava_dynamic_css_file(): Kava_Dynamic_CSS_File {
-		return Kava_Dynamic_CSS_File::get_instance();
-	}
+if (!function_exists("kava_dynamic_css_file")) {
+    /**
+     * Returns instance of Kava_Dynamic_CSS_File
+     *
+     * @since  1.0.0
+     * @return Kava_Dynamic_CSS_File
+     */
+    function kava_dynamic_css_file(): Kava_Dynamic_CSS_File
+    {
+        return Kava_Dynamic_CSS_File::get_instance();
+    }
 }
 
 kava_dynamic_css_file();

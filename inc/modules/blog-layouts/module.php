@@ -25,24 +25,24 @@ if ( ! class_exists( 'Kava_Blog_Layouts_Module' ) ) {
 		/**
 		 * Sidebar list.
 		 */
-		private $sidebar_list = array (
-			'default'          => array( 'default','v2','v3','v4','v5','v6','v8','v10' ),
-			'creative'         => array( 'v3','v5','v8' ),
-			'grid'             => array( 'v3','v10' ),
-			'masonry'          => array( 'v3','v5','v6','v7','v10' ),
-			'vertical-justify' => array(),
-		);
+	private $sidebar_list = [
+		'default'          => [ 'default','v2','v3','v4','v5','v6','v8','v10' ],
+		'creative'         => [ 'v3','v5','v8' ],
+		'grid'             => [ 'v3','v10' ],
+		'masonry'          => [ 'v3','v5','v6','v7','v10' ],
+		'vertical-justify' => [],
+	];
 
-		/**
-		 * Fullwidth list.
-		 */
-		private $fullwidth_list = array (
-			'default'          => array( 'v9' ),
-			'grid'             => array( 'v4','v5','v9' ),
-			'masonry'          => array( 'v4','v9' ),
-			'vertical-justify' => array( 'v4','v5','v6','v9','v10' ),
-			'creative'         => array( 'default','v2' )
-		);
+	/**
+	 * Fullwidth list.
+	 */
+	private $fullwidth_list = [
+		'default'          => [ 'v9' ],
+		'grid'             => [ 'v4','v5','v9' ],
+		'masonry'          => [ 'v4','v9' ],
+		'vertical-justify' => [ 'v4','v5','v6','v9','v10' ],
+		'creative'         => [ 'default','v2' ]
+	];
 
 		/**
 		 * Module ID
@@ -62,13 +62,13 @@ if ( ! class_exists( 'Kava_Blog_Layouts_Module' ) ) {
 		 */
 		public function filters(): void {
 
-			add_action( 'wp_head', array( $this, 'module_init_properties' ) );
-			add_filter( 'kava-theme/customizer/options', array( $this, 'customizer_options' ) );
-			add_filter( 'kava-theme/customizer/blog-sidebar-enabled', array( $this, 'customizer_blog_sidebar_enabled' ) );
-			add_filter( 'kava-theme/posts/template-part-slug', array( $this, 'apply_layout_template' ) );
-			add_filter( 'kava-theme/posts/post-style', array( $this, 'apply_style_template' ) );
-			add_filter( 'kava-theme/posts/list-class', array( $this, 'add_list_class' ) );
-			add_filter( 'kava-theme/site-content/container-enabled', array( $this, 'disable_site_content_container' ) );
+	add_action( 'wp_head', [ $this, 'module_init_properties' ] );
+	add_filter( 'kava-theme/customizer/options', [ $this, 'customizer_options' ] );
+	add_filter( 'kava-theme/customizer/blog-sidebar-enabled', [ $this, 'customizer_blog_sidebar_enabled' ] );
+	add_filter( 'kava-theme/posts/template-part-slug', [ $this, 'apply_layout_template' ] );
+	add_filter( 'kava-theme/posts/post-style', [ $this, 'apply_style_template' ] );
+	add_filter( 'kava-theme/posts/list-class', [ $this, 'add_list_class' ] );
+	add_filter( 'kava-theme/site-content/container-enabled', [ $this, 'disable_site_content_container' ] );
 
 		}
 
@@ -168,43 +168,43 @@ if ( ! class_exists( 'Kava_Blog_Layouts_Module' ) ) {
 		 */
 		public function customizer_options( array $options ): array {
 
-			$new_options = array(
-				'blog_layout_type' => array(
-					'title'    => esc_html__( 'Layout', 'kava' ),
-					'priority' => 1,
-					'section'  => 'blog',
-					'default'  => 'default',
-					'field'    => 'select',
-					'choices'  => array(
-						'default'          => esc_html__( 'Listing', 'kava' ),
-						'grid'             => esc_html__( 'Grid', 'kava' ),
-						'masonry'          => esc_html__( 'Masonry', 'kava' ),
-						'vertical-justify' => esc_html__( 'Vertical Justify', 'kava' ),
-						'creative'         => esc_html__( 'Creative', 'kava' ),
-					),
-					'type' => 'control',
-				),
-				'blog_style' => array(
+		$new_options = [
+			'blog_layout_type' => [
+				'title'    => esc_html__( 'Layout', 'kava' ),
+				'priority' => 1,
+				'section'  => 'blog',
+				'default'  => 'default',
+				'field'    => 'select',
+				'choices'  => [
+					'default'          => esc_html__( 'Listing', 'kava' ),
+					'grid'             => esc_html__( 'Grid', 'kava' ),
+					'masonry'          => esc_html__( 'Masonry', 'kava' ),
+					'vertical-justify' => esc_html__( 'Vertical Justify', 'kava' ),
+					'creative'         => esc_html__( 'Creative', 'kava' ),
+				],
+				'type' => 'control',
+			],
+			'blog_style' => [
 					'title'    => esc_html__( 'Style', 'kava' ),
 					'section'  => 'blog',
 					'priority' => 2,
 					'default'  => 'default',
 					'field'    => 'select',
-					'choices'  => array(
-						'default' => esc_html__( 'Style 1', 'kava' ),
-						'v2'      => esc_html__( 'Style 2', 'kava' ),
-						'v3'      => esc_html__( 'Style 3', 'kava' ),
-						'v4'      => esc_html__( 'Style 4', 'kava' ),
-						'v5'      => esc_html__( 'Style 5', 'kava' ),
-						'v6'      => esc_html__( 'Style 6', 'kava' ),
-						'v7'      => esc_html__( 'Style 7', 'kava' ),
-						'v8'      => esc_html__( 'Style 8', 'kava' ),
-						'v9'      => esc_html__( 'Style 9', 'kava' ),
-						'v10'     => esc_html__( 'Style 10', 'kava' ),
-					),
-					'type' => 'control',
-				),
-			);
+				'choices'  => [
+					'default' => esc_html__( 'Style 1', 'kava' ),
+					'v2'      => esc_html__( 'Style 2', 'kava' ),
+					'v3'      => esc_html__( 'Style 3', 'kava' ),
+					'v4'      => esc_html__( 'Style 4', 'kava' ),
+					'v5'      => esc_html__( 'Style 5', 'kava' ),
+					'v6'      => esc_html__( 'Style 6', 'kava' ),
+					'v7'      => esc_html__( 'Style 7', 'kava' ),
+					'v8'      => esc_html__( 'Style 8', 'kava' ),
+					'v9'      => esc_html__( 'Style 9', 'kava' ),
+					'v10'     => esc_html__( 'Style 10', 'kava' ),
+				],
+				'type' => 'control',
+			],
+		];
 
 			$options['options'] = array_merge( $new_options, $options['options'] );
 

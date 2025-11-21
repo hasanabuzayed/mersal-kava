@@ -20,19 +20,19 @@ $author_block_class = $is_author_block_enabled ? 'with_author_block' : '';
 					<?php get_template_part( 'template-parts/single-post/author-bio' ); ?>
 					<?php the_title( '<h1 class="entry-title h2-style">', '</h1>' ); ?>
 					<div class="entry-meta"><?php
-						kava_posted_in( array(
+						kava_posted_in( [
 							'prefix'  => __( 'In', 'kava' ),
-						) );
-						kava_posted_on( array(
+						]);
+						kava_posted_on( [
 							'prefix'  => '<i class="fa-regular fa-clock" aria-hidden="true"></i> ' . __( 'Posted', 'kava' ),
-						) );
-						kava_post_tags ( array(
+						]);
+						kava_post_tags ( [
 							'prefix'    => '<i class="fa-solid fa-tag" aria-hidden="true"></i>',
-						) );
-						kava_post_comments( array(
+						]);
+						kava_post_comments( [
 							'prefix'    => '<i class="fa-regular fa-comment" aria-hidden="true"></i>',
 							'postfix' => __( 'Comment(s)', 'kava' )
-						) );
+						]);
 					?></div><!-- .entry-meta -->
 				</header><!-- .entry-header -->
 			</div>

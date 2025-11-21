@@ -15,23 +15,23 @@
 			<div class="justify-item__thumbnail" <?php kava_post_overlay_thumbnail( kava_justify_thumbnail_size(0) );?>></div>
 		<?php endif; ?>
 		<div class="justify-item-inner__top"><?php
-			kava_post_comments( array(
+			kava_post_comments( [
 				'prefix' => '<i class="fa-solid fa-comment" aria-hidden="true"></i>',
 				'class'  => 'comments-button'
-			) );
+			]);
 		?></div>
 		<div class="justify-item-wrap invert">
 			<header class="entry-header">
 				<div class="entry-meta">
 					<?php
 					kava_posted_by();
-					kava_posted_in( array(
+					kava_posted_in( [
 						'prefix' => __( 'In', 'kava' ),
 						'delimiter' => ', '
-					) );
-					kava_posted_on( array(
+					]);
+					kava_posted_on( [
 						'prefix' => '',
-					) );
+					]);
 					kava_post_tags();
 					?>
 				</div><!-- .entry-meta -->

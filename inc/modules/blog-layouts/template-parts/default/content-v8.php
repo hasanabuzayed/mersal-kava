@@ -18,20 +18,20 @@
 	<div class="default-item__content">
 
 		<?php
-			kava_post_comments( array(
+			kava_post_comments( [
 				'prefix' => '<i class="fa-solid fa-comment" aria-hidden="true"></i>'
-			) );
+			]);
 		?>
 
 		<header class="entry-header">
 			<div class="entry-meta"><?php
 				kava_posted_by();
-				kava_posted_in( array(
+				kava_posted_in( [
 					'prefix' => __( 'In', 'kava' ),
-				) );
-				kava_posted_on( array(
+				]);
+				kava_posted_on( [
 					'prefix' => __( 'Posted', 'kava' )
-				) );
+				]);
 			?></div><!-- .entry-meta -->
 			<h4 class="entry-title"><?php 
 				kava_sticky_label();
@@ -44,9 +44,9 @@
 		<footer class="entry-footer">
 			<div class="entry-meta">
 				<?php
-					kava_post_tags( array(
+					kava_post_tags( [
 						'prefix' => __( 'Tags:', 'kava' )
-					) );
+					]);
 				?>
 				<div><?php
 					kava_post_link();

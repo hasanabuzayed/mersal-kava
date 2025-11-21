@@ -14,17 +14,17 @@
 	<div class="entry-meta">
 		<?php
 			kava_posted_by();
-			kava_posted_in( array(
+			kava_posted_in( [
 				'prefix'  => __( 'In', 'kava' ),
-			) );
-			kava_posted_on( array(
+			] );
+			kava_posted_on( [
 				'prefix'  => __( 'Posted', 'kava' ),
-			) );
-			kava_post_comments( array(
+			] );
+			kava_post_comments( [
 				'postfix' => __( 'Comment(s)', 'kava' ),
-			) );
+			] );
 		?>
 	</div><!-- .entry-meta -->
 </header><!-- .entry-header -->
 
-<?php kava_post_thumbnail( 'kava-thumb-l', array( 'link' => false ) ); ?>
+<?php kava_post_thumbnail( 'kava-thumb-l', [ 'link' => false ] ); ?>

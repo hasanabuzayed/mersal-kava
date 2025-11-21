@@ -6,162 +6,179 @@
  * @subpackage Class
  */
 
-if ( ! class_exists( 'Kava_Widget_Area' ) ) {
+if (!class_exists("Kava_Widget_Area")) {
+    class Kava_Widget_Area
+    {
+        /**
+         * A reference to an instance of this class.
+         *
+         * @since 1.0.0
+         * @var   object
+         */
+        private static $instance = null;
 
-	class Kava_Widget_Area {
+        /**
+         * Settings.
+         *
+         * @since 1.0.0
+         * @var   array
+         */
+        public $widgets_settings = [];
 
-		/**
-		 * A reference to an instance of this class.
-		 *
-		 * @since 1.0.0
-		 * @var   object
-		 */
-		private static $instance = null;
+        /**
+         * Public holder thats save widgets state during page loading.
+         *
+         * @since 1.0.0
+         * @var   array
+         */
+        public $active_sidebars = [];
 
-		/**
-		 * Settings.
-		 *
-		 * @since 1.0.0
-		 * @var   array
-		 */
-		public $widgets_settings = [];
+        /**
+         * Constructor.
+         *
+         * @since 1.0.0
+         * @since 1.0.1 Removed argument in constructor.
+         */
+        function __construct()
+        {
+            add_action("widgets_init", [$this, "register"]);
+            add_action("kava-theme/widget-area/render", [$this, "render"]);
+        }
 
-		/**
-		 * Public holder thats save widgets state during page loading.
-		 *
-		 * @since 1.0.0
-		 * @var   array
-		 */
-		public $active_sidebars = [];
+        /**
+         * Register widget areas.
+         *
+         * @since  1.0.0
+         * @return void
+         */
+        public function register(): void
+        {
+            global $wp_registered_sidebars;
 
-		/**
-		 * Constructor.
-		 *
-		 * @since 1.0.0
-		 * @since 1.0.1 Removed argument in constructor.
-		 */
-		function __construct() {
-			add_action( 'widgets_init',            [ $this, 'register' ] );
-			add_action( 'kava-theme/widget-area/render', [ $this, 'render' ] );
-		}
+            foreach ($this->widgets_settings as $id => $settings) {
+                register_sidebar([
+                    "name" => $settings["name"],
+                    "id" => $id,
+                    "description" => $settings["description"],
+                    "before_widget" => $settings["before_widget"],
+                    "after_widget" => $settings["after_widget"],
+                    "before_title" => $settings["before_title"],
+                    "after_title" => $settings["after_title"],
+                ]);
 
-		/**
-		 * Register widget areas.
-		 *
-		 * @since  1.0.0
-		 * @return void
-		 */
-		public function register(): void {
-			global $wp_registered_sidebars;
+                if (isset($settings["is_global"])) {
+                    $wp_registered_sidebars[$id]["is_global"] =
+                        $settings["is_global"];
+                }
+            }
+        }
 
-			foreach ( $this->widgets_settings as $id => $settings ) {
+        /**
+         * Render widget areas.
+         *
+         * @since  1.0.0
+         * @param  string $area_id Widget area ID.
+         * @return void
+         */
+        public function render(string $area_id): void
+        {
+            if (!is_active_sidebar($area_id)) {
+                $this->active_sidebars[$area_id] = false;
+                return;
+            }
 
-				register_sidebar( [
-					'name'          => $settings['name'],
-					'id'            => $id,
-					'description'   => $settings['description'],
-					'before_widget' => $settings['before_widget'],
-					'after_widget'  => $settings['after_widget'],
-					'before_title'  => $settings['before_title'],
-					'after_title'   => $settings['after_title'],
-				] );
+            $this->active_sidebars[$area_id] = true;
 
-				if ( isset( $settings['is_global'] ) ) {
-					$wp_registered_sidebars[ $id ]['is_global'] = $settings['is_global'];
-				}
-			}
-		}
+            // Conditional page tags checking.
+            if (
+                isset($this->widgets_settings[$area_id]["conditional"]) &&
+                !empty($this->widgets_settings[$area_id]["conditional"])
+            ) {
+                $visibility = false;
 
-		/**
-		 * Render widget areas.
-		 *
-		 * @since  1.0.0
-		 * @param  string $area_id Widget area ID.
-		 * @return void
-		 */
-		public function render( string $area_id ): void {
+                foreach (
+                    $this->widgets_settings[$area_id]["conditional"]
+                    as $conditional
+                ) {
+                    if (is_callable($conditional)) {
+                        $visibility = call_user_func($conditional)
+                            ? true
+                            : false;
+                    }
 
-			if ( ! is_active_sidebar( $area_id ) ) {
-				$this->active_sidebars[ $area_id ] = false;
-				return;
-			}
+                    if (true === $visibility) {
+                        break;
+                    }
+                }
 
-			$this->active_sidebars[ $area_id ] = true;
+                if (false === $visibility) {
+                    return;
+                }
+            }
 
-			// Conditional page tags checking.
-			if ( isset( $this->widgets_settings[ $area_id ]['conditional'] )
-				&& ! empty( $this->widgets_settings[ $area_id ]['conditional'] )
-				) {
+            $area_id = apply_filters(
+                "kava-theme/widget_area/rendering_current",
+                $area_id,
+            );
+            $before_wrapper =
+                $this->widgets_settings[$area_id]["before_wrapper"] ??
+                '<div id="%1$s" %2$s>';
+            $after_wrapper =
+                $this->widgets_settings[$area_id]["after_wrapper"] ?? "</div>";
 
-				$visibility = false;
+            $classes = [$area_id, "widget-area"];
+            $classes = apply_filters(
+                "kava-theme/widget_area/classes",
+                $classes,
+                $area_id,
+            );
 
-				foreach ( $this->widgets_settings[ $area_id ]['conditional'] as $conditional ) {
-					if ( is_callable( $conditional ) ) {
-						$visibility = call_user_func( $conditional ) ? true : false;
-					}
+            if (is_array($classes)) {
+                $classes = 'class="' . join(" ", $classes) . '"';
+            }
 
-					if ( true === $visibility ) {
-						break;
-					}
-				}
+            printf($before_wrapper, $area_id, $classes);
+            dynamic_sidebar($area_id);
+            printf($after_wrapper);
+        }
 
-				if ( false === $visibility ) {
-					return;
-				}
-			}
+        /**
+         * Check if passed sidebar was already rendered and it's active.
+         *
+         * @since  1.0.0
+         * @param  string    $index Sidebar ID.
+         * @return bool|null
+         */
+        public function is_active_sidebar(string $index): ?bool
+        {
+            if (isset($this->active_sidebars[$index])) {
+                return $this->active_sidebars[$index];
+            }
 
-			$area_id        = apply_filters( 'kava-theme/widget_area/rendering_current', $area_id );
-			$before_wrapper = $this->widgets_settings[ $area_id ]['before_wrapper'] ?? '<div id="%1$s" %2$s>';
-			$after_wrapper  = $this->widgets_settings[ $area_id ]['after_wrapper'] ?? '</div>';
+            return null;
+        }
 
-			$classes = [ $area_id, 'widget-area' ];
-			$classes = apply_filters( 'kava-theme/widget_area/classes', $classes, $area_id );
+        /**
+         * Returns the instance.
+         *
+         * @since  1.0.0
+         * @return self
+         */
+        public static function get_instance(): self
+        {
+            // If the single instance hasn't been set, set it now.
+            if (null == self::$instance) {
+                self::$instance = new self();
+            }
 
-			if ( is_array( $classes ) ) {
-				$classes = 'class="' . join( ' ', $classes ) . '"';
-			}
+            return self::$instance;
+        }
+    }
 
-			printf( $before_wrapper, $area_id, $classes );
-				dynamic_sidebar( $area_id );
-			printf( $after_wrapper );
-		}
+    function kava_widget_area(): Kava_Widget_Area
+    {
+        return Kava_Widget_Area::get_instance();
+    }
 
-		/**
-		 * Check if passed sidebar was already rendered and it's active.
-		 *
-		 * @since  1.0.0
-		 * @param  string    $index Sidebar ID.
-		 * @return bool|null
-		 */
-		public function is_active_sidebar( string $index ): ?bool {
-
-			if ( isset( $this->active_sidebars[ $index ] ) ) {
-				return $this->active_sidebars[ $index ];
-			}
-
-			return null;
-		}
-
-		/**
-		 * Returns the instance.
-		 *
-		 * @since  1.0.0
-		 * @return self
-		 */
-		public static function get_instance(): self {
-
-			// If the single instance hasn't been set, set it now.
-			if ( null == self::$instance ) {
-				self::$instance = new self();
-			}
-
-			return self::$instance;
-		}
-	}
-
-	function kava_widget_area(): Kava_Widget_Area {
-		return Kava_Widget_Area::get_instance();
-	}
-
-	kava_widget_area();
+    kava_widget_area();
 }

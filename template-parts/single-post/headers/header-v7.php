@@ -19,16 +19,16 @@ $has_post_thumbnail_class = $has_post_thumbnail ? 'invert' : '';
 		<div class="row">
 			<div class="col-xs-12 col-lg-8 col-lg-push-2">
 				<div class="entry-header-top"><?php
-					kava_posted_in( array(
+					kava_posted_in( [
 						'delimiter' => '',
 						'before'    => '<div class="cat-links btn-style">',
 						'after'     => '</div>'
-					) );
-					kava_posted_on( array(
+					]);
+					kava_posted_on( [
 						'prefix'  => '<i class="fa-regular fa-clock" aria-hidden="true"></i> ' . __( 'Posted', 'kava' ),
 						'before'  => '<div class="posted-on">',
 						'after'   => '</div>',
-					) );
+					]);
 				?></div>
 				<header class="entry-header">
 					<?php get_template_part( 'template-parts/single-post/author-bio' ); ?>
@@ -36,13 +36,13 @@ $has_post_thumbnail_class = $has_post_thumbnail ? 'invert' : '';
 				</header><!-- .entry-header -->
 				<div class="entry-header-bottom">
 					<div class="entry-meta"><?php
-						kava_post_tags ( array(
+						kava_post_tags ( [
 							'prefix'    => '<i class="fa-solid fa-tag" aria-hidden="true"></i>',
-						) );
-						kava_post_comments( array(
+						]);
+						kava_post_comments( [
 							'prefix'    => '<i class="fa-regular fa-comment" aria-hidden="true"></i>',
 							'postfix' => __( 'Comment(s)', 'kava' )
-						) );
+						]);
 					?></div><!-- .entry-meta -->
 				</div>
 			</div>

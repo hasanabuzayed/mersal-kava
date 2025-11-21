@@ -36,8 +36,8 @@ if ( ! class_exists( 'Kava_Module_Base' ) ) {
 				$this->load_child_modules( $childs );
 			}
 
-			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
-			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
+		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
+		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_styles' ] );
 
 			$this->includes();
 

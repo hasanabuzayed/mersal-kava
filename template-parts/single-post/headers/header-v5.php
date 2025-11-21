@@ -21,19 +21,19 @@ $has_post_thumbnail_class = $has_post_thumbnail ? 'invert' : '';
 					<?php endif; ?>
 					<div class="entry-header-top">
 						<div class="entry-meta"><?php
-							kava_posted_in( array(
+							kava_posted_in( [
 								'delimiter' => '',
 								'before'    => '<span class="cat-links btn-style">',
 								'after'     => '</span>'
-							) );
-							kava_posted_on( array(
+							]);
+							kava_posted_on( [
 								'prefix'  => __( 'Posted', 'kava' ),
 								'before'  => '<span class="posted-on">',
 								'after'   => '</span>',
-							) );
-							kava_post_comments( array(
+							]);
+							kava_post_comments( [
 								'postfix' => __( 'Comment(s)', 'kava' ),
-							) );
+							]);
 						?></div>
 						<?php if ( kava_theme()->customizer->get_value( 'single_post_author' ) ) : ?>
 							<div class="post-author">
@@ -44,17 +44,17 @@ $has_post_thumbnail_class = $has_post_thumbnail ? 'invert' : '';
 										$author_meta = get_userdata($author_id);
 										$author_role = $author_meta->roles;
 
-										kava_posted_by( array(
+										kava_posted_by( [
 											'before'  => '<div class="byline">',
 											'after'   => '</div>'
-										) );
+										]);
 									?>
 									<div class="post-author__role"><?php echo wp_kses_post( $author_role[0] ); ?></div>
 								</div>
 								<div class="post-author__avatar"><?php
-									kava_get_post_author_avatar( array(
+									kava_get_post_author_avatar( [
 										'size' => 50
-									) );
+									]);
 								?></div>
 							</div>
 						<?php endif; ?>

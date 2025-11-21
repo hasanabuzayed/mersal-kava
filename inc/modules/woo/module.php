@@ -41,11 +41,11 @@ if ( ! class_exists( 'Kava_Woo_Module' ) ) {
 			 */
 			add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' );
 
-			add_filter( 'kava-theme/assets-depends/script', array( $this, 'assets_depends_script' ) );
+	add_filter( 'kava-theme/assets-depends/script', [ $this, 'assets_depends_script' ] );
 
-			add_filter( 'kava-theme/customizer/options', array( $this, 'customizer_options' ) );
+	add_filter( 'kava-theme/customizer/options', [ $this, 'customizer_options' ] );
 
-			add_filter( 'cx_customizer/core_sections', array(  $this, 'kava_customizer_core_sections' ) );
+	add_filter( 'cx_customizer/core_sections', [ $this, 'kava_customizer_core_sections' ] );
 		}
 
 		/**
@@ -66,16 +66,16 @@ if ( ! class_exists( 'Kava_Woo_Module' ) ) {
 		 */
 		public function customizer_options( array $options ): array {
 
-			$new_options = array(
-				'woocommerce_accent_color' => array(
-					'title'    => esc_html__( 'WooCommerce Accent color', 'kava' ),
-					'section'  => 'color_scheme',
-					'priority' => 10,
-					'default'  => '#27d18b',
-					'field'    => 'hex_color',
-					'type'     => 'control',
-				),
-			);
+		$new_options = [
+			'woocommerce_accent_color' => [
+				'title'    => esc_html__( 'WooCommerce Accent color', 'kava' ),
+				'section'  => 'color_scheme',
+				'priority' => 10,
+				'default'  => '#27d18b',
+				'field'    => 'hex_color',
+				'type'     => 'control',
+			],
+		];
 
 			$options['options'] = array_merge( $new_options, $options['options'] );
 
@@ -102,8 +102,8 @@ if ( ! class_exists( 'Kava_Woo_Module' ) ) {
 		 *
 		 * @return bool|callable
 		 */
-		public function condition_cb(): bool {
-			return class_exists( 'WooCommerce' );
+		public function condition_cb(): ?callable {
+			return class_exists( 'WooCommerce' ) ? true : null;
 		}
 
 		/**
@@ -129,7 +129,7 @@ if ( ! class_exists( 'Kava_Woo_Module' ) ) {
 			wp_register_script(
 				'kava-woo-module-script',
 				get_theme_file_uri( 'inc/modules/woo/assets/js/woo-module-script.js' ),
-				array( 'jquery' ),
+				[ 'jquery' ],
 				kava_theme()->version(),
 				true
 			);

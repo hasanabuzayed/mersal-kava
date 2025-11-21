@@ -30,7 +30,7 @@ if ( ! class_exists( 'Kava_Woo_Breadcrumbs_Module' ) ) {
 		 * @return void
 		 */
 		public function filters(): void {
-			add_filter( 'cx_breadcrumbs/custom_trail', array( $this, 'get_wc_breadcrumbs' ), 10, 2 );
+			add_filter( 'cx_breadcrumbs/custom_trail', [ $this, 'get_wc_breadcrumbs' ], 10, 2 );
 		}
 
 		/**
@@ -65,7 +65,7 @@ if ( ! class_exists( 'Kava_Woo_Breadcrumbs_Module' ) ) {
 
 			$wc_breadcrumbs = new Kava_WC_Breadcrumbs( $args );
 
-			return array( 'items' => $wc_breadcrumbs->items, 'page_title' => $wc_breadcrumbs->page_title );
+			return [ 'items' => $wc_breadcrumbs->items, 'page_title' => $wc_breadcrumbs->page_title ];
 
 		}
 

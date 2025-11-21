@@ -15,18 +15,18 @@
 		<?php endif; ?>
 		<div class="grid-item-wrap invert">
 			<?php
-				kava_posted_in( array(
+				kava_posted_in( [
 					'prefix' => false,
 					'delimiter' => false,
-				) );
+				]);
 			?>
 			<header class="entry-header">
 				<div class="entry-meta">
 					<?php
 					kava_posted_by();
-					kava_posted_on( array(
+					kava_posted_on( [
 						'prefix' => '',
-					) );
+					]);
 					?>
 				</div><!-- .entry-meta -->
 				<h4 class="entry-title"><?php

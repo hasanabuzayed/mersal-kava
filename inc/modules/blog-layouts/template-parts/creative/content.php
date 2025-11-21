@@ -19,12 +19,12 @@
 
 		<?php if ( kava_theme()->customizer->get_value( 'blog_post_categories' ) ) : ?>
 			<div class="creative-item__before-content"><?php
-				kava_posted_in( array(
+				kava_posted_in( [
 					'prefix'    => '',
 					'delimiter' => '',
 					'before'    => '<div class="cat-links">',
 					'after'     => '</div>'
-				) );
+				]);
 			?></div>
 		<?php endif; ?>
 
@@ -43,18 +43,18 @@
 					<div>
 						<?php
 							kava_posted_by();
-							kava_posted_on( array(
+							kava_posted_on( [
 								'prefix' => __( 'Posted', 'kava' )
-							) );
-							kava_post_tags( array(
+							]);
+							kava_post_tags( [
 								'prefix' => __( 'Tags:', 'kava' )
-							) );
+							]);
 						?>
 					</div>
 					<?php
-						kava_post_comments( array(
+						kava_post_comments( [
 							'postfix' => __( 'Comment(s)', 'kava' )
-						) );
+						]);
 					?>
 				</div>
 				<?php kava_edit_link(); ?>

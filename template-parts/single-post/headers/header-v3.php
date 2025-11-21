@@ -19,11 +19,11 @@ $has_post_thumbnail_class = $has_post_thumbnail ? 'invert' : '';
 		<div class="row">
 			<div class="col-xs-12 col-md-8">
 				<header class="entry-header">
-					<?php kava_posted_in( array(
+					<?php kava_posted_in( [
 						'delimiter' => '',
 						'before'    => '<div class="cat-links btn-style">',
 						'after'     => '</div>',
-					) ); ?>
+					] ); ?>
 					<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 					<?php if ( has_excerpt() ) :
 						the_excerpt();
@@ -32,30 +32,30 @@ $has_post_thumbnail_class = $has_post_thumbnail ? 'invert' : '';
 						<div class="post-author">
 							<?php if ( kava_theme()->customizer->get_value( 'single_post_author' ) ) : ?>
 								<div class="post-author__avatar"><?php
-									kava_get_post_author_avatar( array(
+									kava_get_post_author_avatar( [
 										'size' => 50
-									) );
+									]);
 									?></div>
 							<?php endif; ?>
 							<div class="post-author__content">
 								<?php
-								kava_posted_by( array(
+								kava_posted_by( [
 									'before'  => '<div class="byline">',
 									'after'   => '</div>'
-								) );
-								kava_posted_on( array(
+								]);
+								kava_posted_on( [
 									'prefix'  => __( 'Posted', 'kava' ),
 									'before'  => '<div class="posted-on">',
 									'after'   => '</div>',
-								) );
+								]);
 								?>
 							</div>
 						</div>
 						<?php
-							kava_post_comments( array(
+							kava_post_comments( [
 								'prefix' => '<i class="fa-solid fa-comment" aria-hidden="true"></i>',
 								'class'  => 'comments-button'
-							) );
+							]);
 						?>
 					</div>
 				</header><!-- .entry-header -->

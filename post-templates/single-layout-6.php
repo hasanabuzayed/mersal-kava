@@ -20,11 +20,11 @@ get_header();
 				<?php if ( $author_block_enabled ) : ?>
 					<div id="author-block" class="col-xs-12 col-md-3"><?php
 						get_template_part( 'template-parts/single-post/author-bio' );
-						kava_posted_on( array(
+						kava_posted_on( [
 							'prefix'  => __( 'Posted', 'kava' ),
 							'before' => '<div class="posted-on">',
 							'after'  => '</div>',
-						) );
+						] );
 					?></div>
 				<?php endif; ?>
 				<div id="primary" class="col-xs-12 col-md-9">

@@ -13,7 +13,7 @@ $has_post_thumbnail_class = $has_post_thumbnail ? 'has-post-thumbnail' : '';
 ?>
 
 <div class="single-header-10 invert <?php echo esc_attr( $has_post_thumbnail_class ); ?>">
-	<?php kava_post_thumbnail( 'kava-thumb-xl', array( 'link' => false ) ); ?>
+	<?php kava_post_thumbnail( 'kava-thumb-xl', [ 'link' => false ] ); ?>
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12">
@@ -24,26 +24,26 @@ $has_post_thumbnail_class = $has_post_thumbnail ? 'has-post-thumbnail' : '';
 							if ( kava_theme()->customizer->get_value( 'single_post_author' ) ) : ?>
 								<span class="post-author">
 									<span class="post-author__avatar"><?php
-										kava_get_post_author_avatar( array(
+										kava_get_post_author_avatar( [
 											'size' => 50
-										) );
+										] );
 									?></span>
 									<?php kava_posted_by();
 								?></span>
 							<?php endif; ?>
 							<?php
-								kava_posted_in( array(
+								kava_posted_in( [
 									'prefix'  => __( 'In', 'kava' ),
-								) );
-								kava_posted_on( array(
+								] );
+								kava_posted_on( [
 									'prefix'  => __( 'Posted', 'kava' ),
-								) );
+								] );
 						?></div><!-- .entry-meta -->
 						<div class="entry-meta"><?php
-							kava_post_comments( array(
+							kava_post_comments( [
 								'prefix' => '<i class="fa-solid fa-comment" aria-hidden="true"></i>',
 								'class'  => 'comments-button'
-							) );
+							] );
 						?></div><!-- .entry-meta -->
 					</div>
 				</header><!-- .entry-header -->

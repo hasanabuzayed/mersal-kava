@@ -18,9 +18,9 @@
 	<header class="entry-header">
 		<?php
 			kava_posted_in();
-			kava_posted_on( array(
+			kava_posted_on( [
 				'prefix' => __( 'Posted', 'kava' )
-			) );
+			]);
 		?>
 		<h4 class="entry-title"><?php 
 			kava_sticky_label();
@@ -35,12 +35,12 @@
 			<div>
 				<?php
 					kava_posted_by();
-					kava_post_comments( array(
+					kava_post_comments( [
 						'prefix' => '<i class="fa-solid fa-comment" aria-hidden="true"></i>'
-					) );
-					kava_post_tags( array(
+					]);
+					kava_post_tags( [
 						'prefix' => __( 'Tags:', 'kava' )
-					) );
+					]);
 				?>
 			</div>
 			<?php

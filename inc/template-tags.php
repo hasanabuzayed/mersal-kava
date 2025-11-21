@@ -672,22 +672,13 @@ function kava_sticky_label(): void {
 		'<i class="fa-solid fa-thumbtack" aria-hidden="true"></i>'
 	);
 
-	switch ( $sticky_type ) {
-
-		case 'icon':
-			$content = $icon;
-			break;
-
-		case 'label':
-			$label = kava_theme()->customizer->get_value( 'blog_sticky_label' );
-			$content = $label;
-			break;
-
-		case 'both':
-			$label = kava_theme()->customizer->get_value( 'blog_sticky_label' );
-			$content = $icon . $label;
-			break;
-	}
+	// Use match expression for sticky type content (PHP 8.0+)
+	$content = match ( $sticky_type ) {
+		'icon' => $icon,
+		'label' => kava_theme()->customizer->get_value( 'blog_sticky_label' ),
+		'both' => $icon . kava_theme()->customizer->get_value( 'blog_sticky_label' ),
+		default => '',
+	};
 
 	if ( empty( $content ) ) {
 		return;

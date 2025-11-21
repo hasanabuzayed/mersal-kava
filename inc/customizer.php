@@ -1581,21 +1581,21 @@ function kava_get_customizer_options(): array {
 				'type' => 'control',
 			],
 
-			/* 'related_posts_categories' => array(
+			/* 'related_posts_categories' => [
 				'title'   => esc_html__( 'Show post categories', 'kava' ),
 				'section' => 'related_posts',
 				'default' => true,
 				'field'   => 'checkbox',
 				'type'    => 'control',
 			], */
-			/* 'related_posts_tags' => array(
+			/* 'related_posts_tags' => [
 				'title'   => esc_html__( 'Show post tags', 'kava' ),
 				'section' => 'related_posts',
 				'default' => true,
 				'field'   => 'checkbox',
 				'type'    => 'control',
 			], */
-			/* 'related_posts_comment_count' => array(
+			/* 'related_posts_comment_count' => [
 				'title'   => esc_html__( 'Show post comment count', 'kava' ),
 				'section' => 'related_posts',
 				'default' => true,
