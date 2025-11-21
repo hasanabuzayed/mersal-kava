@@ -11,7 +11,7 @@
  * @since  1.0.0
  * @return void
  */
-function kava_main_menu() {
+function kava_main_menu(): void {
 
 	$classes[] = 'main-navigation';
 
@@ -40,7 +40,7 @@ function kava_main_menu() {
  * @since  1.0.0
  * @return void
  */
-function kava_footer_menu() { ?>
+function kava_footer_menu(): void { ?>
 	<nav id="footer-navigation" class="footer-menu" role="navigation">
 	<?php
 		$args = apply_filters( 'kava-theme/menu/footer-menu-args', [
@@ -68,7 +68,7 @@ function kava_footer_menu() { ?>
  * @param  string $type    Content type - icon, text or both.
  * @return string
  */
-function kava_get_social_list( $context, $type = 'icon' ) {
+function kava_get_social_list( string $context, string $type = 'icon' ): string {
 	static $instance = 0;
 	$instance++;
 
@@ -103,10 +103,10 @@ function kava_get_social_list( $context, $type = 'icon' ) {
  * @param  array $args Nav menu arguments.
  * @return void
  */
-function kava_set_nav_menu( $args ) {
+function kava_set_nav_menu( array $args ): void {
 
 	if ( ! current_user_can( 'edit_theme_options' ) ) {
-		return null;
+		return;
 	}
 
 	$format = '<div class="set-menu %3$s"><a href="%2$s" target="_blank" class="set-menu_link">%1$s</a></div>';

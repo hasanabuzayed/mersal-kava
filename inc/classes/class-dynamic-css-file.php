@@ -73,9 +73,9 @@ if ( ! class_exists( 'Kava_Dynamic_CSS_File' ) ) {
 		 *
 		 * @since  1.0.0
 		 * @access public
-		 * @return bool|mixed|null
+		 * @return bool
 		 */
-		public function is_cache_dynamic_css() {
+		public function is_cache_dynamic_css(): bool {
 
 			if ( null !== $this->is_cache_dynamic_css ) {
 				return $this->is_cache_dynamic_css;
@@ -99,7 +99,7 @@ if ( ! class_exists( 'Kava_Dynamic_CSS_File' ) ) {
 		 * @access public
 		 * @return void
 		 */
-		public function maybe_create_css_file() {
+		public function maybe_create_css_file(): void {
 
 			if ( ! $this->is_cache_dynamic_css() ) {
 				return;
@@ -125,7 +125,7 @@ if ( ! class_exists( 'Kava_Dynamic_CSS_File' ) ) {
 		 * @access public
 		 * @return void
 		 */
-		public function enqueue_dynamic_css() {
+		public function enqueue_dynamic_css(): void {
 
 			if ( ! $this->is_cache_dynamic_css() ) {
 				return;
@@ -150,7 +150,7 @@ if ( ! class_exists( 'Kava_Dynamic_CSS_File' ) ) {
 		 * @access public
 		 * @return void
 		 */
-		public function remove_print_inline_style() {
+		public function remove_print_inline_style(): void {
 
 			if ( ! $this->is_cache_dynamic_css() ) {
 				return;
@@ -170,7 +170,7 @@ if ( ! class_exists( 'Kava_Dynamic_CSS_File' ) ) {
 		 * @access public
 		 * @return void
 		 */
-		public function remove_css_file() {
+		public function remove_css_file(): void {
 			if ( $this->dynamic_css_exists() ) {
 				unlink( $this->dynamic_css_path() );
 			}
@@ -183,7 +183,7 @@ if ( ! class_exists( 'Kava_Dynamic_CSS_File' ) ) {
 		 * @access public
 		 * @return bool
 		 */
-		public function dynamic_css_exists() {
+		public function dynamic_css_exists(): bool {
 			return file_exists( $this->dynamic_css_path() );
 		}
 
@@ -194,7 +194,7 @@ if ( ! class_exists( 'Kava_Dynamic_CSS_File' ) ) {
 		 * @access public
 		 * @return string
 		 */
-		public function dynamic_css_path() {
+		public function dynamic_css_path(): string {
 			return $this->dynamic_dir() . 'dynamic-style.css';
 		}
 
@@ -205,7 +205,7 @@ if ( ! class_exists( 'Kava_Dynamic_CSS_File' ) ) {
 		 * @access public
 		 * @return string
 		 */
-		public function dynamic_css_url() {
+		public function dynamic_css_url(): string {
 			return $this->dynamic_url() . 'dynamic-style.css';
 		}
 
@@ -216,7 +216,7 @@ if ( ! class_exists( 'Kava_Dynamic_CSS_File' ) ) {
 		 * @access public
 		 * @return string
 		 */
-		public function dynamic_url() {
+		public function dynamic_url(): string {
 
 			if ( null !== $this->dynamic_url ) {
 				return $this->dynamic_url;
@@ -240,7 +240,7 @@ if ( ! class_exists( 'Kava_Dynamic_CSS_File' ) ) {
 		 * @access public
 		 * @return string
 		 */
-		public function dynamic_dir() {
+		public function dynamic_dir(): string {
 
 			if ( null !== $this->dynamic_dir ) {
 				return $this->dynamic_dir;
@@ -260,7 +260,7 @@ if ( ! class_exists( 'Kava_Dynamic_CSS_File' ) ) {
 		 * @access public
 		 * @return bool
 		 */
-		public function ensure_dynamic_dir() {
+		public function ensure_dynamic_dir(): bool {
 
 			if ( file_exists( $this->dynamic_dir() ) ) {
 				return true;
@@ -274,9 +274,9 @@ if ( ! class_exists( 'Kava_Dynamic_CSS_File' ) ) {
 		 *
 		 * @since  1.0.0
 		 * @access public
-		 * @return Kava_Dynamic_CSS_File
+		 * @return self
 		 */
-		public static function get_instance() {
+		public static function get_instance(): self {
 			// If the single instance hasn't been set, set it now.
 			if ( null == self::$instance ) {
 				self::$instance = new self;
@@ -296,7 +296,7 @@ if ( ! function_exists( 'kava_dynamic_css_file' ) ) {
 	 * @since  1.0.0
 	 * @return Kava_Dynamic_CSS_File
 	 */
-	function kava_dynamic_css_file() {
+	function kava_dynamic_css_file(): Kava_Dynamic_CSS_File {
 		return Kava_Dynamic_CSS_File::get_instance();
 	}
 }

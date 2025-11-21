@@ -42,16 +42,16 @@ if ( ! class_exists( 'Kava_Post_Meta' ) ) {
 		/**
 		 * Add meta options
 		 *
-		 * @param $options
+		 * @param array $options
 		 */
-		public function add_options( array $options = [] ) {
+		public function add_options( array $options = [] ): void {
 			$this->options[] = $options;
 		}
 
 		/**
 		 * Init meta
 		 */
-		public function init_post_meta() {
+		public function init_post_meta(): void {
 
 			foreach ( $this->options as $options ) {
 
@@ -63,7 +63,7 @@ if ( ! class_exists( 'Kava_Post_Meta' ) ) {
 			}
 		}
 
-		public function get_interface_builder() {
+		public function get_interface_builder(): mixed {
 
 			$builder_data = kava_theme()->framework->get_included_module_data( 'cherry-x-interface-builder.php' );
 
@@ -79,9 +79,9 @@ if ( ! class_exists( 'Kava_Post_Meta' ) ) {
 		 * Returns the instance.
 		 *
 		 * @since  1.0.0
-		 * @return Kava_Post_Meta
+		 * @return self
 		 */
-		public static function get_instance() {
+		public static function get_instance(): self {
 
 			// If the single instance hasn't been set, set it now.
 			if ( null == self::$instance ) {
@@ -93,7 +93,7 @@ if ( ! class_exists( 'Kava_Post_Meta' ) ) {
 
 }
 
-function kava_post_meta() {
+function kava_post_meta(): Kava_Post_Meta {
 	return Kava_Post_Meta::get_instance();
 }
 

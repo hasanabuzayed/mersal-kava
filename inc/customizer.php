@@ -12,7 +12,7 @@
  * @return array
  */
 
-function kava_get_customizer_options() {
+function kava_get_customizer_options(): array {
 	/**
 	 * Filter a holder for Customizer options (for theme/plugin developer customization).
 	 *
@@ -1614,7 +1614,7 @@ function kava_get_customizer_options() {
  * @param  string $value   Setting value to compare.
  * @return bool
  */
-function kava_is_not_setting( $control, $setting, $value ) {
+function kava_is_not_setting( mixed $control, string $setting, string $value ): bool {
 
 	if ( $value !== $control->manager->get_setting( $setting )->value() ) {
 		return true;
@@ -1630,7 +1630,7 @@ function kava_is_not_setting( $control, $setting, $value ) {
  * @param  object $control
  * @return bool
  */
-function kava_is_sticky_text( $control ) {
+function kava_is_sticky_text( mixed $control ): bool {
 	return kava_is_not_setting( $control, 'blog_sticky_type', 'icon' );
 }
 
@@ -1640,7 +1640,7 @@ function kava_is_sticky_text( $control ) {
  * @param  object $control
  * @return bool
  */
-function kava_is_sticky_icon( $control ) {
+function kava_is_sticky_icon( mixed $control ): bool {
 	return kava_is_not_setting( $control, 'blog_sticky_type', 'label' );
 }
 
@@ -1651,7 +1651,7 @@ function kava_is_sticky_icon( $control ) {
  * @param  object $wp_customize
  * @return void
  */
-function kava_customizer_change_core_controls( $wp_customize ) {
+function kava_customizer_change_core_controls( mixed $wp_customize ): void {
 	$wp_customize->get_control( 'site_icon' )->section      = 'kava_favicon';
 	$wp_customize->get_control( 'background_color' )->label = esc_html__( 'Body Background Color', 'kava' );
 }
@@ -1665,7 +1665,7 @@ add_action( 'customize_register', 'kava_customizer_change_core_controls', 20 );
  * @since 1.0.0
  * @return array
  */
-function kava_get_font_styles() {
+function kava_get_font_styles(): array {
 	return apply_filters( 'kava-theme/font/styles', [
 		'normal'  => esc_html__( 'Normal', 'kava' ),
 		'italic'  => esc_html__( 'Italic', 'kava' ),
@@ -1680,7 +1680,7 @@ function kava_get_font_styles() {
  * @since 1.0.0
  * @return array
  */
-function kava_get_character_sets() {
+function kava_get_character_sets(): array {
 	return apply_filters( 'kava-theme/font/character_sets', [
 		'latin'        => esc_html__( 'Latin', 'kava' ),
 		'greek'        => esc_html__( 'Greek', 'kava' ),
@@ -1698,7 +1698,7 @@ function kava_get_character_sets() {
  * @since 1.0.0
  * @return array
  */
-function kava_get_text_aligns() {
+function kava_get_text_aligns(): array {
 	return apply_filters( 'kava-theme/font/text-aligns', [
 		'inherit' => esc_html__( 'Inherit', 'kava' ),
 		'center'  => esc_html__( 'Center', 'kava' ),
@@ -1714,7 +1714,7 @@ function kava_get_text_aligns() {
  * @since 1.0.0
  * @return array
  */
-function kava_get_font_weight() {
+function kava_get_font_weight(): array {
 	return apply_filters( 'kava-theme/font/weight', [
 		'100' => '100',
 		'200' => '200',
@@ -1733,7 +1733,7 @@ function kava_get_font_weight() {
  *
  * @return array
  */
-function kava_get_dynamic_css_options() {
+function kava_get_dynamic_css_options(): array {
 	return apply_filters( 'kava-theme/dynamic_css/options', [
 		'prefix'        => 'kava',
 		'type'          => 'theme_mod',
@@ -1767,7 +1767,7 @@ function kava_get_dynamic_css_options() {
  * @since  1.0.0
  * @return string
  */
-function kava_get_default_footer_copyright() {
+function kava_get_default_footer_copyright(): string {
 	return esc_html__( '&copy; %%year%% Kava | Multipurpose WP Theme with Elementor Page Builder', 'kava' );
 }
 
@@ -1776,7 +1776,7 @@ function kava_get_default_footer_copyright() {
  *
  * @return bool
  */
-function kava_is_blog_sidebar_enabled() {
+function kava_is_blog_sidebar_enabled(): bool {
 	return apply_filters( 'kava-theme/customizer/blog-sidebar-enabled', true );
 }
 
@@ -1785,7 +1785,7 @@ function kava_is_blog_sidebar_enabled() {
  *
  * @return bool
  */
-function kava_is_blog_read_more_btn_text() {
+function kava_is_blog_read_more_btn_text(): bool {
 	$btn_type = kava_theme()->customizer->get_value( 'blog_read_more_type' );
 	return 'text' === $btn_type || 'text_icon' === $btn_type ? true : false;
 }
@@ -1797,6 +1797,6 @@ function kava_is_blog_read_more_btn_text() {
  * @return bool
  */
 
-function kava_is_totop_enable( $control ) {
+function kava_is_totop_enable( mixed $control ): bool {
 	return kava_is_not_setting( $control, 'totop_visibility', false );
 }

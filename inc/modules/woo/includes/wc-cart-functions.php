@@ -21,7 +21,7 @@ if ( ! function_exists( 'kava_woocommerce_change_cross_sells_columns_count' ) ) 
 	 * @param number $columns
 	 * @return number
 	 */
-	function kava_woocommerce_change_cross_sells_columns_count( $columns ) {
+	function kava_woocommerce_change_cross_sells_columns_count( int $columns ): int {
 		return 1;
 	}
 

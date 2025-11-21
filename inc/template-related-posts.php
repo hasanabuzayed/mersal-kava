@@ -11,7 +11,7 @@
  * @since  1.0.0
  * @return array
  */
-function kava_related_posts() {
+function kava_related_posts(): void {
 
 	if ( ! is_singular( 'post' ) ) {
 		return;

@@ -14,7 +14,7 @@ if ( ! function_exists( 'kava_wc_loop_products_panel_open' ) ) {
 	/**
 	 * Archive products panel wrapper open
 	 */
-	function kava_wc_loop_products_panel_open() {
+	function kava_wc_loop_products_panel_open(): void {
 		if ( ! wc_get_loop_prop( 'is_paginated' ) || ! woocommerce_products_will_display() ) {
 			return;
 		}
@@ -29,7 +29,7 @@ if ( ! function_exists( 'kava_wc_loop_products_panel_close' ) ) {
 	/**
 	 * Archive products panel wrapper close
 	 */
-	function kava_wc_loop_products_panel_close() {
+	function kava_wc_loop_products_panel_close(): void {
 		if ( ! wc_get_loop_prop( 'is_paginated' ) || ! woocommerce_products_will_display() ) {
 			return;
 		}
@@ -48,16 +48,16 @@ if ( ! function_exists( 'kava_wc_product_loop_start' ) ) {
 	 *
 	 * @return string
 	 */
-	function kava_wc_product_loop_start( $ob_get_clean ) {
+	function kava_wc_product_loop_start( string $ob_get_clean ): string {
 
 		$context = wc_get_loop_prop( 'name' );
-		$columns = array(
+		$columns = [
 			'xs' => 1,
 			'sm' => 2,
 			'md' => 2,
 			'lg' => wc_get_loop_prop( 'columns' ),
 			'xl' => wc_get_loop_prop( 'columns' ),
-		);
+		];
 
 		switch ( $context ) {
 			case 'related':

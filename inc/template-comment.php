@@ -13,7 +13,7 @@
  * @param array  $args     An array of arguments.
  * @param int    $depth    Depth of comment.
  */
-function kava_rewrite_comment_item( $_comment, $args, $depth ) {
+function kava_rewrite_comment_item( mixed $_comment, array $args, int $depth ): void {
 	global $comment;
 
 	$_comment->kava_comment_list_args = $args;
@@ -35,7 +35,7 @@ function kava_rewrite_comment_item( $_comment, $args, $depth ) {
  * @param  array  $args   Arguments.
  * @return string $output Avatar of the author of the comment.
  */
-function kava_comment_author_avatar( $args = [] ) {
+function kava_comment_author_avatar( array $args = [] ): string {
 	global $comment;
 
 	if ( ! empty( $comment->kava_comment_list_args['avatar_size'] ) ) {
@@ -63,7 +63,7 @@ function kava_comment_author_avatar( $args = [] ) {
  * @param  array  $args   Arguments.
  * @return string $output URL of the author of the comment.
  */
-function kava_get_comment_author_link( $args = [] ) {
+function kava_get_comment_author_link( array $args = [] ): string {
 	/**
 	 * Filter a URL of the author of the current comment.
 	 *
@@ -81,7 +81,7 @@ function kava_get_comment_author_link( $args = [] ) {
  * @param  array  $args   Arguments.
  * @return string $output The comment date of the current comment.
  */
-function kava_get_comment_date( $args = [] ) {
+function kava_get_comment_date( array $args = [] ): string {
 	$format = get_option( 'date_format' ) . ' ' . esc_attr_x( '\a\t', 'time prefix in comment date', 'kava' ) . ' ' . get_option( 'time_format' );
 
 	if ( ! empty( $args['format'] ) ) {
@@ -110,7 +110,7 @@ function kava_get_comment_date( $args = [] ) {
  * @param  array  $args          Arguments.
  * @return string $output        Comment's text.
  */
-function kava_get_comment_text( $args = [] ) {
+function kava_get_comment_text( array $args = [] ): string {
 	global $comment_depth;
 
 	ob_start();
@@ -142,7 +142,7 @@ function kava_get_comment_text( $args = [] ) {
  * @param  array  $args          Arguments.
  * @return string $output        `Reply` link.
  */
-function kava_get_comment_reply_link( $args = [] ) {
+function kava_get_comment_reply_link( array $args = [] ): string {
 	global $comment_depth;
 
 	$args = wp_parse_args( $args, [
@@ -172,7 +172,7 @@ function kava_get_comment_reply_link( $args = [] ) {
  * @param  array  $args   Arguments.
  * @return string $output HTML-link to edit the current comment.
  */
-function kava_get_comment_link_edit( $args = [] ) {
+function kava_get_comment_link_edit( array $args = [] ): ?string {
 	global $comment;
 
 	$text = esc_html__( 'Edit', 'kava' );
@@ -184,7 +184,7 @@ function kava_get_comment_link_edit( $args = [] ) {
 	$url = get_edit_comment_link( $comment->comment_ID );
 
 	if ( null === $url ) {
-		return;
+		return null;
 	}
 
 	$link = '<a class="comment-edit-link" href="' . esc_url( $url ) . '">' . $text . '</a>';

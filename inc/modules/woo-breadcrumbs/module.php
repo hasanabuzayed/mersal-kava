@@ -20,7 +20,7 @@ if ( ! class_exists( 'Kava_Woo_Breadcrumbs_Module' ) ) {
 		 *
 		 * @return string
 		 */
-		public function module_id() {
+		public function module_id(): string {
 			return 'woo-breadcrumbs';
 		}
 
@@ -29,7 +29,7 @@ if ( ! class_exists( 'Kava_Woo_Breadcrumbs_Module' ) ) {
 		 *
 		 * @return void
 		 */
-		public function filters() {
+		public function filters(): void {
 			add_filter( 'cx_breadcrumbs/custom_trail', array( $this, 'get_wc_breadcrumbs' ), 10, 2 );
 		}
 
@@ -38,7 +38,7 @@ if ( ! class_exists( 'Kava_Woo_Breadcrumbs_Module' ) ) {
 		 *
 		 * @return void
 		 */
-		public function actions() {
+		public function actions(): void {
 			remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20 );
 		}
 		/**
@@ -46,7 +46,7 @@ if ( ! class_exists( 'Kava_Woo_Breadcrumbs_Module' ) ) {
 		 *
 		 * @return void
 		 */
-		public function includes() {
+		public function includes(): void {
 			require_once get_theme_file_path( 'inc/modules/woo-breadcrumbs/classes/class-wc-breadcrumbs.php' );
 		}
 
@@ -58,7 +58,7 @@ if ( ! class_exists( 'Kava_Woo_Breadcrumbs_Module' ) ) {
 		 *
 		 * @return bool|array
 		 */
-		public function get_wc_breadcrumbs( $is_custom_breadcrumbs, $args ) {
+		public function get_wc_breadcrumbs( bool $is_custom_breadcrumbs, array $args ): bool|array {
 			if ( ! is_woocommerce() ){
 				return $is_custom_breadcrumbs;
 			}

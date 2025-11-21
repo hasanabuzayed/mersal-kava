@@ -21,12 +21,12 @@ if ( ! class_exists( 'Kava_Module_Base' ) ) {
 		 *
 		 * @return string
 		 */
-		abstract public function module_id();
+		abstract public function module_id(): string;
 
 		/**
 		 * Constructor for the class
 		 */
-		public function __construct( $childs = array() ) {
+		public function __construct( array $childs = [] ) {
 
 			if ( ! $this->is_enabled() ) {
 				return;
@@ -54,7 +54,7 @@ if ( ! class_exists( 'Kava_Module_Base' ) ) {
 		 * @param  array $childs Modules IDs
 		 * @return void
 		 */
-		public function load_child_modules( $childs = array() ) {
+		public function load_child_modules( array $childs = [] ): void {
 
 			foreach ( $childs as $child => $childs_of_child ) {
 				kava_theme()->load_module( $child, $childs_of_child );
@@ -67,7 +67,7 @@ if ( ! class_exists( 'Kava_Module_Base' ) ) {
 		 *
 		 * @return boolean
 		 */
-		public function is_enabled() {
+		public function is_enabled(): bool {
 
 			if ( null === $this->condition_cb() ) {
 				return true;
@@ -82,14 +82,14 @@ if ( ! class_exists( 'Kava_Module_Base' ) ) {
 		 *
 		 * @return void
 		 */
-		public function enqueue_scripts() {}
+		public function enqueue_scripts(): void {}
 
 		/**
 		 * Enqueue module styles.
 		 *
 		 * @return void
 		 */
-		public function enqueue_styles() {}
+		public function enqueue_styles(): void {}
 
 		/**
 		 * Module condition callback.
@@ -98,7 +98,7 @@ if ( ! class_exists( 'Kava_Module_Base' ) ) {
 		 *
 		 * @return callback name|null
 		 */
-		public function condition_cb() {
+		public function condition_cb(): ?callable {
 			return null;
 		}
 
@@ -107,28 +107,28 @@ if ( ! class_exists( 'Kava_Module_Base' ) ) {
 		 *
 		 * @return void
 		 */
-		public function includes() {}
+		public function includes(): void {}
 
 		/**
 		 * Add or remove module-related actions
 		 *
 		 * @return void
 		 */
-		public function actions() {}
+		public function actions(): void {}
 
 		/**
 		 * Add or remove module-related filters
 		 *
 		 * @return void
 		 */
-		public function filters() {}
+		public function filters(): void {}
 
 		/**
 		 * Run any custom initializtion code
 		 *
 		 * @return void
 		 */
-		public function custom_init() {}
+		public function custom_init(): void {}
 
 
 	}

@@ -12,7 +12,7 @@
  * @param  string  $classes Additional classes.
  * @return string
  */
-function kava_get_container_classes( $classes = null, $fullwidth = false ) {
+function kava_get_container_classes( ?string $classes = null, bool $fullwidth = false ): string {
 	if ( $classes ) {
 		$classes .= ' ';
 	}
@@ -35,7 +35,7 @@ function kava_get_container_classes( $classes = null, $fullwidth = false ) {
  * @param   string  $classes Additional classes.
  * @return  void
  */
-function kava_header_class( $classes = null ) {
+function kava_header_class( ?string $classes = null ): void {
 	if ( $classes ) {
 		$classes .= ' ';
 	}
@@ -67,7 +67,7 @@ function kava_header_class( $classes = null ) {
  * @param   string  $classes Additional classes.
  * @return  void
  */
-function kava_breadcrumbs_class( $classes = null ) {
+function kava_breadcrumbs_class( ?string $classes = null ): void {
 	if ( $classes ) {
 		$classes .= ' ';
 	}
@@ -92,7 +92,7 @@ function kava_breadcrumbs_class( $classes = null ) {
  * @since  1.0.0
  * @return string
  */
-function kava_content_class( $classes = null ) {
+function kava_content_class( ?string $classes = null ): void {
 	if ( $classes ) {
 		$classes .= ' ';
 	}
@@ -114,7 +114,7 @@ function kava_content_class( $classes = null ) {
  * @since  1.0.0
  * @return string
  */
-function kava_footer_class( $classes = null ) {
+function kava_footer_class( ?string $classes = null ): void {
 	if ( $classes ) {
 		$classes .= ' ';
 	}
@@ -137,7 +137,7 @@ function kava_footer_class( $classes = null ) {
  * @param  array $classes Additional classes.
  * @return void
  */
-function kava_primary_content_class( $classes = [] ) {
+function kava_primary_content_class( array $classes = [] ): void {
 	echo kava_get_layout_classes( 'content', $classes );
 }
 
@@ -148,7 +148,7 @@ function kava_primary_content_class( $classes = [] ) {
  * @param  array $classes Additional classes.
  * @return void
  */
-function kava_secondary_content_class( $classes = [] ) {
+function kava_secondary_content_class( array $classes = [] ): void {
 	echo kava_get_layout_classes( 'sidebar', $classes );
 }
 
@@ -160,7 +160,7 @@ function kava_secondary_content_class( $classes = [] ) {
  * @param  array  $classes Additional classes.
  * @return string
  */
-function kava_get_layout_classes( $layout = 'content', $classes = [] ) {
+function kava_get_layout_classes( string $layout = 'content', array $classes = [] ): string {
 	$sidebar_position = kava_theme()->sidebar_position;
 	$sidebar_width    = kava_theme()->customizer->get_value( 'sidebar_width' );
 
@@ -191,7 +191,7 @@ function kava_get_layout_classes( $layout = 'content', $classes = [] ) {
  * @param  string       $classes Additional classes.
  * @return string|void
  */
-function kava_posts_list_class( $classes = null ) {
+function kava_posts_list_class( ?string $classes = null ): void {
 	if ( $classes ) {
 		$classes .= ' ';
 	}
@@ -209,7 +209,7 @@ function kava_posts_list_class( $classes = null ) {
  * @param  array $classes Additional classes.
  * @return void
  */
-function kava_site_branding_class( $classes = [] ) {
+function kava_site_branding_class( array $classes = [] ): void {
 	$classes[] = 'site-branding';
 
 	echo 'class="' . join( ' ', $classes ) . '"';

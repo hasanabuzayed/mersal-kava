@@ -13,7 +13,7 @@
  * @param  string $value Default meta-value.
  * @return string
  */
-function kava_set_post_meta_value( $value ) {
+function kava_set_post_meta_value( string $value ): string {
 	$queried_obj = kava_get_queried_obj();
 
 	if ( ! $queried_obj ) {
@@ -33,9 +33,9 @@ function kava_set_post_meta_value( $value ) {
 /**
  * Get queried object.
  *
- * @return string|boolean
+ * @return int|false
  */
-function kava_get_queried_obj() {
+function kava_get_queried_obj(): int|false {
 	$queried_obj = apply_filters( 'kava-theme/posts/queried_object_id', false );
 
 	if ( ! $queried_obj && ! kava_maybe_need_rewrite_mod() ) {
@@ -51,9 +51,9 @@ function kava_get_queried_obj() {
 /**
  * Check if we need to try rewrite theme mod or not
  *
- * @return boolean
+ * @return bool
  */
-function kava_maybe_need_rewrite_mod() {
+function kava_maybe_need_rewrite_mod(): bool {
 
 	if ( is_front_page() && 'page' !== get_option( 'show_on_front' ) ) {
 		return false;
@@ -77,7 +77,7 @@ function kava_maybe_need_rewrite_mod() {
  * @param  string $string String to parse.
  * @return string
  */
-function kava_render_macros( $string ) {
+function kava_render_macros( string $string ): string {
 
 	$macros = apply_filters( 'kava-theme/data_macros', [
 		'/%%year%%/' => date( 'Y' ),
@@ -93,7 +93,7 @@ function kava_render_macros( $string ) {
  * @param  string $content content to render
  * @return string
  */
-function kava_render_icons( $content ) {
+function kava_render_icons( string $content ): string {
 	$icons     = kava_get_render_icons_set();
 	$icons_set = implode( '|', array_keys( $icons ) );
 
@@ -108,7 +108,7 @@ function kava_render_icons( $content ) {
  * @param  array $matches Search matches array.
  * @return string
  */
-function kava_render_icons_callback( $matches ) {
+function kava_render_icons_callback( array $matches ): string {
 
 	if ( empty( $matches[1] ) && empty( $matches[2] ) ) {
 		return $matches[0];
@@ -133,7 +133,7 @@ function kava_render_icons_callback( $matches ) {
  *
  * @return array
  */
-function kava_get_render_icons_set() {
+function kava_get_render_icons_set(): array {
 	return apply_filters( 'kava-theme/icons/icons-set', [
 		'fa'       => '<i class="fa-solid fa-%s"></i>',
 		'fa-solid' => '<i class="fa-solid fa-%s"></i>',
@@ -149,7 +149,7 @@ function kava_get_render_icons_set() {
  * @param  string $url Formatted URL to parse.
  * @return string
  */
-function kava_render_theme_url( $url ) {
+function kava_render_theme_url( string $url ): string {
 	return sprintf( $url, get_template_directory_uri() );
 }
 
@@ -158,7 +158,7 @@ function kava_render_theme_url( $url ) {
  *
  * @return string
  */
-function kava_justify_thumbnail_size( $mask = 0, $thumbnail_size = 'post-thumbnail', $justify_size='kava-thumb-justify', $justify_size_1 = 'kava-thumb-justify', $justify_size_2 = 'kava-thumb-justify-2') {
+function kava_justify_thumbnail_size( int $mask = 0, string $thumbnail_size = 'post-thumbnail', string $justify_size = 'kava-thumb-justify', string $justify_size_1 = 'kava-thumb-justify', string $justify_size_2 = 'kava-thumb-justify-2' ): string {
 	$mask_list = [
 		[ $justify_size_1, $justify_size_2, $justify_size_2, $justify_size_1, $justify_size_1, $justify_size_1, $justify_size_1 ],
 		[ $justify_size_1, $justify_size_1, $justify_size_2, $justify_size_2, $justify_size_1, $justify_size_1, $justify_size_1, $justify_size_2, $justify_size_1 ]
@@ -175,16 +175,16 @@ function kava_justify_thumbnail_size( $mask = 0, $thumbnail_size = 'post-thumbna
  *
  * @return string
  */
-function kava_get_post_template_part_slug() {
+function kava_get_post_template_part_slug(): string {
 	return apply_filters( 'kava-theme/posts/template-part-slug', 'template-parts/content' );
 }
 
 /**
  * Get post template part slug.
  *
- * @return string
+ * @return mixed
  */
-function kava_get_post_style() {
+function kava_get_post_style(): mixed {
 	return apply_filters( 'kava-theme/posts/post-style', false );
 }
 
@@ -195,7 +195,7 @@ function kava_get_post_style() {
  *
  * @return array
  */
-function kava_kses_post_allowed_html( $additional_allowed_html = [] ) {
+function kava_kses_post_allowed_html( array $additional_allowed_html = [] ): array {
 	$allowed_html = wp_kses_allowed_html( 'post' );
 
 	if ( ! empty( $additional_allowed_html ) ) {
@@ -214,7 +214,7 @@ function kava_kses_post_allowed_html( $additional_allowed_html = [] ) {
 /**
  * Support `wp_body_open` action, available since WordPress 5.2.
  */
-function kava_body_open() {
+function kava_body_open(): void {
 	if ( function_exists( 'wp_body_open' ) ) {
 		wp_body_open();
 	} else {

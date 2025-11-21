@@ -9,7 +9,7 @@ class Kava_WC_Breadcrumbs extends CX_Breadcrumbs {
 	/**
 	 * Build breadcrumbs trail items array
 	 */
-	public function build_trail() {
+	public function build_trail(): void {
 
 		$this->is_extend = true;
 
@@ -38,7 +38,7 @@ class Kava_WC_Breadcrumbs extends CX_Breadcrumbs {
 	/**
 	 * Add single product trail items
 	 */
-	private function add_single_product() {
+	private function add_single_product(): void {
 		global $post;
 		if ( 'minified' !== $this->args['path_type'] ) {
 			$terms = false;
@@ -46,7 +46,7 @@ class Kava_WC_Breadcrumbs extends CX_Breadcrumbs {
 				$terms = wc_get_product_terms(
 					$post->ID,
 					'product_cat',
-					array( 'orderby' => 'parent', 'order' => 'DESC' )
+					[ 'orderby' => 'parent', 'order' => 'DESC' ]
 				);
 			}
 			if ( $terms ) {
@@ -65,7 +65,7 @@ class Kava_WC_Breadcrumbs extends CX_Breadcrumbs {
 	 *
 	 * @param string $taxonomy
 	 */
-	private function term_ancestors( $term_id, $taxonomy ) {
+	private function term_ancestors( int $term_id, string $taxonomy ): void {
 		if ( 'minified' === $this->args['path_type'] ) {
 			return;
 		}
@@ -82,7 +82,7 @@ class Kava_WC_Breadcrumbs extends CX_Breadcrumbs {
 	/**
 	 * Get product category page trail link
 	 */
-	private function add_product_tax() {
+	private function add_product_tax(): void {
 		$current_term = $GLOBALS['wp_query']->get_queried_object();
 		if ( is_tax( 'product_cat' ) ) {
 			$this->term_ancestors( $current_term->term_id, 'product_cat' );
@@ -93,7 +93,7 @@ class Kava_WC_Breadcrumbs extends CX_Breadcrumbs {
 	/**
 	 * Add WooCommerce shop page
 	 */
-	private function add_shop_page() {
+	private function add_shop_page(): void {
 		$shop_page_id = function_exists( 'wc_get_page_id' ) ? wc_get_page_id( 'shop' ) : false;
 		if ( ! $shop_page_id ) {
 			return;

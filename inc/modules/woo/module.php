@@ -20,7 +20,7 @@ if ( ! class_exists( 'Kava_Woo_Module' ) ) {
 		 *
 		 * @return string
 		 */
-		public function module_id() {
+		public function module_id(): string {
 			return 'woo';
 		}
 
@@ -29,7 +29,7 @@ if ( ! class_exists( 'Kava_Woo_Module' ) ) {
 		 *
 		 * @return void
 		 */
-		public function filters() {
+		public function filters(): void {
 
 			/**
 			 * Disable the default WooCommerce stylesheet.
@@ -51,7 +51,7 @@ if ( ! class_exists( 'Kava_Woo_Module' ) ) {
 		/**
 		 * Add WooCommerce customizer sections
 		*/
-		public function kava_customizer_core_sections( $sections ) {
+		public function kava_customizer_core_sections( array $sections ): array {
 			$sections[] = 'woocommerce_settings';
 			return $sections;
 		}
@@ -64,7 +64,7 @@ if ( ! class_exists( 'Kava_Woo_Module' ) ) {
 		 *
 		 * @return array
 		 */
-		public function customizer_options( $options ) {
+		public function customizer_options( array $options ): array {
 
 			$new_options = array(
 				'woocommerce_accent_color' => array(
@@ -88,7 +88,7 @@ if ( ! class_exists( 'Kava_Woo_Module' ) ) {
 		 *
 		 * @return void
 		 */
-		public function includes() {
+		public function includes(): void {
 			require_once get_theme_file_path( 'inc/modules/woo/includes/wc-cart-functions.php' );
 			require_once get_theme_file_path( 'inc/modules/woo/includes/wc-content-product-functions.php' );
 			require_once get_theme_file_path( 'inc/modules/woo/includes/wc-single-product-functions.php' );
@@ -102,7 +102,7 @@ if ( ! class_exists( 'Kava_Woo_Module' ) ) {
 		 *
 		 * @return bool|callable
 		 */
-		public function condition_cb() {
+		public function condition_cb(): bool {
 			return class_exists( 'WooCommerce' );
 		}
 
@@ -113,7 +113,7 @@ if ( ! class_exists( 'Kava_Woo_Module' ) ) {
 		 *
 		 * @return int
 		 */
-		public function assets_depends_script( $scripts_depends ) {
+		public function assets_depends_script( array $scripts_depends ): array {
 			array_push( $scripts_depends, 'kava-woo-module-script' );
 
 			return $scripts_depends;
@@ -124,7 +124,7 @@ if ( ! class_exists( 'Kava_Woo_Module' ) ) {
 		 *
 		 * @return void
 		 */
-		public function enqueue_scripts() {
+		public function enqueue_scripts(): void {
 			// register scripts
 			wp_register_script(
 				'kava-woo-module-script',
@@ -140,7 +140,7 @@ if ( ! class_exists( 'Kava_Woo_Module' ) ) {
 		 *
 		 * @return void
 		 */
-		public function enqueue_styles() {
+		public function enqueue_styles(): void {
 			$font_path   = WC()->plugin_url() . '/assets/fonts/';
 			$inline_font = '@font-face {
 			font-family: "star";

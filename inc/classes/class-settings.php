@@ -88,9 +88,9 @@ if ( ! class_exists( 'Kava_Settings' ) ) {
 		/**
 		 * Is default settings page enabled or not.
 		 *
-		 * @return boolean
+		 * @return bool
 		 */
-		public function is_enabled() {
+		public function is_enabled(): bool {
 			return apply_filters( 'kava-theme/settings-page/is-enabled', true );
 		}
 
@@ -99,7 +99,7 @@ if ( ! class_exists( 'Kava_Settings' ) ) {
 		 *
 		 * @return void
 		 */
-		public function admin_enqueue_scripts() {
+		public function admin_enqueue_scripts(): void {
 
 			if ( isset( $_REQUEST['page'] ) && $this->key === $_REQUEST['page'] ) {
 
@@ -131,7 +131,7 @@ if ( ! class_exists( 'Kava_Settings' ) ) {
 		 *
 		 * @return string
 		 */
-		public function get_settings_page_link() {
+		public function get_settings_page_link(): string {
 
 			return add_query_arg(
 				[
@@ -146,10 +146,10 @@ if ( ! class_exists( 'Kava_Settings' ) ) {
 		 * Get setting value.
 		 *
 		 * @param  string  $setting
-		 * @param  boolean $default
+		 * @param  mixed $default
 		 * @return mixed
 		 */
-		public function get( $setting, $default = false ) {
+		public function get( string $setting, mixed $default = false ): mixed {
 
 			if ( null === $this->settings ) {
 				$this->settings = get_option( $this->key, [] );
@@ -163,7 +163,7 @@ if ( ! class_exists( 'Kava_Settings' ) ) {
 		 *
 		 * @return void
 		 */
-		public function register_page() {
+		public function register_page(): void {
 
 			add_menu_page(
 				esc_html__( 'Theme', 'kava' ),
@@ -181,14 +181,14 @@ if ( ! class_exists( 'Kava_Settings' ) ) {
 		 *
 		 * @return void
 		 */
-		public function render_page() {
+		public function render_page(): void {
 			include get_parent_theme_file_path( 'admin-templates/settings-page.php' );
 		}
 
 		/**
 		 * Generate config data.
 		 */
-		public function generate_config_data() {
+		public function generate_config_data(): void {
 
 			$default_disable_container_archive_cpt = $this->prepare_default_values_list( $this->get_post_types( true ), 'false' );
 			$default_disable_container_single_cpt  = $this->prepare_default_values_list( $this->get_post_types(), 'false' );
@@ -242,7 +242,7 @@ if ( ! class_exists( 'Kava_Settings' ) ) {
 			];
 		}
 
-		public function save_settings() {
+		public function save_settings(): void {
 
 			if ( ! isset( $_REQUEST['action'] ) || $this->ajax_action !== $_REQUEST['action'] || empty( $_REQUEST['options'] ) ) {
 				wp_send_json_error( [
@@ -252,9 +252,9 @@ if ( ! class_exists( 'Kava_Settings' ) ) {
 			}
 
 			if ( ! current_user_can( 'manage_options' ) ) {
-				wp_send_json_error( array(
+				wp_send_json_error( [
 					'message' => esc_html__( 'Sorry! You cannot change options.', 'kava' )
-				) );
+				] );
 
 				return;
 			}
@@ -288,7 +288,7 @@ if ( ! class_exists( 'Kava_Settings' ) ) {
 		 * @param  array $options
 		 * @return array
 		 */
-		public function prepare_options_list( $options = [] ) {
+		public function prepare_options_list( array $options = [] ): array {
 
 			$result = [];
 
@@ -309,7 +309,7 @@ if ( ! class_exists( 'Kava_Settings' ) ) {
 		 * @param  mixed $default
 		 * @return array
 		 */
-		public function prepare_default_values_list( $options = [], $default = 'false' ) {
+		public function prepare_default_values_list( array $options = [], mixed $default = 'false' ): array {
 
 			$result = [];
 
@@ -323,10 +323,10 @@ if ( ! class_exists( 'Kava_Settings' ) ) {
 		/**
 		 * Get public post types options list
 		 *
-		 * @param  boolean $is_archive_list
+		 * @param  bool $is_archive_list
 		 * @return array
 		 */
-		public function get_post_types( $is_archive_list = false ) {
+		public function get_post_types( bool $is_archive_list = false ): array {
 			$args = [
 				'show_in_nav_menus' => true,
 			];
@@ -358,7 +358,7 @@ if ( ! class_exists( 'Kava_Settings' ) ) {
 		 *
 		 * @return array
 		 */
-		public function get_single_post_templates() {
+		public function get_single_post_templates(): array {
 			$default_template = [ 'default' => apply_filters( 'default_page_template_title', esc_html__( 'Default Template', 'kava' ) ) ];
 
 			if ( ! function_exists( 'get_page_templates' ) ) {
@@ -384,7 +384,7 @@ if ( ! class_exists( 'Kava_Settings' ) ) {
 		 *
 		 * @return array
 		 */
-		public function get_available_modules() {
+		public function get_available_modules(): array {
 
 			if (  null === $this->available_modules ) {
 				$this->available_modules = [];
@@ -395,7 +395,7 @@ if ( ! class_exists( 'Kava_Settings' ) ) {
 			return $this->available_modules;
 		}
 
-		public function parse_available_modules( $modules = [], $parent = null ) {
+		public function parse_available_modules( array $modules = [], ?string $parent = null ): void {
 
 			$disabled_modules = apply_filters( 'kava-theme/disabled-modules', [] );
 
@@ -427,9 +427,9 @@ if ( ! class_exists( 'Kava_Settings' ) ) {
 		 *
 		 * @since  1.0.0
 		 * @access public
-		 * @return object
+		 * @return self
 		 */
-		public static function get_instance() {
+		public static function get_instance(): self {
 			// If the single instance hasn't been set, set it now.
 			if ( null == self::$instance ) {
 				self::$instance = new self;
@@ -442,9 +442,9 @@ if ( ! class_exists( 'Kava_Settings' ) ) {
 /**
  * Returns instance of Kava_Settings
  *
- * @return object
+ * @return Kava_Settings
  */
-function kava_settings() {
+function kava_settings(): Kava_Settings {
 	return Kava_Settings::get_instance();
 }
 

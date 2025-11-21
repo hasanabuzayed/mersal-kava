@@ -11,7 +11,7 @@ if ( ! function_exists( 'kava_post_excerpt' ) ) :
 	/**
 	 * Prints HTML with excerpt.
 	 */
-	function kava_post_excerpt( $args = [] ) {
+	function kava_post_excerpt( array $args = [] ): ?string {
 		$default_args = [
 			'before' => '<div class="entry-content">',
 			'after'  => '</div>',
@@ -22,7 +22,7 @@ if ( ! function_exists( 'kava_post_excerpt' ) ) :
 		$post_excerpt_enable = kava_theme()->customizer->get_value( 'blog_post_excerpt' );
 
 		if ( ! $post_excerpt_enable ) {
-			return;
+			return null;
 		}
 
 		$words_count = kava_theme()->customizer->get_value( 'blog_post_excerpt_words_count' );
@@ -36,7 +36,7 @@ if ( ! function_exists( 'kava_post_excerpt' ) ) :
 			$excerpt = wp_trim_words( $excerpt, $words_count, '...' );
 
 			if ( ! $excerpt ) {
-				return;
+				return null;
 			}
 		}
 
@@ -47,6 +47,7 @@ if ( ! function_exists( 'kava_post_excerpt' ) ) :
 
 		if ( $args['echo'] ) {
 			echo wp_kses_post( $excerpt_output );
+			return null;
 		} else {
 			return $excerpt_output;
 		}
@@ -57,7 +58,7 @@ if ( ! function_exists( 'kava_posted_on' ) ) :
 	/**
 	 * Prints HTML with meta information for the current post-date/time.
 	 */
-	function kava_posted_on( $args = [] ) {
+	function kava_posted_on( array $args = [] ): ?string {
 		if ( 'post' === get_post_type() ) {
 
 			$default_args = [
@@ -100,12 +101,14 @@ if ( ! function_exists( 'kava_posted_on' ) ) :
 
 				if ( $args['echo'] ) {
 					echo wp_kses( $date_output, kava_kses_post_allowed_html( $allowed_html ) );
+					return null;
 				} else {
 					return $date_output;
 				}
 			}
 
 		}
+		return null;
 	}
 endif;
 
@@ -113,7 +116,7 @@ if ( ! function_exists( 'kava_posted_by' ) ) :
 	/**
 	 * Prints HTML with meta information for the current author.
 	 */
-	function kava_posted_by( $args = [] ) {
+	function kava_posted_by( array $args = [] ): void {
 		if ( 'post' === get_post_type() ) {
 
 			$default_args = [
@@ -139,7 +142,7 @@ if ( ! function_exists( 'kava_posted_in' ) ) :
 	/**
 	 * Prints HTML with meta information for the current categories.
 	 */
-	function kava_posted_in( $args = [] ) {
+	function kava_posted_in( array $args = [] ): void {
 		if ( 'post' === get_post_type() ) {
 
 			$default_args = [
@@ -179,7 +182,7 @@ if ( ! function_exists( 'kava_post_tags' ) ) :
 	/**
 	 * Prints HTML with meta information for the current tags.
 	 */
-	function kava_post_tags( $args = [] ) {
+	function kava_post_tags( array $args = [] ): void {
 		if ( 'post' === get_post_type() ) {
 
 			$default_args = [
@@ -219,7 +222,7 @@ if ( ! function_exists( 'kava_post_comments' ) ) :
 	/**
 	 * Prints HTML with meta information for the current comments.
 	 */
-	function kava_post_comments( $args = [] ) {
+	function kava_post_comments( array $args = [] ): void {
 		if ( 'post' === get_post_type() ) {
 
 			$option_name = ! is_singular( 'post' ) ? 'blog_post_comments' : 'single_post_comments';
@@ -261,7 +264,7 @@ if ( ! function_exists( 'kava_get_post_author' ) ) :
 	/*
 	* Display a post author.
 	*/
-	function kava_get_post_author( $args = [] ) {
+	function kava_get_post_author( array $args = [] ): ?string {
 		$default_args = [
 			'prefix' => '',
 			'before' => '<span class="author">',
@@ -294,6 +297,7 @@ if ( ! function_exists( 'kava_get_post_author' ) ) :
 
 		if ( $args['echo'] ) {
 			echo wp_kses_post( $author_output );
+			return null;
 		} else {
 			return $author_output;
 		}
@@ -304,7 +308,7 @@ if ( ! function_exists( 'kava_get_post_author_avatar' ) ) :
 	/*
 	* Display a post author avatar.
 	*/
-	function kava_get_post_author_avatar( $args = [] ) {
+	function kava_get_post_author_avatar( array $args = [] ): ?string {
 		$default_args = [
 			'size' => 140,
 			'echo' => true
@@ -328,6 +332,7 @@ if ( ! function_exists( 'kava_get_post_author_avatar' ) ) :
 
 		if ( $args['echo'] ) {
 			echo wp_kses( $avatar_output, kava_kses_post_allowed_html( $allowed_html ) );
+			return null;
 		} else {
 			return $avatar_output;
 		}
@@ -338,7 +343,7 @@ if ( ! function_exists( 'kava_get_author_meta' ) ) :
 	/*
 	* Display author meta.
 	*/
-	function kava_get_author_meta( $args = [] ) {
+	function kava_get_author_meta( array $args = [] ): ?string {
 		$default_args = [
 			'field' => 'description',
 			'echo'  => true
@@ -355,6 +360,7 @@ if ( ! function_exists( 'kava_get_author_meta' ) ) :
 
 		if ( $args['echo'] ) {
 			echo wp_kses_post( $author_meta_output );
+			return null;
 		} else {
 			return $author_meta_output;
 		}
@@ -362,7 +368,7 @@ if ( ! function_exists( 'kava_get_author_meta' ) ) :
 endif;
 
 if ( ! function_exists( 'kava_post_link' ) ) :
-	function kava_post_link( $args = [] ) {
+	function kava_post_link( array $args = [] ): void {
 
 		$default_args = [
 			'class' => '',
@@ -400,7 +406,7 @@ if ( ! function_exists( 'kava_post_link' ) ) :
 endif;
 
 if ( ! function_exists( 'kava_edit_link' ) ) :
-	function kava_edit_link() {
+	function kava_edit_link(): void {
 		edit_post_link(
 			sprintf(
 				wp_kses(
@@ -427,9 +433,9 @@ if ( ! function_exists( 'kava_post_thumbnail' ) ) :
  * Wraps the post thumbnail in an anchor element on index views, or a div
  * element when on single views.
  */
-function kava_post_thumbnail( $image_size = 'post-thumbnail', $args = [] ) {
+function kava_post_thumbnail( string $image_size = 'post-thumbnail', array $args = [] ): ?string {
 	if ( post_password_required() || is_attachment() || ! has_post_thumbnail() ) {
-		return;
+		return null;
 	}
 
 	$default_args = [
@@ -473,6 +479,7 @@ function kava_post_thumbnail( $image_size = 'post-thumbnail', $args = [] ) {
 
 	if ( $args['echo'] ) {
 		echo $thumb;
+		return null;
 	} else {
 		return $thumb;
 	}
@@ -485,7 +492,7 @@ if ( ! function_exists( 'kava_post_overlay_thumbnail' ) ) :
  *
  * @return string
  */
-function kava_post_overlay_thumbnail( $img_size = 'kava-thumb-xl', $postID = null ) {
+function kava_post_overlay_thumbnail( string $img_size = 'kava-thumb-xl', ?int $postID = null ): void {
 	$thumbnail = apply_filters(
 		'kava-theme/post/overlay-thumb',
 		get_the_post_thumbnail_url( $postID, $img_size )
@@ -504,7 +511,7 @@ if ( ! function_exists( 'kava_get_page_preloader' ) ) :
  * @since  1.0.0
  * @return void
  */
-function kava_get_page_preloader() {
+function kava_get_page_preloader(): void {
 	$page_preloader  = kava_theme()->customizer->get_value( 'page_preloader' );
 	$enable_theme_js = kava_settings()->get( 'enqueue_theme_js_scripts', true );
 
@@ -526,7 +533,7 @@ if ( ! function_exists( 'kava_header_logo' ) ) :
  * @since  1.0.0
  * @return void
  */
-function kava_header_logo() {
+function kava_header_logo(): void {
 	if ( has_custom_logo() ) {
 		the_custom_logo();
 	} else {
@@ -549,7 +556,7 @@ if ( ! function_exists( 'kava_site_description' ) ) :
  * @since  1.0.0
  * @return void
  */
-function kava_site_description() {
+function kava_site_description(): void {
 	$show_desc = kava_theme()->customizer->get_value( 'show_tagline' );
 
 	if ( ! $show_desc ) {
@@ -576,7 +583,7 @@ if ( ! function_exists( 'kava_social_list' ) ) :
  * @since  1.0.1 Added new param - $type.
  * @return void
  */
-function kava_social_list( $context = '', $type = 'icon' ) {
+function kava_social_list( string $context = '', string $type = 'icon' ): void {
 	$visibility_in_header = kava_theme()->customizer->get_value( 'header_social_links' );
 	$visibility_in_footer = kava_theme()->customizer->get_value( 'footer_social_links' );
 
@@ -599,7 +606,7 @@ if ( ! function_exists( 'kava_footer_copyright' ) ) :
  * @since  1.0.0
  * @return void
  */
-function kava_footer_copyright() {
+function kava_footer_copyright(): void {
 	$copyright = kava_theme()->customizer->get_value( 'footer_copyright' );
 	$format    = apply_filters(
 		'kava-theme/footer/copyright-format',
@@ -620,7 +627,7 @@ if ( ! function_exists( 'kava_is_top_panel_visible' ) ) :
  *
  * @return bool
  */
-function kava_is_top_panel_visible() {
+function kava_is_top_panel_visible(): bool {
 	$is_visible = false;
 	$top_panel_enable = kava_theme()->customizer->get_value( 'top_panel_enable' );
 
@@ -651,7 +658,7 @@ if ( ! function_exists( 'kava_sticky_label' ) ) :
  * @since  1.0.0
  * @return void
  */
-function kava_sticky_label() {
+function kava_sticky_label(): void {
 
 	if ( ! is_sticky() || ! is_home() || is_paged() ) {
 		return;

@@ -14,7 +14,7 @@ if ( ! function_exists( 'kava_set_wc_dynamic_css_options' ) ) {
 	 *
 	 * @return mixed
 	 */
-	function kava_set_wc_dynamic_css_options( $options ) {
+	function kava_set_wc_dynamic_css_options( array $options ): array {
 
 		array_push( $options['css_files'], get_theme_file_path( 'inc/modules/woo/assets/css/dynamic/woo-module-dynamic.css' ) );
 

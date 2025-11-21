@@ -20,7 +20,7 @@ if ( ! class_exists( 'Kava_Woo_Page_Title_Module' ) ) {
 		 *
 		 * @return string
 		 */
-		public function module_id() {
+		public function module_id(): string {
 			return 'woo-page-title';
 		}
 
@@ -29,7 +29,7 @@ if ( ! class_exists( 'Kava_Woo_Page_Title_Module' ) ) {
 		 *
 		 * @return void
 		 */
-		public function actions() {
+		public function actions(): void {
 			remove_action( 'woocommerce_archive_description', 'woocommerce_taxonomy_archive_description', 10 );
 			remove_action( 'woocommerce_archive_description', 'woocommerce_product_archive_description', 10 );
 			add_action( 'woocommerce_before_main_content', array( $this, 'get_woo_page_title' ), 1 );
@@ -38,7 +38,7 @@ if ( ! class_exists( 'Kava_Woo_Page_Title_Module' ) ) {
 		/**
 		 * Return page title for WooCommerce
 		 */
-		public function get_woo_page_title() {
+		public function get_woo_page_title(): void {
 			include get_theme_file_path( 'inc/modules/woo-page-title/template/page-title.php' );
 		}
 
@@ -47,7 +47,7 @@ if ( ! class_exists( 'Kava_Woo_Page_Title_Module' ) ) {
 		 *
 		 * @return void
 		 */
-		public function filters() {
+		public function filters(): void {
 			add_filter( 'woocommerce_show_page_title', '__return_false' );
 		}
 

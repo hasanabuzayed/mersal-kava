@@ -6,7 +6,7 @@
  */
 
 add_action( 'after_setup_theme', 'kava_register_menus', 5 );
-function kava_register_menus() {
+function kava_register_menus(): void {
 
 	register_nav_menus( [
 		'main'   => esc_html__( 'Main', 'kava' ),

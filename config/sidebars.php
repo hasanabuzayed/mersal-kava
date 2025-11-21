@@ -6,7 +6,7 @@
  */
 
 add_action( 'after_setup_theme', 'kava_register_sidebars', 5 );
-function kava_register_sidebars() {
+function kava_register_sidebars(): void {
 
 	kava_widget_area()->widgets_settings = apply_filters( 'kava-theme/widget_area/default_settings', [
 		'sidebar' => [

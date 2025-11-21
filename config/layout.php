@@ -6,7 +6,7 @@
  */
 
 add_action( 'after_setup_theme', 'kava_set_layout', 5 );
-function kava_set_layout() {
+function kava_set_layout(): void {
 
 	kava_theme()->layout = [
 		'one-right-sidebar' => [

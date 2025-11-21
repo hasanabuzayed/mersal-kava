@@ -49,7 +49,7 @@ if ( ! class_exists( 'Kava_Blog_Layouts_Module' ) ) {
 		 *
 		 * @return string
 		 */
-		public function module_id() {
+		public function module_id(): string {
 
 			return 'blog-layouts';
 
@@ -60,7 +60,7 @@ if ( ! class_exists( 'Kava_Blog_Layouts_Module' ) ) {
 		 *
 		 * @return void
 		 */
-		public function filters() {
+		public function filters(): void {
 
 			add_action( 'wp_head', array( $this, 'module_init_properties' ) );
 			add_filter( 'kava-theme/customizer/options', array( $this, 'customizer_options' ) );
@@ -77,7 +77,7 @@ if ( ! class_exists( 'Kava_Blog_Layouts_Module' ) ) {
 		 *
 		 * @return void
 		 */
-		public function module_init_properties() {
+		public function module_init_properties(): void {
 
 			$this->layout_type  = kava_theme()->customizer->get_value( 'blog_layout_type' );
 			$this->layout_style = kava_theme()->customizer->get_value( 'blog_style' );
@@ -101,7 +101,7 @@ if ( ! class_exists( 'Kava_Blog_Layouts_Module' ) ) {
 		 *
 		 * @return array
 		 */
-		public function apply_layout_template( $layout ) {
+		public function apply_layout_template( mixed $layout ): string {
 
 			$blog_post_template = 'template-parts/grid/content';
 
@@ -132,7 +132,7 @@ if ( ! class_exists( 'Kava_Blog_Layouts_Module' ) ) {
 		 *
 		 * @return [type]        [description]
 		 */
-		public function apply_style_template( $style ) {
+		public function apply_style_template( mixed $style ): string|bool {
 
 			$blog_layout_style = $this->layout_style;
 
@@ -151,7 +151,7 @@ if ( ! class_exists( 'Kava_Blog_Layouts_Module' ) ) {
 		 *
 		 * @return [type]   modified list class
 		 */
-		public function add_list_class( $list_class ) {
+		public function add_list_class( string $list_class ): string {
 
 			$list_class .= ' posts-list--' . sanitize_html_class( ! is_search() ? $this->layout_type : 'default' );
 			$list_class .= ' list-style-' . sanitize_html_class( $this->layout_style ); 
@@ -166,7 +166,7 @@ if ( ! class_exists( 'Kava_Blog_Layouts_Module' ) ) {
 		 * @param  array $options Options list
 		 * @return array
 		 */
-		public function customizer_options( $options ) {
+		public function customizer_options( array $options ): array {
 
 			$new_options = array(
 				'blog_layout_type' => array(
@@ -217,7 +217,7 @@ if ( ! class_exists( 'Kava_Blog_Layouts_Module' ) ) {
 		 *
 		 * @return bool
 		 */
-		public function is_blog_archive() {
+		public function is_blog_archive(): bool {
 
 			if ( is_home() || ( is_archive() && ! is_tax() && ! is_post_type_archive() ) ) {
 				return true;
@@ -232,7 +232,7 @@ if ( ! class_exists( 'Kava_Blog_Layouts_Module' ) ) {
 		 *
 		 * @return boolean
 		 */
-		public function disable_site_content_container( $enabled ) {
+		public function disable_site_content_container( bool $enabled ): bool {
 
 			if ( $this->is_blog_archive() ) {
 				return $this->fullwidth_enabled;
@@ -247,7 +247,7 @@ if ( ! class_exists( 'Kava_Blog_Layouts_Module' ) ) {
 		 *
 		 * @return boolean
 		 */
-		public function customizer_blog_sidebar_enabled() {
+		public function customizer_blog_sidebar_enabled(): bool {
 
 			return $this->sidebar_enabled;
 
@@ -258,7 +258,7 @@ if ( ! class_exists( 'Kava_Blog_Layouts_Module' ) ) {
 		 *
 		 * @return void
 		 */
-		public function enqueue_styles() {
+		public function enqueue_styles(): void {
 
 			wp_enqueue_style(
 				'blog-layouts-module',

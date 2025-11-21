@@ -51,7 +51,7 @@ if ( ! class_exists( 'Kava_Widget_Area' ) ) {
 		 * @since  1.0.0
 		 * @return void
 		 */
-		public function register() {
+		public function register(): void {
 			global $wp_registered_sidebars;
 
 			foreach ( $this->widgets_settings as $id => $settings ) {
@@ -79,7 +79,7 @@ if ( ! class_exists( 'Kava_Widget_Area' ) ) {
 		 * @param  string $area_id Widget area ID.
 		 * @return void
 		 */
-		public function render( $area_id ) {
+		public function render( string $area_id ): void {
 
 			if ( ! is_active_sidebar( $area_id ) ) {
 				$this->active_sidebars[ $area_id ] = false;
@@ -133,7 +133,7 @@ if ( ! class_exists( 'Kava_Widget_Area' ) ) {
 		 * @param  string    $index Sidebar ID.
 		 * @return bool|null
 		 */
-		public function is_active_sidebar( $index ) {
+		public function is_active_sidebar( string $index ): ?bool {
 
 			if ( isset( $this->active_sidebars[ $index ] ) ) {
 				return $this->active_sidebars[ $index ];
@@ -146,9 +146,9 @@ if ( ! class_exists( 'Kava_Widget_Area' ) ) {
 		 * Returns the instance.
 		 *
 		 * @since  1.0.0
-		 * @return object
+		 * @return self
 		 */
-		public static function get_instance() {
+		public static function get_instance(): self {
 
 			// If the single instance hasn't been set, set it now.
 			if ( null == self::$instance ) {
@@ -159,7 +159,7 @@ if ( ! class_exists( 'Kava_Widget_Area' ) ) {
 		}
 	}
 
-	function kava_widget_area() {
+	function kava_widget_area(): Kava_Widget_Area {
 		return Kava_Widget_Area::get_instance();
 	}
 

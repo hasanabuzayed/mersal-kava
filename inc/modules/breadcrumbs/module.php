@@ -28,7 +28,7 @@ if ( ! class_exists( 'Kava_Breadcrumbs_Module' ) ) {
 		 *
 		 * @return string
 		 */
-		public function module_id() {
+		public function module_id(): string {
 			return 'breadcrumbs';
 		}
 
@@ -37,7 +37,7 @@ if ( ! class_exists( 'Kava_Breadcrumbs_Module' ) ) {
 		 *
 		 * @return void
 		 */
-		public function actions() {
+		public function actions(): void {
 			add_action( 'wp_head',           array( $this, 'init_breadcrumbs' ) );
 			add_action( 'after_setup_theme', array( $this, 'add_meta_options' ), 6 );
 
@@ -49,7 +49,7 @@ if ( ! class_exists( 'Kava_Breadcrumbs_Module' ) ) {
 		 *
 		 * @return void
 		 */
-		public function filters() {
+		public function filters(): void {
 			// Customizer options
 			add_filter( 'kava-theme/customizer/options', array( $this, 'add_customizer_options' ) );
 
@@ -62,7 +62,7 @@ if ( ! class_exists( 'Kava_Breadcrumbs_Module' ) ) {
 		 *
 		 * @since 1.0.0
 		 */
-		public function init_breadcrumbs() {
+		public function init_breadcrumbs(): void {
 			$this->breadcrumbs = new CX_Breadcrumbs( $this->get_breadcrumbs_options() );
 		}
 
@@ -73,7 +73,7 @@ if ( ! class_exists( 'Kava_Breadcrumbs_Module' ) ) {
 		 *
 		 * @return array
 		 */
-		public function add_customizer_options( $options = array() ) {
+		public function add_customizer_options( array $options = [] ): array {
 
 			$breadcrumbs_options = array(
 				/** `Breadcrumbs` section */
@@ -131,7 +131,7 @@ if ( ! class_exists( 'Kava_Breadcrumbs_Module' ) ) {
 		 * @since  1.0.0
 		 * @return array
 		 */
-		public function get_breadcrumbs_options() {
+		public function get_breadcrumbs_options(): array {
 			/**
 			 * Filter a holder for breadcrumbs options.
 			 *
@@ -158,14 +158,14 @@ if ( ! class_exists( 'Kava_Breadcrumbs_Module' ) ) {
 		/**
 		 * Print Breadcrumbs area.
 		 */
-		public function print_breadcrumbs_area() {
+		public function print_breadcrumbs_area(): void {
 			get_template_part( 'inc/modules/breadcrumbs/template-parts/breadcrumbs' );
 		}
 
 		/**
 		 * Add meta options
 		 */
-		public function add_meta_options() {
+		public function add_meta_options(): void {
 			kava_post_meta()->add_options( array(
 				'id'            => 'kava-extra-page-settings',
 				'title'         => esc_html__( 'Page Settings', 'kava' ),
@@ -196,7 +196,7 @@ if ( ! class_exists( 'Kava_Breadcrumbs_Module' ) ) {
 		 *
 		 * @return bool
 		 */
-		public function breadcrumbs_visibility( $visibility ) {
+		public function breadcrumbs_visibility( bool $visibility ): bool {
 			$post_id = get_the_ID();
 
 			$meta_value = get_post_meta( $post_id, 'kava_extra_enable_breadcrumbs', true );

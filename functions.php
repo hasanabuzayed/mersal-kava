@@ -132,7 +132,7 @@ if ( ! class_exists( 'Kava_Theme_Setup' ) ) {
 		 *
 		 * @return string
 		 */
-		public function version() {
+		public function version(): string {
 			return apply_filters( 'kava-theme/version', $this->version );
 		}
 
@@ -141,7 +141,7 @@ if ( ! class_exists( 'Kava_Theme_Setup' ) ) {
 		 *
 		 * @since  1.0.0
 		 */
-		public function framework_loader() {
+		public function framework_loader(): void {
 
 			require get_theme_file_path( 'framework/loader.php' );
 
@@ -164,7 +164,7 @@ if ( ! class_exists( 'Kava_Theme_Setup' ) ) {
 		 *
 		 * @since 1.0.0
 		 */
-		public function init_customizer() {
+		public function init_customizer(): void {
 
 			$enable_customize_options = kava_settings()->get( 'enable_theme_customize_options', true );
 			$enqueue_dynamic_css      = kava_settings()->get( 'enqueue_dynamic_css', true );
@@ -190,7 +190,7 @@ if ( ! class_exists( 'Kava_Theme_Setup' ) ) {
 		 *
 		 * @since 1.0.0
 		 */
-		public function init_theme_properties() {
+		public function init_theme_properties(): void {
 
 			$this->is_blog = is_home() || ( is_archive() && ! is_tax() && ! is_post_type_archive() ) ? true : false;
 
@@ -211,7 +211,7 @@ if ( ! class_exists( 'Kava_Theme_Setup' ) ) {
 		 *
 		 * @since 1.0.0
 		 */
-		public function l10n() {
+		public function l10n(): void {
 
 			/*
 			 * Make theme available for translation.
@@ -226,7 +226,7 @@ if ( ! class_exists( 'Kava_Theme_Setup' ) ) {
 		 *
 		 * @since 1.0.0
 		 */
-		public function theme_support() {
+		public function theme_support(): void {
 
 			global $content_width;
 
@@ -266,7 +266,7 @@ if ( ! class_exists( 'Kava_Theme_Setup' ) ) {
 		 *
 		 * @since 1.0.0
 		 */
-		public function includes() {
+		public function includes(): void {
 
 			/**
 			 * Configurations.
@@ -307,7 +307,7 @@ if ( ! class_exists( 'Kava_Theme_Setup' ) ) {
 		 *
 		 * @return string
 		 */
-		public function modules_base() {
+		public function modules_base(): string {
 			return 'inc/modules/';
 		}
 
@@ -315,7 +315,7 @@ if ( ! class_exists( 'Kava_Theme_Setup' ) ) {
 		 * Returns module class by name
 		 * @return string
 		 */
-		public function get_module_class( $name ) {
+		public function get_module_class( string $name ): string {
 
 			$module = str_replace( ' ', '_', ucwords( str_replace( '-', ' ', $name ) ) );
 			return 'Kava_' . $module . '_Module';
@@ -327,7 +327,7 @@ if ( ! class_exists( 'Kava_Theme_Setup' ) ) {
 		 *
 		 * @return void
 		 */
-		public function load_modules() {
+		public function load_modules(): void {
 			foreach ( kava_get_allowed_modules() as $module => $childs ) {
 				$this->load_module( $module, $childs );
 			}
@@ -339,7 +339,7 @@ if ( ! class_exists( 'Kava_Theme_Setup' ) ) {
 		 * @param string $module
 		 * @param array  $childs
 		 */
-		public function load_module( $module = '', $childs = [] ) {
+		public function load_module( string $module = '', array $childs = [] ): void {
 
 			$available_modules = kava_settings()->get( 'available_modules' );
 			$enabled = $available_modules[ $module ] ?? true;
@@ -369,7 +369,7 @@ if ( ! class_exists( 'Kava_Theme_Setup' ) ) {
 		 *
 		 * @since 1.0.0
 		 */
-		public function register_assets() {
+		public function register_assets(): void {
 			// Register Font Awesome 6 via CDN (modern approach)
 			wp_register_style(
 				'font-awesome',
@@ -396,7 +396,7 @@ if ( ! class_exists( 'Kava_Theme_Setup' ) ) {
 		 *
 		 * @since 1.0.0
 		 */
-		public function enqueue_scripts() {
+		public function enqueue_scripts(): void {
 
 			/**
 			 * Filter the depends on main theme script.
@@ -436,7 +436,7 @@ if ( ! class_exists( 'Kava_Theme_Setup' ) ) {
 		 *
 		 * @since 1.0.0
 		 */
-		public function enqueue_styles() {
+		public function enqueue_styles(): void {
 
 			/**
 			 * Filter the depends on main theme styles.
@@ -493,12 +493,12 @@ if ( ! class_exists( 'Kava_Theme_Setup' ) ) {
 		/**
 		 * Do Elementor or Jet Theme Core location
 		 *
-		 * @param string $location
-		 * @param string $fallback
+		 * @param string|null $location
+		 * @param string|array|null $fallback
 		 *
 		 * @return bool
 		 */
-		public function do_location( $location = null, $fallback = null ) {
+		public function do_location( ?string $location = null, string|array|null $fallback = null ): bool {
 
 			$handler = false;
 			$done    = false;
@@ -538,9 +538,9 @@ if ( ! class_exists( 'Kava_Theme_Setup' ) ) {
 		/**
 		 * Register Elementor Pro locations
 		 *
-		 * @param object $elementor_theme_manager
+		 * @param mixed $elementor_theme_manager
 		 */
-		public function elementor_locations( $elementor_theme_manager ) {
+		public function elementor_locations( mixed $elementor_theme_manager ): void {
 
 			// Do nothing if Jet Theme Core is active.
 			if ( function_exists( 'jet_theme_core' ) ) {
@@ -575,7 +575,7 @@ if ( ! class_exists( 'Kava_Theme_Setup' ) ) {
  * @since  1.0.0
  * @return Kava_Theme_Setup
  */
-function kava_theme() {
+function kava_theme(): object {
 	return Kava_Theme_Setup::get_instance();
 }
 

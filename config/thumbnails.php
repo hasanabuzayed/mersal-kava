@@ -6,7 +6,7 @@
  */
 
 add_action( 'after_setup_theme', 'kava_register_image_sizes', 5 );
-function kava_register_image_sizes() {
+function kava_register_image_sizes(): void {
 	set_post_thumbnail_size( 370, 265, true );
 
 	// Registers a new image sizes.

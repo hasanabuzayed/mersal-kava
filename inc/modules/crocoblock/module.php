@@ -26,7 +26,7 @@ if ( ! class_exists( 'Kava_Crocoblock_Module' ) ) {
 		 *
 		 * @return string
 		 */
-		public function module_id() {
+		public function module_id(): string {
 			return 'crocoblock';
 		}
 
@@ -35,7 +35,7 @@ if ( ! class_exists( 'Kava_Crocoblock_Module' ) ) {
 		 *
 		 * @return void
 		 */
-		public function actions() {
+		public function actions(): void {
 
 			if ( ! is_admin() ) {
 				return;
@@ -50,7 +50,7 @@ if ( ! class_exists( 'Kava_Crocoblock_Module' ) ) {
 		 *
 		 * @return void
 		 */
-		public function data_importer_config() {
+		public function data_importer_config(): void {
 
 			if ( ! function_exists( 'jet_data_importer_register_config' ) ) {
 				return;
@@ -72,7 +72,7 @@ if ( ! class_exists( 'Kava_Crocoblock_Module' ) ) {
 		 *
 		 * @return void
 		 */
-		public function plugins_wizard_config() {
+		public function plugins_wizard_config(): void {
 
 			if ( ! function_exists( 'jet_plugins_wizard_register_config' ) ) {
 				return;

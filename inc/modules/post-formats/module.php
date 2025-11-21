@@ -22,7 +22,7 @@ if ( ! class_exists( 'Kava_Post_Formats_Module' ) ) {
 		 *
 		 * @return string
 		 */
-		public function module_id() {
+		public function module_id(): string {
 			return 'post-formats';
 		}
 
@@ -31,7 +31,7 @@ if ( ! class_exists( 'Kava_Post_Formats_Module' ) ) {
 		 *
 		 * @return void
 		 */
-		public function actions() {
+		public function actions(): void {
 			add_action( 'after_setup_theme', [ $this, 'support_post_formats' ], 6 );
 			add_action( 'after_setup_theme', [ $this, 'add_meta_options' ], 6 );
 
@@ -48,7 +48,7 @@ if ( ! class_exists( 'Kava_Post_Formats_Module' ) ) {
 		 *
 		 * @return void
 		 */
-		public function filters() {
+		public function filters(): void {
 			add_filter( 'kava-theme/assets-depends/script', [ $this, 'add_depends_scripts' ] );
 			add_filter( 'kava-theme/assets-depends/styles', [ $this, 'add_depends_styles' ] );
 		}
@@ -56,7 +56,7 @@ if ( ! class_exists( 'Kava_Post_Formats_Module' ) ) {
 		/**
 		 * Enable `post-formats` support.
 		 */
-		public function support_post_formats() {
+		public function support_post_formats(): void {
 			// Enable post formats.
 			add_theme_support( 'post-formats', $this->post_formats );
 		}
@@ -64,7 +64,7 @@ if ( ! class_exists( 'Kava_Post_Formats_Module' ) ) {
 		/**
 		 * Register module assets
 		 */
-		public function register_assets() {
+		public function register_assets(): void {
 			wp_register_script(
 				'magnific-popup',
 				get_theme_file_uri( 'assets/lib/magnific-popup/jquery.magnific-popup.min.js' ),
@@ -105,7 +105,7 @@ if ( ! class_exists( 'Kava_Post_Formats_Module' ) ) {
 		 *
 		 * @return array
 		 */
-		public function add_depends_scripts( $depends_scripts = [] ) {
+		public function add_depends_scripts( array $depends_scripts = [] ): array {
 			if ( is_singular( 'post' ) ) {
 				array_push( $depends_scripts, 'magnific-popup', 'swiper' );
 			}
@@ -120,7 +120,7 @@ if ( ! class_exists( 'Kava_Post_Formats_Module' ) ) {
 		 *
 		 * @return array
 		 */
-		public function add_depends_styles( $depends_styles = [] ) {
+		public function add_depends_styles( array $depends_styles = [] ): array {
 			if ( is_singular( 'post' ) ) {
 				array_push( $depends_styles, 'magnific-popup', 'swiper' );
 			}
@@ -131,7 +131,7 @@ if ( ! class_exists( 'Kava_Post_Formats_Module' ) ) {
 		/**
 		 * Add meta options
 		 */
-		public function add_meta_options() {
+		public function add_meta_options(): void {
 			kava_post_meta()->add_options( [
 				'id'            => 'kava-extra-post-type-settings',
 				'title'         => esc_html__( 'Post Formats Settings', 'kava' ),
@@ -332,7 +332,7 @@ if ( ! class_exists( 'Kava_Post_Formats_Module' ) ) {
 		 * @since  1.0.0
 		 * @param  array $args Set of arguments.
 		 */
-		public function post_format_image( $args = [] ) {
+		public function post_format_image( array $args = [] ): void {
 			$post_id = get_the_ID();
 
 			if ( has_post_thumbnail( $post_id ) ) {
@@ -359,7 +359,7 @@ if ( ! class_exists( 'Kava_Post_Formats_Module' ) ) {
 		 * @since  1.0.0
 		 * @param  array $args Set of arguments.
 		 */
-		public function post_format_gallery( $args = [] ) {
+		public function post_format_gallery( array $args = [] ): void {
 			$post_id = get_the_ID();
 
 			$gallery_images = get_post_meta( $post_id, 'kava_extra_gallery_images', true );
@@ -404,7 +404,7 @@ if ( ! class_exists( 'Kava_Post_Formats_Module' ) ) {
 		 *
 		 * @since 1.0.0
 		 */
-		public function post_format_video() {
+		public function post_format_video(): void {
 			$post_id = get_the_ID();
 
 			$video = null;
@@ -438,7 +438,7 @@ if ( ! class_exists( 'Kava_Post_Formats_Module' ) ) {
 		 *
 		 * @since 1.0.0
 		 */
-		public function post_format_link() {
+		public function post_format_link(): void {
 			$post_id = get_the_ID();
 
 			$link = get_post_meta( $post_id, 'kava_extra_link', true );
@@ -461,7 +461,7 @@ if ( ! class_exists( 'Kava_Post_Formats_Module' ) ) {
 		 *
 		 * @since 1.0.0
 		 */
-		public function post_format_quote() {
+		public function post_format_quote(): void {
 			$post_id = get_the_ID();
 
 			$quote = get_post_meta( $post_id, 'kava_extra_quote_text', true );
@@ -483,7 +483,7 @@ if ( ! class_exists( 'Kava_Post_Formats_Module' ) ) {
 		 * @since  1.0.0
 		 * @param  array $args Set of arguments.
 		 */
-		public function post_format_audio( $args = [] ) {
+		public function post_format_audio( array $args = [] ): void {
 			$post_id = get_the_ID();
 			$audio = get_post_meta( $post_id, 'kava_extra_audio', true );
 

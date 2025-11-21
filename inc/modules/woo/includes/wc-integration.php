@@ -13,7 +13,7 @@
  *
  * @return void
  */
-function kava_wc_setup() {
+function kava_wc_setup(): void {
 	add_theme_support( 'woocommerce' );
 	add_theme_support( 'wc-product-gallery-zoom' );
 	add_theme_support( 'wc-product-gallery-lightbox' );
@@ -29,7 +29,7 @@ add_action( 'after_setup_theme', 'kava_wc_setup' );
  *
  * @return array $classes modified to include 'woocommerce-active' class.
  */
-function kava_wc_active_body_class( $classes ) {
+function kava_wc_active_body_class( array $classes ): array {
 	$classes[] = 'woocommerce-active';
 
 	return $classes;
@@ -44,11 +44,11 @@ add_filter( 'body_class', 'kava_wc_active_body_class' );
  *
  * @return array $args related products args.
  */
-function kava_wc_related_products_args( $args ) {
-	$defaults = array(
+function kava_wc_related_products_args( array $args ): array {
+	$defaults = [
 		'posts_per_page' => 4,
 		'columns'        => 4,
-	);
+	];
 
 	$args = wp_parse_args( $defaults, $args );
 
@@ -71,7 +71,7 @@ if ( ! function_exists( 'kava_wc_wrapper_before' ) ) {
 	 *
 	 * @return void
 	 */
-	function kava_wc_wrapper_before() {
+	function kava_wc_wrapper_before(): void {
 		?>
 			<div <?php kava_content_class() ?>>
 			<div class="row">
@@ -91,7 +91,7 @@ if ( ! function_exists( 'kava_wc_wrapper_after' ) ) {
 	 *
 	 * @return void
 	 */
-function kava_wc_wrapper_after() {
+function kava_wc_wrapper_after(): void {
 	?>
 	</main><!-- #main -->
 	</div><!-- #primary -->
@@ -105,7 +105,7 @@ if ( ! function_exists( 'kava_wc_sidebar_after' ) ) {
 	/**
 	 * Close tags after sidebar
 	 */
-	function kava_wc_sidebar_after() {
+	function kava_wc_sidebar_after(): void {
 		?>
 			</div>
 			</div>
@@ -136,7 +136,7 @@ if ( ! function_exists( 'kava_wc_cart_link_fragment' ) ) {
 	 *
 	 * @return array Fragments to refresh via AJAX.
 	 */
-	function kava_wc_cart_link_fragment( $fragments ) {
+	function kava_wc_cart_link_fragment( array $fragments ): array {
 		ob_start();
 		kava_wc_cart_link();
 		$fragments['a.header-cart__link'] = ob_get_clean();
@@ -159,7 +159,7 @@ if ( ! function_exists( 'kava_wc_cart_link' ) ) {
 	 *
 	 * @return void
 	 */
-	function kava_wc_cart_link() {
+	function kava_wc_cart_link(): void {
 		?>
 			<a class="header-cart__link" href="#" title="<?php esc_attr_e( 'View your shopping cart', 'kava' ); ?>">
 		  <?php
@@ -183,7 +183,7 @@ if ( ! function_exists( 'kava_wc_header_cart' ) ) {
 	 *
 	 * @return void
 	 */
-	function kava_wc_header_cart() {
+	function kava_wc_header_cart(): void {
 		if ( is_cart() ) {
 			$class = 'current-menu-item';
 		} else {
@@ -216,7 +216,7 @@ if ( ! function_exists( 'kava_wc_pagination' ) ) {
 	 *
 	 * @return mixed
 	 */
-	function kava_wc_pagination( $args ) {
+	function kava_wc_pagination( array $args ): array {
 		$args['prev_text'] = sprintf( '
 		<span class="nav-icon icon-prev"></span><span>%1$s</span>',
 			esc_html__( 'Prev', 'kava' ) );
@@ -236,7 +236,7 @@ if ( ! function_exists( 'kava_init_wc_properties' ) ) {
 	/**
 	 * Init shop properties
 	 */
-	function kava_init_wc_properties() {
+	function kava_init_wc_properties(): void {
 
 		// Sidebar properties for archive product
 		if ( ( is_shop() || is_product_taxonomy() ) && ! is_singular( 'product' ) ) {

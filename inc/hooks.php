@@ -33,7 +33,7 @@ add_filter( 'get_post_metadata', 'kava_set_default_single_post_template', 10, 4 
  * @since  1.0.0
  * @return string `<meta>` tag for viewport.
  */
-function kava_meta_viewport() {
+function kava_meta_viewport(): void {
 	echo '<meta name="viewport" content="width=device-width, initial-scale=1" />' . "\n";
 }
 
@@ -43,7 +43,7 @@ function kava_meta_viewport() {
  * @param  array $classes Existing classes.
  * @return array
  */
-function kava_extra_body_classes( $classes ) {
+function kava_extra_body_classes( array $classes ): array {
 
 	// Adds a class of group-blog to blogs with more than 1 published author.
 	if ( is_multi_author() ) {
@@ -81,7 +81,7 @@ function kava_extra_body_classes( $classes ) {
  * @param  array $image_sizes
  * @return array
  */
-function kava_image_size_names_choose( $image_sizes ) {
+function kava_image_size_names_choose( array $image_sizes ): array {
 	$image_sizes['post-thumbnail'] = __( 'Post Thumbnail', 'kava' );
 
 	return $image_sizes;
@@ -93,7 +93,7 @@ function kava_image_size_names_choose( $image_sizes ) {
  * @param  array $args Argumnts for comment form.
  * @return array
  */
-function kava_modify_comment_form( $args ) {
+function kava_modify_comment_form( array $args ): array {
 	$args = wp_parse_args( $args );
 
 	if ( ! isset( $args['format'] ) ) {
@@ -125,7 +125,7 @@ function kava_modify_comment_form( $args ) {
  * @param  array $fonts Fonts List.
  * @return array
  */
-	function kava_modify_fonts_list( $fonts = [] ) {
+	function kava_modify_fonts_list( array $fonts = [] ): array {
 
 		$fonts = array_merge(
 			[
@@ -143,7 +143,7 @@ function kava_modify_comment_form( $args ) {
  * @param  boolean $enabled
  * @return boolean
  */
-function kava_disable_site_content_container( $enabled = true ) {
+function kava_disable_site_content_container( bool $enabled = true ): bool {
 	$disable_content_container_archive_cpt = kava_settings()->get( 'disable_content_container_archive_cpt' );
 	$disable_content_container_single_cpt  = kava_settings()->get( 'disable_content_container_single_cpt' );
 
@@ -186,7 +186,7 @@ function kava_disable_site_content_container( $enabled = true ) {
  *
  * @return mixed
  */
-function kava_set_default_single_post_template( $value, $post_id, $meta_key, $single ) {
+function kava_set_default_single_post_template( mixed $value, int $post_id, string $meta_key, bool $single ): mixed {
 
 	if ( '_wp_page_template' !== $meta_key ) {
 		return $value;

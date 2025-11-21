@@ -11,7 +11,7 @@
  */
 
 if ( ! function_exists( 'kava_get_allowed_modules' ) ) {
-	function kava_get_allowed_modules() {
+	function kava_get_allowed_modules(): array {
 		return apply_filters( 'kava-theme/allowed-modules', [
 			'blog-layouts'    => [],
 			'breadcrumbs'     => [],
