@@ -38,8 +38,8 @@ if ( ! class_exists( 'Kava_Module_Base' ) ) {
 				$this->load_child_modules( $childs );
 			}
 
-		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
-		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_styles' ] );
+			add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
+			add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_styles' ] );
 
 			$this->includes();
 
@@ -100,7 +100,7 @@ if ( ! class_exists( 'Kava_Module_Base' ) ) {
 		 *
 		 * @return callback name|null
 		 */
-		public function condition_cb(): ?callable {
+		public function condition_cb() {
 			return null;
 		}
 

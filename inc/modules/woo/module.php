@@ -43,11 +43,11 @@ if ( ! class_exists( 'Kava_Woo_Module' ) ) {
 			 */
 			add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' );
 
-	add_filter( 'kava-theme/assets-depends/script', [ $this, 'assets_depends_script' ] );
+			add_filter( 'kava-theme/assets-depends/script', [ $this, 'assets_depends_script' ] );
 
-	add_filter( 'kava-theme/customizer/options', [ $this, 'customizer_options' ] );
+			add_filter( 'kava-theme/customizer/options', [ $this, 'customizer_options' ] );
 
-	add_filter( 'cx_customizer/core_sections', [ $this, 'kava_customizer_core_sections' ] );
+			add_filter( 'cx_customizer/core_sections', [ $this, 'kava_customizer_core_sections' ] );
 		}
 
 		/**
@@ -104,8 +104,8 @@ if ( ! class_exists( 'Kava_Woo_Module' ) ) {
 		 *
 		 * @return bool|callable
 		 */
-		public function condition_cb(): ?callable {
-			return class_exists( 'WooCommerce' ) ? true : null;
+		public function condition_cb() {
+			return class_exists( class: 'WooCommerce' );
 		}
 
 		/**
