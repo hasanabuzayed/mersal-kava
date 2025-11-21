@@ -73,11 +73,12 @@ if ( ! class_exists( 'Kava_Post_Formats_Module' ) ) {
 				true
 			);
 
+			// Swiper v12 - Using CDN (bundle version includes all modules)
 			wp_register_script(
 				'swiper',
-				get_theme_file_uri( 'assets/lib/swiper/swiper.min.js' ),
-				array( 'jquery' ),
-				'4.3.3',
+				'https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js',
+				array(), // Swiper v12 doesn't require jQuery
+				'12.0.3',
 				true
 			);
 
@@ -88,11 +89,12 @@ if ( ! class_exists( 'Kava_Post_Formats_Module' ) ) {
 				'1.1.0'
 			);
 
+			// Swiper v12 - Using CDN (standard CSS, no SCSS)
 			wp_register_style(
 				'swiper',
-				get_theme_file_uri( 'assets/lib/swiper/swiper.min.css' ),
+				'https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css',
 				array(),
-				'4.3.3'
+				'12.0.3'
 			);
 		}
 
@@ -386,7 +388,7 @@ if ( ! class_exists( 'Kava_Post_Formats_Module' ) ) {
 
 				echo sprintf(
 					'<div class="post-format-gallery-wrapper">
-								<div class="swiper-container">
+								<div class="swiper">
 									<div class="swiper-wrapper">%s</div>
 									<div class="swiper-button-prev"></div>
 									<div class="swiper-button-next"></div>

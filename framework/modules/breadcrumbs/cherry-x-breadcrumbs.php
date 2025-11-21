@@ -1541,7 +1541,15 @@ if ( ! class_exists( 'CX_Breadcrumbs' ) ) {
 
 			// Check if is Font Awesome icon
 			if ( 0 === strpos( $label, 'fa-' ) ) {
-				return sprintf( '<i class="fa %1$s">%2$s</i>', esc_attr( $label ), $fallback );
+				// Support Font Awesome 6 syntax (fa-solid, fa-regular, fa-brands)
+				// If just 'fa-*', default to solid
+				if ( 0 === strpos( $label, 'fa-solid-' ) || 0 === strpos( $label, 'fa-regular-' ) || 0 === strpos( $label, 'fa-brands-' ) ) {
+					return sprintf( '<i class="%1$s">%2$s</i>', esc_attr( $label ), $fallback );
+				} else {
+					// Legacy format: convert 'fa-*' to 'fa-solid fa-*'
+					$icon_class = str_replace( 'fa-', 'fa-solid fa-', $label );
+					return sprintf( '<i class="%1$s">%2$s</i>', esc_attr( $icon_class ), $fallback );
+				}
 			}
 
 			// Return default icon

@@ -24,13 +24,13 @@ $author_block_class = $is_author_block_enabled ? 'with_author_block' : '';
 							'prefix'  => __( 'In', 'kava' ),
 						) );
 						kava_posted_on( array(
-							'prefix'  => '<i class="fa fa-clock-o" aria-hidden="true"></i> ' . __( 'Posted', 'kava' ),
+							'prefix'  => '<i class="fa-regular fa-clock" aria-hidden="true"></i> ' . __( 'Posted', 'kava' ),
 						) );
 						kava_post_tags ( array(
-							'prefix'    => '<i class="fa fa-tag" aria-hidden="true"></i>',
+							'prefix'    => '<i class="fa-solid fa-tag" aria-hidden="true"></i>',
 						) );
 						kava_post_comments( array(
-							'prefix'    => '<i class="fa fa-comment-o" aria-hidden="true"></i>',
+							'prefix'    => '<i class="fa-regular fa-comment" aria-hidden="true"></i>',
 							'postfix' => __( 'Comment(s)', 'kava' )
 						) );
 					?></div><!-- .entry-meta -->

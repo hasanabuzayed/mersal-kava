@@ -41,7 +41,7 @@ $has_post_thumbnail_class = $has_post_thumbnail ? 'has-post-thumbnail' : '';
 						?></div><!-- .entry-meta -->
 						<div class="entry-meta"><?php
 							kava_post_comments( array(
-								'prefix' => '<i class="fa fa-comment" aria-hidden="true"></i>',
+								'prefix' => '<i class="fa-solid fa-comment" aria-hidden="true"></i>',
 								'class'  => 'comments-button'
 							) );
 						?></div><!-- .entry-meta -->

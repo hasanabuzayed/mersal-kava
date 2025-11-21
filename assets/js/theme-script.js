@@ -1,225 +1,255 @@
-// Responsive menu
-var kavaResponsiveMenu = function kavaResponsiveMenu() {
-	var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-	var defaults = {
+/**
+ * Kava Theme JavaScript
+ * Modernized with ES6+ and reduced jQuery dependency
+ */
+
+// Responsive menu - Modern vanilla JS implementation
+const kavaResponsiveMenu = function(options = {}) {
+	const defaults = {
 		wrapper: '.main-navigation',
 		menu: '.menu',
-		threshold: 640, // Minimal menu width,
+		threshold: 640,
 		mobileMenuClass: 'mobile-menu',
 		mobileMenuOpenClass: 'mobile-menu-open',
 		mobileMenuToggleButtonClass: 'mobile-menu-toggle-button',
-		toggleButtonTemplate: '<i class="mobile-menu-close fa fa-bars" aria-hidden="true"></i><i class="mobile-menu-open fa fa-times" aria-hidden="true"></i>'
+		toggleButtonTemplate: '<i class="mobile-menu-close fa-solid fa-bars" aria-hidden="true"></i><i class="mobile-menu-open fa-solid fa-times" aria-hidden="true"></i>'
 	};
 
-	if ( typeof Object.assign !== 'function' ) {
-		options = jQuery.extend( {}, defaults, options );
-	} else {
-		options = Object.assign( defaults, options );
+	const config = Object.assign({}, defaults, options);
+	
+	const wrapper = typeof config.wrapper === 'string' 
+		? document.querySelector(config.wrapper)
+		: config.wrapper;
+	
+	const menu = typeof config.menu === 'string'
+		? document.querySelector(config.menu)
+		: config.menu;
+
+	if (!wrapper || !menu) {
+		return;
 	}
 
-	var wrapper = options.wrapper.nodeType ?
-		options.wrapper :
-		document.querySelector(options.wrapper);
+	let toggleButton;
+	let toggleButtonOpenBlock;
+	let toggleButtonCloseBlock;
+	let isMobileMenu = false;
+	let isMobileMenuOpen = false;
 
-	var menu = options.menu.nodeType ?
-		options.menu :
-		document.querySelector(options.menu);
+	// Initialize
+	const init = () => {
+		addToggleButton();
+		checkScreenWidth();
+		addResizeHandler();
+	};
 
-	var toggleButton,
-		toggleButtonOpenBlock,
-		toggleButtonCloseBlock,
-		isMobileMenu,
-		isMobileMenuOpen;
-
-	// series
-	var init = [
-		addToggleButton,
-		checkScreenWidth,
-		addResizeHandler
-	];
-
-	if (wrapper && menu) {
-		runSeries(init);
-	}
-
-	function addToggleButton() {
+	const addToggleButton = () => {
 		toggleButton = document.createElement('button');
-
-		toggleButton.innerHTML = options.toggleButtonTemplate.trim();
-		toggleButton.className = options.mobileMenuToggleButtonClass;
-		wrapper.insertBefore(toggleButton, wrapper.children[0]);
+		toggleButton.innerHTML = config.toggleButtonTemplate.trim();
+		toggleButton.className = config.mobileMenuToggleButtonClass;
+		toggleButton.setAttribute('aria-label', 'Toggle mobile menu');
+		wrapper.insertBefore(toggleButton, wrapper.firstChild);
 
 		toggleButtonOpenBlock = toggleButton.querySelector('.mobile-menu-open');
 		toggleButtonCloseBlock = toggleButton.querySelector('.mobile-menu-close');
 
 		toggleButton.addEventListener('click', mobileMenuToggle);
-	}
+	};
 
-	// menu switchers
-	function switchToMobileMenu() {
-		wrapper.classList.add(options.mobileMenuClass);
-		toggleButton.style.display = "block";
+	const switchToMobileMenu = () => {
+		wrapper.classList.add(config.mobileMenuClass);
+		toggleButton.style.display = 'block';
 		isMobileMenuOpen = false;
 		hideMenu();
-	}
+	};
 
-	function switchToDesktopMenu() {
-		wrapper.classList.remove(options.mobileMenuClass);
-		toggleButton.style.display = "none";
+	const switchToDesktopMenu = () => {
+		wrapper.classList.remove(config.mobileMenuClass);
+		toggleButton.style.display = 'none';
 		showMenu();
-	}
+	};
 
-	// mobile menu toggle
-	function mobileMenuToggle() {
-		if (isMobileMenuOpen) {
-			hideMenu();
-		} else {
-			showMenu();
-		}
+	const mobileMenuToggle = () => {
+		isMobileMenuOpen ? hideMenu() : showMenu();
 		isMobileMenuOpen = !isMobileMenuOpen;
-	}
+	};
 
-	function hideMenu() {
-		wrapper.classList.remove(options.mobileMenuOpenClass);
-		menu.style.display = "none";
-		toggleButtonOpenBlock.style.display = "none";
-		toggleButtonCloseBlock.style.display = "block";
-	}
+	const hideMenu = () => {
+		wrapper.classList.remove(config.mobileMenuOpenClass);
+		menu.style.display = 'none';
+		if (toggleButtonOpenBlock) toggleButtonOpenBlock.style.display = 'none';
+		if (toggleButtonCloseBlock) toggleButtonCloseBlock.style.display = 'block';
+	};
 
-	function showMenu() {
-		wrapper.classList.add(options.mobileMenuOpenClass);
-		menu.style.display = "block";
-		toggleButtonOpenBlock.style.display = "block";
-		toggleButtonCloseBlock.style.display = "none";
-	}
+	const showMenu = () => {
+		wrapper.classList.add(config.mobileMenuOpenClass);
+		menu.style.display = 'block';
+		if (toggleButtonOpenBlock) toggleButtonOpenBlock.style.display = 'block';
+		if (toggleButtonCloseBlock) toggleButtonCloseBlock.style.display = 'none';
+	};
 
-	// resize helpers
-	function checkScreenWidth() {
-		var currentMobileMenuStatus = window.innerWidth < options.threshold ? true : false;
-
+	const checkScreenWidth = () => {
+		const currentMobileMenuStatus = window.innerWidth < config.threshold;
+		
 		if (isMobileMenu !== currentMobileMenuStatus) {
 			isMobileMenu = currentMobileMenuStatus;
 			isMobileMenu ? switchToMobileMenu() : switchToDesktopMenu();
 		}
-	}
+	};
 
-	function addResizeHandler() {
-		window.addEventListener('resize', resizeHandler);
-	}
+	const addResizeHandler = () => {
+		let resizeTimer;
+		window.addEventListener('resize', () => {
+			clearTimeout(resizeTimer);
+			resizeTimer = setTimeout(() => {
+				window.requestAnimationFrame(checkScreenWidth);
+			}, 150);
+		});
+	};
 
-	function resizeHandler() {
-		window.requestAnimationFrame(checkScreenWidth)
-	}
-
-	// general helpers
-	function runSeries(functions) {
-		functions.forEach( function( func ) {
-			return func();
-		} );
-	}
+	init();
 };
 
-var Kava_Theme_JS;
+// Main Theme JavaScript Object
+const Kava_Theme_JS = {
+	init() {
+		// Wait for DOM to be ready
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', () => this.initComponents());
+		} else {
+			this.initComponents();
+		}
+	},
 
-(function($) {
-	'use strict';
+	initComponents() {
+		this.pagePreloaderInit();
+		this.toTopInit();
+		this.responsiveMenuInit();
+		this.magnificPopupInit();
+		this.swiperInit();
+	},
 
-	Kava_Theme_JS = {
+	pagePreloaderInit() {
+		const preloader = document.querySelector('.page-preloader-cover');
+		if (preloader) {
+			setTimeout(() => {
+				preloader.style.transition = 'opacity 500ms';
+				preloader.style.opacity = '0';
+				setTimeout(() => preloader.remove(), 500);
+			}, 500);
+		}
+	},
 
-		init: function() {
-			this.page_preloader_init();
-			this.toTopInit();
-			this.responsiveMenuInit();
-			this.magnificPopupInit();
-			this.swiperInit();
-		},
-
-		page_preloader_init: function() {
-			var $pleloader = $( '.page-preloader-cover' );
-
-			if ( $pleloader[0] ) {
-				$pleloader.delay( 500 ).fadeTo( 500, 0, function() {
-					$( this ).remove();
-				} );
-			}
-		},
-
-		toTopInit: function() {
-			if ( undefined === window.kavaConfig.toTop || ! window.kavaConfig.toTop ) {
-				return;
-			}
-
+	toTopInit() {
+		if (window.kavaConfig && window.kavaConfig.toTop) {
 			this.toTop();
-		},
+		}
+	},
 
-		toTop: function( options ) {
-			var defaults = {
-					buttonID:    'toTop',
-					min:         200,
-					inDelay:     600,
-					outDelay:    400,
-					scrollSpeed: 600,
-					easingType:  'linear'
-				},
-				settings = $.extend( defaults, options ),
-				buttonSelector = '#' + settings.buttonID;
+	toTop(options = {}) {
+		const defaults = {
+			buttonID: 'toTop',
+			min: 200,
+			inDelay: 600,
+			outDelay: 400,
+			scrollSpeed: 600
+		};
 
-			$( 'body' ).append( '<div id="' + settings.buttonID + '" role="button"></div>' );
+		const settings = Object.assign({}, defaults, options);
+		const buttonSelector = `#${settings.buttonID}`;
+		
+		// Check if button already exists
+		if (document.querySelector(buttonSelector)) {
+			return;
+		}
 
-			$( buttonSelector ).hide().on( 'click.KavaThemeToTop', function() {
-				$( 'html, body' ).animate( { scrollTop: 0 }, settings.scrollSpeed, settings.easingType );
-				return false;
-			} );
+		// Create button
+		const button = document.createElement('div');
+		button.id = settings.buttonID;
+		button.setAttribute('role', 'button');
+		button.setAttribute('aria-label', 'Scroll to top');
+		button.style.display = 'none';
+		document.body.appendChild(button);
 
-			$( window ).on( 'scroll', function() {
-				var scrollTop = $( window ).scrollTop();
+		// Click handler
+		button.addEventListener('click', (e) => {
+			e.preventDefault();
+			window.scrollTo({
+				top: 0,
+				behavior: 'smooth'
+			});
+		});
 
-				if ( scrollTop > settings.min )
-					$( buttonSelector ).fadeIn( settings.inDelay );
-				else
-					$( buttonSelector ).fadeOut( settings.outDelay );
-			} );
-		},
+		// Scroll handler with throttling
+		let scrollTimer;
+		window.addEventListener('scroll', () => {
+			clearTimeout(scrollTimer);
+			scrollTimer = setTimeout(() => {
+				const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+				const buttonEl = document.querySelector(buttonSelector);
+				
+				if (scrollTop > settings.min) {
+					buttonEl.style.transition = `opacity ${settings.inDelay}ms`;
+					buttonEl.style.opacity = '1';
+					buttonEl.style.display = 'block';
+				} else {
+					buttonEl.style.transition = `opacity ${settings.outDelay}ms`;
+					buttonEl.style.opacity = '0';
+					setTimeout(() => {
+						if (window.pageYOffset <= settings.min) {
+							buttonEl.style.display = 'none';
+						}
+					}, settings.outDelay);
+				}
+			}, 10);
+		});
+	},
 
-		responsiveMenuInit: function() {
-			if (typeof kavaResponsiveMenu !== 'undefined') {
-				kavaResponsiveMenu();
-			}
-		},
+	responsiveMenuInit() {
+		if (typeof kavaResponsiveMenu !== 'undefined') {
+			kavaResponsiveMenu();
+		}
+	},
 
-		magnificPopupInit: function() {
+	magnificPopupInit() {
+		// Magnific Popup requires jQuery, so we check for it
+		if (typeof window.jQuery !== 'undefined' && typeof window.jQuery.magnificPopup !== 'undefined') {
+			const $ = window.jQuery;
+			$('[data-popup="magnificPopup"]').magnificPopup({
+				type: 'image'
+			});
+		}
+	},
 
-			if (typeof $.magnificPopup !== 'undefined') {
+	swiperInit() {
+		if (typeof Swiper !== 'undefined') {
+			// Swiper v12 uses .swiper class (not .swiper-container)
+			const containers = document.querySelectorAll('.swiper');
+			
+			containers.forEach(container => {
+				// Check if already initialized
+				if (container.swiper) {
+					return;
+				}
 
-				//MagnificPopup init
-				$('[data-popup="magnificPopup"]').magnificPopup({
-					type: 'image'
-				});
-
-			}
-		},
-
-		swiperInit: function() {
-			if (typeof Swiper !== 'undefined') {
-
-				//Swiper carousel init
-				var mySwiper = new Swiper('.swiper-container', {
-					// Optional parameters
+				// Initialize Swiper v12 - all options are compatible
+				new Swiper(container, {
 					loop: true,
 					spaceBetween: 10,
 					autoHeight: true,
-
-					// Navigation arrows
 					navigation: {
-						nextEl: '.swiper-button-next',
-						prevEl: '.swiper-button-prev'
+						nextEl: container.querySelector('.swiper-button-next'),
+						prevEl: container.querySelector('.swiper-button-prev')
 					}
-				})
-
-			}
+				});
+			});
 		}
-	};
+	}
+};
 
-	Kava_Theme_JS.init();
+// Initialize when DOM is ready
+Kava_Theme_JS.init();
 
-}(jQuery));
+// Export for potential external use
+if (typeof module !== 'undefined' && module.exports) {
+	module.exports = Kava_Theme_JS;
+}

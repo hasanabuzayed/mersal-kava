@@ -41,6 +41,14 @@
 }
 
 .post_format-post-format-gallery {
+	// Swiper v12 CSS Variables for theming
+	// Note: These variables affect default Swiper components (pagination, etc.)
+	// Since we use custom Font Awesome icons, they mainly affect other Swiper elements
+	--swiper-navigation-color: currentColor;
+	--swiper-navigation-size: 18px;
+	--swiper-theme-color: currentColor;
+	--swiper-pagination-color: currentColor;
+	
 	.post-thumbnail {
 		display: block;
 		margin-bottom: 26px;
@@ -60,15 +68,21 @@
 		background-image: none;
 		background-color: $color__white;
 		box-shadow: 0px 0px 20px 0px rgba(59, 61, 66, 0.1);
+		
+		// Swiper v12: Hide default SVG icons, use Font Awesome instead
+		svg {
+			display: none;
+		}
+		
 		&:before {
 			line-height: 45px;
 		}
 	}
 	.swiper-button-prev:before {
-		content: '\f104';
+		content: '\f104'; // Font Awesome angle-left (fa-solid)
 	}
 	.swiper-button-next:before {
-		content: '\f105';
+		content: '\f105'; // Font Awesome angle-right (fa-solid)
 	}
 }
 

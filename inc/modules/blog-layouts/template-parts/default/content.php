@@ -42,7 +42,7 @@
 			?>
 			<div><?php
 				kava_post_comments( array(
-					'prefix' => '<i class="fa fa-comment" aria-hidden="true"></i>',
+					'prefix' => '<i class="fa-solid fa-comment" aria-hidden="true"></i>',
 					'class'  => 'comments-button'
 				) );
 				kava_post_link();

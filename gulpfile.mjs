@@ -1,16 +1,17 @@
-'use strict';
+import gulp from 'gulp';
+import rename from 'gulp-rename';
+import notify from 'gulp-notify';
+import autoprefixer from 'gulp-autoprefixer';
+import sassPlugin from 'gulp-sass';
+import * as sass from 'sass';
+import plumber from 'gulp-plumber';
+import rtlcss from 'gulp-rtlcss';
+import livereload from 'gulp-livereload';
+import checktextdomain from 'gulp-checktextdomain';
 
-var gulp            = require( 'gulp' ),
-	rename          = require( 'gulp-rename' ),
-	notify          = require( 'gulp-notify' ),
-	autoprefixer    = require( 'gulp-autoprefixer' ),
-	sass            = require( 'gulp-sass' ),
-	plumber         = require( 'gulp-plumber' ),
-	rtlcss          = require( 'gulp-rtlcss' ),
-	livereload      = require( 'gulp-livereload' ),
-	checktextdomain = require( 'gulp-checktextdomain' );
+const sassCompiler = sassPlugin(sass);
 
-var sass_settings = {
+let sass_settings = {
 	outputStyle: 'expanded',
 	linefeed:    'crlf',
 	indentType:  'tab',
@@ -33,10 +34,9 @@ function CSS_Task( args ) {
 				}
 			} )
 		)
-		.pipe( sass( sass_settings ) )
+		.pipe( sassCompiler( sass_settings ).on( 'error', sassCompiler.logError ) )
 		.pipe( autoprefixer( {
-			browsers: ['last 10 versions'],
-			cascade:  false
+			cascade: false
 		} ) )
 		.pipe( rename( args['output_file'] ) )
 		.pipe( gulp.dest( args['output_dir'] ) )
@@ -60,10 +60,9 @@ function RTL_CSS_Task( args ) {
 				}
 			} )
 		)
-		.pipe( sass( sass_settings ) )
+		.pipe( sassCompiler( sass_settings ).on( 'error', sassCompiler.logError ) )
 		.pipe( autoprefixer( {
-			browsers: ['last 10 versions'],
-			cascade:  false
+			cascade: false
 		} ) )
 		.pipe( rtlcss() )
 		.pipe( rename( args['output_file'] ) )
@@ -73,7 +72,7 @@ function RTL_CSS_Task( args ) {
 }
 
 gulp.task( 'css', function() {
-	CSS_Task( {
+	return CSS_Task( {
 		src:         './assets/sass/style.scss',
 		output_dir:  './',
 		output_file: 'style.css'
@@ -81,7 +80,7 @@ gulp.task( 'css', function() {
 } );
 
 gulp.task( 'css_theme', function() {
-	CSS_Task( {
+	return CSS_Task( {
 		src:         './assets/sass/theme.scss',
 		output_dir:  './',
 		output_file: 'theme.css'
@@ -89,7 +88,7 @@ gulp.task( 'css_theme', function() {
 } );
 
 gulp.task( 'blog_layouts_module', function() {
-	CSS_Task( {
+	return CSS_Task( {
 		src:         './inc/modules/blog-layouts/assets/scss/blog-layouts-module.scss',
 		output_dir:  './inc/modules/blog-layouts/assets/css/',
 		output_file: 'blog-layouts-module.css',
@@ -100,29 +99,29 @@ gulp.task( 'blog_layouts_module', function() {
 } );
 
 gulp.task( 'woo_module', function() {
-	CSS_Task( {
+	return CSS_Task( {
 		src:         './inc/modules/woo/assets/scss/woo-module.scss',
 		output_dir:  './inc/modules/woo/assets/css/',
 		output_file: 'woo-module.css',
 		sass_settings: {
 			outputStyle: 'compressed'
 		}
-	} )
+	} );
 } );
 
 gulp.task( 'woo_module_rtl', function() {
-	RTL_CSS_Task( {
+	return RTL_CSS_Task( {
 		src:         './inc/modules/woo/assets/scss/woo-module.scss',
 		output_dir:  './inc/modules/woo/assets/css/',
 		output_file: 'woo-module-rtl.css',
 		sass_settings: {
 			outputStyle: 'compressed'
 		}
-	} )
+	} );
 } );
 
 gulp.task( 'admin_css', function() {
-	CSS_Task( {
+	return CSS_Task( {
 		src:         './assets/sass/admin.scss',
 		output_dir:  './assets/css/',
 		output_file: 'admin.css',
@@ -135,23 +134,25 @@ gulp.task( 'admin_css', function() {
 gulp.task( 'watch', function() {
 	//livereload.listen();
 
-	gulp.watch( ['./assets/sass/**', '!./assets/sass/admin.scss'], ['css', 'css_theme'] );
-	gulp.watch( './inc/modules/blog-layouts/assets/scss/**',       ['blog_layouts_module'] );
-	gulp.watch( './inc/modules/woo/assets/scss/**',                ['woo_module', 'woo_module_rtl'] );
-	gulp.watch( './assets/sass/admin.scss',                        ['admin_css'] );
+	gulp.watch( ['./assets/sass/**', '!./assets/sass/admin.scss'], gulp.series( 'css', 'css_theme' ) );
+	gulp.watch( './inc/modules/blog-layouts/assets/scss/**',       gulp.series( 'blog_layouts_module' ) );
+	gulp.watch( './inc/modules/woo/assets/scss/**',                gulp.parallel( 'woo_module', 'woo_module_rtl' ) );
+	gulp.watch( './assets/sass/admin.scss',                        gulp.series( 'admin_css' ) );
 
 } );
 
 // default
-gulp.task( 'default', [
-	'css',
-	'css_theme',
-	'blog_layouts_module',
-	'woo_module',
-	'woo_module_rtl',
-	'admin_css',
+gulp.task( 'default', gulp.series(
+	gulp.parallel(
+		'css',
+		'css_theme',
+		'blog_layouts_module',
+		'woo_module',
+		'woo_module_rtl',
+		'admin_css'
+	),
 	'watch'
-] );
+) );
 
 gulp.task( 'checktextdomain', function() {
 	return gulp.src( ['**/*.php', '!framework/**/*.php'] )

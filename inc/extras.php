@@ -115,7 +115,8 @@ function kava_render_icons_callback( $matches ) {
 	}
 
 	if ( empty( $matches[1] ) ) {
-		return sprintf( '<i class="fa fa-%s"></i>', $matches[2] );
+		// Default to solid style for Font Awesome 6
+		return sprintf( '<i class="fa-solid fa-%s"></i>', $matches[2] );
 	}
 
 	$icons = kava_get_render_icons_set();
@@ -134,7 +135,10 @@ function kava_render_icons_callback( $matches ) {
  */
 function kava_get_render_icons_set() {
 	return apply_filters( 'kava-theme/icons/icons-set', array(
-		'fa'       => '<i class="fa fa-%s"></i>',
+		'fa'       => '<i class="fa-solid fa-%s"></i>',
+		'fa-solid' => '<i class="fa-solid fa-%s"></i>',
+		'fa-regular' => '<i class="fa-regular fa-%s"></i>',
+		'fa-brands' => '<i class="fa-brands fa-%s"></i>',
 		'material' => '<i class="material-icons">%s</i>',
 	) );
 }

@@ -662,7 +662,7 @@ function kava_sticky_label() {
 	$content = '';
 	$icon    = apply_filters(
 		'kava-theme/posts/sticky-icon',
-		'<i class="fa fa-thumb-tack" aria-hidden="true"></i>'
+		'<i class="fa-solid fa-thumbtack" aria-hidden="true"></i>'
 	);
 
 	switch ( $sticky_type ) {

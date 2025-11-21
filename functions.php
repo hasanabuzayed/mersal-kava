@@ -370,13 +370,25 @@ if ( ! class_exists( 'Kava_Theme_Setup' ) ) {
 		 * @since 1.0.0
 		 */
 		public function register_assets() {
-			// Register style
+			// Register Font Awesome 6 via CDN (modern approach)
+			wp_register_style(
+				'font-awesome',
+				'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css',
+				array(),
+				'6.5.1'
+			);
+			
+			// Fallback to local Font Awesome 4.7.0 for backward compatibility
+			// Note: Icon classes need to be updated from 'fa fa-*' to 'fa-solid fa-*', 'fa-regular fa-*', or 'fa-brands fa-*'
+			// Uncomment below and comment above if you prefer local files:
+			/*
 			wp_register_style(
 				'font-awesome',
 				get_theme_file_uri( 'assets/lib/font-awesome/font-awesome.min.css' ),
 				array(),
 				'4.7.0'
 			);
+			*/
 		}
 
 		/**

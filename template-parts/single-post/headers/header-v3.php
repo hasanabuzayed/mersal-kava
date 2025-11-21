@@ -53,7 +53,7 @@ $has_post_thumbnail_class = $has_post_thumbnail ? 'invert' : '';
 						</div>
 						<?php
 							kava_post_comments( array(
-								'prefix' => '<i class="fa fa-comment" aria-hidden="true"></i>',
+								'prefix' => '<i class="fa-solid fa-comment" aria-hidden="true"></i>',
 								'class'  => 'comments-button'
 							) );
 						?>

@@ -18,11 +18,11 @@ switch ( $navigation_type ) {
 							array(
 								'prev_text' => sprintf( '
 									<span class="screen-reader-text">%1$s</span>
-									<i class="fa fa-angle-left" aria-hidden="true"></i> %1$s',
+									<i class="fa-solid fa-angle-left" aria-hidden="true"></i> %1$s',
 									esc_html__( 'Older Posts', 'kava' ) ),
 								'next_text' => sprintf( '
 									<span class="screen-reader-text">%1$s</span>
-									%1$s <i class="fa fa-angle-right" aria-hidden="true"></i>',
+									%1$s <i class="fa-solid fa-angle-right" aria-hidden="true"></i>',
 									esc_html__( 'Newer Posts', 'kava' ) ),
 							)
 			)
@@ -34,11 +34,11 @@ switch ( $navigation_type ) {
 							array(
 								'prev_text' => sprintf( '
 									<span class="screen-reader-text">%1$s</span>
-									<i class="fa fa-angle-left" aria-hidden="true"></i> %1$s',
+									<i class="fa-solid fa-angle-left" aria-hidden="true"></i> %1$s',
 									esc_html__( 'Prev', 'kava' ) ),
 								'next_text' => sprintf( '
 									<span class="screen-reader-text">%1$s</span>
-									%1$s <i class="fa fa-angle-right" aria-hidden="true"></i>',
+									%1$s <i class="fa-solid fa-angle-right" aria-hidden="true"></i>',
 									esc_html__( 'Next', 'kava' ) ),
 							)
 			)
