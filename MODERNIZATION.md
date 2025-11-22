@@ -241,6 +241,87 @@ See `NODE_JS_24_UPGRADE_PLAN.md` for complete upgrade details and progress repor
 
 See `SASS_MIGRATION_PLAN.md` for complete migration details and `SASS_PHASE_8_PROGRESS.md` for testing results.
 
+### 8. CSS/SCSS Optimization & Modernization 📋
+
+**Status:** 📋 Planning Phase - see `CSS_OPTIMIZATION_PLAN.md`
+
+**Current State:**
+- CSS files are unminified (306K total)
+- No CSS purging (unused CSS removal)
+- No source maps for production
+- No CSS custom properties (using Sass variables only)
+- Modern Sass syntax (migration complete)
+- Autoprefixer configured
+
+**Optimization Target:**
+- CSS minification for production builds
+- CSS purging to remove unused styles
+- Source maps for better debugging
+- CSS custom properties for runtime theming
+- Modern CSS features (Grid, Flexbox, logical properties)
+- Critical CSS extraction for faster initial render
+- Performance optimizations (file size, load time)
+
+**Expected Benefits:**
+- **File Size Reduction:** 30-50% (with minification + purging)
+- **Load Time Improvement:** 20-30% faster
+- **Better Performance Scores:** Improved Core Web Vitals
+- **Runtime Theming:** CSS variables for easier customization
+- **Better Caching:** Optimized CSS loading strategy
+- **Improved Maintainability:** Better code organization
+
+**Migration Scope:**
+- 6 CSS output files (~306K total unminified)
+- Build system enhancements
+- Modern CSS feature adoption
+- Code quality improvements
+- Performance optimizations
+
+**Planned Phases:**
+- 📋 Phase 1: Build System Enhancement (minification, source maps, purging)
+- 📋 Phase 2: Modern CSS Features (CSS variables, modern layout, logical properties)
+- 📋 Phase 3: SCSS Code Quality (organization, mixin optimization, performance)
+- 📋 Phase 4: CSS Performance (critical CSS, loading optimization, caching)
+- 📋 Phase 5: Code Quality & Best Practices (linting, documentation, browser compatibility)
+- 📋 Phase 6: Advanced Optimizations (PostCSS, analysis tools, optional)
+
+**Current File Sizes:**
+- `style.css`: 21K (unminified)
+- `theme.css`: 66K (unminified)
+- `admin.css`: 1.6K (unminified)
+- `blog-layouts-module.css`: 134K (unminified)
+- `woo-module.css`: 82K (unminified)
+- `woo-module-rtl.css`: 82K (unminified)
+- **Total:** ~306K (unminified)
+
+**Estimated Savings:**
+- With minification: ~214K (30% reduction)
+- With minification + purging: ~171-192K (40-50% reduction)
+
+**Priority 1 (Quick Wins):**
+- ✅ CSS Minification - Immediate file size reduction
+- ✅ Source Maps - Better debugging experience
+- ✅ CSS Custom Properties - Better theming integration
+
+**Priority 2 (Performance):**
+- ⚠️ CSS Purging - Remove unused CSS (requires careful testing)
+- ⚠️ Critical CSS - Faster initial render
+- ⚠️ Modern CSS Features - Better performance
+
+**Priority 3 (Code Quality):**
+- ⚠️ CSS Linting - Code consistency
+- ⚠️ Logical Properties - Better RTL support
+- ⚠️ SCSS Organization - Better maintainability
+
+**Status:**
+- 📋 Planning phase
+- ✅ Optimization plan created
+- ⏳ Ready to begin Phase 1: Build System Enhancement
+
+**Estimated Time:** 34-50 hours total
+
+See `CSS_OPTIMIZATION_PLAN.md` for complete optimization plan and detailed phase breakdown.
+
 ## Installation & Setup
 
 ### Requirements
