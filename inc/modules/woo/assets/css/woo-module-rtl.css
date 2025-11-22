@@ -8,12 +8,20 @@ WooCommerce styles override
 .elementor-widget-wp-widget-woocommerce_shopping_cart .woocommerce-mini-cart__buttons .checkout:before,
 .widget_shopping_cart .woocommerce-mini-cart__buttons .checkout:before, .elementor-widget-wp-widget-woocommerce_widget_cart .woocommerce-mini-cart__buttons .wc-forward:not(.checkout):before,
 .elementor-widget-wp-widget-woocommerce_shopping_cart .woocommerce-mini-cart__buttons .wc-forward:not(.checkout):before,
-.widget_shopping_cart .woocommerce-mini-cart__buttons .wc-forward:not(.checkout):before, .header-cart__link-icon:before, .button.single_add_to_cart_button:after, .button.single_add_to_cart_button:before, .button.add_to_cart_button:after, .button.add_to_cart_button:before, .button.product_type_variable:after, .button.product_type_variable:before, .jet-compare-button__container .single_add_to_cart_button.jet-compare-button__link:after, .jet-compare-button__container .single_add_to_cart_button.jet-compare-button__link:before, .jet-compare-button__container .add_to_cart_button.jet-compare-button__link:after, .jet-compare-button__container .add_to_cart_button.jet-compare-button__link:before, .jet-compare-button__container .product_type_variable.jet-compare-button__link:after, .jet-compare-button__container .product_type_variable.jet-compare-button__link:before, .jet-wishlist-button__container .single_add_to_cart_button.jet-wishlist-button__link:after, .jet-wishlist-button__container .single_add_to_cart_button.jet-wishlist-button__link:before, .jet-wishlist-button__container .add_to_cart_button.jet-wishlist-button__link:after, .jet-wishlist-button__container .add_to_cart_button.jet-wishlist-button__link:before, .jet-wishlist-button__container .product_type_variable.jet-wishlist-button__link:after, .jet-wishlist-button__container .product_type_variable.jet-wishlist-button__link:before {
+.widget_shopping_cart .woocommerce-mini-cart__buttons .wc-forward:not(.checkout):before, .header-cart__link-icon:before, .elementor-widget-wp-widget-woocommerce_product_categories .product-categories li.current-cat a:after,
+.widget_product_categories .product-categories li.current-cat a:after, .elementor-widget-wp-widget-woocommerce_layered_nav_filters ul li.chosen a:after,
+.widget_layered_nav_filters ul li.chosen a:after, .elementor-widget-wp-widget-woocommerce_layered_nav ul li.chosen:after,
+.widget_layered_nav ul li.chosen:after, .elementor-widget-wp-widget-woocommerce_rating_filter ul li.chosen:after,
+.widget_rating_filter ul li.chosen:after, .elementor-widget-wp-widget-woocommerce_price_filter .button:before,
+.widget_price_filter .button:before, .woocommerce-product-gallery__trigger::before, .woocommerce-account .woocommerce .woocommerce-MyAccount-navigation ul li a::before, .woocommerce-checkout .place-order .button::before, .woocommerce-cart table.cart tr td.actions > .button::before, .woocommerce-cart table.cart tr td.product-remove a::before, .woocommerce-cart .cart-collaterals .wc-proceed-to-checkout .checkout-button::before, .woocommerce-cart .cart-collaterals table tr.shipping td .shipping-calculator-button::before, .woocommerce-cart .cart-collaterals table tr .shipping-calculator-form .button::before, label.checkbox input[type=checkbox] + span::after,
+label.inline input[type=checkbox] + span::after, .star-rating::before, .star-rating span::before, .stars a::before, .woocommerce-pagination a.page-numbers .nav-icon::before,
+.woocommerce-pagination span.page-numbers .nav-icon::before, .woocommerce-pagination ul.page-numbers li .page-numbers .nav-icon::before, .woocommerce-message:before,
+.woocommerce-info:before,
+.woocommerce-error:before, .button.single_add_to_cart_button:after, .button.single_add_to_cart_button:before, .button.add_to_cart_button:after, .button.add_to_cart_button:before, .button.product_type_variable:after, .button.product_type_variable:before, .jet-compare-button__container .single_add_to_cart_button.jet-compare-button__link:after, .jet-compare-button__container .single_add_to_cart_button.jet-compare-button__link:before, .jet-compare-button__container .add_to_cart_button.jet-compare-button__link:after, .jet-compare-button__container .add_to_cart_button.jet-compare-button__link:before, .jet-compare-button__container .product_type_variable.jet-compare-button__link:after, .jet-compare-button__container .product_type_variable.jet-compare-button__link:before, .jet-wishlist-button__container .single_add_to_cart_button.jet-wishlist-button__link:after, .jet-wishlist-button__container .single_add_to_cart_button.jet-wishlist-button__link:before, .jet-wishlist-button__container .add_to_cart_button.jet-wishlist-button__link:after, .jet-wishlist-button__container .add_to_cart_button.jet-wishlist-button__link:before, .jet-wishlist-button__container .product_type_variable.jet-wishlist-button__link:after, .jet-wishlist-button__container .product_type_variable.jet-wishlist-button__link:before {
   display: inline-block;
-  font: normal normal normal 14px/1 "FontAwesome";
+  font: normal normal normal 14px/1 FontAwesome;
+  line-height: 1;
   font-size: inherit;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 @keyframes icon-spin {
   0% {
@@ -187,6 +195,12 @@ select.orderby {
   width: 170px;
 }
 
+/*
+Theme Name: kava
+
+WooCommerce styles override
+*/
+/*         Variables        */
 /**
  * Messages
  */
@@ -263,6 +277,12 @@ select.orderby {
   background-color: #fdbc32;
 }
 
+/*
+Theme Name: kava
+
+WooCommerce styles override
+*/
+/*         Variables        */
 /**
  * WooCommerce pagination
  */
@@ -411,6 +431,12 @@ select.orderby {
   line-height: 1;
 }
 
+/*
+Theme Name: kava
+
+WooCommerce styles override
+*/
+/*         Variables        */
 /**
  * Rating
  */
@@ -628,6 +654,12 @@ select:focus {
   text-transform: none;
 }
 
+/*
+Theme Name: kava
+
+WooCommerce styles override
+*/
+/*         Variables        */
 /**
  *  Checkbox
  */
@@ -970,6 +1002,12 @@ ul.products.columns--6 li.product {
   }
 }
 /*        Pages        */
+/*
+Theme Name: kava
+
+WooCommerce styles override
+*/
+/*         Variables        */
 /**
  * WooComerce cart page
  */
@@ -1273,6 +1311,12 @@ ul.products.columns--6 li.product {
   border-color: #ebeced;
 }
 
+/*
+Theme Name: kava
+
+WooCommerce styles override
+*/
+/*         Variables        */
 /**
  * Checkout page
  */
@@ -1452,6 +1496,12 @@ ul.products.columns--6 li.product {
 /**
  * Compare
  */
+/*
+Theme Name: kava
+
+WooCommerce styles override
+*/
+/*         Variables        */
 /**
  * My account page
  */
@@ -2035,6 +2085,12 @@ ol.commentlist li + li {
   margin-right: auto;
 }
 
+/*
+Theme Name: kava
+
+WooCommerce styles override
+*/
+/*         Variables        */
 /**
  * Single Product Thumbnails
  */
@@ -2322,6 +2378,12 @@ ol.commentlist li + li {
 /**
  * WooCommerce Widgets
  */
+/*
+Theme Name: kava
+
+WooCommerce styles override
+*/
+/*         Variables        */
 /**
  * Price filter widget
  */
@@ -2378,6 +2440,12 @@ ol.commentlist li + li {
   margin-left: 4px;
 }
 
+/*
+Theme Name: kava
+
+WooCommerce styles override
+*/
+/*         Variables        */
 /**
  * Rating filter widget
  */
@@ -2423,6 +2491,12 @@ ol.commentlist li + li {
   vertical-align: middle;
 }
 
+/*
+Theme Name: kava
+
+WooCommerce styles override
+*/
+/*         Variables        */
 /**
  * Rating filter widget
  */
@@ -2480,6 +2554,12 @@ ol.commentlist li + li {
   border-color: #ebeced !important;
 }
 
+/*
+Theme Name: kava
+
+WooCommerce styles override
+*/
+/*         Variables        */
 /**
  * Active filters widget
  */
@@ -2514,6 +2594,12 @@ ol.commentlist li + li {
 /**
  * Top rated products widget
  */
+/*
+Theme Name: kava
+
+WooCommerce styles override
+*/
+/*         Variables        */
 /**
  * Product categories widget
  */

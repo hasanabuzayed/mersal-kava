@@ -4,22 +4,25 @@
 @use "../mixins/mixins-master";
 @use "../mixins/border-radius";
 
-input[type='text'],
-input[type='email'],
-input[type='url'],
-input[type='password'],
-input[type='search'],
-input[type='number'],
-input[type='tel'],
-input[type='range'],
-input[type='date'],
-input[type='month'],
-input[type='week'],
-input[type='time'],
-input[type='datetime'],
-input[type='datetime-local'],
-select,
-textarea {
+// Modern selector: :is() reduces specificity and improves readability
+:is(
+	input[type='text'],
+	input[type='email'],
+	input[type='url'],
+	input[type='password'],
+	input[type='search'],
+	input[type='number'],
+	input[type='tel'],
+	input[type='range'],
+	input[type='date'],
+	input[type='month'],
+	input[type='week'],
+	input[type='time'],
+	input[type='datetime'],
+	input[type='datetime-local'],
+	select,
+	textarea
+) {
 	width: 100%;
 	box-sizing: border-box;
 	padding: var(--kava-input-indents, structure.$input__indents);
@@ -33,16 +36,21 @@ textarea {
 	}
 }
 
-button,
-input[type='submit'],
-input[type='reset'] {
+// Modern selector: :is() for better readability
+:is(
+	button,
+	input[type='submit'],
+	input[type='reset']
+) {
 	&:focus {
 		outline: none;
 	}
 }
 
-input[type='submit'],
-input[type='reset'] {
+:is(
+	input[type='submit'],
+	input[type='reset']
+){
 	@include mixins-master.font-size(math.div(11, 16));
 	font-weight: 600;
 }

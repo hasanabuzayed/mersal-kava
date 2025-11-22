@@ -96,7 +96,10 @@ function kava_get_social_list( string $context, string $type = 'icon' ): string 
 		'fallback_message' => esc_html__( 'Set social menu', 'kava' ),
 	], $context, $type );
 
-	return wp_nav_menu( $args );
+	$menu = wp_nav_menu( $args );
+
+	// Ensure we always return a string, even if wp_nav_menu returns false or null
+	return is_string( $menu ) ? $menu : '';
 }
 
 /**

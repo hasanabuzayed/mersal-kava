@@ -48,9 +48,6 @@
 @mixin font-awesome-icon {
 	display: inline-block;
 	font: normal normal normal 14px/1 FontAwesome;
-	font-size: inherit;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
 }
 
 // Button
@@ -78,39 +75,99 @@
 }
 
 // Layout justify content space between
+// Modern hybrid approach: gap adds minimum spacing, margins handle edge alignment
 @mixin space-between-content($child-indent-type: 'margin') {
 	display: flex;
 	justify-content: space-between;
 	align-items: flex-start;
-	margin-left: -(variables.$grid-gutter-width)*0.5;
-	margin-right: -(variables.$grid-gutter-width)*0.5;
-	@if $child-indent-type=='padding' or $child-indent-type=='margin' {
-		>* {
-			margin-left: variables.$grid-gutter-width*0.5;
-			margin-right: variables.$grid-gutter-width*0.5;
+
+	// Modern approach: gap adds minimum spacing between items
+	// Works with justify-content: space-between (gap sets minimum, space-between distributes)
+	@supports (gap: 1px) {
+		gap: variables.$grid-gutter-width; // Minimum spacing between items
+		// Keep negative margins for edge alignment (removes outer padding)
+		margin-left: -(variables.$grid-gutter-width)*0.5;
+		margin-right: -(variables.$grid-gutter-width)*0.5;
+		// Minimal child margins - gap handles most spacing, but we need some for edge alignment
+		@if $child-indent-type=='padding' or $child-indent-type=='margin' {
+			>* {
+				margin-left: variables.$grid-gutter-width*0.25; // Quarter spacing for edge alignment
+				margin-right: variables.$grid-gutter-width*0.25;
+			}
+		} @else {
+			>* {
+				padding-left: variables.$grid-gutter-width*0.25;
+				padding-right: variables.$grid-gutter-width*0.25;
+			}
 		}
-	} @else {
-		>* {
-			padding-left: variables.$grid-gutter-width*0.5;
-			padding-right: variables.$grid-gutter-width*0.5;
+	}
+
+	// Fallback: Original margin-based approach for older browsers
+	@supports not (gap: 1px) {
+		margin-left: -(variables.$grid-gutter-width)*0.5;
+		margin-right: -(variables.$grid-gutter-width)*0.5;
+		@if $child-indent-type=='padding' or $child-indent-type=='margin' {
+			>* {
+				margin-left: variables.$grid-gutter-width*0.5;
+				margin-right: variables.$grid-gutter-width*0.5;
+			}
+		} @else {
+			>* {
+				padding-left: variables.$grid-gutter-width*0.5;
+				padding-right: variables.$grid-gutter-width*0.5;
+			}
 		}
 	}
 }
 
 // Custom grid indent
-@mixin grid-indent( $indent: variables.$grid-gutter-width*0.5, $child-indent-type: 'padding', $child-selector: '> *' ) {
-	margin-left: - $indent;
-	margin-right: - $indent;
+// Modern approach: Use gap for flex/grid layouts, margins for inline-block
+@mixin grid-indent( $indent: variables.$grid-gutter-width*0.5, $child-indent-type: 'padding', $child-selector: '> *', $use-gap: false ) {
+	// When explicitly requested or when used in flex context, use gap
+	@if $use-gap {
+		display: flex;
+		flex-wrap: wrap;
 
-	@if $child-indent-type=='padding' or $child-indent-type=='margin' {
-		#{$child-selector} {
-			#{$child-indent-type}-left: $indent;
-			#{$child-indent-type}-right: $indent;
+		@supports (gap: 1px) {
+			gap: $indent * 2; // gap replaces negative margins + child padding
+			margin-left: 0;
+			margin-right: 0;
+			#{$child-selector} {
+				margin: 0;
+				padding: 0;
+			}
+		}
+
+		@supports not (gap: 1px) {
+			margin-left: - $indent;
+			margin-right: - $indent;
+			@if $child-indent-type=='padding' or $child-indent-type=='margin' {
+				#{$child-selector} {
+					#{$child-indent-type}-left: $indent;
+					#{$child-indent-type}-right: $indent;
+				}
+			} @else {
+				#{$child-selector} {
+					padding-left: $indent;
+					padding-right: $indent;
+				}
+			}
 		}
 	} @else {
-		#{$child-selector} {
-			padding-left: $indent;
-			padding-right: $indent;
+		// Default: Use negative margins (for inline-block, etc.)
+		margin-left: - $indent;
+		margin-right: - $indent;
+
+		@if $child-indent-type=='padding' or $child-indent-type=='margin' {
+			#{$child-selector} {
+				#{$child-indent-type}-left: $indent;
+				#{$child-indent-type}-right: $indent;
+			}
+		} @else {
+			#{$child-selector} {
+				padding-left: $indent;
+				padding-right: $indent;
+			}
 		}
 	}
 }

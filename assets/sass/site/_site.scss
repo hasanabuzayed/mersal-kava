@@ -17,6 +17,8 @@
 	&-breadcrumbs.container,
 	&-content.container,
 	&-footer.container {
+		padding-inline: 0; // Logical property (replaces padding-left/right)
+		// Fallback for older browsers
 		padding-left: 0;
 		padding-right: 0;
 	}

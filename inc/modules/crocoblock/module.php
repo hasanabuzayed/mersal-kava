@@ -43,8 +43,8 @@ if ( ! class_exists( 'Kava_Crocoblock_Module' ) ) {
 				return;
 			}
 
-	add_action( 'init', [ $this, 'plugins_wizard_config' ], 0 );
-	add_action( 'init', [ $this, 'data_importer_config' ], 0 );
+			add_action( 'init', [ $this, 'plugins_wizard_config' ], 0 );
+			add_action( 'init', [ $this, 'data_importer_config' ], 0 );
 		}
 
 		/**

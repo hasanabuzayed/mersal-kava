@@ -35,13 +35,15 @@ input[type='submit'] {
 	@include mixins-master.font-size(math.div(14, 16));
 	text-transform: uppercase;
 	font-weight: 500;
-	&:after {
-		transform:translateY(-1px);
-		@include mixins-master.font-awesome-icon;
-		@include mixins-master.font-size(math.div(12, 16));
-		content: '\f061';
-		margin-left: 6px;
-	}
+		&:after {
+			transform:translateY(-1px);
+			@include mixins-master.font-awesome-icon;
+			@include mixins-master.font-size(math.div(12, 16));
+			content: '\f061';
+			margin-inline-start: 6px; // Logical property (replaces margin-left)
+			// Fallback for older browsers
+			margin-left: 6px;
+		}
 }
 
 // Reset button style

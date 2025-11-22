@@ -6,7 +6,8 @@ p {
 	margin: 0 0 1em;
 }
 
-dfn, cite, em, i {
+// Modern selector: :is() for better readability
+:is(dfn, cite, em, i) {
 	font-style: italic;
 }
 
@@ -37,7 +38,8 @@ pre {
 	@include mixins-master.font-size(1);
 }
 
-code, kbd, tt, var {
+// Modern selector: :is() for better readability
+:is(code, kbd, tt, var) {
 	font-family: typography.$font__code;
 
 	@include mixins-master.font-size(0.9375);
@@ -48,12 +50,14 @@ code {
 	border: 1px solid colors.$color__background-hr;
 }
 
-abbr, acronym {
+// Modern selector: :is() for better readability
+:is(abbr, acronym) {
 	cursor: help;
 	border-bottom: 1px dotted colors.$color__border-abbr;
 }
 
-mark, ins {
+// Modern selector: :is() for better readability
+:is(mark, ins) {
 	font-style: italic;
 	text-decoration: none;
 	border-bottom: 1px solid;

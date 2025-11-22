@@ -11,8 +11,8 @@ img {
 	/* Adhere to container width. */
 }
 
-blockquote,
-q {
+// Modern selector: :is() for better readability
+:is(blockquote, q) {
 	quotes: none;
 	&:before,
 	&:after {
@@ -54,6 +54,8 @@ blockquote {
 		position: absolute;
 		font-size: 30px;
 		top: 0;
+		inset-inline-start: 10px; // Logical property (replaces left)
+		// Fallback for older browsers
 		left: 10px;
 	}
 }

@@ -49,10 +49,9 @@
 
 %icon-font-default {
 	display: inline-block;
-	font: normal normal normal 14px/1 'FontAwesome';
+	font: normal normal normal 14px/1 FontAwesome;
+	line-height: 1;
 	font-size: inherit;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
 }
 
 @mixin spin-animation() {

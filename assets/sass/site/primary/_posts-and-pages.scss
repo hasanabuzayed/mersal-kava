@@ -21,7 +21,21 @@
 	&-meta {
 		@include mixins-master.font-size(math.div(14, 16));
 		.entry-header & {
-			@include mixins-master.grid-indent(8px);
+			// Use gap for flex layout in entry meta
+			display: flex;
+			flex-wrap: wrap;
+			@supports (gap: 1px) {
+				gap: 16px; // 8px * 2
+				margin-left: 0;
+				margin-right: 0;
+				> * {
+					margin: 0;
+					padding: 0;
+				}
+			}
+			@supports not (gap: 1px) {
+				@include mixins-master.grid-indent(8px);
+			}
 			.posts-list--default & {
 				margin-bottom: 28px;
 			}

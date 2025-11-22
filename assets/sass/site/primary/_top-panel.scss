@@ -24,11 +24,15 @@
 		}
 		&__left {
 			>* {
+				margin-inline-end: 10px; // Logical property (replaces margin-right)
+				// Fallback for older browsers
 				margin-right: 10px;
 			}
 		}
 		&__right {
 			>* {
+				margin-inline-start: 10px; // Logical property (replaces margin-left)
+				// Fallback for older browsers
 				margin-left: 10px;
 			}
 		}

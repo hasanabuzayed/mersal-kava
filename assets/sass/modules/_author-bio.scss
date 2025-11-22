@@ -7,7 +7,8 @@
 		align-items: center;
 		margin: 40px 0;
 		padding-bottom: 40px;
-		@include mixins-master.grid-indent(12px);
+		// Use gap for modern flex layout (pass $use-gap: true)
+		@include mixins-master.grid-indent(12px, 'padding', '> *', true);
 		border-bottom: 1px solid colors.$color__background-hr;
 	}
 	&__avatar {

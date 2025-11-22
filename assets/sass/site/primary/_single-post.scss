@@ -34,6 +34,8 @@
 			.tags-links {
 				a {
 					display: inline-block;
+					margin-inline-start: 5px; // Logical property (replaces margin-left)
+					// Fallback for older browsers
 					margin-left: 5px;
 				}
 			}
@@ -156,6 +158,8 @@
 				display: flex;
 				align-items: center;
 				&__avatar {
+					margin-inline-end: 20px; // Logical property (replaces margin-right)
+					// Fallback for older browsers
 					margin-right: 20px;
 				}
 			}
@@ -308,6 +312,8 @@
 					display: flex;
 					align-items: center;
 					&__avatar {
+						margin-inline-start: 15px; // Logical property (replaces margin-left)
+						// Fallback for older browsers
 						margin-left: 15px;
 					}
 					&__content {

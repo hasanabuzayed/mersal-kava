@@ -5,6 +5,9 @@
 
 // Grid system
 @mixin make-container($gutter: variables.$grid-gutter-width) {
+	margin-inline: auto; // Logical property (replaces margin-left/right)
+	padding-inline: math.div($gutter, 2); // Logical property (replaces padding-left/right)
+	// Fallback for older browsers
 	margin-left: auto;
 	margin-right: auto;
 	padding-left:  ($gutter * 0.5);
@@ -23,6 +26,7 @@
 @mixin make-row($gutter: variables.$grid-gutter-width) {
 	display: flex;
 	flex-wrap: wrap;
+	// Use negative margins approach (gap doesn't work well with flexbox in all cases)
 	margin-left:  math.div($gutter, -2);
 	margin-right: math.div($gutter, -2);
 }
@@ -30,6 +34,7 @@
 @mixin make-col($gutter: variables.$grid-gutter-width) {
 	position: relative;
 	min-height: 1px;
+	// Use padding for gutter spacing (works with negative margin on row)
 	padding-left:  ($gutter * 0.5);
 	padding-right: ($gutter * 0.5);
 }
@@ -41,6 +46,8 @@
 
 @mixin make-col-offset($size, $columns: variables.$grid-columns) {
 	@if variables.$need-offset {
+		margin-inline-start: math.percentage(math.div($size, $columns)); // Logical property
+		// Fallback for older browsers
 		margin-left: math.percentage(math.div($size, $columns));
 	}
 }
@@ -74,7 +81,7 @@
 		position: relative;
 		// Prevent columns from collapsing when empty
 		min-height: 1px;
-		// Inner gutter via padding
+		// Inner gutter via padding (works with negative margin on row)
 		padding-left: ($gutter * 0.5);
 		padding-right: ($gutter * 0.5);
 	}

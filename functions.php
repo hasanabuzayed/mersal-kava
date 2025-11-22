@@ -370,25 +370,15 @@ if ( ! class_exists( 'Kava_Theme_Setup' ) ) {
 		 * @since 1.0.0
 		 */
 		public function register_assets(): void {
-			// Register Font Awesome 6 via CDN (modern approach)
+			// Register Font Awesome 6 exclusively via CDN
+			// CDN provides: Font Awesome 6 Free (solid/regular), Font Awesome 6 Brands, and legacy FontAwesome font-face
+			// The legacy FontAwesome font-family is used for CSS pseudo-elements (::before, ::after) with Unicode content
 			wp_register_style(
 				'font-awesome',
-				'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css',
+				'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css',
 				[],
-				'6.5.1'
+				'7.0.1'
 			);
-			
-			// Fallback to local Font Awesome 4.7.0 for backward compatibility
-			// Note: Icon classes need to be updated from 'fa fa-*' to 'fa-solid fa-*', 'fa-regular fa-*', or 'fa-brands fa-*'
-			// Uncomment below and comment above if you prefer local files:
-			/*
-			wp_register_style(
-				'font-awesome',
-				get_theme_file_uri( 'assets/lib/font-awesome/font-awesome.min.css' ),
-				[],
-				'4.7.0'
-			);
-			*/
 			
 			// Register Montserrat font from Google Fonts
 			wp_register_style(
