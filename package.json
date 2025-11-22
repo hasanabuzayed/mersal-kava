@@ -2,8 +2,8 @@
   "name": "kava",
   "version": "1.0.0",
   "engines": {
-    "node": ">=14.0.0",
-    "npm": ">=6.0.0"
+    "node": ">=24.0.0",
+    "npm": ">=11.0.0"
   },
   "devDependencies": {
     "gulp": "^5.0.1",
