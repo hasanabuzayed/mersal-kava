@@ -2,14 +2,34 @@
 @use "../variables-site/structure";
 @use "border-radius";
 
+/*--------------------------------------------------------------
+# Layout & Positioning Mixins
+--------------------------------------------------------------*/
+
 // Center block
+// Centers a block-level element horizontally
 @mixin center-block {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
 }
 
+// Overlay position
+// Positions an element to cover its parent (for overlays, backgrounds, etc.)
+@mixin overlay-position() {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+/*--------------------------------------------------------------
+# Clearfix & Reset Mixins
+--------------------------------------------------------------*/
+
 // Clearfix
+// Clears floated elements using the micro clearfix method
 @mixin clearfix {
 	content: "";
 	display: table;
@@ -17,24 +37,34 @@
 }
 
 // Clear after (not all clearfix need this also)
+// Clears floats after an element
 @mixin clearfix-after {
 	clear: both;
 }
 
 // Clear list
+// Resets list styles (padding, margin, list-style)
 @mixin reset-list {
 	padding: 0;
 	margin: 0;
 	list-style: none;
 }
 
+/*--------------------------------------------------------------
+# Typography Mixins
+--------------------------------------------------------------*/
+
 // Rem output with px fallback
+// Converts rem values to pixels with fallback for older browsers
+// @param {Number} $sizeValue - Size in rem units (default: 1)
 @mixin font-size($sizeValue: 1) {
 	font-size: ($sizeValue * 16) * 1px;
 	font-size: $sizeValue * 1rem;
 }
 
 // Optional hyphenation
+// Applies CSS hyphenation with vendor prefixes
+// @param {String} $mode - Hyphenation mode (default: auto)
 @mixin hyphens($mode: auto) {
 	word-wrap: break-word;
 	-webkit-hyphens: $mode;
@@ -45,12 +75,27 @@
 }
 
 // Font-awesome icon
+// Font Awesome 7 CDN: Use "Font Awesome 7 Free" with font-weight 900 for solid icons
+// This works with CSS pseudo-elements (::before, ::after) and Unicode codes
 @mixin font-awesome-icon {
 	display: inline-block;
-	font: normal normal normal 14px/1 FontAwesome;
+	font-family: "Font Awesome 7 Free"; // Font Awesome 7 Free for solid icons
+	font-weight: 900; // Solid icons use weight 900
+	font-style: normal;
+	font-variant: normal;
+	text-rendering: auto;
+	line-height: 1;
+	font-size: inherit;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
+/*--------------------------------------------------------------
+# Component Mixins
+--------------------------------------------------------------*/
+
 // Button
+// Base button styles with theme variables
 @mixin btn {
 	display: inline-block;
 	max-width: 100%;
@@ -67,15 +112,26 @@
 	transition: all 0.3s ease;
 }
 
+/*--------------------------------------------------------------
+# Utility Mixins
+--------------------------------------------------------------*/
 
 // Resize anything
+// Makes an element resizable
+// @param {String} $direction - Resize direction: horizontal, vertical, both
 @mixin resizable($direction) {
 	resize: $direction; // Options: horizontal, vertical, both
 	overflow: auto; // Per CSS3 UI, `resize` only applies when `overflow` isn't `visible`
 }
 
+/*--------------------------------------------------------------
+# Layout Mixins
+--------------------------------------------------------------*/
+
 // Layout justify content space between
 // Modern hybrid approach: gap adds minimum spacing, margins handle edge alignment
+// Creates a flex container with space-between justification and optional gap support
+// @param {String} $child-indent-type - Child spacing type: 'margin' or 'padding' (default: 'margin')
 @mixin space-between-content($child-indent-type: 'margin') {
 	display: flex;
 	justify-content: space-between;
@@ -122,6 +178,11 @@
 
 // Custom grid indent
 // Modern approach: Use gap for flex/grid layouts, margins for inline-block
+// Creates consistent spacing between grid/flex items with optional gap support
+// @param {Number} $indent - Indent value (default: half grid gutter width)
+// @param {String} $child-indent-type - Child spacing type: 'padding' or 'margin' (default: 'padding')
+// @param {String} $child-selector - Child selector (default: '> *')
+// @param {Boolean} $use-gap - Whether to use CSS gap property (default: false)
 @mixin grid-indent( $indent: variables.$grid-gutter-width*0.5, $child-indent-type: 'padding', $child-selector: '> *', $use-gap: false ) {
 	// When explicitly requested or when used in flex context, use gap
 	@if $use-gap {
@@ -171,14 +232,4 @@
 		}
 	}
 }
-
-// Overlay position
-@mixin overlay-position() {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-}
-
 

@@ -73,6 +73,24 @@
 }
 
 /*--------------------------------------------------------------
+# Layout & Positioning Mixins
+--------------------------------------------------------------*/
+/*--------------------------------------------------------------
+# Clearfix & Reset Mixins
+--------------------------------------------------------------*/
+/*--------------------------------------------------------------
+# Typography Mixins
+--------------------------------------------------------------*/
+/*--------------------------------------------------------------
+# Component Mixins
+--------------------------------------------------------------*/
+/*--------------------------------------------------------------
+# Utility Mixins
+--------------------------------------------------------------*/
+/*--------------------------------------------------------------
+# Layout Mixins
+--------------------------------------------------------------*/
+/*--------------------------------------------------------------
 ## Blog layouts
 --------------------------------------------------------------*/
 /*--------------------------------------------------------------
@@ -1858,7 +1876,15 @@ body:not(.sidebar_enabled) .list-style-v3 .default-item {
 }
 .posts-list.posts-list--grid .grid-item .comments-link:before {
   display: inline-block;
-  font: normal normal normal 14px/1 FontAwesome;
+  font-family: "Font Awesome 7 Free";
+  font-weight: 900;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1;
+  font-size: inherit;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   font-size: 14px;
   font-size: 0.875rem;
   content: "\f075";
@@ -2857,7 +2883,15 @@ body:not(.sidebar_enabled) .list-style-v3 .default-item {
 }
 .posts-list__item.justify-item .comments-link:before {
   display: inline-block;
-  font: normal normal normal 14px/1 FontAwesome;
+  font-family: "Font Awesome 7 Free";
+  font-weight: 900;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1;
+  font-size: inherit;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   font-size: 14px;
   font-size: 0.875rem;
   content: "\f075";
@@ -4079,7 +4113,15 @@ body:not(.sidebar_enabled) .list-style-v3 .default-item {
 }
 .posts-list.posts-list--masonry .masonry-item .comments-link:before {
   display: inline-block;
-  font: normal normal normal 14px/1 FontAwesome;
+  font-family: "Font Awesome 7 Free";
+  font-weight: 900;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1;
+  font-size: inherit;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   font-size: 14px;
   font-size: 0.875rem;
   content: "\f075";
