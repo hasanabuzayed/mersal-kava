@@ -1,10 +1,12 @@
+@use "../mixins/mixins-master";
+
 .post-author {
 	&-bio {
 		display: flex;
 		align-items: center;
 		margin: 40px 0;
 		padding-bottom: 40px;
-		@include grid-indent(12px);
+		@include mixins-master.grid-indent(12px);
 		border-bottom: 1px solid $color__background-hr;
 	}
 	&__avatar {

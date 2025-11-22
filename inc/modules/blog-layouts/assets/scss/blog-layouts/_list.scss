@@ -1,3 +1,9 @@
+@use "../../../../../../assets/sass/grid/breakpoints";
+@use "../../../../../../assets/sass/grid/variables";
+@use "../../../../../../assets/sass/mixins/border-radius";
+@use "../../../../../../assets/sass/mixins/mixins-master";
+@use "../../../../../../assets/sass/variables-site/colors";
+
 /*--------------------------------------------------------------
 ### Posts List
 --------------------------------------------------------------*/
@@ -15,7 +21,7 @@
 		.default-item+.default-item {
 			margin-top: 50px;
 			padding-top: 40px;
-			border-top: 1px solid $color__background-hr;
+			border-top: 1px solid colors.$color__background-hr;
 		}
 	}
 	&.list-style-v3,
@@ -51,8 +57,8 @@
 		}
 		.entry {
 			&-content {
-				@include media-breakpoint-up(sm) {
-					@include font-size(18/16);
+				@include breakpoints.media-breakpoint-up(sm) {
+					@include mixins-master.font-size(18/16);
 				}
 			}
 			&-footer {
@@ -61,7 +67,7 @@
 						margin-top: 28px;
 					}
 					>div {
-						@include space-between-content;
+						@include mixins-master.space-between-content;
 					}
 				}
 			}
@@ -91,8 +97,8 @@
 				margin-right: 45px;
 			}
 			&-content {
-				@include media-breakpoint-up(sm) {
-					@include font-size(18/16);
+				@include breakpoints.media-breakpoint-up(sm) {
+					@include mixins-master.font-size(18/16);
 				}
 			}
 			&-footer {
@@ -103,7 +109,7 @@
 					margin-top: 10px;
 					text-align: center;
 					>div {
-						@include grid-indent(8px, 'margin');
+						@include mixins-master.grid-indent(8px, 'margin');
 					}
 				}
 			}
@@ -118,9 +124,9 @@
 .default-item {
 	.list-style-v3 & {
 		padding: 20px;
-		@include border-radius;
-		border: 1px solid $color__background-hr;
-		@include media-breakpoint-up(sm) {
+		@include border-radius.border-radius;
+		border: 1px solid colors.$color__background-hr;
+		@include breakpoints.media-breakpoint-up(sm) {
 			padding: 32px 40px 30px;
 		}
 		body:not(.sidebar_enabled) & {
@@ -140,8 +146,8 @@
 				text-align: center;
 				margin-left: 15px;
 				margin-right: 15px;
-				@include media-breakpoint-up(sm) {
-					@include font-size(18/16);
+				@include breakpoints.media-breakpoint-up(sm) {
+					@include mixins-master.font-size(18/16);
 				}
 			}
 			&-footer {
@@ -189,20 +195,20 @@
 
 	.list-style-v4 &,
 	.list-style-v5 & {
-		@include media-breakpoint-up(sm) {
+		@include breakpoints.media-breakpoint-up(sm) {
 			display: flex;
 			justify-content: space-between;
 		}
 		.post-thumbnail,
 		&.has-post-thumbnail .default-item__content {
-			@include media-breakpoint-up(sm) {
+			@include breakpoints.media-breakpoint-up(sm) {
 				width: 50%;
 			}
 		}
 		.post-thumbnail {
 			margin: 7px 0 30px;
-			@include media-breakpoint-up(sm) {
-				margin: 7px $grid-gutter-width 0 0;
+			@include breakpoints.media-breakpoint-up(sm) {
+				margin: 7px variables.$grid-gutter-width 0 0;
 			}
 		}
 		.entry {
@@ -210,8 +216,8 @@
 				margin-bottom: 22px;
 			}
 			&-content {
-				@include media-breakpoint-up(sm) {
-					@include font-size(18/16);
+				@include breakpoints.media-breakpoint-up(sm) {
+					@include mixins-master.font-size(18/16);
 				}
 			}
 			&-footer {
@@ -221,7 +227,7 @@
 						margin-top: 28px;
 					}
 					>div {
-						@include grid-indent(10px, 'margin');
+						@include mixins-master.grid-indent(10px, 'margin');
 					}
 				}
 			}
@@ -236,15 +242,15 @@
 .default-item {
 	.list-style-v5 & {
 		padding: 20px;
-		@include border-radius;
-		border: 1px solid $color__background-hr;
+		@include border-radius.border-radius;
+		border: 1px solid colors.$color__background-hr;
 		align-items: stretch;
-		@include media-breakpoint-up(sm) {
+		@include breakpoints.media-breakpoint-up(sm) {
 			padding: 28px 40px 40px;
 		}
 		&:nth-child(odd) {
 			.default-item__thumbnail {
-				@include media-breakpoint-up(sm) {
+				@include breakpoints.media-breakpoint-up(sm) {
 					margin-right: 40px;
 				}
 			}
@@ -255,7 +261,7 @@
 			}
 
 			.default-item__thumbnail {
-				@include media-breakpoint-up(sm) {
+				@include breakpoints.media-breakpoint-up(sm) {
 					margin-left: 40px;
 				}
 			}
@@ -266,7 +272,7 @@
 			min-height: 200px;
 			background-size: cover;
 			background-position: center;
-			@include media-breakpoint-up(sm) {
+			@include breakpoints.media-breakpoint-up(sm) {
 				width: 53%;
 				margin-top: 10px;
 				margin-bottom: 0;
@@ -282,9 +288,9 @@
 .default-item {
 	.list-style-v6 & {
 		padding: 20px;
-		@include border-radius;
-		border: 1px solid $color__background-hr;
-		@include media-breakpoint-up(sm) {
+		@include border-radius.border-radius;
+		border: 1px solid colors.$color__background-hr;
+		@include breakpoints.media-breakpoint-up(sm) {
 			padding: 28px 40px 40px;
 			display: flex;
 		}
@@ -294,10 +300,10 @@
 				border-radius: 0;
 				width: 100%;
 			}
-			@include media-breakpoint-up(sm) {
+			@include breakpoints.media-breakpoint-up(sm) {
 				flex-shrink: 0;
 				max-width: 230px;
-				margin: 7px $grid-gutter-width 0 0;
+				margin: 7px variables.$grid-gutter-width 0 0;
 			}
 		}
 		.entry {
@@ -310,7 +316,7 @@
 						margin-top: 28px;
 					}
 					>div {
-						@include space-between-content;
+						@include mixins-master.space-between-content;
 					}
 				}
 			}
@@ -341,8 +347,8 @@
 		.entry {
 			&-content {
 				margin-bottom: 10px;
-				@include media-breakpoint-up(sm) {
-					@include font-size(18/16);
+				@include breakpoints.media-breakpoint-up(sm) {
+					@include mixins-master.font-size(18/16);
 				}
 			}
 			&-footer {
@@ -351,7 +357,7 @@
 						margin-top: 28px;
 					}
 					>div {
-						@include grid-indent(10px, 'margin');
+						@include mixins-master.grid-indent(10px, 'margin');
 					}
 				}
 			}
@@ -362,7 +368,7 @@
 			margin-right: 8.5%;
 			padding: 40px 8.5% 40px;
 			text-align: center;
-			background-color: $color__white;
+			background-color: colors.$color__white;
 			z-index: 3;
 		}
 	}
@@ -380,7 +386,7 @@
 			width: 70%;
 			margin-top: 40px;
 			margin-bottom: 40px;
-			@include media-breakpoint-up(sm) {
+			@include breakpoints.media-breakpoint-up(sm) {
 				width: 50%;
 			}
 		}
@@ -411,9 +417,9 @@
 			max-height: 550px;
 			background-size: cover;
 			background-position: center;
-			@include border-radius;
+			@include border-radius.border-radius;
 			z-index: -1;
-			@include media-breakpoint-up(sm) {
+			@include breakpoints.media-breakpoint-up(sm) {
 				width: 57%;
 			}
 		}
@@ -421,8 +427,8 @@
 			position: relative;
 			padding: 4.7% 5.5%;
 			text-align: center;
-			@include border-radius;
-			background-color: $color__light;
+			@include border-radius.border-radius;
+			background-color: colors.$color__light;
 		}
 		.comments-link {
 			position: absolute;
@@ -465,7 +471,7 @@
 		justify-content: center;
 
 		&:nth-child(odd):not(.has-post-thumbnail) {
-			background-color: $color__lightblue;
+			background-color: colors.$color__lightblue;
 		}
 
 		.entry {
@@ -474,26 +480,26 @@
 			&-footer {
 				margin-left: 5%;
 				margin-right: 5%;
-				@include media-breakpoint-up(sm) {
+				@include breakpoints.media-breakpoint-up(sm) {
 					margin-left: 15%;
 					margin-right: 15%;
 				}
 			}
 			&-content {
 				margin-bottom: 15px;
-				@include media-breakpoint-up(sm) {
-					@include font-size(18/16);
+				@include breakpoints.media-breakpoint-up(sm) {
+					@include mixins-master.font-size(18/16);
 				}
 			}
 		}
 		&__thumbnail {
-			@include overlay-position;
+			@include mixins-master.overlay-position;
 			background-size: cover;
 			background-position: center;
 			z-index: -1;
 			&:before {
 				content: '';
-				@include overlay-position;
+				@include mixins-master.overlay-position;
 				background-color: rgba(0, 0, 0, .4);
 			}
 		}
@@ -513,14 +519,14 @@
 
 		padding: 20px;
 		min-height: 430px;
-		@include media-breakpoint-up(sm) {
+		@include breakpoints.media-breakpoint-up(sm) {
 			padding: 30px;
 		}
 
 		&:before {
 			content: '';
-			@include overlay-position;
-			background-color: $color__darkgray2;
+			@include mixins-master.overlay-position;
+			background-color: colors.$color__darkgray2;
 			z-index: -2;
 		}
 
@@ -529,7 +535,7 @@
 		}
 		.entry {
 			&-header {
-				@include media-breakpoint-up(sm) {
+				@include breakpoints.media-breakpoint-up(sm) {
 					width: 60%;
 				}
 				.entry-meta {
@@ -540,13 +546,13 @@
 				margin-bottom: 10px;
 			}
 			&-content {
-				@include media-breakpoint-up(sm) {
+				@include breakpoints.media-breakpoint-up(sm) {
 					width: 75%;
 				}
 			}
 			&-footer {
 				.entry-meta {
-					@include space-between-content;
+					@include mixins-master.space-between-content;
 				}
 			}
 		}
@@ -554,14 +560,14 @@
 			margin-top: 50px;
 		}
 		&__thumbnail {
-			@include border-radius;
-			@include overlay-position;
+			@include border-radius.border-radius;
+			@include mixins-master.overlay-position;
 			background-size: cover;
 			background-position: center;
 			z-index: -1;
 			&:before {
 				content: '';
-				@include overlay-position;
+				@include mixins-master.overlay-position;
 				top: 25%;
 				background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,.5) 100%);
 			}
@@ -579,7 +585,7 @@
 			margin-top: 28px;
 		}
 		>div {
-			@include space-between-content;
+			@include mixins-master.space-between-content;
 		}
 	}
 }

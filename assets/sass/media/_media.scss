@@ -1,3 +1,4 @@
+@use "sass:meta";
 .page-content .wp-smiley,
 .entry-content .wp-smiley,
 .comment-content .wp-smiley {
@@ -35,14 +36,14 @@ object {
 /*--------------------------------------------------------------
 ## Captions
 --------------------------------------------------------------*/
-@import 'captions';
+@include meta.load-css('captions');
 
 /*--------------------------------------------------------------
 ## Galleries
 --------------------------------------------------------------*/
-@import 'galleries';
+@include meta.load-css('galleries');
 
 /*--------------------------------------------------------------
 ## Embeds
 --------------------------------------------------------------*/
-@import 'embeds';
+@include meta.load-css('embeds');

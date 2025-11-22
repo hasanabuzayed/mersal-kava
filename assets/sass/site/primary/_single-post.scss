@@ -1,3 +1,6 @@
+@use "../../grid/breakpoints";
+@use "../../mixins/mixins-master";
+
 /*--------------------------------------------------------------
 ### Single Post
 --------------------------------------------------------------*/
@@ -13,8 +16,8 @@
 			margin-bottom: 35px;
 		}
 		&-content {
-			@include media-breakpoint-up(sm) {
-				@include font-size(18/16);
+			@include breakpoints.media-breakpoint-up(sm) {
+				@include mixins-master.font-size(18/16);
 			}
 		}
 		&-footer {
@@ -94,13 +97,13 @@
 			margin-top: 40px;
 			margin-bottom: 25px;
 			text-align: center;
-			@include media-breakpoint-up(sm) {
+			@include breakpoints.media-breakpoint-up(sm) {
 				margin-bottom: 55px;
 			}
 		}
 		.post-thumbnail {
 			margin-bottom: 25px;
-			@include media-breakpoint-up(sm) {
+			@include breakpoints.media-breakpoint-up(sm) {
 				margin-bottom: 55px;
 			}
 			.size-kava-thumb-xl {
@@ -124,10 +127,10 @@
 			z-index: 1;
 			&.invert {
 				padding: 50px 0 45px;
-				@include media-breakpoint-up(sm) {
+				@include breakpoints.media-breakpoint-up(sm) {
 					padding: 80px 0 75px;
 				}
-				@include media-breakpoint-up(md) {
+				@include breakpoints.media-breakpoint-up(md) {
 					padding: 130px 0 115px;
 				}
 				.entry-title,
@@ -143,7 +146,7 @@
 			}
 			.entry-header-bottom {
 				margin-top: 40px;
-				@include space-between-content;
+				@include mixins-master.space-between-content;
 				align-items: center;
 			}
 			.post-author {
@@ -157,14 +160,14 @@
 				background: none;
 			}
 			p {
-				@include media-breakpoint-up(sm) {
-					@include font-size(18/16);
+				@include breakpoints.media-breakpoint-up(sm) {
+					@include mixins-master.font-size(18/16);
 				}
 			}
 			.overlay-thumbnail {
 				&:before {
 					content: '';
-					@include overlay-position;
+					@include mixins-master.overlay-position;
 					background-color: rgba(0, 0, 0, .5);
 				}
 			}
@@ -194,7 +197,7 @@
 		}
 		.site-main {
 			padding: 20px;
-			@include media-breakpoint-up(sm) {
+			@include breakpoints.media-breakpoint-up(sm) {
 				padding: 65px 100px;
 			}
 			background-color: $color__white;
@@ -205,22 +208,22 @@
 			text-align: center;
 			.overlay-thumbnail {
 				bottom: -100px;
-				@include media-breakpoint-up(sm) {
+				@include breakpoints.media-breakpoint-up(sm) {
 					bottom: -150px;
 				}
-				@include media-breakpoint-up(md) {
+				@include breakpoints.media-breakpoint-up(md) {
 					bottom: -200px;
 				}
-				@include media-breakpoint-up(lg) {
+				@include breakpoints.media-breakpoint-up(lg) {
 					bottom: -270px;
 				}
-				@include media-breakpoint-up(xl) {
+				@include breakpoints.media-breakpoint-up(xl) {
 					bottom: -430px;
 				}
 			}
 			&.invert {
 				padding: 50px 0 35px;
-				@include media-breakpoint-up(sm) {
+				@include breakpoints.media-breakpoint-up(sm) {
 					padding: 103px 0 95px;
 				}
 				.entry-title,
@@ -238,28 +241,28 @@
 				}
 			}
 			.entry-meta:not(:empty) {
-				@include grid-indent(12px);
+				@include mixins-master.grid-indent(12px);
 				margin-top: 27px;
 			}
 			p {
-				@include media-breakpoint-up(sm) {
-					@include font-size(18/16);
+				@include breakpoints.media-breakpoint-up(sm) {
+					@include mixins-master.font-size(18/16);
 				}
 			}
 			i {
-				@include font-size(12/16);
+				@include mixins-master.font-size(12/16);
 			}
 		}
 	} //single-layout-5
 	&-single-layout-5 {
 		.single-header-5 {
-			@include media-breakpoint-down(sm) {
+			@include breakpoints.media-breakpoint-down(sm) {
 				text-align: center;
 			}
 			&.invert {
 				.entry-header {
 					padding: 25px;
-					@include media-breakpoint-up(md) {
+					@include breakpoints.media-breakpoint-up(md) {
 						padding: 40px;
 						min-height: 730px;
 					}
@@ -271,19 +274,19 @@
 					margin-bottom: 35px;
 					position: relative;
 					&-top {
-						@include media-breakpoint-up(md) {
-							@include space-between-content();
+						@include breakpoints.media-breakpoint-up(md) {
+							@include mixins-master.space-between-content();
 						}
 					}
 					p {
-						@include media-breakpoint-up(sm) {
-							@include font-size(18/16);
+						@include breakpoints.media-breakpoint-up(sm) {
+							@include mixins-master.font-size(18/16);
 						}
 					}
 				}
 				&-header p,
 				&-title {
-					@include media-breakpoint-up(md) {
+					@include breakpoints.media-breakpoint-up(md) {
 						width: 70%;
 					}
 				}
@@ -298,7 +301,7 @@
 				vertical-align: baseline;
 			}
 			.post-author {
-				@include media-breakpoint-up(md) {
+				@include breakpoints.media-breakpoint-up(md) {
 					display: flex;
 					align-items: center;
 					&__avatar {
@@ -309,14 +312,14 @@
 						text-align: right;
 					}
 				}
-				@include media-breakpoint-down(sm) {
+				@include breakpoints.media-breakpoint-down(sm) {
 					margin-bottom: 15px;
 				}
 			}
 		}
 	} //single-layout-6
 	&-single-layout-6 {
-		@include media-breakpoint-down(sm) {
+		@include breakpoints.media-breakpoint-down(sm) {
 			#author-block {
 				margin-bottom: 50px;
 			}
@@ -373,8 +376,8 @@
 			.entry {
 				&-header {
 					&-top:not(:empty) {
-						@include media-breakpoint-up(sm) {
-							@include space-between-content;
+						@include breakpoints.media-breakpoint-up(sm) {
+							@include mixins-master.space-between-content;
 						}
 						.cat-links,
 						.posted-on {
@@ -383,7 +386,7 @@
 					}
 					&-bottom {
 						.entry-meta {
-							@include grid-indent(12px);
+							@include mixins-master.grid-indent(12px);
 						}
 					}
 				}
@@ -408,7 +411,7 @@
 				}
 			}
 			i {
-				@include font-size(12/16);
+				@include mixins-master.font-size(12/16);
 			}
 		}
 	} //single-layout-8
@@ -420,10 +423,10 @@
 			margin-bottom: 60px;
 			padding: 60px 0 0;
 			text-align: center;
-			@include media-breakpoint-up(md) {
+			@include breakpoints.media-breakpoint-up(md) {
 				padding: 60px 0 30px;
 			}
-			@include media-breakpoint-up(lg) {
+			@include breakpoints.media-breakpoint-up(lg) {
 				padding: 60px 0;
 			}
 			&.with_author_block {
@@ -469,14 +472,14 @@
 			margin-top: 20px;
 			margin-bottom: 30px;
 			text-align: center;
-			@include media-breakpoint-up(sm) {
+			@include breakpoints.media-breakpoint-up(sm) {
 				margin-top: 40px;
 				margin-bottom: 60px;
 			}
 			.post-thumbnail {
 				margin-top: 25px;
 				margin-bottom: 0;
-				@include media-breakpoint-up(sm) {
+				@include breakpoints.media-breakpoint-up(sm) {
 					margin-top: 55px;
 				}
 				img {
@@ -506,12 +509,12 @@
 					padding: 32px 40px 25px;
 					margin-top: 30px;
 					margin-bottom: 55px;
-					@include media-breakpoint-down(xs) {
+					@include breakpoints.media-breakpoint-down(xs) {
 						text-align: center;
 					}
 					&-bottom {
-						@include media-breakpoint-up(sm) {
-							@include space-between-content;
+						@include breakpoints.media-breakpoint-up(sm) {
+							@include mixins-master.space-between-content;
 							align-items: flex-end;
 						}
 					}
@@ -522,7 +525,7 @@
 						display: inline-block;
 					}
 					.post-author {
-						@include media-breakpoint-down(sm) {
+						@include breakpoints.media-breakpoint-down(sm) {
 							display: block;
 						}
 					}

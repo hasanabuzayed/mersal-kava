@@ -1,3 +1,5 @@
+@use "../mixins/variables";
+
 /**
  * Product main styles
  */
@@ -8,12 +10,12 @@
 	}
 
 	.product{
-		margin: $wc-product-offset;
+		margin: variables.$wc-product-offset;
 		
 		.product-content{
-			padding: $wc-product-inset;
-			border: $wc-product-border;
-			border-radius: $wc-product-border-radius;
+			padding: variables.$wc-product-inset;
+			border: variables.$wc-product-border;
+			border-radius: variables.$wc-product-border-radius;
 		}
 	}
 }

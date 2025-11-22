@@ -1,3 +1,6 @@
+@use "sass:color";
+@use "../mixins/variables";
+
 /**
  * Cart widget
  */
@@ -67,15 +70,15 @@
 		}
 		
 		.checkout {
-			color: $wc-white-color;
-			background: $wc-green-color;
+			color: variables.$wc-white-color;
+			background: variables.$wc-green-color;
 			
 			&:hover {
-				background: lighten($wc-green-color, 20%);
+				background: color.adjust(variables.$wc-green-color, $lightness: 20%);
 			}
 			
 			&:before {
-				content: $wc-widget-cart-checkout-button-icon;
+				content: variables.$wc-widget-cart-checkout-button-icon;
 				display: inline-block;
 				margin-right: 6px;
 				
@@ -90,7 +93,7 @@
 			border: none;
 			
 			&:before {
-				content: $wc-widget-cart-view-cart-button-icon;
+				content: variables.$wc-widget-cart-view-cart-button-icon;
 				display: inline-block;
 				margin-right: 6px;
 				
@@ -111,7 +114,7 @@
 			top: 0;
 			left: -30px;
 			height: 1px;
-			border-top: 1px solid $wc-border-color;
+			border-top: 1px solid variables.$wc-border-color;
 		}
 		
 		> strong {
@@ -151,8 +154,8 @@
 	.woocommerce.widget_shopping_cart {
 		min-width: 275px;
 		border: none;
-		background-color: $wc-widget-cart-header-bg-color;
-		box-shadow: 0 7px 18px 0 $wc-widget-cart-header-box-shadow-color;
+		background-color: variables.$wc-widget-cart-header-bg-color;
+		box-shadow: 0 7px 18px 0 variables.$wc-widget-cart-header-box-shadow-color;
 		
 		li {
 			+ li {
@@ -207,7 +210,7 @@
 		&-icon {
 			font-size: 12px;
 			&:before {
-				content: $wc-widget-cart-header-icon;
+				content: variables.$wc-widget-cart-header-icon;
 				@extend %icon-font-default;
 			}
 		}

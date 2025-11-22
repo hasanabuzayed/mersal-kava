@@ -1,3 +1,5 @@
+@use "../mixins/variables";
+
 /**
  * Product badges styles
  */
@@ -10,10 +12,10 @@
 
 .onsale {
 	display: inline-block;
-	font-size: $wc-badges-fz;
-	line-height: $wc-badges-lh;
-	color: $wc-badges-color;
-	background-color: $wc-badge-sale-bg;
+	font-size: variables.$wc-badges-fz;
+	line-height: variables.$wc-badges-lh;
+	color: variables.$wc-badges-color;
+	background-color: variables.$wc-badge-sale-bg;
 	padding: 2px 5px;
 	border-radius: 0;
 	

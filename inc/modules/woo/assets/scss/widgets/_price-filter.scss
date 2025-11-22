@@ -1,3 +1,5 @@
+@use "../mixins/variables";
+
 /**
  * Price filter widget
  */
@@ -18,30 +20,30 @@
 		position: relative;
 		display: block;
 		width: 100%;
-		height: $wc-widget-price-slider-height;
-		border-radius: $wc-widget-price-slider-border-radius;
-		background-color: $wc-gray-color;
+		height: variables.$wc-widget-price-slider-height;
+		border-radius: variables.$wc-widget-price-slider-border-radius;
+		background-color: variables.$wc-gray-color;
 	}
 	
 	.ui-slider-range{
 		position: absolute;
-		height: $wc-widget-price-slider-height;
-		border-radius: $wc-widget-price-slider-border-radius;
+		height: variables.$wc-widget-price-slider-height;
+		border-radius: variables.$wc-widget-price-slider-border-radius;
 	}
 	
 	.ui-slider-handle{
 		position: absolute;
 		top: 50%;
 		display: block;
-		margin-top: -$wc-widget-price-slider-handle-height/2;
-		width: $wc-widget-price-slider-handle-width;
-		height: $wc-widget-price-slider-handle-height;
+		margin-top: -(variables.$wc-widget-price-slider-handle-height)/2;
+		width: variables.$wc-widget-price-slider-handle-width;
+		height: variables.$wc-widget-price-slider-handle-height;
 		border-radius: 50%;
 		outline: none;
 		
 		
 		&:last-child{
-			margin-left: -$wc-widget-price-slider-handle-width;
+			margin-left: -(variables.$wc-widget-price-slider-handle-width);
 		}
 	}
 	
@@ -50,7 +52,7 @@
 		margin-top: 20px;
 		
 		&:before{
-			content: $wc-widget-price-slider-button-icon ;
+			content: variables.$wc-widget-price-slider-button-icon ;
 			font-size: 12px;
 			margin-right: 4px;
 			

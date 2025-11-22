@@ -1,3 +1,5 @@
+@use "../grid/variables";
+
 html#ecwid_html {
 	body#ecwid_body {
 		/* Horizontal categories styles */
@@ -11,20 +13,20 @@ html#ecwid_html {
 		.ec-size {
 			&.ecwid-lte-600px {
 				div.ecwid-productBrowser {
-					padding: 0 $grid-gutter-width/2 20px;
+					padding: 0 variables.$grid-gutter-width/2 20px;
 				}
 			}
 			div.ecwid-productBrowser {
-				padding: 0 $grid-gutter-width 20px;
+				padding: 0 variables.$grid-gutter-width 20px;
 				background-color: transparent;
 			}
 			.ec-wrapper {
 				.ec-store {
 					.grid__products--medium-items {
-						margin-right: -$grid-gutter-width/2;
-						margin-left: -$grid-gutter-width/2;
+						margin-right: -(variables.$grid-gutter-width)/2;
+						margin-left: -(variables.$grid-gutter-width)/2;
 						.grid-product__wrap {
-							padding: $grid-gutter-width/2;
+							padding: variables.$grid-gutter-width/2;
 						}
 					}
 					.product-details-module__content {

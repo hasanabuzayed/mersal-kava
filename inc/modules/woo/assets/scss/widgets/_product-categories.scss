@@ -1,3 +1,5 @@
+@use "../mixins/variables";
+
 /**
  * Product categories widget
  */
@@ -35,7 +37,7 @@
 					width: 16px;
 					height: 16px;
 					display: block;
-					border: 1px solid $wc-border-color;
+					border: 1px solid variables.$wc-border-color;
 					border-radius: 4px;
 				}
 				
@@ -43,7 +45,7 @@
 			
 			&.current-cat{
 				a:after{
-					content: $wc-list-widget-current-item-icon;
+					content: variables.$wc-list-widget-current-item-icon;
 					position: absolute;
 					display: block;
 					font-size: 10px;
@@ -55,7 +57,7 @@
 			}
 			
 			+ li{
-				margin-top: $wc-list-widget-space-between-items;
+				margin-top: variables.$wc-list-widget-space-between-items;
 			}
 
 			.children{

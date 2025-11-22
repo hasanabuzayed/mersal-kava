@@ -1,71 +1,71 @@
-@import "variables-site/variables-site";
-@import "mixins/mixins-master";
+@use "variables-site/variables-site";
+@use "mixins/mixins-master";
 
-@import "grid/variables";
-@import "grid/breakpoints";
-@import "grid/mixins";
+@use "grid/variables";
+@use "grid/breakpoints";
+@use "grid/mixins";
 
 /*--------------------------------------------------------------
 # Typography
 --------------------------------------------------------------*/
-@import "typography/typography";
+@use "typography/typography";
 
 /*--------------------------------------------------------------
 # Elements
 --------------------------------------------------------------*/
-@import "elements/elements";
+@use "elements/elements";
 
 /*--------------------------------------------------------------
 # Forms
 --------------------------------------------------------------*/
-@import "forms/forms";
+@use "forms/forms";
 
 /*--------------------------------------------------------------
 # Navigation
 --------------------------------------------------------------*/
-@import "navigation/navigation";
+@use "navigation/navigation";
 
 /*--------------------------------------------------------------
 # Accessibility
 --------------------------------------------------------------*/
-@import "modules/accessibility";
+@use "modules/accessibility";
 
 /*--------------------------------------------------------------
 # Alignments
 --------------------------------------------------------------*/
-@import "modules/alignments";
+@use "modules/alignments";
 
 /*--------------------------------------------------------------
 # Clearings
 --------------------------------------------------------------*/
-@import "modules/clearings";
+@use "modules/clearings";
 
 /*--------------------------------------------------------------
 # Comments
 --------------------------------------------------------------*/
-@import "modules/comments";
+@use "modules/comments";
 
 /*--------------------------------------------------------------
 # Author Bio
 --------------------------------------------------------------*/
-@import "modules/author-bio";
+@use "modules/author-bio";
 
 /*--------------------------------------------------------------
 # Content
 --------------------------------------------------------------*/
-@import "site/site";
+@use "site/site";
 
 /*--------------------------------------------------------------
 # Widgets
 --------------------------------------------------------------*/
-@import "site/secondary/widgets";
+@use "site/secondary/widgets";
 
 /*--------------------------------------------------------------
 # Media
 --------------------------------------------------------------*/
-@import "media/media";
+@use "media/media";
 
 /*--------------------------------------------------------------
 # Plugins
 --------------------------------------------------------------*/
-@import "plugins/plugins";
+@use "plugins/plugins";

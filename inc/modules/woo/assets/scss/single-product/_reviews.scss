@@ -1,3 +1,5 @@
+@use "../mixins/variables";
+
 /**
  * Single product reviews
  */
@@ -18,8 +20,8 @@ ol.commentlist {
 
 		.meta {
 			margin-bottom: 0;
-			font-size: $wc-reviews-meta-fz;
-			line-height: $wc-reviews-meta-lh;
+			font-size: variables.$wc-reviews-meta-fz;
+			line-height: variables.$wc-reviews-meta-lh;
 		}
 
 		& + li {
@@ -46,8 +48,8 @@ ol.commentlist {
 
 	label {
 		display: block;
-		font-size: $wc-label-fz;
-		line-height: $wc-label-lh;
-		margin: $wc-label-offset;
+		font-size: variables.$wc-label-fz;
+		line-height: variables.$wc-label-lh;
+		margin: variables.$wc-label-offset;
 	}
 }

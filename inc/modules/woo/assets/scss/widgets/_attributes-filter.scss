@@ -1,3 +1,5 @@
+@use "../mixins/variables";
+
 /**
  * Rating filter widget
  */
@@ -6,16 +8,16 @@
 	
 	.select2{
 		.select2-selection--single{
-			height: $wc-widget-select-height;
-			border: 1px solid $wc-border-color;
+			height: variables.$wc-widget-select-height;
+			border: 1px solid variables.$wc-border-color;
 			border-radius: 4px;
 			
 			.select2-selection__arrow{
-				height: $wc-widget-select-height;
+				height: variables.$wc-widget-select-height;
 			}
 			
 			.select2-selection__rendered{
-				line-height: $wc-widget-select-height;
+				line-height: variables.$wc-widget-select-height;
 			}
 		}
 	}
@@ -36,13 +38,13 @@
 				width: 16px;
 				height: 16px;
 				display: block;
-				border: 1px solid $wc-border-color;
+				border: 1px solid variables.$wc-border-color;
 				border-radius: 4px;
 			}
 			
 			&.chosen{
 				&:after{
-					content: $wc-list-widget-current-item-icon;
+					content: variables.$wc-list-widget-current-item-icon;
 					position: absolute;
 					display: block;
 					font-size: 10px;
@@ -54,7 +56,7 @@
 			}
 			
 			+ li{
-				margin-top: $wc-list-widget-space-between-items;
+				margin-top: variables.$wc-list-widget-space-between-items;
 			}
 			
 		}
@@ -63,5 +65,5 @@
 }
 
 .select2-dropdown{
-	border-color: $wc-border-color!important;
+	border-color: variables.$wc-border-color!important;
 }

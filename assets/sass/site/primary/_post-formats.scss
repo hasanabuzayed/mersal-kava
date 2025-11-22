@@ -1,3 +1,5 @@
+@use "../../mixins/mixins-master";
+
 /* Image Post Format */
 
 .post_format-post-format-image {
@@ -7,7 +9,7 @@
 			position: relative;
 			display: block;
 			&:before {
-				@include font-awesome-icon;
+				@include mixins-master.font-awesome-icon;
 				content: '\f00e';
 				position: absolute;
 				top: 50%;
@@ -62,8 +64,8 @@
 		height: 45px;
 		margin-top: -35px;
 		text-align: center;
-		@include font-awesome-icon;
-		@include font-size(18/16);
+		@include mixins-master.font-awesome-icon;
+		@include mixins-master.font-size(18/16);
 		border-radius: 50%;
 		background-image: none;
 		background-color: $color__white;
@@ -90,13 +92,13 @@
 
 .post_format-post-format-link {
 	.post-format-link {
-		@include font-size(20/16);
+		@include mixins-master.font-size(20/16);
 		font-weight: 400;
 		&:before {
 			transform: translateY(1px);
 			content: '\f0c1';
 			margin-right: 8px;
-			@include font-awesome-icon;
+			@include mixins-master.font-awesome-icon;
 		}
 		&-wrapper {
 			margin-bottom: 24px;

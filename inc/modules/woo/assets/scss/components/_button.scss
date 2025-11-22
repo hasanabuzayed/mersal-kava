@@ -1,16 +1,19 @@
+@use "../mixins/mixins";
+@use "../mixins/variables";
+
 /**
  * Buttons
  */
 .button {
 	display: inline-block;
 	max-width: 100%;
-	padding: $wc-button-indents;
+	padding: variables.$wc-button-indents;
 	cursor: pointer;
 	text-align: center;
 	text-transform: uppercase;
 	text-decoration: none;
-	border: $wc-button-border;
-	border-radius: $wc-button-border-radius;
+	border: variables.$wc-button-border;
+	border-radius: variables.$wc-button-border-radius;
 	
 	&.product_type_grouped,
 	&.product_type_external,
@@ -34,8 +37,8 @@
 		&:before {
 			display: inline-block;
 			@extend %icon-font-default;
-			font-size: $wc-add-to-cart-icon-fz;
-			line-height: $wc-add-to-cart-icon-lh;
+			font-size: variables.$wc-add-to-cart-icon-fz;
+			line-height: variables.$wc-add-to-cart-icon-lh;
 		}
 		
 		// loader
@@ -47,7 +50,7 @@
 			margin-left: -5px;
 			transition: .3s all ease;
 			
-			@include spin-animation;
+			@include mixins.spin-animation;
 		}
 		
 		&:before {
@@ -56,14 +59,14 @@
 	}
 	
 	// button with icon
-	@if ($wc-add-to-cart-with-icon) {
+	@if (variables.$wc-add-to-cart-with-icon) {
 		&.add_to_cart_button:before,
 		&.single_add_to_cart_button:before {
-			content: $wc-add-to-cart-sample-icon;
+			content: variables.$wc-add-to-cart-sample-icon;
 		}
 		
 		&.product_type_variable:before {
-			content: $wc-add-to-cart-variable-icon;
+			content: variables.$wc-add-to-cart-variable-icon;
 		}
 	}
 	
@@ -75,16 +78,16 @@
 		}
 		
 		&:after {
-			content: $wc-add-to-cart-loading-icon;
+			content: variables.$wc-add-to-cart-loading-icon;
 		}
 	}
 	
 	// added state
 	&.ajax_add_to_cart.added {
-		background-color: $wc-add-to-cart-added-color;
+		background-color: variables.$wc-add-to-cart-added-color;
 		
 		&:before {
-			content: $wc-add-to-cart-added-icon;
+			content: variables.$wc-add-to-cart-added-icon;
 		}
 	}
 }
@@ -94,8 +97,8 @@
 	text-align: center;
 	text-transform: uppercase;
 	margin-top: 10px;
-	padding: $wc-button-indents;
-	border-radius: $wc-button-border-radius;
+	padding: variables.$wc-button-indents;
+	border-radius: variables.$wc-button-border-radius;
 }
 
 

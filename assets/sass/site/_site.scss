@@ -1,9 +1,13 @@
+@use "sass:meta";
+@use "../grid/breakpoints";
+@use "../mixins/mixins-master";
+
 .site {
-	@include hyphens(auto);
+	@include mixins-master.hyphens(auto);
 	overflow: hidden;
 	&-logo {
 		margin: 0;
-		@include font-size(32/16);
+		@include mixins-master.font-size(32/16);
 		line-height: 1.2;
 		text-transform: lowercase;
 		font-weight: 700;
@@ -32,53 +36,53 @@
 }
 
 #secondary {
-	@include media-breakpoint-down(sm) {
+	@include breakpoints.media-breakpoint-down(sm) {
 		margin-top: 40px;
 	}
 }
 
 .space-between-content {
-	@include space-between-content;
+	@include mixins-master.space-between-content;
 }
 
 /*--------------------------------------------------------------
 ## Header
 --------------------------------------------------------------*/
 
-@import "primary/header";
+@include meta.load-css("primary/header");
 
 /*--------------------------------------------------------------
 ## Top panel
 --------------------------------------------------------------*/
 
-@import "primary/top-panel";
+@include meta.load-css("primary/top-panel");
 
 /*--------------------------------------------------------------
 ## Footer
 --------------------------------------------------------------*/
 
-@import "primary/footer";
+@include meta.load-css("primary/footer");
 
 /*--------------------------------------------------------------
 ## Posts and pages
 --------------------------------------------------------------*/
 
-@import "primary/posts-and-pages";
+@include meta.load-css("primary/posts-and-pages");
 
 /*--------------------------------------------------------------
 ## Post Formats
 --------------------------------------------------------------*/
 
-@import "primary/post-formats";
+@include meta.load-css("primary/post-formats");
 
 /*--------------------------------------------------------------
 ## Single post
 --------------------------------------------------------------*/
 
-@import "primary/single-post";
+@include meta.load-css("primary/single-post");
 
 /*--------------------------------------------------------------
 ## Sticky 
 --------------------------------------------------------------*/
 
-@import "primary/sticky";
+@include meta.load-css("primary/sticky");

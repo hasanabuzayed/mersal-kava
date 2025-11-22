@@ -1,3 +1,6 @@
+@use "../grid/breakpoints";
+@use "../mixins/mixins-master";
+
 #toTop {
 	overflow: hidden;
 	display: none;
@@ -9,14 +12,14 @@
 	transition: color 0.3s, background-color 0.3s;
 	&:before{
 		content: "\f106";
-		@include font-awesome-icon;
+		@include mixins-master.font-awesome-icon;
 		width: 100%;
 		font-size: 25px;
 	}
 	&:focus {
 		outline: none;
 	}
-	@include media-breakpoint-up(sm) {
+	@include breakpoints.media-breakpoint-up(sm) {
 		right: 20px;
 	}
 }

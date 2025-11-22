@@ -1,3 +1,4 @@
+@use "sass:color";
 $color__white: #fff;
 $color__light: #f1f4f6;
 $color__lightblue: #F2F6FB;
@@ -18,4 +19,4 @@ $color__border-button: #ccc;
 $color__border-input: $color__background-hr;
 $color__border-abbr: #666;
 $color__border-table: $color__background-hr;
-$color__border-pre: darken( $color__background-pre, 10% );
+$color__border-pre: color.adjust( $color__background-pre, $lightness: -10% );

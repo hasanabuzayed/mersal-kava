@@ -1,3 +1,5 @@
+@use "../mixins/variables";
+
 /**
  * Active filters widget
  */
@@ -17,20 +19,20 @@
 				}
 				
 				a:after{
-					content: $wc-list-widget-remove-item-icon;
+					content: variables.$wc-list-widget-remove-item-icon;
 					position: absolute;
 					display: block;
 					font-size: 10px;
 					left: 7px;
 					top: 4px;
-					color: $wc-list-widget-remove-item-icon-color;
+					color: variables.$wc-list-widget-remove-item-icon-color;
 					
 					@extend %icon-font-default;
 				}
 			}
 			
 			+ li{
-				margin-top: $wc-list-widget-space-between-items;
+				margin-top: variables.$wc-list-widget-space-between-items;
 			}
 			
 		}

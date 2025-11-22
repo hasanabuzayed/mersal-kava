@@ -1,32 +1,38 @@
+@use "sass:map";
+@use "../../../../../../assets/sass/grid/breakpoints";
+@use "../../../../../../assets/sass/grid/variables" as variables2;
+@use "../mixins/mixins";
+@use "../mixins/variables";
+
 /**
  * Shop layout
  */
 ul.products {
-	@include make-row();
+	@include mixins.make-row();
 	list-style: none;
 
 	li.product {
-		@include make-col-ready();
+		@include mixins.make-col-ready();
 	}
 }
 
-@each $breakpoint in map-keys($grid-breakpoints) {
-	@include media-breakpoint-up($breakpoint, $grid-breakpoints) {
+@each $breakpoint in map.keys(variables2.$grid-breakpoints) {
+	@include breakpoints.media-breakpoint-up($breakpoint, variables2.$grid-breakpoints) {
 		
-		$infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+		$infix: mixins.breakpoint-infix($breakpoint, variables2.$grid-breakpoints);
 		
-		@for $i from 1 through $wc-max-columns {
+		@for $i from 1 through variables.$wc-max-columns {
 			
 			ul.products {
 				&.columns-#{$i} {
 					li.product {
-						@include column-width($i);
+						@include mixins.column-width($i);
 					}
 				}
 				
 				&.columns-#{$infix}-#{$i} {
 					li.product {
-						@include column-width($i);
+						@include mixins.column-width($i);
 					}
 				}
 			}

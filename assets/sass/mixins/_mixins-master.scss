@@ -1,3 +1,7 @@
+@use "../grid/variables";
+@use "../variables-site/structure";
+@use "border-radius";
+
 // Center block
 @mixin center-block {
 	display: block;
@@ -53,16 +57,16 @@
 @mixin btn {
 	display: inline-block;
 	max-width: 100%;
-	padding: $button__indents;
+	padding: structure.$button__indents;
 	cursor: pointer;
 	text-align: center;
 	white-space: nowrap;
 	text-transform: uppercase;
 	text-overflow: ellipsis;
 	text-decoration: none;
-	border: $button__border;
-	@include border-radius($button__border-radius);
-	box-shadow: $button__box-shadow;
+	border: structure.$button__border;
+	@include border-radius.border-radius(structure.$button__border-radius);
+	box-shadow: structure.$button__box-shadow;
 	transition: all 0.3s ease;
 }
 
@@ -78,23 +82,23 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: flex-start;
-	margin-left: -$grid-gutter-width/2;
-	margin-right: -$grid-gutter-width/2;
+	margin-left: -(variables.$grid-gutter-width)/2;
+	margin-right: -(variables.$grid-gutter-width)/2;
 	@if $child-indent-type=='padding' or $child-indent-type=='margin' {
 		>* {
-			margin-left: $grid-gutter-width/2;
-			margin-right: $grid-gutter-width/2;
+			margin-left: variables.$grid-gutter-width/2;
+			margin-right: variables.$grid-gutter-width/2;
 		}
 	} @else {
 		>* {
-			padding-left: $grid-gutter-width/2;
-			padding-right: $grid-gutter-width/2;
+			padding-left: variables.$grid-gutter-width/2;
+			padding-right: variables.$grid-gutter-width/2;
 		}
 	}
 }
 
 // Custom grid indent
-@mixin grid-indent( $indent: $grid-gutter-width/2, $child-indent-type: 'padding', $child-selector: '> *' ) {
+@mixin grid-indent( $indent: variables.$grid-gutter-width/2, $child-indent-type: 'padding', $child-selector: '> *' ) {
 	margin-left: - $indent;
 	margin-right: - $indent;
 
@@ -121,4 +125,3 @@
 }
 
 
-@import "border-radius";

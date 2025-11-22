@@ -1,12 +1,14 @@
+@use "../mixins/variables";
+
 /**
  * Archive panel
  */
 
 // Archive title
 .woocommerce-products-header__title.page-title {
-	font-size: $wc-page-title-fz;
+	font-size: variables.$wc-page-title-fz;
 	text-align: center;
-	line-height: $wc-page-title-lh;
+	line-height: variables.$wc-page-title-lh;
 	margin: 10px 0 35px;
 }
 
@@ -33,7 +35,7 @@
 	padding: 0 0 30px 0;
 	margin: 0 0 30px 0;
 	align-items: center;
-	border-bottom: $wc-archive-panel-border;
+	border-bottom: variables.$wc-archive-panel-border;
 	
 	&:empty{
 		display: none!important;

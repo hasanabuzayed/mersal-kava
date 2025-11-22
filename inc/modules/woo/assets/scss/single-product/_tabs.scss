@@ -1,9 +1,11 @@
+@use "../mixins/variables";
+
 /**
  * WooCommerce tabs
  */
 .woocommerce-tabs {
-	padding: $wc-tabs-inset;
-	border-bottom: $wc-tabs-border;
+	padding: variables.$wc-tabs-inset;
+	border-bottom: variables.$wc-tabs-border;
 	
 	//  woocommerce panel
 	.panel {
@@ -33,18 +35,18 @@
 	//  woocommerce tabs list
 	.tabs {
 		list-style: none;
-		margin: $wc-tabs-offset;
+		margin: variables.$wc-tabs-offset;
 		
 		&.wc-tabs {
-			border-top: $wc-tabs-b;
-			border-bottom: $wc-tabs-b;
+			border-top: variables.$wc-tabs-b;
+			border-bottom: variables.$wc-tabs-b;
 		}
 		
 		//  woocommerce tabs element
 		li {
 			position: relative;
-			font-size: $wc-tabs-fz;
-			line-height: $wc-tabs-lh;
+			font-size: variables.$wc-tabs-fz;
+			line-height: variables.$wc-tabs-lh;
 			
 			a {
 				display: inline-block;
@@ -63,7 +65,7 @@
 				}
 				
 				a {
-					padding: $wc-tabs-inset;
+					padding: variables.$wc-tabs-inset;
 				}
 			}
 			
@@ -72,7 +74,7 @@
 			}
 			
 			&.active::before {
-				content: $wc-tabs-active-icon;
+				content: variables.$wc-tabs-active-icon;
 			}
 			
 		}
@@ -83,15 +85,15 @@
 	padding: 10px 0;
 	
 	p {
-		font-size: $wc-tabs-description-fz;
-		line-height: $wc-tabs-description-lh;
+		font-size: variables.$wc-tabs-description-fz;
+		line-height: variables.$wc-tabs-description-lh;
 	}
 }
 
 .site-content__wrap:not(.container){
 	.woocommerce-tabs{
 		.woocommerce-Tabs-panel:not(:nth-child(2)){
-			max-width: $container-width;
+			max-width: variables.$container-width;
 			margin-right: auto;
 			margin-left: auto;
 		}

@@ -1,20 +1,22 @@
+@use "../mixins/variables";
+
 /**
  * Rating
  */
 .star-rating {
-	width: $wc-rating-width;
-	height: $wc-rating-height;
-	font-size: $wc-rating-fz;
-	color: $wc-rating-rated-color;
+	width: variables.$wc-rating-width;
+	height: variables.$wc-rating-height;
+	font-size: variables.$wc-rating-fz;
+	color: variables.$wc-rating-rated-color;
 	margin:  10px 0;
 	position: relative;
 	display: block;
 	overflow: hidden;
 
 	&::before {
-		content: $wc-rating-icon + $wc-rating-icon + $wc-rating-icon + $wc-rating-icon + $wc-rating-icon;
-		letter-spacing: $wc-rating-ls;
-		color: $wc-rating-color;
+		content: variables.$wc-rating-icon + variables.$wc-rating-icon + variables.$wc-rating-icon + variables.$wc-rating-icon + variables.$wc-rating-icon;
+		letter-spacing: variables.$wc-rating-ls;
+		color: variables.$wc-rating-color;
 		float: left;
 		top: 0;
 		left: 0;
@@ -31,8 +33,8 @@
 		position: absolute;
 
 		&::before {
-			letter-spacing: $wc-rating-ls;
-			content: $wc-rating-icon + $wc-rating-icon + $wc-rating-icon + $wc-rating-icon + $wc-rating-icon;
+			letter-spacing: variables.$wc-rating-ls;
+			content: variables.$wc-rating-icon + variables.$wc-rating-icon + variables.$wc-rating-icon + variables.$wc-rating-icon + variables.$wc-rating-icon;
 			top: 0;
 			position: absolute;
 			left: 0;
@@ -50,9 +52,9 @@
 // Single Product Reviews rating
 .stars {
 	display: inline-block;
-	width: calc(#{$wc-rating-width} + 1em);
-	height: $wc-rating-height;
-	font-size: $wc-rating-fz;
+	width: calc(#{variables.$wc-rating-width} + 1em);
+	height: variables.$wc-rating-height;
+	font-size: variables.$wc-rating-fz;
 	overflow: hidden;
 	margin-bottom: 0;
 	padding-left: 15px;
@@ -68,11 +70,11 @@
 		text-indent: -999em;
 		display: inline-block;
 		text-decoration: none;
-		color: $wc-rating-color;
+		color: variables.$wc-rating-color;
 
 		&:hover,
 		&.active {
-			color: $wc-rating-rated-color;
+			color: variables.$wc-rating-rated-color;
 		}
 		
 		& + a {
@@ -83,8 +85,8 @@
 		}
 
 		&::before {
-			letter-spacing: $wc-rating-ls;
-			content: $wc-rating-icon + $wc-rating-icon + $wc-rating-icon + $wc-rating-icon + $wc-rating-icon;
+			letter-spacing: variables.$wc-rating-ls;
+			content: variables.$wc-rating-icon + variables.$wc-rating-icon + variables.$wc-rating-icon + variables.$wc-rating-icon + variables.$wc-rating-icon;
 			top: 0;
 			position: absolute;
 			left: 0;
@@ -99,10 +101,10 @@
 	
 	&:hover{
 		a{
-			color: $wc-rating-rated-color;
+			color: variables.$wc-rating-rated-color;
 			
 			&:hover ~ a {
-				color: $wc-rating-color;
+				color: variables.$wc-rating-color;
 			}
 		}
 	}
@@ -110,11 +112,11 @@
 	&.selected{
 		a{
 			&:not(.active) {
-				color: $wc-rating-rated-color;
+				color: variables.$wc-rating-rated-color;
 			}
 			
 			&.active ~ a {
-				color: $wc-rating-color;
+				color: variables.$wc-rating-color;
 			}
 		}
 	}

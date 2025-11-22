@@ -1,3 +1,6 @@
+@use "../../../../../../assets/sass/grid/breakpoints";
+@use "../mixins/variables";
+
 /**
  * Checkout page
  */
@@ -13,8 +16,8 @@
 
 	.woocommerce-info,
 	.woocommerce-checkout h3 {
-		font-size: $wc-checkout-page-sub-title-fz;
-		line-height: $wc-checkout-page-sub-title-lh;
+		font-size: variables.$wc-checkout-page-sub-title-fz;
+		line-height: variables.$wc-checkout-page-sub-title-lh;
 		margin: 0 0 10px;
 	}
 
@@ -37,14 +40,14 @@
 
 	form.woocommerce-checkout,
 	.woocommerce-form-login + .woocommerce-info {
-		border-top: 1px solid $wc-border_color;
+		border-top: 1px solid variables.$wc-border_color;
 		padding-top: 30px;
 		margin-top: 30px;
 	}
 
 	.woocommerce-info {
 		a {
-			font-size: $wc-checkout-page-sub-title-link-fz;
+			font-size: variables.$wc-checkout-page-sub-title-link-fz;
 		}
 	}
 
@@ -58,14 +61,14 @@
 
 	.site-content {
 		label {
-			margin: $wc-label-offset;
+			margin: variables.$wc-label-offset;
 		}
 	}
 
 	label {
 		display: inline;
-		font-size: $wc-label-fz;
-		line-height: $wc-label-lh;
+		font-size: variables.$wc-label-fz;
+		line-height: variables.$wc-label-lh;
 		
 	}
 
@@ -86,20 +89,20 @@
 
 	.woocommerce-checkout-review-order {
 		table {
-			border: 1px solid $wc-border-color;
+			border: 1px solid variables.$wc-border-color;
 			width: 100%;
 
 			thead {
-				border-bottom: 1px solid $wc-border-color;
+				border-bottom: 1px solid variables.$wc-border-color;
 			}
 
 			.amount {
-				font-size: $wc-grid-price-fz;
-				line-height: $wc-grid-price-lh;
+				font-size: variables.$wc-grid-price-fz;
+				line-height: variables.$wc-grid-price-lh;
 			}
 
 			tr.order-total .amount {
-				font-size: calc(#{$wc-grid-price-fz} * 1.4);
+				font-size: calc(#{variables.$wc-grid-price-fz} * 1.4);
 			}
 
 			tr {
@@ -120,7 +123,7 @@
 
 			tbody tr td {
 				padding: 17px 20px;
-				border-bottom: 1px solid $wc-border-color;
+				border-bottom: 1px solid variables.$wc-border-color;
 			}
 
 			tfoot tr {
@@ -155,22 +158,22 @@
 	}
 
 	.place-order .button {
-		font-size: $wc-checkout-place-order-button-fz;
-		padding: $wc-checkout-place-order-button-inset;
+		font-size: variables.$wc-checkout-place-order-button-fz;
+		padding: variables.$wc-checkout-place-order-button-inset;
 		margin-top: 18px;
-		background-color: $wc-add-to-cart-added-color;
+		background-color: variables.$wc-add-to-cart-added-color;
 		width: 100%;
 
 		&::before {
-			content: $wc-checkout-place-order-button-icon;
-			font-size: calc(#{ $wc-proceed-to-checkout-button-fz} + 5px);
+			content: variables.$wc-checkout-place-order-button-icon;
+			font-size: calc(#{ variables.$wc-proceed-to-checkout-button-fz} + 5px);
 			@extend %icon-font-default;
 			padding-right: 5px;
 		}
 	}
 
 	// inline layout
-	@if ($wc-checkout-page-inline-layout) {
+	@if (variables.$wc-checkout-page-inline-layout) {
 		.woocommerce {
 			max-width: 100%;
 			.col2-set {
@@ -183,7 +186,7 @@
 			.col-2 {
 				width: 100%;
 
-				@include media-breakpoint-up(md) {
+				@include breakpoints.media-breakpoint-up(md) {
 					width: calc(50% - 15px);
 				}
 			}
@@ -191,7 +194,7 @@
 			.col-2 {
 				margin-left: 0;
 
-				@include media-breakpoint-up(md) {
+				@include breakpoints.media-breakpoint-up(md) {
 					margin-left: 30px;
 				}
 			}

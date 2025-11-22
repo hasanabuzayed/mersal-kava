@@ -1,12 +1,14 @@
+@use "../mixins/variables";
+
 /**
  * Prices
  */
 
 // Grid product
 .price {
-	font-size: $wc-grid-price-fz;
-	line-height: $wc-grid-price-lh;
-	margin: $wc-grid-price-offset;
+	font-size: variables.$wc-grid-price-fz;
+	line-height: variables.$wc-grid-price-lh;
+	margin: variables.$wc-grid-price-offset;
 	display: block;
 	
 	ins, del {
@@ -17,15 +19,15 @@
 		font-style: normal;
 		border: none;
 		margin-right: 5px;
-		@if ($wc-grid-ins-price-fz != $wc-grid-price-fz) {
-			font-size: $wc-grid-ins-price-fz;
+		@if (variables.$wc-grid-ins-price-fz != variables.$wc-grid-price-fz) {
+			font-size: variables.$wc-grid-ins-price-fz;
 		}
 	}
 
 	del {
-		color: $wc-sale-price-color;
-		@if ($wc-grid-del-price-fz != $wc-grid-price-fz) {
-			font-size: $wc-grid-del-price-fz;
+		color: variables.$wc-sale-price-color;
+		@if (variables.$wc-grid-del-price-fz != variables.$wc-grid-price-fz) {
+			font-size: variables.$wc-grid-del-price-fz;
 		}
 	}
 
@@ -33,20 +35,20 @@
 
 // List product
 .product-list .price {
-	margin: $wc-list-price-offset;
-	@if ($wc-list-price-fz != $wc-grid-price-fz) {
-		font-size: $wc-list-price-fz;
-		line-height: $wc-list-price-lh;
+	margin: variables.$wc-list-price-offset;
+	@if (variables.$wc-list-price-fz != variables.$wc-grid-price-fz) {
+		font-size: variables.$wc-list-price-fz;
+		line-height: variables.$wc-list-price-lh;
 
-		@if ($wc-list-price-fz != $wc-list-ins-price-fz) {
+		@if (variables.$wc-list-price-fz != variables.$wc-list-ins-price-fz) {
 			ins {
-				font-size: $wc-list-ins-price-fz;
+				font-size: variables.$wc-list-ins-price-fz;
 			}
 		}
 
-		@if ($wc-list-price-fz != $wc-list-del-price-fz) {
+		@if (variables.$wc-list-price-fz != variables.$wc-list-del-price-fz) {
 			del {
-				font-size: $wc-list-del-price-fz;
+				font-size: variables.$wc-list-del-price-fz;
 			}
 		}
 	}
@@ -54,20 +56,20 @@
 
 // Single product
 .single-product .summary .price {
-	margin: $wc-single-price-offset;
-	@if ($wc-single-price-fz != $wc-grid-price-fz) {
-		font-size: $wc-single-price-fz;
-		line-height: $wc-single-price-lh;
+	margin: variables.$wc-single-price-offset;
+	@if (variables.$wc-single-price-fz != variables.$wc-grid-price-fz) {
+		font-size: variables.$wc-single-price-fz;
+		line-height: variables.$wc-single-price-lh;
 
-		@if ($wc-single-price-fz != $wc-single-ins-price-fz) {
+		@if (variables.$wc-single-price-fz != variables.$wc-single-ins-price-fz) {
 			ins {
-				font-size: $wc-single-ins-price-fz;
+				font-size: variables.$wc-single-ins-price-fz;
 			}
 		}
 
-		@if ($wc-single-price-fz != $wc-single-del-price-fz) {
+		@if (variables.$wc-single-price-fz != variables.$wc-single-del-price-fz) {
 			del {
-				font-size: $wc-single-del-price-fz;
+				font-size: variables.$wc-single-del-price-fz;
 			}
 		}
 	}

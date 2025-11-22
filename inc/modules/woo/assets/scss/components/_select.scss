@@ -1,12 +1,14 @@
+@use "../mixins/variables";
+
 /**
  * Select
  */
 select {
-	font-size: $wc-select-fz;
-	line-height: $wc-select-lh;
-	padding: $wc-select-inset;
-	border-radius: $wc-select-border-radius;
-	border: $wc-select-border;
+	font-size: variables.$wc-select-fz;
+	line-height: variables.$wc-select-lh;
+	padding: variables.$wc-select-inset;
+	border-radius: variables.$wc-select-border-radius;
+	border: variables.$wc-select-border;
 	&:focus {
 		box-shadow: none;
 	}

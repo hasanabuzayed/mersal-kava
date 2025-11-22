@@ -1,3 +1,5 @@
+@use "../mixins/mixins-master";
+
 .clear:before,
 .clear:after,
 .comment-body:before,
@@ -14,7 +16,7 @@
 .site-content:after,
 .site-footer:before,
 .site-footer:after {
-	@include clearfix;
+	@include mixins-master.clearfix;
 }
 
 .clear:after,
@@ -25,7 +27,7 @@
 .site-header:after,
 .site-content:after,
 .site-footer:after {
-	@include clearfix-after;
+	@include mixins-master.clearfix-after;
 }
 
 .hidden {

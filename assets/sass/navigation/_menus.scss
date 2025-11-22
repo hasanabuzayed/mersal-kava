@@ -1,3 +1,5 @@
+@use "../mixins/mixins-master";
+
 .main-navigation {
 	.menu {
 		list-style: none;
@@ -69,7 +71,7 @@
 				position: absolute;
 				top: 6px;
 				right: 3px;
-				@include font-awesome-icon;
+				@include mixins-master.font-awesome-icon;
 				content: '\f107';
 			}
 		}

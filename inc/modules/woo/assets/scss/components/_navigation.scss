@@ -1,3 +1,5 @@
+@use "../mixins/variables";
+
 /**
  * WooCommerce pagination
  */
@@ -14,35 +16,35 @@
 		// Pagination Number
 		
 		& + * {
-			margin-left: $wc-pagination-number-offset;
+			margin-left: variables.$wc-pagination-number-offset;
 		}
 	}
 	
 	a.page-numbers,
 	span.page-numbers {
 		display: inline-block;
-		font-size: $wc-pagination-number-fz;
-		line-height: $wc-pagination-number-lh;
-		padding: $wc-pagination-number-inset;
-		text-align: $wc-pagination-number-ta;
+		font-size: variables.$wc-pagination-number-fz;
+		line-height: variables.$wc-pagination-number-lh;
+		padding: variables.$wc-pagination-number-inset;
+		text-align: variables.$wc-pagination-number-ta;
 		&:not(.prev):not(.next){
-			height: $wc-pagination-number-height;
-			width: $wc-pagination-number-width;
-			border-radius: $wc-pagination-number-border-radius;
-			border: $wc-pagination-number-border;
+			height: variables.$wc-pagination-number-height;
+			width: variables.$wc-pagination-number-width;
+			border-radius: variables.$wc-pagination-number-border-radius;
+			border: variables.$wc-pagination-number-border;
 			
 			&:hover,
 			&.current {
-				background-color: $wc-border-color;
+				background-color: variables.$wc-border-color;
 			}
 		}
 		
 		&.next {
-			margin-left: $wc-pagination-text-offset;
+			margin-left: variables.$wc-pagination-text-offset;
 		}
 		
 		&.prev {
-			margin-right: $wc-pagination-text-offset;
+			margin-right: variables.$wc-pagination-text-offset;
 		}
 		
 		&:hover {
@@ -51,7 +53,7 @@
 		
 		// Pagination icon
 		.nav-icon {
-			font-size: $wc-pagination-icon-fz;
+			font-size: variables.$wc-pagination-icon-fz;
 			
 			&::before {
 				@extend %icon-font-default;
@@ -60,14 +62,14 @@
 			&.icon-next{
 				margin-left: 4px;
 				&::before {
-					content: $wc-pagination-icon-next;
+					content: variables.$wc-pagination-icon-next;
 				}
 			}
 			
 			&.icon-prev{
 				margin-right: 4px;
 				&::before {
-					content: $wc-pagination-icon-prev;
+					content: variables.$wc-pagination-icon-prev;
 				}
 			}
 			
@@ -92,28 +94,28 @@
 				display: flex;
 				justify-content: center;
 				align-items: center;
-				font-size: $wc-pagination-number-fz;
-				line-height: $wc-pagination-number-lh;
-				padding: $wc-pagination-number-inset;
-				text-align: $wc-pagination-number-ta;
+				font-size: variables.$wc-pagination-number-fz;
+				line-height: variables.$wc-pagination-number-lh;
+				padding: variables.$wc-pagination-number-inset;
+				text-align: variables.$wc-pagination-number-ta;
 				&:not(.prev,.next){
-					height: $wc-pagination-number-height;
-					width: $wc-pagination-number-width;
-					border-radius: $wc-pagination-number-border-radius;
-					border: $wc-pagination-number-border;
+					height: variables.$wc-pagination-number-height;
+					width: variables.$wc-pagination-number-width;
+					border-radius: variables.$wc-pagination-number-border-radius;
+					border: variables.$wc-pagination-number-border;
 					
 					&:hover,
 					&.current {
-						background-color: $wc-border-color;
+						background-color: variables.$wc-border-color;
 					}
 				}
 				
 				&.next {
-					margin-left: $wc-pagination-text-offset;
+					margin-left: variables.$wc-pagination-text-offset;
 				}
 				
 				&.prev {
-					margin-right: $wc-pagination-text-offset;
+					margin-right: variables.$wc-pagination-text-offset;
 				}
 				
 				&:hover {
@@ -122,24 +124,24 @@
 				
 				// Pagination icon
 				.nav-icon {
-					font-size: $wc-pagination-icon-fz;
+					font-size: variables.$wc-pagination-icon-fz;
 					
 					&::before {
 						@extend %icon-font-default;
 					}
 					
 					&.icon-next::before {
-						content: $wc-pagination-icon-next;
+						content: variables.$wc-pagination-icon-next;
 					}
 					
 					&.icon-prev::before {
-						content: $wc-pagination-icon-prev;
+						content: variables.$wc-pagination-icon-prev;
 					}
 				}
 			}
 			
 			& + li {
-				margin-left: $wc-pagination-number-offset;
+				margin-left: variables.$wc-pagination-number-offset;
 			}
 		}
 	}

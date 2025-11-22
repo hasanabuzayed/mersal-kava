@@ -1,3 +1,5 @@
+@use "../mixins/variables";
+
 /**
  *  Checkbox
  */
@@ -13,19 +15,19 @@ label.inline {
 	input[type="checkbox"] + span::before {
 		content: '';
 		display: inline-block;
-		width: $wc-checkbox-width;
-		height: $wc-checkbox-height;
+		width: variables.$wc-checkbox-width;
+		height: variables.$wc-checkbox-height;
 		background: transparent;
-		border: 1px solid $wc-border-color;
-		border-radius: $wc-checkbox-br;
+		border: 1px solid variables.$wc-border-color;
+		border-radius: variables.$wc-checkbox-br;
 		position: absolute;
 		top: 0;
 		left: 0;
 	}
 	input[type="checkbox"] + span::after {
-		content: $wc-checkbox-active-icon;
+		content: variables.$wc-checkbox-active-icon;
 		opacity: 0;
-		font-size: $wc-checkbox-active-icon-fz;
+		font-size: variables.$wc-checkbox-active-icon-fz;
 		position: absolute;
 		top: 4px;
 		left: 4px;

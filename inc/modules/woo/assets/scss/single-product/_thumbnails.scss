@@ -1,3 +1,5 @@
+@use "../mixins/variables";
+
 /**
  * Single Product Thumbnails
  */
@@ -10,7 +12,7 @@
 		height: 50px;
 		width:  50px;
 		border-radius: 50%;
-		border: $wc-single-product-gallery-trigger-b;
+		border: variables.$wc-single-product-gallery-trigger-b;
 		position: absolute;
 		top: 20px;
 		left: 20px;
@@ -19,9 +21,9 @@
 		font-size: 0;
 
 		&::before {
-			content: $wc-single-product-gallery-trigger-icon;
+			content: variables.$wc-single-product-gallery-trigger-icon;
 			@extend %icon-font-default;
-			font-size: $wc-single-product-gallery-trigger-fz;
+			font-size: variables.$wc-single-product-gallery-trigger-fz;
 			line-height:  50px;
 		}
 

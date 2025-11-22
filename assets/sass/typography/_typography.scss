@@ -1,5 +1,8 @@
+@use "sass:meta";
+@use "../mixins/mixins-master";
+
 html {
-	@include font-size(1);
+	@include mixins-master.font-size(1);
 }
 button,
 input,
@@ -7,5 +10,5 @@ select,
 textarea {
 }
 
-@import "headings";
-@import "copy";
+@include meta.load-css("headings");
+@include meta.load-css("copy");

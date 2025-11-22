@@ -1,38 +1,39 @@
-@import "variables";
-@import "breakpoints";
-@import "mixins";
+@use "sass:map";
+@use "variables";
+@use "breakpoints";
+@use "mixins";
 
 // Container widths
 .container {
-	@include make-container();
-	@include make-container-max-widths();
+	@include mixins.make-container();
+	@include mixins.make-container-max-widths();
 }
 
 
 // Fluid container
 .container-fluid {
-	@include make-container();
+	@include mixins.make-container();
 }
 
 // Row
 .row {
-	@include make-row();
+	@include mixins.make-row();
 }
 
 // Columns
-@include make-grid-columns();
+@include mixins.make-grid-columns();
 
 // Flex column reordering
-@each $breakpoint in map-keys($grid-breakpoints) {
-	@include media-breakpoint-up($breakpoint) {
+@each $breakpoint in map.keys(variables.$grid-breakpoints) {
+	@include breakpoints.media-breakpoint-up($breakpoint) {
 		.col-#{$breakpoint}-first { order: -1; }
 		.col-#{$breakpoint}-last  { order: 1; }
 	}
 }
 
 // Alignment for every column in row
-@each $breakpoint in map-keys($grid-breakpoints) {
-	@include media-breakpoint-up($breakpoint) {
+@each $breakpoint in map.keys(variables.$grid-breakpoints) {
+	@include breakpoints.media-breakpoint-up($breakpoint) {
 		.row-#{$breakpoint}-top    { align-items: flex-start; }
 		.row-#{$breakpoint}-center { align-items: center; }
 		.row-#{$breakpoint}-bottom { align-items: flex-end; }
@@ -40,8 +41,8 @@
 }
 
 // Alignment per column
-@each $breakpoint in map-keys($grid-breakpoints) {
-	@include media-breakpoint-up($breakpoint) {
+@each $breakpoint in map.keys(variables.$grid-breakpoints) {
+	@include breakpoints.media-breakpoint-up($breakpoint) {
 		.col-#{$breakpoint}-top    { align-self: flex-start; }
 		.col-#{$breakpoint}-center { align-self: center; }
 		.col-#{$breakpoint}-bottom { align-self: flex-end; }

@@ -1,14 +1,16 @@
+@use "../mixins/mixins-master";
+
 .wp-caption {
 	margin-bottom: 1.5em;
 	max-width: 100%;
 
 	img[class*="wp-image-"] {
-		@include center-block;
+		@include mixins-master.center-block;
 	}
 
 	.wp-caption-text {
 		margin: 0.8075em 0;
-		@include font-size(.75);
+		@include mixins-master.font-size(.75);
 	}
 }
 

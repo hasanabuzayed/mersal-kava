@@ -1,3 +1,5 @@
+@use "../mixins/mixins-master";
+
 ul, ol {
 	margin: 0 0 1.5em 1.5em;
 	padding-left:0;
@@ -28,7 +30,7 @@ dd {
 
 /* Inline list */
 .inline-list {
-	@include reset-list;
+	@include mixins-master.reset-list;
 	li {
 		display: inline-block;
 		vertical-align: top;

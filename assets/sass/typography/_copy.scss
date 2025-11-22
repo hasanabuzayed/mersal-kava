@@ -1,3 +1,5 @@
+@use "../mixins/mixins-master";
+
 p {
 	margin: 0 0 1em;
 }
@@ -7,9 +9,9 @@ dfn, cite, em, i {
 }
 
 blockquote {
-	@include font-size(1.25);
+	@include mixins-master.font-size(1.25);
 	cite {
-		@include font-size(0.875);
+		@include mixins-master.font-size(0.875);
 	}
 }
 
@@ -30,13 +32,13 @@ pre {
 	white-space: pre-wrap;
 	word-wrap: break-word;
 
-	@include font-size(1);
+	@include mixins-master.font-size(1);
 }
 
 code, kbd, tt, var {
 	font-family: $font__code;
 
-	@include font-size(0.9375);
+	@include mixins-master.font-size(0.9375);
 }
 
 code {

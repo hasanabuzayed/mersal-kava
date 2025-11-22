@@ -1,3 +1,5 @@
+@use "../mixins/variables";
+
 /**
  * Tag cloud widget
  */
@@ -9,11 +11,11 @@
 			font-size: 14px!important;
 			padding: 5px 12px;
 			margin-bottom: 5px;
-			border:  1px solid $wc-border-color;
+			border:  1px solid variables.$wc-border-color;
 			border-radius: 4px;
 			
 			&:hover{
-				background-color: $wc-border-color;
+				background-color: variables.$wc-border-color;
 			}
 		}
 	}

@@ -1,3 +1,6 @@
+@use "../../../../../../assets/sass/grid/breakpoints";
+@use "../mixins/variables";
+
 /**
  * My account page
  */
@@ -19,14 +22,14 @@
 
 			> * {
 				flex: 1 1 100%;
-				@include media-breakpoint-up(sm) {
+				@include breakpoints.media-breakpoint-up(sm) {
 					flex: 1 1 calc(50% - 15px);
 				}
 			}
 
 			.u-column2 {
 				padding-left: 0;
-				@include media-breakpoint-up(sm) {
+				@include breakpoints.media-breakpoint-up(sm) {
 					padding-left: 30px;
 				}
 			}
@@ -43,9 +46,9 @@
 
 		label:not(.woocommerce-form__label-for-checkbox) {
 			display: block;
-			font-size: $wc-label-fz;
-			line-height: $wc-label-lh;
-			margin: $wc-label-offset;
+			font-size: variables.$wc-label-fz;
+			line-height: variables.$wc-label-lh;
+			margin: variables.$wc-label-offset;
 		}
 
 		> .woocommerce-form-login {
@@ -63,16 +66,16 @@
 			width: 100%;
 			margin-bottom: 30px;
 
-			@include media-breakpoint-up(sm) {
+			@include breakpoints.media-breakpoint-up(sm) {
 				width: auto;
 				margin-bottom: 0;
 			}
 
-			@include media-breakpoint-up(md) {
+			@include breakpoints.media-breakpoint-up(md) {
 				width: 270px;
 			}
 
-			@each $name, $icon in $wc-my-account-navigation-icons {
+			@each $name, $icon in variables.$wc-my-account-navigation-icons {
 				ul li.woocommerce-MyAccount-navigation-link--#{$name} a::before {
 					content: $icon;
 				}
@@ -90,7 +93,7 @@
 					a {
 						padding: 13px 20px;
 						border-radius: 4px;
-						border: 1px solid $wc-border-color;
+						border: 1px solid variables.$wc-border-color;
 						display: flex;
 						align-items: center;
 
@@ -113,7 +116,7 @@
 			flex-grow: 1;
 			width: 100%;
 
-			@include media-breakpoint-up(sm) {
+			@include breakpoints.media-breakpoint-up(sm) {
 				padding-left: 30px;
 				flex-grow: 1;
 				width: calc(100% - 300px);
@@ -144,9 +147,9 @@
 			}
 
 			label {
-				font-size: $wc-label-fz;
-				line-height: $wc-label-lh;
-				margin: $wc-label-offset;
+				font-size: variables.$wc-label-fz;
+				line-height: variables.$wc-label-lh;
+				margin: variables.$wc-label-offset;
 				display: block;
 			}
 
@@ -176,7 +179,7 @@
 			table.woocommerce-orders-table,
 			table.shop_table.order_details {
 				width: 100%;
-				border-top: 1px solid $wc-border-color;
+				border-top: 1px solid variables.$wc-border-color;
 
 				tr {
 					th.woocommerce-orders-table__header-order-actions,
@@ -204,7 +207,7 @@
 					}
 
 					td, th {
-						border-bottom: 1px solid $wc-border-color;
+						border-bottom: 1px solid variables.$wc-border-color;
 						font-size: 14px;
 						padding: 3px 0;
 					}
@@ -248,7 +251,7 @@
 		table.woocommerce-orders-table,
 		table.shop_table.order_details {
 			width: 100%;
-			border-top: 1px solid $wc-border-color;
+			border-top: 1px solid variables.$wc-border-color;
 
 			tr {
 				th.woocommerce-orders-table__header-order-actions {
@@ -268,7 +271,7 @@
 				}
 
 				td, th {
-					border-bottom: 1px solid $wc-border-color;
+					border-bottom: 1px solid variables.$wc-border-color;
 					font-size: 14px;
 					padding: 3px 0;
 				}

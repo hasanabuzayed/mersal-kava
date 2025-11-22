@@ -1,3 +1,6 @@
+@use "../../grid/breakpoints";
+@use "../../mixins/mixins-master";
+
 .widget {
 	&-title {
 		text-transform: uppercase;
@@ -12,7 +15,7 @@
 	.sidebar &,
 	.footer-area & {
 		margin-top: 1.5em;
-		@include media-breakpoint-up(md) {
+		@include breakpoints.media-breakpoint-up(md) {
 			margin-top: 3em;
 		}
 	}
@@ -44,7 +47,7 @@
 			&:before {
 				content: '\f133';
 				margin-right: 5px;
-				@include font-awesome-icon;
+				@include mixins-master.font-awesome-icon;
 			}
 		}
 	}
@@ -53,8 +56,8 @@
 			margin-bottom: 20px;
 			&:before {
 				content: '\f075';
-				@include font-awesome-icon;
-				@include font-size(14/16);
+				@include mixins-master.font-awesome-icon;
+				@include mixins-master.font-size(14/16);
 				margin-right: 5px;
 			}
 			.comment-author-link {
@@ -112,7 +115,7 @@
 		}
 		caption {
 			padding: 20px 0;
-			@include font-size(20/16);
+			@include mixins-master.font-size(20/16);
 			text-align: center;
 			font-weight: 400;
 		}

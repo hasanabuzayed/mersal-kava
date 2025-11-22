@@ -1,3 +1,5 @@
+@use "../../grid/breakpoints";
+
 .sticky-label {
 	display: inline-block;
 	vertical-align: top;
@@ -10,7 +12,7 @@
 	line-height: 1.6;
 	@include border-radius;
 
-	@include media-breakpoint-up(xl) {
+	@include breakpoints.media-breakpoint-up(xl) {
 		font-size: 14px;
 		padding: 6px 10px 3px;
 	}
@@ -23,7 +25,7 @@
 	.posts-list--masonry &,
 	.posts-list--vertical-justify:not(.list-style-v10) & {
 		padding: 4px 8px 1px;
-		@include media-breakpoint-up(xl) {
+		@include breakpoints.media-breakpoint-up(xl) {
 			margin-top: 1px;
 			margin-bottom: 1px;
 		}

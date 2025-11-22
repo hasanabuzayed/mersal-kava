@@ -1,3 +1,5 @@
+@use "../mixins/mixins-master";
+
 .social-list {
 	.menu-item {
 		> a {
@@ -66,8 +68,8 @@
 			&[href*="vk.com"]::before             { content: '\f189'; }
 			&[href*="ok.ru"]::before              { content: '\f263'; }
 			&::before {
-				@include font-awesome-icon();
-				@include font-size(12/16);
+				@include mixins-master.font-awesome-icon();
+				@include mixins-master.font-size(12/16);
 				display: block;
 				width: 20px;
 				height: 20px;

@@ -2,28 +2,29 @@
  * WooCommerce Widgets
  */
 
-@import "price-filter";
-@import "rating-filter";
-@import "attributes-filter";
-@import "active-filters";
-@import "top-rated-products";
-@import "recent-reviews";
-@import "product-categories";
-@import "products";
-@import "recently-viewed-products";
-@import "product-search";
-@import "tag-cloud";
-@import "cart";
+@use "price-filter";
+@use "rating-filter";
+@use "attributes-filter";
+@use "active-filters";
+@use "top-rated-products";
+@use "recent-reviews";
+@use "product-categories";
+@use "products";
+@use "recently-viewed-products";
+@use "product-search";
+@use "tag-cloud";
+@use "cart";
+@use "../mixins/variables";
 
 .woocommerce.widget{
 	padding: 25px 30px 30px 30px;
-	border: $wc-border;
-	border-radius: $wc-border-radius;
+	border: variables.$wc-border;
+	border-radius: variables.$wc-border-radius;
 	
 	.widget-title {
-		font-size: $wc-widgets-title-fz;
-		line-height: $wc-widgets-title-lh;
-		margin: $wc-widgets-title-offset;
+		font-size: variables.$wc-widgets-title-fz;
+		line-height: variables.$wc-widgets-title-lh;
+		margin: variables.$wc-widgets-title-offset;
 	}
 	
 	+ .widget {
@@ -44,12 +45,12 @@
 		
 		img {
 			float: left;
-			max-width: $wc-product-list-widget-img-width;
+			max-width: variables.$wc-product-list-widget-img-width;
 			margin: 0 20px 10px 0;
 		}
 		
 		.amount {
-			font-size: $wc-product-list-widget-price-fz;
+			font-size: variables.$wc-product-list-widget-price-fz;
 		}
 		
 		ins {
@@ -58,11 +59,11 @@
 		}
 		
 		del{
-			color: $wc-sale-price-color;
+			color: variables.$wc-sale-price-color;
 		}
 		
 		+ li {
-			margin-top: $wc-product-list-widget-items-offset;
+			margin-top: variables.$wc-product-list-widget-items-offset;
 		}
 	}
 }

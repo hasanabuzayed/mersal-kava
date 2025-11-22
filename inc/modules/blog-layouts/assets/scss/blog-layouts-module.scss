@@ -1,15 +1,15 @@
-@import "../../../../../assets/sass/variables-site/variables-site"; //main theme variables
-@import "../../../../../assets/sass/grid/variables";                //main theme grid variables
-@import "../../../../../assets/sass/grid/breakpoints";              //main theme grid breakpoints
-@import "../../../../../assets/sass/mixins/mixins-master";          //main theme mixins
+@use "../../../../../assets/sass/variables-site/variables-site"; //main theme variables
+@use "../../../../../assets/sass/grid/variables";                //main theme grid variables
+@use "../../../../../assets/sass/grid/breakpoints";              //main theme grid breakpoints
+@use "../../../../../assets/sass/mixins/mixins-master";          //main theme mixins
 
 
 /*--------------------------------------------------------------
 ## Blog layouts
 --------------------------------------------------------------*/
 
-@import "blog-layouts/list";
-@import "blog-layouts/creative";
-@import "blog-layouts/grid";
-@import "blog-layouts/vertical-justify";
-@import "blog-layouts/masonry";
+@use "blog-layouts/list";
+@use "blog-layouts/creative";
+@use "blog-layouts/grid";
+@use "blog-layouts/vertical-justify";
+@use "blog-layouts/masonry";

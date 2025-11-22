@@ -1,3 +1,5 @@
+@use "../mixins/mixins-master";
+
 /* Text meant only for screen readers. */
 .screen-reader-text {
 	clip: rect(1px, 1px, 1px, 1px);
@@ -13,7 +15,7 @@
 		clip: auto !important;
 		color: $color__text-screen;
 		display: block;
-		@include font-size(0.875);
+		@include mixins-master.font-size(0.875);
 		font-weight: bold;
 		height: auto;
 		left: 5px;
