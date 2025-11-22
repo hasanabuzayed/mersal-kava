@@ -150,6 +150,40 @@ See `PHP_COMPREHENSIVE_UPDATE_COMPLETE.md` for full details.
 
 See `WP_6.8_COMPATIBILITY_SUMMARY.md` for complete summary and `WP_6.8_PHASE_4_TESTING_CHECKLIST.md` for testing procedures.
 
+### 6. Node.js 24 Upgrade 📋
+
+**Status:** Planning phase - see `NODE_JS_24_UPGRADE_PLAN.md`
+
+**Current Requirements:**
+- Node.js >=14.0.0
+- npm >=6.0.0
+
+**Planned Upgrade:**
+- Node.js >=24.0.0 (LTS)
+- npm >=11.0.0
+
+**Key Features:**
+- V8 Engine 13.6 with new JavaScript features
+- npm 11 with faster installs and improved security
+- Enhanced AsyncLocalStorage performance
+- Global URLPattern API
+- Improved permission model
+
+**Compatibility Status:**
+- ✅ All build dependencies compatible with Node.js 24
+- ✅ ES modules already in use (gulpfile.mjs)
+- ✅ Modern Gulp 5.x plugins
+- ✅ No deprecated APIs in use
+
+**Next Steps:**
+- Phase 1: Pre-Upgrade Assessment
+- Phase 2: Environment Setup
+- Phase 3: Build System Testing
+- Phase 4: Integration Testing
+- Phase 5: Documentation & Cleanup
+
+See `NODE_JS_24_UPGRADE_PLAN.md` for complete upgrade plan and checklist.
+
 ## Installation & Setup
 
 ### 1. Install Dependencies
@@ -196,7 +230,7 @@ gulp admin_css
 
 1. **Font Awesome Icons**: All `fa fa-*` classes must be updated to `fa-solid fa-*`, `fa-regular fa-*`, or `fa-brands fa-*`
 2. **Gulp 4.x**: Build scripts now use series/parallel syntax (already updated)
-3. **Node.js**: Requires Node.js 14+ (specified in package.json)
+3. **Node.js**: Currently requires Node.js 14+ (specified in package.json). Node.js 24 upgrade planned - see `NODE_JS_24_UPGRADE_PLAN.md`
 
 ## Browser Support
 
