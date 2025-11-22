@@ -186,6 +186,43 @@ See `WP_6.8_COMPATIBILITY_SUMMARY.md` for complete summary and `WP_6.8_PHASE_4_T
 
 See `NODE_JS_24_UPGRADE_PLAN.md` for complete upgrade details and progress reports.
 
+### 7. Sass Migration 📋
+
+**Status:** Planning phase - see `SASS_MIGRATION_PLAN.md`
+
+**Current State:**
+- Using `@import` (deprecated, will be removed in Sass 3.0)
+- Using `/` division (deprecated, will be removed in Sass 2.0)
+- Using global built-in functions (deprecated, will be removed in Sass 3.0)
+- Using color functions `darken()`, `lighten()` (deprecated)
+
+**Migration Target:**
+- Migrate to `@use` and `@forward` module system
+- Migrate to `math.div()` for division
+- Migrate to module-based functions
+- Migrate to `color.scale()` and `color.adjust()`
+
+**Key Benefits:**
+- Eliminate deprecation warnings
+- Improve performance
+- Better namespacing and organization
+- Future-proof for Sass 3.0
+
+**Migration Tool:**
+- sass-migrator (official Sass migration tool)
+
+**Scope:**
+- ~115 SCSS files
+- 5 main entry points
+- Complex nested import structure
+
+**Status:**
+- 📋 Planning phase
+- ✅ Migration plan created
+- ⏳ Ready to begin Phase 1
+
+See `SASS_MIGRATION_PLAN.md` for complete migration plan and checklist.
+
 ## Installation & Setup
 
 ### Requirements
