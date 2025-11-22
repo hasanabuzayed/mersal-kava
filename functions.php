@@ -389,6 +389,14 @@ if ( ! class_exists( 'Kava_Theme_Setup' ) ) {
 				'4.7.0'
 			);
 			*/
+			
+			// Register Montserrat font from Google Fonts
+			wp_register_style(
+				'montserrat-font',
+				'https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap',
+				[],
+				null
+			);
 		}
 
 		/**
@@ -446,6 +454,7 @@ if ( ! class_exists( 'Kava_Theme_Setup' ) ) {
 			 */
 			$styles_depends = apply_filters( 'kava-theme/assets-depends/styles', [
 				'font-awesome',
+				'montserrat-font',
 			] );
 
 			wp_enqueue_style(

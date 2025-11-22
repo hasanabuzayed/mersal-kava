@@ -22,14 +22,14 @@ select,
 textarea {
 	width: 100%;
 	box-sizing: border-box;
-	padding: structure.$input__indents;
-	border: 1px solid colors.$color__border-input;
-	background-color: colors.$color__background-input;
+	padding: var(--kava-input-indents, structure.$input__indents);
+	border: 1px solid var(--kava-color-border-input, colors.$color__border-input);
+	background-color: var(--kava-color-background-input, colors.$color__background-input);
 
 	@include border-radius.border-radius;
 	&:focus {
 		outline: none;
-		box-shadow: structure.$box__shadow;
+		box-shadow: var(--kava-box-shadow, structure.$box__shadow);
 	}
 }
 
@@ -48,7 +48,7 @@ input[type='reset'] {
 }
 
 select {
-	border: 1px solid colors.$color__border-input;
+	border: 1px solid var(--kava-color-border-input, colors.$color__border-input);
 }
 
 textarea {

@@ -16,7 +16,7 @@ input[type='submit'] {
 	@include mixins-master.btn;
 
 	&.invert-button {
-		border: 1px solid colors.$color__white;
+		border: 1px solid var(--kava-color-white, colors.$color__white);
 		background: none;
 	}
 }

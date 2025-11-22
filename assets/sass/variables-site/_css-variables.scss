@@ -1,0 +1,90 @@
+/**
+ * CSS Custom Properties (CSS Variables)
+ * 
+ * These CSS variables are generated from Sass variables to enable
+ * runtime customization without rebuilds. They work alongside
+ * Sass variables for maximum flexibility.
+ * 
+ * Colors use OKLCH color space for better perceptual uniformity
+ * and consistent color manipulation.
+ * 
+ * Usage:
+ *   color: var(--kava-color-primary, oklch(50% 0.1 240));
+ *   margin: var(--kava-spacing-base, 1rem);
+ * 
+ * Note: OKLCH colors require fallbacks for older browsers:
+ *   color: #hex; // Fallback
+ *   color: oklch(...); // Modern browsers
+ */
+
+:root {
+	
+	/*--------------------------------------------------------------
+	# Colors
+	--------------------------------------------------------------*/
+	
+	/* Base Colors */
+	--kava-color-white: oklch(100% 0 0);
+	--kava-color-light: oklch(96% 0.005 240);
+	--kava-color-lightblue: oklch(96.5% 0.01 240);
+	--kava-color-dark: oklch(0% 0 0);
+	--kava-color-darkgray: oklch(18% 0 0);
+	--kava-color-darkgray2: oklch(28% 0 0);
+	
+	/* Background Colors */
+	--kava-color-bg-preloader-cover: oklch(100% 0 0);
+	--kava-color-background-screen: oklch(96% 0 0);
+	--kava-color-background-hr: oklch(94% 0 240);
+	--kava-color-background-input: oklch(100% 0 0);
+	--kava-color-background-pre: oklch(94.5% 0 0);
+	
+	/* Text Colors */
+	--kava-color-text-screen: oklch(52% 0.12 220);
+	--kava-color-text-input: oklch(50% 0 0);
+	
+	/* Border Colors */
+	--kava-color-border-button: oklch(83% 0 0);
+	--kava-color-border-input: oklch(94% 0 240);
+	--kava-color-border-abbr: oklch(50% 0 0);
+	--kava-color-border-table: oklch(94% 0 240);
+	--kava-color-border-pre: oklch(86% 0 0); /* color.adjust(#eee, $lightness: -10%) */
+	
+	/*--------------------------------------------------------------
+	# Structure
+	--------------------------------------------------------------*/
+	
+	/* Border & Shadow */
+	--kava-border-radius: 4px;
+	--kava-box-shadow: 0 5px 32px rgba(103, 122, 141, 0.17);
+	
+	/* Layout Sizes */
+	--kava-size-site-main: 100%;
+	--kava-size-site-sidebar: 25%;
+	
+	/* Input Spacing */
+	--kava-input-indents: 8px 12px;
+	
+	/* Button Spacing */
+	--kava-button-indents: 12px 20px;
+	--kava-button-border-radius: 4px;
+	--kava-button-border: none;
+	--kava-button-box-shadow: none;
+	
+	/* Media */
+	--kava-embed-ratio: 62.33%;
+	
+	/*--------------------------------------------------------------
+	# Typography
+	--------------------------------------------------------------*/
+	
+	/* Font Families */
+	--kava-font-main: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	--kava-font-code: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
+	--kava-font-pre: "Courier 10 Pitch", Courier, monospace;
+	
+	/* Line Heights */
+	--kava-line-height-body: 1.5;
+	--kava-line-height-pre: 1.6;
+	
+}
+
