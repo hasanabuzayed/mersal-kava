@@ -8,6 +8,8 @@ import plumber from 'gulp-plumber';
 import rtlcss from 'gulp-rtlcss';
 import livereload from 'gulp-livereload';
 import checktextdomain from 'gulp-checktextdomain';
+import cleanCSS from 'gulp-clean-css';
+import sourcemaps from 'gulp-sourcemaps';
 
 const sassCompiler = sassPlugin(sass);
 
@@ -18,13 +20,20 @@ let sass_settings = {
 	indentWidth: 1
 };
 
+// Environment detection
+const isProduction = process.env.NODE_ENV === 'production';
+
 function CSS_Task( args ) {
 
 	if ( undefined !== args['sass_settings'] && 'object' === typeof (args['sass_settings']) ) {
 		sass_settings = Object.assign( {}, sass_settings, args['sass_settings'] );
 	}
 
-	return gulp.src( args['src'] )
+	// Determine if we should minify based on args or environment
+	const shouldMinify = args['minify'] !== undefined ? args['minify'] : isProduction;
+	const shouldSourcemap = args['sourcemap'] !== undefined ? args['sourcemap'] : !isProduction;
+
+	let stream = gulp.src( args['src'] )
 		.pipe(
 			plumber( {
 				errorHandler: function( error ) {
@@ -33,15 +42,39 @@ function CSS_Task( args ) {
 					this.emit( 'end' );
 				}
 			} )
-		)
+		);
+
+	// Initialize source maps if needed
+	if ( shouldSourcemap ) {
+		stream = stream.pipe( sourcemaps.init() );
+	}
+
+	stream = stream
 		.pipe( sassCompiler( sass_settings ).on( 'error', sassCompiler.logError ) )
 		.pipe( autoprefixer( {
 			cascade: false
-		} ) )
+		} ) );
+
+	// Minify CSS if needed (only if not already compressed by Sass)
+	if ( shouldMinify && sass_settings.outputStyle !== 'compressed' ) {
+		stream = stream.pipe( cleanCSS( {
+			compatibility: 'ie8',
+			level: 2
+		} ) );
+	}
+
+	// Write source maps if needed
+	if ( shouldSourcemap ) {
+		stream = stream.pipe( sourcemaps.write( '.' ) );
+	}
+
+	stream = stream
 		.pipe( rename( args['output_file'] ) )
 		.pipe( gulp.dest( args['output_dir'] ) )
 		.pipe( notify( 'Compile ' + args['output_file'] + '. Done!' ) )
 		.pipe( livereload() );
+
+	return stream;
 }
 
 function RTL_CSS_Task( args ) {
@@ -50,7 +83,11 @@ function RTL_CSS_Task( args ) {
 		sass_settings = Object.assign( {}, sass_settings, args['sass_settings'] );
 	}
 
-	return gulp.src( args['src'] )
+	// Determine if we should minify based on args or environment
+	const shouldMinify = args['minify'] !== undefined ? args['minify'] : isProduction;
+	const shouldSourcemap = args['sourcemap'] !== undefined ? args['sourcemap'] : !isProduction;
+
+	let stream = gulp.src( args['src'] )
 		.pipe(
 			plumber( {
 				errorHandler: function( error ) {
@@ -59,23 +96,59 @@ function RTL_CSS_Task( args ) {
 					this.emit( 'end' );
 				}
 			} )
-		)
+		);
+
+	// Initialize source maps if needed
+	if ( shouldSourcemap ) {
+		stream = stream.pipe( sourcemaps.init() );
+	}
+
+	stream = stream
 		.pipe( sassCompiler( sass_settings ).on( 'error', sassCompiler.logError ) )
 		.pipe( autoprefixer( {
 			cascade: false
 		} ) )
-		.pipe( rtlcss() )
+		.pipe( rtlcss() );
+
+	// Minify CSS if needed (only if not already compressed by Sass)
+	if ( shouldMinify && sass_settings.outputStyle !== 'compressed' ) {
+		stream = stream.pipe( cleanCSS( {
+			compatibility: 'ie8',
+			level: 2
+		} ) );
+	}
+
+	// Write source maps if needed
+	if ( shouldSourcemap ) {
+		stream = stream.pipe( sourcemaps.write( '.' ) );
+	}
+
+	stream = stream
 		.pipe( rename( args['output_file'] ) )
 		.pipe( gulp.dest( args['output_dir'] ) )
 		.pipe( notify( 'Compile ' + args['output_file'] + '. Done!' ) )
 		.pipe( livereload() );
+
+	return stream;
 }
 
 gulp.task( 'css', function() {
 	return CSS_Task( {
 		src:         './assets/sass/style.scss',
 		output_dir:  './',
-		output_file: 'style.css'
+		output_file: 'style.css',
+		minify:      false,
+		sourcemap:   true
+	} );
+} );
+
+gulp.task( 'css_min', function() {
+	return CSS_Task( {
+		src:         './assets/sass/style.scss',
+		output_dir:  './',
+		output_file: 'style.css',
+		minify:      true,
+		sourcemap:   false
 	} );
 } );
 
@@ -83,7 +156,19 @@ gulp.task( 'css_theme', function() {
 	return CSS_Task( {
 		src:         './assets/sass/theme.scss',
 		output_dir:  './',
-		output_file: 'theme.css'
+		output_file: 'theme.css',
+		minify:      false,
+		sourcemap:   true
+	} );
+} );
+
+gulp.task( 'css_theme_min', function() {
+	return CSS_Task( {
+		src:         './assets/sass/theme.scss',
+		output_dir:  './',
+		output_file: 'theme.css',
+		minify:      true,
+		sourcemap:   false
 	} );
 } );
 
@@ -93,8 +178,10 @@ gulp.task( 'blog_layouts_module', function() {
 		output_dir:  './inc/modules/blog-layouts/assets/css/',
 		output_file: 'blog-layouts-module.css',
 		sass_settings: {
-			outputStyle: 'compressed'
-		}
+			outputStyle: isProduction ? 'compressed' : 'expanded'
+		},
+		minify:      false, // Already compressed by Sass if production
+		sourcemap:   !isProduction
 	} );
 } );
 
@@ -104,8 +191,10 @@ gulp.task( 'woo_module', function() {
 		output_dir:  './inc/modules/woo/assets/css/',
 		output_file: 'woo-module.css',
 		sass_settings: {
-			outputStyle: 'compressed'
-		}
+			outputStyle: isProduction ? 'compressed' : 'expanded'
+		},
+		minify:      false, // Already compressed by Sass if production
+		sourcemap:   !isProduction
 	} );
 } );
 
@@ -115,8 +204,10 @@ gulp.task( 'woo_module_rtl', function() {
 		output_dir:  './inc/modules/woo/assets/css/',
 		output_file: 'woo-module-rtl.css',
 		sass_settings: {
-			outputStyle: 'compressed'
-		}
+			outputStyle: isProduction ? 'compressed' : 'expanded'
+		},
+		minify:      false, // Already compressed by Sass if production
+		sourcemap:   !isProduction
 	} );
 } );
 
@@ -126,8 +217,10 @@ gulp.task( 'admin_css', function() {
 		output_dir:  './assets/css/',
 		output_file: 'admin.css',
 		sass_settings: {
-			outputStyle: 'compressed'
-		}
+			outputStyle: isProduction ? 'compressed' : 'expanded'
+		},
+		minify:      false, // Already compressed by Sass if production
+		sourcemap:   !isProduction
 	} );
 } );
 
@@ -141,7 +234,17 @@ gulp.task( 'watch', function() {
 
 } );
 
-// default
+// Production build task (minified)
+gulp.task( 'build', gulp.parallel(
+	'css_min',
+	'css_theme_min',
+	'blog_layouts_module',
+	'woo_module',
+	'woo_module_rtl',
+	'admin_css'
+) );
+
+// default (development with watch)
 gulp.task( 'default', gulp.series(
 	gulp.parallel(
 		'css',
