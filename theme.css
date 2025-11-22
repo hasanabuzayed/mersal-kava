@@ -1668,6 +1668,12 @@ body:not(.sidebar_enabled) .post-default {
   margin-bottom: 26px;
 }
 
+.post_format-post-format-gallery {
+  --swiper-navigation-color: currentColor;
+  --swiper-navigation-size: 18px;
+  --swiper-theme-color: currentColor;
+  --swiper-pagination-color: currentColor;
+}
 .post_format-post-format-gallery .post-thumbnail {
   display: block;
   margin-bottom: 26px;
