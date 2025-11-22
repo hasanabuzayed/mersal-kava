@@ -1,3 +1,5 @@
+@use "sass:math";
+
 @use "../../../../../../assets/sass/grid/breakpoints";
 @use "../../../../../../assets/sass/grid/variables";
 @use "../../../../../../assets/sass/mixins/border-radius";
@@ -21,15 +23,15 @@ grid.$color__nothumb: colors.$color__lightblue;
 	/* vertical-justify list */
 	&--vertical-justify {
 		display: flex;
-		margin-right: -(variables.$grid-gutter-width) / 2;
-		margin-left: -(variables.$grid-gutter-width) / 2;
+		margin-right: -(variables.$grid-gutter-width) * 0.5;
+		margin-left: -(variables.$grid-gutter-width) * 0.5;
 		flex-flow: row wrap;
 		>.post {
 			flex: 1 0;
 			flex-basis: calc(100%/3 - #{variables.$grid-gutter-width});
 			max-width: calc(100%/3 - #{variables.$grid-gutter-width});
-			margin-right: variables.$grid-gutter-width / 2;
-			margin-left: variables.$grid-gutter-width / 2;
+			margin-right: variables.$grid-gutter-width * 0.5;
+			margin-left: variables.$grid-gutter-width * 0.5;
 			&:nth-child(7n + 2),
 			&:nth-child(7n + 3) {
 				flex: 1 0;
@@ -79,8 +81,8 @@ grid.$color__nothumb: colors.$color__lightblue;
 				flex: 1 0;
 				flex-basis: calc(100%/2);
 				max-width: calc(100%/2);
-				margin-right: variables.$grid-gutter-width / 2;
-				margin-left: variables.$grid-gutter-width / 2;
+				margin-right: variables.$grid-gutter-width * 0.5;
+				margin-left: variables.$grid-gutter-width * 0.5;
 				&:nth-child(7n + 2),
 				&:nth-child(7n + 3) {
 					flex: 1 0;
@@ -106,8 +108,8 @@ grid.$color__nothumb: colors.$color__lightblue;
 			flex: 1 0;
 			flex-basis: calc(100%/4 - #{variables.$grid-gutter-width});
 			max-width: calc(100%/4 - #{variables.$grid-gutter-width});
-			margin-right: variables.$grid-gutter-width / 2;
-			margin-left: variables.$grid-gutter-width / 2;
+			margin-right: variables.$grid-gutter-width * 0.5;
+			margin-left: variables.$grid-gutter-width * 0.5;
 			&:nth-child(7n + 3),
 			&:nth-child(7n + 4),
 			&:nth-child(7n + 8) {
@@ -119,8 +121,8 @@ grid.$color__nothumb: colors.$color__lightblue;
 				flex: 1 0;
 				flex-basis: calc(100%/2 - #{variables.$grid-gutter-width});
 				max-width: calc(100%/2 - #{variables.$grid-gutter-width});
-				margin-right: variables.$grid-gutter-width / 2;
-				margin-left: variables.$grid-gutter-width / 2;
+				margin-right: variables.$grid-gutter-width * 0.5;
+				margin-left: variables.$grid-gutter-width * 0.5;
 				&:nth-child(7n + 3),
 				&:nth-child(7n + 4),
 				&:nth-child(7n + 8) {
@@ -133,8 +135,8 @@ grid.$color__nothumb: colors.$color__lightblue;
 				flex: 1 0;
 				flex-basis: calc(100% - #{variables.$grid-gutter-width});
 				max-width: calc(100% - #{variables.$grid-gutter-width});
-				margin-right: variables.$grid-gutter-width / 2;
-				margin-left: variables.$grid-gutter-width / 2;
+				margin-right: variables.$grid-gutter-width * 0.5;
+				margin-left: variables.$grid-gutter-width * 0.5;
 				&:nth-child(7n + 3),
 				&:nth-child(7n + 4),
 				&:nth-child(7n + 8) {
@@ -152,7 +154,7 @@ grid.$color__nothumb: colors.$color__lightblue;
 			.comments-link {
 				padding: 10px 12px 9px;
 				@include border-radius.border-radius();
-				@include mixins-master.font-size(11/16);
+				@include mixins-master.font-size(math.div(11, 16));
 				background-color: colors.$color__light;
 				.list-style-v3 & {
 					background-color: transparent;
@@ -160,7 +162,7 @@ grid.$color__nothumb: colors.$color__lightblue;
 				}
 				&:before {
 					@include mixins-master.font-awesome-icon;
-					@include mixins-master.font-size(14/16);
+					@include mixins-master.font-size(math.div(14, 16));
 					content: '\f075';
 					margin-right: 4px;
 				}
@@ -180,7 +182,7 @@ grid.$color__nothumb: colors.$color__lightblue;
 					margin: 0 0 10px;
 				}
 				&-meta {
-					@include mixins-master.font-size(14/16);
+					@include mixins-master.font-size(math.div(14, 16));
 				}
 				&-content {
 					margin-bottom: 5px;
@@ -358,8 +360,8 @@ grid.$color__nothumb: colors.$color__lightblue;
 	### V4
 	---------------------*/
 	&.posts-list--vertical-justify.list-style-v4 {
-		margin-left: variables.$grid-gutter-width/2;
-		margin-right: variables.$grid-gutter-width/2;
+		margin-left: variables.$grid-gutter-width*0.5;
+		margin-right: variables.$grid-gutter-width*0.5;
 		position: relative;
 		.posts-list__item.justify-item {
 			&:not(.has-post-thumbnail) .justify-item-inner {
@@ -497,8 +499,8 @@ grid.$color__nothumb: colors.$color__lightblue;
 	### V5
 	---------------------*/
 	&.posts-list--vertical-justify.list-style-v5 {
-		margin-left: variables.$grid-gutter-width/2;
-		margin-right: variables.$grid-gutter-width/2;
+		margin-left: variables.$grid-gutter-width*0.5;
+		margin-right: variables.$grid-gutter-width*0.5;
 		position: relative;
 		.posts-list__item.justify-item {
 			&:not(.has-post-thumbnail) .justify-item-inner {
@@ -971,8 +973,8 @@ grid.$color__nothumb: colors.$color__lightblue;
 	### V9Styles
 	---------------------*/
 	&.posts-list--vertical-justify.list-style-v9 {
-		margin-left: variables.$grid-gutter-width/2;
-		margin-right: variables.$grid-gutter-width/2;
+		margin-left: variables.$grid-gutter-width*0.5;
+		margin-right: variables.$grid-gutter-width*0.5;
 		position: relative;
 		.posts-list__item.justify-item {
 			&:not(.has-post-thumbnail) .justify-item-inner {
@@ -1102,8 +1104,8 @@ grid.$color__nothumb: colors.$color__lightblue;
 	### V10Styles
 	---------------------*/
 	&.posts-list--vertical-justify.list-style-v10 {
-		margin-left: variables.$grid-gutter-width/2;
-		margin-right: variables.$grid-gutter-width/2;
+		margin-left: variables.$grid-gutter-width*0.5;
+		margin-right: variables.$grid-gutter-width*0.5;
 		position: relative;
 		.justify-item__thumbnail {
 			position: absolute;
@@ -1173,7 +1175,7 @@ grid.$color__nothumb: colors.$color__lightblue;
 					border-radius: 0;
 					padding: 0 8px;
 					background-color: transparent;
-					@include mixins-master.font-size(14/16);
+					@include mixins-master.font-size(math.div(14, 16));
 					&:before {
 						display: none;
 					}

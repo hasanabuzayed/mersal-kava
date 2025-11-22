@@ -7,8 +7,8 @@
 @mixin make-container($gutter: variables.$grid-gutter-width) {
 	margin-left: auto;
 	margin-right: auto;
-	padding-left:  ($gutter / 2);
-	padding-right: ($gutter / 2);
+	padding-left:  ($gutter * 0.5);
+	padding-right: ($gutter * 0.5);
 }
 
 // For each breakpoint, define the maximum width of the container in a media query
@@ -23,37 +23,37 @@
 @mixin make-row($gutter: variables.$grid-gutter-width) {
 	display: flex;
 	flex-wrap: wrap;
-	margin-left:  ($gutter / -2);
-	margin-right: ($gutter / -2);
+	margin-left:  math.div($gutter, -2);
+	margin-right: math.div($gutter, -2);
 }
 
 @mixin make-col($gutter: variables.$grid-gutter-width) {
 	position: relative;
 	min-height: 1px;
-	padding-left:  ($gutter / 2);
-	padding-right: ($gutter / 2);
+	padding-left:  ($gutter * 0.5);
+	padding-right: ($gutter * 0.5);
 }
 
 @mixin make-col-span($size, $columns: variables.$grid-columns) {
-	flex: 0 0 math.percentage($size / $columns);
-	max-width: math.percentage($size / $columns);
+	flex: 0 0 math.percentage(math.div($size, $columns));
+	max-width: math.percentage(math.div($size, $columns));
 }
 
 @mixin make-col-offset($size, $columns: variables.$grid-columns) {
 	@if variables.$need-offset {
-		margin-left: math.percentage($size / $columns);
+		margin-left: math.percentage(math.div($size, $columns));
 	}
 }
 
 @mixin make-col-push($size, $columns: variables.$grid-columns) {
 	@if variables.$need-push {
-		left: if($size > 0, math.percentage($size / $columns), auto);
+		left: if($size > 0, math.percentage(math.div($size, $columns)), auto);
 	}
 }
 
 @mixin make-col-pull($size, $columns: variables.$grid-columns) {
 	@if variables.$need-pull {
-		right: if($size > 0, math.percentage($size / $columns), auto);
+		right: if($size > 0, math.percentage(math.div($size, $columns)), auto);
 	}
 }
 
@@ -75,8 +75,8 @@
 		// Prevent columns from collapsing when empty
 		min-height: 1px;
 		// Inner gutter via padding
-		padding-left: ($gutter / 2);
-		padding-right: ($gutter / 2);
+		padding-left: ($gutter * 0.5);
+		padding-right: ($gutter * 0.5);
 	}
 	@each $breakpoint in map.keys($breakpoints) {
 		@for $i from 1 through $columns {
