@@ -1,3 +1,4 @@
+@use "sass:math";
 @use "../../../../../../assets/sass/grid/breakpoints";
 @use "../../../../../../assets/sass/grid/variables";
 @use "../../../../../../assets/sass/mixins/border-radius";
@@ -82,7 +83,7 @@ grid.$color__nothumb: colors.$color__lightblue;
 		.comments-link {
 			padding: 10px 12px 9px;
 			@include border-radius.border-radius();
-			@include mixins-master.font-size(11/16);
+			@include mixins-master.font-size(math.div(11, 16));
 			background-color: colors.$color__light;
 			.list-style-v3 & {
 				background-color: transparent;
@@ -90,7 +91,7 @@ grid.$color__nothumb: colors.$color__lightblue;
 			}
 			&:before {
 				@include mixins-master.font-awesome-icon;
-				@include mixins-master.font-size(14/16);
+				@include mixins-master.font-size(math.div(14, 16));
 				content: '\f075';
 				margin-right: 4px;
 			}
@@ -111,7 +112,7 @@ grid.$color__nothumb: colors.$color__lightblue;
 				margin: 0 0 10px;
 			}
 			&-meta {
-				@include mixins-master.font-size(14/16);
+				@include mixins-master.font-size(math.div(14, 16));
 			}
 			&-content {
 				margin-bottom: 5px;
@@ -273,8 +274,8 @@ grid.$color__nothumb: colors.$color__lightblue;
 		margin-left: variables.$grid-gutter-width;
 		margin-right: variables.$grid-gutter-width;
 		@include breakpoints.media-breakpoint-down(sm) {
-			margin-left: variables.$grid-gutter-width/2;
-			margin-right: variables.$grid-gutter-width/2;
+			margin-left: variables.$grid-gutter-width * 0.5;
+			margin-right: variables.$grid-gutter-width * 0.5;
 		}
 	}
 	/*-------------------

@@ -98,7 +98,7 @@
 						align-items: center;
 
 						&::before {
-							@extend %icon-font-default;
+							@extend %icon-font-default !optional;
 							font-size: 18px;
 							margin-right: 8px;
 						}

@@ -1,17 +1,19 @@
+@use "sass:math";
 @use "../grid/variables";
 @use "../mixins/mixins-master";
+@use "../mixins/border-radius";
 
 .gallery {
-	@include mixins-master.grid-indent(variables.$grid-gutter-width/2);
+	@include mixins-master.grid-indent(variables.$grid-gutter-width * 0.5);
 	&-item {
-		margin-top: variables.$grid-gutter-width/2;
-		margin-bottom: variables.$grid-gutter-width/2;
+		margin-top: variables.$grid-gutter-width * 0.5;
+		margin-bottom: variables.$grid-gutter-width * 0.5;
 	}
 	img {
 		display: block;
 		width: 100%;
 		height: auto;
-		@include border-radius();
+		@include border-radius.border-radius();
 	}
 }
 

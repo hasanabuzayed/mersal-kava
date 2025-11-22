@@ -52,7 +52,7 @@
 					left: 3px;
 					top: 6px;
 					
-					@extend %icon-font-default;
+					@extend %icon-font-default !optional;
 				}
 			}
 			

@@ -1,5 +1,6 @@
 @use "sass:color";
 @use "../mixins/variables";
+@use "../mixins/mixins";
 
 /**
  * Cart widget
@@ -82,7 +83,7 @@
 				display: inline-block;
 				margin-right: 6px;
 				
-				@extend %icon-font-default;
+				@extend %icon-font-default !optional;
 			}
 		}
 		
@@ -97,7 +98,7 @@
 				display: inline-block;
 				margin-right: 6px;
 				
-				@extend %icon-font-default;
+				@extend %icon-font-default !optional;
 			}
 		}
 	}
@@ -126,7 +127,7 @@
 		}
 	}
 	
-	@extend %product-list-widget;
+	@extend %product-list-widget !optional;
 }
 
 // Header cart
@@ -211,7 +212,7 @@
 			font-size: 12px;
 			&:before {
 				content: variables.$wc-widget-cart-header-icon;
-				@extend %icon-font-default;
+				@extend %icon-font-default !optional;
 			}
 		}
 	}

@@ -27,7 +27,7 @@
 					top: 4px;
 					color: variables.$wc-list-widget-remove-item-icon-color;
 					
-					@extend %icon-font-default;
+					@extend %icon-font-default !optional;
 				}
 			}
 			

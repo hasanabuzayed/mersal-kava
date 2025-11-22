@@ -1,3 +1,4 @@
+@use "sass:math";
 @use "../../../../../../assets/sass/grid/breakpoints";
 @use "../../../../../../assets/sass/grid/variables";
 @use "../../../../../../assets/sass/mixins/border-radius";
@@ -37,7 +38,7 @@
 		}
 	}
 	.comments-link {
-		@include mixins-master.font-size(14/16);
+		@include mixins-master.font-size(math.div(14, 16));
 		padding: 0;
 		&,
 		&:hover {
@@ -99,7 +100,7 @@
 			}
 			&-content {
 				@include breakpoints.media-breakpoint-up(sm) {
-					@include mixins-master.font-size(18/16);
+					@include mixins-master.font-size(math.div(18, 16));
 				}
 			}
 			&-footer {
@@ -152,11 +153,11 @@
 .posts-list--creative.list-style-v2 {
 	display: flex;
 	flex-wrap: wrap;
-	margin-left: variables.$grid-gutter-width/2;
-	margin-right: variables.$grid-gutter-width/2;
+	margin-left: variables.$grid-gutter-width * 0.5;
+	margin-right: variables.$grid-gutter-width * 0.5;
 	.creative-item {
 		width: calc(100% - #{variables.$grid-gutter-width});
-		margin: variables.$grid-gutter-width/2;
+		margin: variables.$grid-gutter-width * 0.5;
 		padding: 35px 38px 32px;
 		@include breakpoints.media-breakpoint-up(sm) {
 			width: calc(100%/2 - #{variables.$grid-gutter-width});
@@ -655,12 +656,12 @@
 .posts-list--creative.list-style-v9 {
 	display: flex;
 	flex-wrap: wrap;
-	margin-right: -(variables.$grid-gutter-width)/2;
-	margin-left: -(variables.$grid-gutter-width)/2;
+	margin-right: -(variables.$grid-gutter-width) * 0.5;
+	margin-left: -(variables.$grid-gutter-width) * 0.5;
 	.creative-item {
 		width: calc( 100% - #{variables.$grid-gutter-width});
-		margin-right: variables.$grid-gutter-width/2;
-		margin-left: variables.$grid-gutter-width/2;
+		margin-right: variables.$grid-gutter-width * 0.5;
+		margin-left: variables.$grid-gutter-width * 0.5;
 		@include breakpoints.media-breakpoint-up(md) {
 			width: calc( 50% - #{variables.$grid-gutter-width});
 		}
@@ -804,7 +805,7 @@
 			}
 			&-content {
 				@include breakpoints.media-breakpoint-up(sm) {
-					@include mixins-master.font-size(18/16);
+					@include mixins-master.font-size(math.div(18, 16));
 				}
 			}
 			&-footer {

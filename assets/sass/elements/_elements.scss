@@ -1,6 +1,8 @@
 @use "sass:meta";
+@use "sass:math";
 @use "../grid/breakpoints";
 @use "../mixins/mixins-master";
+@use "../variables-site/colors";
 
 img {
 	height: auto;
@@ -22,15 +24,15 @@ blockquote {
 	position: relative;
 	margin: 35px 0;
 	padding: 0 0 0 60px;
-	@include mixins-master.font-size(18/16);
+	@include mixins-master.font-size(math.div(18, 16));
 	font-weight: 400;
 	line-height: 1.45;
 	font-style: italic;
 	@include breakpoints.media-breakpoint-up(sm) {
-		@include mixins-master.font-size(22/16);
+		@include mixins-master.font-size(math.div(22, 16));
 	}
 	@include breakpoints.media-breakpoint-up(md) {
-		@include mixins-master.font-size(28/16);
+		@include mixins-master.font-size(math.div(28, 16));
 	}
 	p {
 		margin: 0;
@@ -57,7 +59,7 @@ blockquote {
 }
 
 hr {
-	background-color: $color__background-hr;
+	background-color: colors.$color__background-hr;
 	border: 0;
 	height: 1px;
 	margin: 1.5em 0;

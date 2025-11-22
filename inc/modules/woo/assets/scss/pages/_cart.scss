@@ -168,7 +168,7 @@
 
 						&::before {
 							content: variables.$wc-cart-page-table-actions-button-icon;
-							@extend %icon-font-default;
+							@extend %icon-font-default !optional;
 							font-size: variables.$wc-cart-page-table-remove-fz;
 							padding-right: 5px;
 						}
@@ -222,7 +222,7 @@
 
 						&::before {
 							content: variables.$wc-cart-page-table-remove-icon;
-							@extend %icon-font-default;
+							@extend %icon-font-default !optional;
 							line-height: variables.$wc-cart-page-table-remove-lh;
 							font-size: variables.$wc-cart-page-table-remove-fz;
 						}
@@ -259,7 +259,7 @@
 			&::before {
 				content: variables.$wc-proceed-to-checkout-button-icon;
 				font-size: calc(#{ variables.$wc-proceed-to-checkout-button-fz} + 5px);
-				@extend %icon-font-default;
+				@extend %icon-font-default !optional;
 				padding-right: 5px;
 			}
 			&:hover{
@@ -285,7 +285,7 @@
 						.shipping-calculator-button {
 							&::before {
 								content: variables.$wc-cart-page-calculate-shipping-button-icon;
-								@extend %icon-font-default;
+								@extend %icon-font-default !optional;
 								font-size: variables.$wc-cart-page-table-remove-fz;
 								padding-right: 5px;
 							}
@@ -319,7 +319,7 @@
 
 						&::before {
 							content: variables.$wc-cart-page-table-actions-button-icon;
-							@extend %icon-font-default;
+							@extend %icon-font-default !optional;
 							font-size: variables.$wc-cart-page-table-remove-fz;
 							padding-right: 5px;
 						}

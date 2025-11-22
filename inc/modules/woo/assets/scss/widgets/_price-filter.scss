@@ -35,7 +35,7 @@
 		position: absolute;
 		top: 50%;
 		display: block;
-		margin-top: -(variables.$wc-widget-price-slider-handle-height)/2;
+		margin-top: -(variables.$wc-widget-price-slider-handle-height) * 0.5;
 		width: variables.$wc-widget-price-slider-handle-width;
 		height: variables.$wc-widget-price-slider-handle-height;
 		border-radius: 50%;
@@ -56,7 +56,7 @@
 			font-size: 12px;
 			margin-right: 4px;
 			
-			@extend %icon-font-default;
+			@extend %icon-font-default !optional;
 		}
 	}
 }

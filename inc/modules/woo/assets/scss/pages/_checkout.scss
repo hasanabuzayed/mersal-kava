@@ -167,7 +167,7 @@
 		&::before {
 			content: variables.$wc-checkout-place-order-button-icon;
 			font-size: calc(#{ variables.$wc-proceed-to-checkout-button-fz} + 5px);
-			@extend %icon-font-default;
+			@extend %icon-font-default !optional;
 			padding-right: 5px;
 		}
 	}

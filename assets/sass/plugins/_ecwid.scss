@@ -1,4 +1,5 @@
 @use "../grid/variables";
+@use "../mixins/border-radius";
 
 html#ecwid_html {
 	body#ecwid_body {
@@ -71,7 +72,7 @@ html#ecwid_html {
 					.form-control {
 						&__button {
 							/* Default kava border-radius styles */
-							@include border-radius();
+							@include border-radius.border-radius();
 						}
 					}
 				}

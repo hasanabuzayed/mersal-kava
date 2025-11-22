@@ -1,3 +1,4 @@
+@use "sass:math";
 @use "../../../../../../assets/sass/grid/breakpoints";
 @use "../../../../../../assets/sass/grid/variables";
 @use "../../../../../../assets/sass/mixins/border-radius";
@@ -21,11 +22,11 @@ $color__nothumb: colors.$color__lightblue;
 	&.list-style-v5 {
 		display: flex;
 		flex-wrap: wrap;
-		margin-left: -(variables.$grid-gutter-width)/2;
-		margin-right: -(variables.$grid-gutter-width)/2;
+		margin-left: -(variables.$grid-gutter-width) * 0.5;
+		margin-right: -(variables.$grid-gutter-width) * 0.5;
 		.grid-item {
-			padding-left: variables.$grid-gutter-width/2;
-			padding-right: variables.$grid-gutter-width/2;
+			padding-left: variables.$grid-gutter-width * 0.5;
+			padding-right: variables.$grid-gutter-width * 0.5;
 			max-width: calc(100%);
 			width: calc(100%);
 			flex: 0 0 calc(100%);
@@ -35,15 +36,15 @@ $color__nothumb: colors.$color__lightblue;
 				flex: 0 0 calc(100% / 2);
 			}
 			@include breakpoints.media-breakpoint-up(md) {
-				padding-left: variables.$grid-gutter-width/2;
-				padding-right: variables.$grid-gutter-width/2;
+				padding-left: variables.$grid-gutter-width * 0.5;
+				padding-right: variables.$grid-gutter-width * 0.5;
 				max-width: calc(100% / 3);
 				width: calc(100% / 3);
 				flex: 0 0 calc(100% / 3);
 			}
 			@include breakpoints.media-breakpoint-up(lg) {
-				padding-left: variables.$grid-gutter-width/2;
-				padding-right: variables.$grid-gutter-width/2;
+				padding-left: variables.$grid-gutter-width * 0.5;
+				padding-right: variables.$grid-gutter-width * 0.5;
 				max-width: calc(100% / 4);
 				width: calc(100% / 4);
 				flex: 0 0 calc(100% / 4);
@@ -57,11 +58,11 @@ $color__nothumb: colors.$color__lightblue;
 	&.list-style-v6 {
 		display: flex;
 		flex-wrap: wrap;
-		margin-left: -(variables.$grid-gutter-width)/2;
-		margin-right: -(variables.$grid-gutter-width)/2;
+		margin-left: -(variables.$grid-gutter-width) * 0.5;
+		margin-right: -(variables.$grid-gutter-width) * 0.5;
 		.grid-item {
-			padding-left: variables.$grid-gutter-width/2;
-			padding-right: variables.$grid-gutter-width/2;
+			padding-left: variables.$grid-gutter-width * 0.5;
+			padding-right: variables.$grid-gutter-width * 0.5;
 			max-width: calc(100%);
 			width: calc(100% );
 			flex: 0 0 calc(100%);
@@ -84,11 +85,11 @@ $color__nothumb: colors.$color__lightblue;
 	&.list-style-v10 {
 		display: flex;
 		flex-wrap: wrap;
-		margin-left: -(variables.$grid-gutter-width)/2;
-		margin-right: -(variables.$grid-gutter-width)/2;
+		margin-left: -(variables.$grid-gutter-width) * 0.5;
+		margin-right: -(variables.$grid-gutter-width) * 0.5;
 		.grid-item {
-			padding-left: variables.$grid-gutter-width/2;
-			padding-right: variables.$grid-gutter-width/2;
+			padding-left: variables.$grid-gutter-width * 0.5;
+			padding-right: variables.$grid-gutter-width * 0.5;
 			max-width: calc(100%);
 			width: calc(100% );
 			flex: 0 0 calc(100%);
@@ -117,11 +118,11 @@ $color__nothumb: colors.$color__lightblue;
 	&.list-style-v10 {
 		display: flex;
 		flex-wrap: wrap;
-		margin-left: -(variables.$grid-gutter-width)/2;
-		margin-right: -(variables.$grid-gutter-width)/2;
+		margin-left: -(variables.$grid-gutter-width) * 0.5;
+		margin-right: -(variables.$grid-gutter-width) * 0.5;
 		.grid-item {
-			padding-left: variables.$grid-gutter-width/2;
-			padding-right: variables.$grid-gutter-width/2;
+			padding-left: variables.$grid-gutter-width * 0.5;
+			padding-right: variables.$grid-gutter-width * 0.5;
 			max-width: calc(100%);
 			width: calc(100% );
 			flex: 0 0 calc(100%);
@@ -142,11 +143,11 @@ $color__nothumb: colors.$color__lightblue;
 		.comments-link {
 			padding: 10px 12px 9px;
 			@include border-radius.border-radius();
-			@include mixins-master.font-size(11/16);
+			@include mixins-master.font-size(math.div(11, 16));
 			background-color: colors.$color__light;
 			&:before {
 				@include mixins-master.font-awesome-icon;
-				@include mixins-master.font-size(14/16);
+				@include mixins-master.font-size(math.div(14, 16));
 				content: '\f075';
 				margin-right: 4px;
 			}
@@ -167,7 +168,7 @@ $color__nothumb: colors.$color__lightblue;
 				margin: 0 0 10px;
 			}
 			&-meta {
-				@include mixins-master.font-size(14/16);
+				@include mixins-master.font-size(math.div(14, 16));
 			}
 			&-content {
 				margin-bottom: 5px;
@@ -329,8 +330,8 @@ $color__nothumb: colors.$color__lightblue;
 	### V4 Styles
 	---------------------*/
 	&.list-style-v4 {
-		margin-left: variables.$grid-gutter-width/2;
-		margin-right: variables.$grid-gutter-width/2;
+		margin-left: variables.$grid-gutter-width * 0.5;
+		margin-right: variables.$grid-gutter-width * 0.5;
 		.posts-list__item.grid-item {
 			margin-bottom: variables.$grid-gutter-width;
 			.post-thumbnail {
@@ -363,8 +364,8 @@ $color__nothumb: colors.$color__lightblue;
 	### V5
 	---------------------*/
 	&.list-style-v5 {
-		margin-left: variables.$grid-gutter-width/2;
-		margin-right: variables.$grid-gutter-width/2;
+		margin-left: variables.$grid-gutter-width * 0.5;
+		margin-right: variables.$grid-gutter-width * 0.5;
 		.posts-list__item.grid-item {
 			&:not(.has-post-thumbnail) .grid-item-inner {
 				border-radius: structure.$border__radius structure.$border__radius;

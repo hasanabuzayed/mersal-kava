@@ -1,6 +1,8 @@
 @use "sass:math";
-
+@use "../variables-site/colors";
+@use "../variables-site/structure";
 @use "../mixins/mixins-master";
+@use "../mixins/border-radius";
 
 input[type='text'],
 input[type='email'],
@@ -20,14 +22,14 @@ select,
 textarea {
 	width: 100%;
 	box-sizing: border-box;
-	padding: $input__indents;
-	border: 1px solid $color__border-input;
-	background-color: $color__background-input;
+	padding: structure.$input__indents;
+	border: 1px solid colors.$color__border-input;
+	background-color: colors.$color__background-input;
 
-	@include border-radius;
+	@include border-radius.border-radius;
 	&:focus {
 		outline: none;
-		box-shadow: $box__shadow;
+		box-shadow: structure.$box__shadow;
 	}
 }
 
@@ -46,7 +48,7 @@ input[type='reset'] {
 }
 
 select {
-	border: 1px solid $color__border-input;
+	border: 1px solid colors.$color__border-input;
 }
 
 textarea {

@@ -1,5 +1,8 @@
+@use "sass:math";
 @use "../../grid/breakpoints";
 @use "../../mixins/mixins-master";
+@use "../../variables-site/colors";
+@use "../../mixins/border-radius";
 
 /*--------------------------------------------------------------
 ### Single Post
@@ -9,7 +12,7 @@
 	article.post {
 		margin-bottom: 50px;
 		padding-bottom: 45px;
-		border-bottom: 1px solid $color__background-hr;
+		border-bottom: 1px solid colors.$color__background-hr;
 	}
 	.post>.entry {
 		&-header {
@@ -17,7 +20,7 @@
 		}
 		&-content {
 			@include breakpoints.media-breakpoint-up(sm) {
-				@include mixins-master.font-size(18/16);
+				@include mixins-master.font-size(math.div(18, 16));
 			}
 		}
 		&-footer {
@@ -42,10 +45,10 @@
 					margin-left: 5px;
 					margin-bottom: 5px;
 					padding: 6px 10px;
-					@include border-radius;
-					border: 1px solid $color__background-hr;
+					@include border-radius.border-radius;
+					border: 1px solid colors.$color__background-hr;
 					&:hover {
-						background-color: $color__background-hr;
+						background-color: colors.$color__background-hr;
 					}
 				}
 			}
@@ -68,8 +71,8 @@
 		background-position: center;
 	}
 	blockquote:not(.post-format-quote) {
-		border-top: 3px solid $color__background-hr;
-		border-bottom: 3px solid $color__background-hr;
+	border-top: 3px solid colors.$color__background-hr;
+	border-bottom: 3px solid colors.$color__background-hr;
 		text-align: center;
 		padding: 30px 10%;
 		&:before,
@@ -107,7 +110,7 @@
 				margin-bottom: 55px;
 			}
 			.size-kava-thumb-xl {
-				@include border-radius(0);
+				@include border-radius.border-radius(0);
 				object-fit: cover;
 				width: 100%;
 				max-width: none;
@@ -161,7 +164,7 @@
 			}
 			p {
 				@include breakpoints.media-breakpoint-up(sm) {
-					@include mixins-master.font-size(18/16);
+					@include mixins-master.font-size(math.div(18, 16));
 				}
 			}
 			.overlay-thumbnail {
@@ -200,7 +203,7 @@
 			@include breakpoints.media-breakpoint-up(sm) {
 				padding: 65px 100px;
 			}
-			background-color: $color__white;
+			background-color: colors.$color__white;
 		}
 		.single-header-4 {
 			position: relative;
@@ -246,11 +249,11 @@
 			}
 			p {
 				@include breakpoints.media-breakpoint-up(sm) {
-					@include mixins-master.font-size(18/16);
+					@include mixins-master.font-size(math.div(18, 16));
 				}
 			}
 			i {
-				@include mixins-master.font-size(12/16);
+				@include mixins-master.font-size(math.div(12, 16));
 			}
 		}
 	} //single-layout-5
@@ -280,7 +283,7 @@
 					}
 					p {
 						@include breakpoints.media-breakpoint-up(sm) {
-							@include mixins-master.font-size(18/16);
+							@include mixins-master.font-size(math.div(18, 16));
 						}
 					}
 				}
@@ -330,7 +333,7 @@
 				&.btn-style {
 					a {
 						padding: 3px 8px;
-						@include border-radius(0);
+						@include border-radius.border-radius(0);
 					}
 				}
 			}
@@ -411,7 +414,7 @@
 				}
 			}
 			i {
-				@include mixins-master.font-size(12/16);
+				@include mixins-master.font-size(math.div(12, 16));
 			}
 		}
 	} //single-layout-8
@@ -483,7 +486,7 @@
 					margin-top: 55px;
 				}
 				img {
-					@include border-radius(0);
+					@include border-radius.border-radius(0);
 					object-fit: cover;
 					width: 100%;
 					max-width: none;
@@ -505,7 +508,7 @@
 		.single-header-10 {
 			.entry {
 				&-header {
-					@include border-radius;
+					@include border-radius.border-radius;
 					padding: 32px 40px 25px;
 					margin-top: 30px;
 					margin-bottom: 55px;
@@ -551,7 +554,7 @@
 			.post-thumbnail {
 				margin-bottom: 0;
 				img {
-					@include border-radius(0);
+					@include border-radius.border-radius(0);
 					object-fit: cover;
 					width: 100%;
 					max-width: none;

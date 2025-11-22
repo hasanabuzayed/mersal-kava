@@ -1,3 +1,5 @@
+@use "../variables-site/structure";
+
 .embed-responsive {
 	position: relative;
 	display: block;
@@ -18,7 +20,7 @@
 
 	// Modifier class for 16:9 aspect ratio
 	&.embed-responsive-16by9 {
-		padding-bottom: $embed__ratio;
+		padding-bottom: structure.$embed__ratio;
 	}
 
 	// Modifier class for 4:3 aspect ratio

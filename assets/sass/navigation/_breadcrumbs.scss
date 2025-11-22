@@ -1,14 +1,17 @@
+@use "sass:math";
 @use "../mixins/mixins-master";
+@use "../variables-site/colors";
+@use "../mixins/border-radius";
 
 .breadcrumbs {
 	position: relative;
 	padding-top: 17px;
 	padding-bottom: 17px;
-	border-top: 1px solid $color__background-hr;
+	border-top: 1px solid colors.$color__background-hr;
 	.page-title {
 		text-align: left;
 		margin-top: 5px;
-		@include mixins-master.font-size(18/16);
+		@include mixins-master.font-size(math.div(18, 16));
 	}
 	&_wrap {
 		overflow: hidden;

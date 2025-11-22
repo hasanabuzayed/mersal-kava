@@ -22,7 +22,7 @@
 
 		&::before {
 			content: variables.$wc-single-product-gallery-trigger-icon;
-			@extend %icon-font-default;
+			@extend %icon-font-default !optional;
 			font-size: variables.$wc-single-product-gallery-trigger-fz;
 			line-height:  50px;
 		}

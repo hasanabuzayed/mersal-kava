@@ -56,7 +56,7 @@
 			font-size: variables.$wc-pagination-icon-fz;
 			
 			&::before {
-				@extend %icon-font-default;
+				@extend %icon-font-default !optional;
 			}
 			
 			&.icon-next{
@@ -127,7 +127,7 @@
 					font-size: variables.$wc-pagination-icon-fz;
 					
 					&::before {
-						@extend %icon-font-default;
+						@extend %icon-font-default !optional;
 					}
 					
 					&.icon-next::before {

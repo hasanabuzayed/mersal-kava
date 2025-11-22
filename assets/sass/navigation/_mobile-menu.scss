@@ -1,3 +1,5 @@
+@use "../variables-site/colors";
+
 .main-navigation.mobile-menu {
 	position: fixed;
 	top: 0;
@@ -5,7 +7,7 @@
 	width: 70%;
 	height: 100vh;
 	margin: 0;
-	background-color: $color__light;
+	background-color: colors.$color__light;
 	z-index: 998;
 	transition: all .3s cubic-bezier(.35, .19, .45, .91);
 	&.mobile-menu-open {

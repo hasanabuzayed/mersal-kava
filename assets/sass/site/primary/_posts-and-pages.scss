@@ -1,5 +1,8 @@
+@use "sass:math";
 @use "../../grid/breakpoints";
 @use "../../mixins/mixins-master";
+@use "../../mixins/border-radius";
+@use "../../variables-site/colors";
 
 /*--------------------------------------------------------------
 ### Entry
@@ -16,7 +19,7 @@
 		}
 	}
 	&-meta {
-		@include mixins-master.font-size(14/16);
+		@include mixins-master.font-size(math.div(14, 16));
 		.entry-header & {
 			@include mixins-master.grid-indent(8px);
 			.posts-list--default & {
@@ -65,17 +68,17 @@ span.tags-links {
 	white-space: nowrap;
 	vertical-align: top;
 	i {
-		@include mixins-master.font-size(14/16);
+		@include mixins-master.font-size(math.div(14, 16));
 		margin-right: 2px;
 	}
 }
 
 .comments-button {
-	@include border-radius();
+	@include border-radius.border-radius();
 	padding: 10px 12px;
-	@include mixins-master.font-size(11/16);
+	@include mixins-master.font-size(math.div(11, 16));
 	line-height: 1.2;
-	background-color: $color__light;
+	background-color: colors.$color__light;
 }
 
 .post-categories {
@@ -90,7 +93,7 @@ span.tags-links {
 		a {
 			display: inline-block;
 			padding: 6px 10px;
-			@include border-radius();
+			@include border-radius.border-radius();
 		}
 	}
 }
@@ -111,7 +114,7 @@ span.tags-links {
 	&+& {
 		margin-top: 50px;
 		padding-top: 40px;
-		border-top: 1px solid $color__background-hr;
+		border-top: 1px solid colors.$color__background-hr;
 	}
 	body:not(.sidebar_enabled) & {
 		max-width: 770px;
@@ -125,7 +128,7 @@ span.tags-links {
 	.entry {
 		&-content {
 			@include breakpoints.media-breakpoint-up(sm) {
-				@include mixins-master.font-size(18/16);
+				@include mixins-master.font-size(math.div(18, 16));
 			}
 		}
 		&-footer {
@@ -151,7 +154,7 @@ span.tags-links {
 	}
 	img {
 		display: block;
-		@include border-radius;
+		@include border-radius.border-radius;
 	}
 	.grid-item & {
 		margin-bottom: 20px;
@@ -165,7 +168,7 @@ span.tags-links {
 .related-posts {
 	margin: 45px 0 40px;
 	padding-bottom: 22px;
-	border-bottom: 1px solid $color__background-hr;
+	border-bottom: 1px solid colors.$color__background-hr;
 	.entry-title {
 		margin: 0 0 20px;
 	}
@@ -190,7 +193,7 @@ span.tags-links {
 			}
 		}
 		.entry-content {
-			@include mixins-master.font-size(14/16);
+			@include mixins-master.font-size(math.div(14, 16));
 		}
 	}
 }

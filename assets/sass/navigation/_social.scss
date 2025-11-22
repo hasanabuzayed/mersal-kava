@@ -1,3 +1,4 @@
+@use "sass:math";
 @use "../mixins/mixins-master";
 
 .social-list {
@@ -69,7 +70,7 @@
 			&[href*="ok.ru"]::before              { content: '\f263'; }
 			&::before {
 				@include mixins-master.font-awesome-icon();
-				@include mixins-master.font-size(12/16);
+				@include mixins-master.font-size(math.div(12, 16));
 				display: block;
 				width: 20px;
 				height: 20px;

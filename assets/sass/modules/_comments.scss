@@ -1,5 +1,6 @@
 @use "../grid/breakpoints";
 @use "../mixins/mixins-master";
+@use "../variables-site/colors";
 
 .comments {
 	&-area {
@@ -17,7 +18,7 @@
 		margin: 0 0 45px;
 		padding: 0 0 8px;
 		list-style: none;
-		border-bottom: 1px solid $color__background-hr;
+		border-bottom: 1px solid colors.$color__background-hr;
 		.children {
 			margin-top: 18px;
 			margin-left: 30px;
@@ -130,7 +131,7 @@
 					margin-right: 10px;
 					vertical-align: middle;
 					border-radius: 4px;
-					border: 1px solid $color__border-input;
+					border: 1px solid colors.$color__border-input;
 				}
 			}
 			input[type='checkbox']:checked~label[for=wp-comment-cookies-consent] {

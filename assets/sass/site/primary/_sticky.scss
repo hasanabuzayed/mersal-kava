@@ -1,4 +1,5 @@
 @use "../../grid/breakpoints";
+@use "../../mixins/border-radius";
 
 .sticky-label {
 	display: inline-block;
@@ -10,7 +11,7 @@
 	text-align: center;
 	font-size: 12px;
 	line-height: 1.6;
-	@include border-radius;
+	@include border-radius.border-radius;
 
 	@include breakpoints.media-breakpoint-up(xl) {
 		font-size: 14px;

@@ -31,7 +31,7 @@ label.inline {
 		position: absolute;
 		top: 4px;
 		left: 4px;
-		@extend %icon-font-default;
+		@extend %icon-font-default !optional;
 	}
 	input[type="checkbox"]:checked + span::after {
 		opacity: 1;

@@ -1,7 +1,6 @@
-jet-plugins.@use "jet-plugins";
+@use "jet-plugins";
 
 $loader-width: 20px;
-jet-plugins.$loader-border-width: 3px;
 
 div.wpcf7 {
 	.ajax-loader {

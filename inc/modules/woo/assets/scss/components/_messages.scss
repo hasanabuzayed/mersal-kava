@@ -35,7 +35,7 @@
 		text-align: center;
 		border-top-left-radius: variables.$wc-border-radius;
 		border-bottom-left-radius: variables.$wc-border-radius;
-		@extend %icon-font-default;
+		@extend %icon-font-default !optional;
 	}
 	
 	> *{

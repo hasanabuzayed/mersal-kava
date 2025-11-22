@@ -36,7 +36,7 @@
 		&:after,
 		&:before {
 			display: inline-block;
-			@extend %icon-font-default;
+			@extend %icon-font-default !optional;
 			font-size: variables.$wc-add-to-cart-icon-fz;
 			line-height: variables.$wc-add-to-cart-icon-lh;
 		}

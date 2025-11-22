@@ -1,4 +1,6 @@
 @use "../mixins/mixins-master";
+@use "../variables-site/typography";
+@use "../variables-site/colors";
 
 p {
 	margin: 0 0 1em;
@@ -20,14 +22,14 @@ address {
 }
 
 pre {
-	font-family: $font__pre;
-	line-height: $font__line-height-pre;
+	font-family: typography.$font__pre;
+	line-height: typography.$font__line-height-pre;
 	overflow: auto;
 	max-width: 100%;
 	margin: 0 0 1.5em;
 	padding: 1.5em;
-	background: $color__background-pre;
-	border: 1px solid $color__border-pre;
+	background: colors.$color__background-pre;
+	border: 1px solid colors.$color__border-pre;
 	white-space: pre;
 	white-space: pre-wrap;
 	word-wrap: break-word;
@@ -36,19 +38,19 @@ pre {
 }
 
 code, kbd, tt, var {
-	font-family: $font__code;
+	font-family: typography.$font__code;
 
 	@include mixins-master.font-size(0.9375);
 }
 
 code {
 	padding: 2px 5px;
-	border: 1px solid $color__background-hr;
+	border: 1px solid colors.$color__background-hr;
 }
 
 abbr, acronym {
 	cursor: help;
-	border-bottom: 1px dotted $color__border-abbr;
+	border-bottom: 1px dotted colors.$color__border-abbr;
 }
 
 mark, ins {
