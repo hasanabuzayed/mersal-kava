@@ -1,6 +1,41 @@
 # kava
 Kava Theme. Get the truly easy-to-use free theme with tons of functionality and perfect design!
 
+## Requirements
+
+- **Node.js:** >=24.0.0 (LTS recommended)
+- **npm:** >=11.0.0 (bundled with Node.js 24)
+- **PHP:** 8.2.x or 8.3.x (recommended)
+- **WordPress:** 6.8+
+
+## Installation
+
+### 1. Install Node.js 24 (if using nvm)
+```bash
+# Install Node.js 24 LTS
+nvm install 24 --lts
+nvm use 24
+
+# Or if .nvmrc exists, just run:
+nvm use
+```
+
+### 2. Install Dependencies
+```bash
+npm install
+```
+
+### 3. Build Assets
+```bash
+# Development (with watch)
+npm run gulp
+
+# Or directly
+gulp
+```
+
+See `MODERNIZATION.md` for complete build system details.
+
 ## Changelog
 
 ### 2.1.4
