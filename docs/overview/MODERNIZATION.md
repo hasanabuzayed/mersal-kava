@@ -65,7 +65,7 @@ This document outlines the modernization updates made to the Kava v3 WordPress t
 
 #### Swiper
 - **Upgraded**: From 4.3.3 to 12.0.3 (via CDN)
-- **Status**: ✅ Migration complete - see `SWIPER_MIGRATION_COMPLETE.md`
+- **Status**: ✅ Migration complete - see `docs/swiper-migration/SWIPER_MIGRATION_COMPLETE.md`
 - **Breaking Changes Addressed**: 
   - ✅ Class name: `.swiper-container` → `.swiper` (updated)
   - ✅ Navigation icons: Custom Font Awesome icons (SVG hidden, FA via `:before`)
@@ -116,11 +116,11 @@ This document outlines the modernization updates made to the Kava v3 WordPress t
 **Files Modernized:** 143 PHP files (excluding framework)
 **Total Time:** Completed
 
-See `PHP_COMPREHENSIVE_UPDATE_COMPLETE.md` for full details.
+See `docs/php-modernization/PHP_COMPREHENSIVE_UPDATE_COMPLETE.md` for full details.
 
 ### 5. WordPress 6.8 Compatibility ✅
 
-**Status:** Code review complete - ready for testing - see `WP_6.8_COMPATIBILITY_SUMMARY.md`
+**Status:** Code review complete - ready for testing - see `docs/wordpress-6.8/WP_6.8_COMPATIBILITY_SUMMARY.md`
 
 **Requirements:**
 - ✅ PHP 8.2.x or 8.3.x (codebase ready)
@@ -148,11 +148,11 @@ See `PHP_COMPREHENSIVE_UPDATE_COMPLETE.md` for full details.
 - ✅ Performance optimized
 - ✅ Accessibility features implemented
 
-See `WP_6.8_COMPATIBILITY_SUMMARY.md` for complete summary and `WP_6.8_PHASE_4_TESTING_CHECKLIST.md` for testing procedures.
+See `docs/wordpress-6.8/WP_6.8_COMPATIBILITY_SUMMARY.md` for complete summary and `docs/wordpress-6.8/WP_6.8_PHASE_4_TESTING_CHECKLIST.md` for testing procedures.
 
 ### 6. Node.js 24 Upgrade ✅
 
-**Status:** ✅ **COMPLETE** - see `NODE_JS_24_UPGRADE_PLAN.md`
+**Status:** ✅ **COMPLETE** - see `docs/nodejs-upgrade/NODE_JS_24_UPGRADE_PLAN.md`
 
 **Current Requirements:**
 - Node.js >=24.0.0 (LTS)
@@ -184,11 +184,11 @@ See `WP_6.8_COMPATIBILITY_SUMMARY.md` for complete summary and `WP_6.8_PHASE_4_T
 - ✅ Phase 4: Integration Testing
 - ✅ Phase 5: Documentation & Cleanup
 
-See `NODE_JS_24_UPGRADE_PLAN.md` for complete upgrade details and progress reports.
+See `docs/nodejs-upgrade/NODE_JS_24_UPGRADE_PLAN.md` for complete upgrade details and progress reports.
 
 ### 7. Sass Migration ✅
 
-**Status:** ✅ **COMPLETE** - see `SASS_MIGRATION_PLAN.md`
+**Status:** ✅ **COMPLETE** - see `docs/sass-migration/SASS_MIGRATION_PLAN.md`
 
 **Migration Completed:**
 - ✅ All `@import` statements migrated to `@use` and `@forward` module system
@@ -239,11 +239,11 @@ See `NODE_JS_24_UPGRADE_PLAN.md` for complete upgrade details and progress repor
 - **Build Tasks:** 6/6 passing
 - **Remaining Warnings:** 0 (all eliminated)
 
-See `SASS_MIGRATION_PLAN.md` for complete migration details and `SASS_PHASE_8_PROGRESS.md` for testing results.
+See `docs/sass-migration/SASS_MIGRATION_PLAN.md` for complete migration details and `docs/sass-migration/SASS_PHASE_8_PROGRESS.md` for testing results.
 
 ### 8. CSS/SCSS Optimization & Modernization 📋
 
-**Status:** 📋 Planning Phase - see `CSS_OPTIMIZATION_PLAN.md`
+**Status:** 📋 Planning Phase - see `docs/css-optimization/CSS_OPTIMIZATION_PLAN.md`
 
 **Current State:**
 - CSS files are unminified (306K total)
@@ -320,7 +320,7 @@ See `SASS_MIGRATION_PLAN.md` for complete migration details and `SASS_PHASE_8_PR
 
 **Estimated Time:** 34-50 hours total
 
-See `CSS_OPTIMIZATION_PLAN.md` for complete optimization plan and detailed phase breakdown.
+See `docs/css-optimization/CSS_OPTIMIZATION_PLAN.md` for complete optimization plan and detailed phase breakdown.
 
 ## Installation & Setup
 
@@ -382,7 +382,7 @@ gulp admin_css
 
 1. **Font Awesome Icons**: All `fa fa-*` classes must be updated to `fa-solid fa-*`, `fa-regular fa-*`, or `fa-brands fa-*`
 2. **Gulp 4.x**: Build scripts now use series/parallel syntax (already updated)
-3. **Node.js**: Requires Node.js 24+ (specified in package.json). Node.js 24 upgrade complete - see `NODE_JS_24_UPGRADE_PLAN.md`
+3. **Node.js**: Requires Node.js 24+ (specified in package.json). Node.js 24 upgrade complete - see `docs/nodejs-upgrade/NODE_JS_24_UPGRADE_PLAN.md`
 
 ## Browser Support
 
