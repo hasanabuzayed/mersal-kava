@@ -92,6 +92,12 @@ if ( ! class_exists( 'Kava_Theme_Setup' ) ) {
 			// Load the theme modules.
 			add_action( 'after_setup_theme', [ $this, 'framework_loader' ], -20 );
 
+			// Resource hints for external domains (early in head, priority 1)
+			add_action( 'wp_head', [ $this, 'add_resource_hints' ], 1 );
+
+			// Optimize font loading (early in head, priority 2)
+			add_action( 'wp_head', [ $this, 'optimize_font_loading' ], 2 );
+
 			// Init properties.
 			add_action( 'wp_head', [ $this, 'init_theme_properties' ] );
 
@@ -379,8 +385,9 @@ if ( ! class_exists( 'Kava_Theme_Setup' ) ) {
 				[],
 				'7.0.1'
 			);
-			
-			// Register Montserrat font from Google Fonts
+
+			// Register Montserrat font from Google Fonts with optimized loading
+			// display=swap ensures text is visible during font load (prevents FOIT - Flash of Invisible Text)
 			wp_register_style(
 				'montserrat-font',
 				'https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap',
@@ -447,29 +454,215 @@ if ( ! class_exists( 'Kava_Theme_Setup' ) ) {
 				'montserrat-font',
 			] );
 
+			// Preload critical CSS for faster initial render
+			$style_uri = get_stylesheet_uri();
+			$style_version = $this->version();
+			$this->preload_critical_css( $style_uri, $style_version );
+
+			// Critical CSS: Load synchronously (render-blocking)
 			wp_enqueue_style(
 				'kava-theme-style',
-				get_stylesheet_uri(),
+				$style_uri,
 				$styles_depends,
-				$this->version()
+				$style_version
 			);
 
 			$enqueue_styles = kava_settings()->get( 'enqueue_theme_styles', true );
 
 			if ( filter_var( $enqueue_styles, FILTER_VALIDATE_BOOLEAN ) ) {
+				$theme_css_uri = get_theme_file_uri( 'theme.css' );
+
+				// Preload main theme CSS
+				$this->preload_critical_css( $theme_css_uri, $this->version() );
+
+				// Critical CSS: Load synchronously (render-blocking)
 				wp_enqueue_style(
 					'kava-theme-main-style',
-					get_theme_file_uri( 'theme.css' ),
+					$theme_css_uri,
 					[ 'kava-theme-style' ],
 					$this->version()
 				);
 
 				if ( is_rtl() ) {
+					// RTL CSS: Load synchronously (needed for proper layout)
 					wp_enqueue_style(
 						'kava-theme-main-rtl-style',
 						get_theme_file_uri( 'theme-rtl.css' ),
-						false,
+						[ 'kava-theme-main-style' ],
 						$this->version()
+					);
+				}
+			}
+
+			// Optimize CSS loading order and async loading for non-critical CSS
+			$this->optimize_css_loading_order();
+		}
+
+		/**
+		 * Preload critical CSS for faster initial render.
+		 *
+		 * @since 1.0.0
+		 * @param string $href CSS file URL
+		 * @param string $version Version string for cache busting
+		 */
+		private function preload_critical_css( string $href, string $version ): void {
+			$href_with_version = add_query_arg( 'ver', $version, $href );
+
+			printf(
+				'<link rel="preload" as="style" href="%s" onload="this.onload=null;this.rel=\'stylesheet\'">%s',
+				esc_url( $href_with_version ),
+				"\n"
+			);
+
+			// Fallback for browsers that don't support preload
+			printf(
+				'<noscript><link rel="stylesheet" href="%s"></noscript>%s',
+				esc_url( $href_with_version ),
+				"\n"
+			);
+		}
+
+		/**
+		 * Optimize CSS loading order and implement async loading for non-critical CSS.
+		 *
+		 * @since 1.0.0
+		 */
+		private function optimize_css_loading_order(): void {
+			/**
+			 * Filter to allow async loading of non-critical CSS.
+			 *
+			 * @since 1.0.0
+			 * @param bool $enable_async_css Whether to enable async CSS loading. Default: true.
+			 */
+			$enable_async_css = apply_filters( 'kava-theme/enable-async-css', true );
+
+			if ( ! $enable_async_css ) {
+				return;
+			}
+
+			// Hook into style_loader_tag to add async loading for non-critical CSS
+			add_filter( 'style_loader_tag', [ $this, 'async_non_critical_css' ], 10, 4 );
+		}
+
+		/**
+		 * Add async loading to non-critical CSS files.
+		 *
+		 * Non-critical CSS includes:
+		 * - Module CSS (blog-layouts, woo-module) - loaded conditionally
+		 * - Dynamic CSS - loaded after critical CSS
+		 *
+		 * @since 1.0.0
+		 * @param string $html   The link tag for the enqueued style.
+		 * @param string $handle The style's registered handle.
+		 * @param string $href   The stylesheet's source URL.
+		 * @param string $media  The stylesheet's media attribute.
+		 * @return string Modified link tag.
+		 */
+		public function async_non_critical_css( string $html, string $handle, string $href, string $media ): string {
+			// List of non-critical CSS handles that can be loaded asynchronously
+			$non_critical_handles = apply_filters( 'kava-theme/non-critical-css-handles', [
+				'blog-layouts-module',
+				'blog-layouts-module-rtl',
+				'kava-woocommerce-style',
+				'kava-theme-dynamic-style',
+			] );
+
+			// Only apply async loading to non-critical CSS
+			if ( ! in_array( $handle, $non_critical_handles, true ) ) {
+				return $html;
+			}
+
+			// Replace the link tag with async loading version
+			// Use media="print" trick with onload to load asynchronously
+			$async_html = str_replace(
+				"media='{$media}'",
+				"media='print' onload=\"this.media='{$media}'\"",
+				$html
+			);
+
+			// Add noscript fallback for browsers without JavaScript
+			$async_html .= '<noscript>' . $html . '</noscript>';
+
+			return $async_html;
+		}
+
+		/**
+		 * Add resource hints (preconnect, dns-prefetch) for external resources.
+		 *
+		 * @since 1.0.0
+		 */
+		public function add_resource_hints(): void {
+			// Preconnect to Google Fonts for faster font loading
+			echo '<link rel="preconnect" href="https://fonts.googleapis.com">' . "\n";
+			echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' . "\n";
+
+			// Preconnect to CDN for Font Awesome
+			echo '<link rel="preconnect" href="https://cdnjs.cloudflare.com">' . "\n";
+
+			/**
+			 * Filter to add additional resource hints.
+			 *
+			 * @since 1.0.0
+			 * @param array $hints Array of resource hint URLs.
+			 */
+			$additional_hints = apply_filters( 'kava-theme/resource-hints', [] );
+
+			foreach ( $additional_hints as $hint ) {
+				if ( ! empty( $hint['href'] ) ) {
+					$crossorigin = ! empty( $hint['crossorigin'] ) ? ' crossorigin' : '';
+					$rel = ! empty( $hint['rel'] ) ? $hint['rel'] : 'preconnect';
+					printf(
+						'<link rel="%s" href="%s"%s>' . "\n",
+						esc_attr( $rel ),
+						esc_url( $hint['href'] ),
+						$crossorigin
+					);
+				}
+			}
+		}
+
+		/**
+		 * Optimize font loading with preload and font-display.
+		 *
+		 * @since 1.0.0
+		 */
+		public function optimize_font_loading(): void {
+			/**
+			 * Filter to enable/disable font loading optimization.
+			 *
+			 * @since 1.0.0
+			 * @param bool $enable Whether to enable font loading optimization. Default: true.
+			 */
+			$enable_optimization = apply_filters( 'kava-theme/enable-font-optimization', true );
+
+			if ( ! $enable_optimization ) {
+				return;
+			}
+
+			// Add font-display: swap via inline style for Google Fonts
+			// This is handled by the display=swap parameter in the Google Fonts URL
+			// Additional optimization: Add preload for critical font files if needed
+
+			/**
+			 * Filter to add font preload hints.
+			 *
+			 * @since 1.0.0
+			 * @param array $fonts Array of font preload configurations.
+			 */
+			$font_preloads = apply_filters( 'kava-theme/font-preloads', [] );
+
+			foreach ( $font_preloads as $font ) {
+				if ( ! empty( $font['href'] ) ) {
+					$as = ! empty( $font['as'] ) ? $font['as'] : 'font';
+					$type = ! empty( $font['type'] ) ? $font['type'] : '';
+					$crossorigin = ! empty( $font['crossorigin'] ) ? ' crossorigin' : ' crossorigin';
+
+					printf(
+						'<link rel="preload" as="%s" href="%s" type="%s"%s>' . "\n",
+						esc_attr( $as ),
+						esc_url( $font['href'] ),
+						esc_attr( $type ),
+						$crossorigin
 					);
 				}
 			}
