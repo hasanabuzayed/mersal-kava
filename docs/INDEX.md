@@ -27,8 +27,13 @@ Quick reference guide to all project documentation.
 
 ### 📋 In Progress
 
-6. **[CSS Optimization](css-optimization/)** - 1 file
+6. **[CSS Optimization](css-optimization/)** - 8 files
    - CSS/SCSS optimization and modernization plan
+
+7. **[HTML Optimization](html-optimization/)** - 4 files
+   - HTML optimization and modernization plan
+   - Sequential optimization framework with feedback loops
+   - Workflow diagrams and metrics templates
 
 ## Quick Links
 
@@ -47,5 +52,6 @@ All documentation has been organized into logical categories:
 - `docs/swiper-migration/` - Swiper library migration
 - `docs/wordpress-6.8/` - WordPress 6.8 compatibility
 - `docs/css-optimization/` - CSS optimization plans
+- `docs/html-optimization/` - HTML optimization plans
 
 See [README.md](README.md) for detailed directory structure and file naming conventions.
