@@ -16,8 +16,8 @@
 @use "cart";
 @use "../mixins/variables";
 
-.woocommerce.widget{
-	padding: 25px 30px 30px 30px;
+.woocommerce.widget {
+	padding: 25px 30px 30px;
 	border: variables.$wc-border;
 	border-radius: variables.$wc-border-radius;
 	
@@ -69,18 +69,18 @@
 }
 
 //calendar in woo sidebar
-.woocommerce .widget.widget_calendar{
-	td, th{
+.woocommerce .widget.widget_calendar {
+	td, th {
 		font-size: 14px;
 		line-height: 44px;
 		padding: 0;
 	}
 
-	tfoot td{
+	tfoot td {
 		line-height: 24px;
 	}
 
-	th{
+	th {
 		padding-bottom: 40px;
 	}
 }

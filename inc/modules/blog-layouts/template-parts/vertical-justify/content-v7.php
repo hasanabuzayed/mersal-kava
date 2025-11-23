@@ -24,10 +24,10 @@
 				kava_posted_in( [
 					'prefix' => __( 'In', 'kava' ),
 					'delimiter' => ', '
-				) ); 
+				] ); 
 				kava_posted_on( [
 					'prefix' => __( 'Posted', 'kava' ),
-				) ); 
+				] ); 
 				?>
 			</div><!-- .entry-meta -->
 	</header><!-- .entry-header -->

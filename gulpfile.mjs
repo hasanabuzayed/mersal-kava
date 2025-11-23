@@ -234,6 +234,41 @@ gulp.task( 'watch', function() {
 
 } );
 
+// Lint CSS/SCSS files using stylelint
+// Run via CLI: npx stylelint "assets/sass/**/*.scss"
+// Or: npx gulp lint:css
+gulp.task( 'lint:css', async function() {
+	// Use Node's child_process to run stylelint CLI (ES module syntax)
+	const { spawn } = await import( 'node:child_process' );
+
+	return new Promise( ( resolve, reject ) => {
+		const stylelint = spawn( 'npx', [
+			'stylelint',
+			'assets/sass/**/*.scss',
+			'inc/modules/**/assets/scss/**/*.scss',
+			'--formatter',
+			'string'
+		], {
+			stdio: 'inherit',
+			shell: true,
+			cwd: process.cwd()
+		} );
+
+		stylelint.on( 'close', ( code ) => {
+			// stylelint exits with code 2 if there are linting errors (non-fatal)
+			if ( code === 0 || code === 2 ) {
+				resolve();
+			} else {
+				reject( new Error( `stylelint exited with code ${code}` ) );
+			}
+		} );
+
+		stylelint.on( 'error', ( error ) => {
+			reject( error );
+		} );
+	} );
+} );
+
 // Production build task (minified)
 gulp.task( 'build', gulp.parallel(
 	'css_min',
