@@ -2,6 +2,8 @@ import gulp from 'gulp';
 import rename from 'gulp-rename';
 import notify from 'gulp-notify';
 import autoprefixer from 'gulp-autoprefixer';
+import postcss from 'gulp-postcss';
+import postcssPresetEnv from 'postcss-preset-env';
 import sassPlugin from 'gulp-sass';
 import * as sass from 'sass';
 import plumber from 'gulp-plumber';
@@ -22,6 +24,25 @@ let sass_settings = {
 
 // Environment detection
 const isProduction = process.env.NODE_ENV === 'production';
+
+// PostCSS configuration with modern CSS features
+// postcss-preset-env includes autoprefixer and many modern CSS features
+const postcssPlugins = [
+	postcssPresetEnv( {
+		stage: 2, // Enable stable CSS features (stage 0-4, lower = more experimental)
+		features: {
+			'nesting-rules': false, // Disable nesting (Sass handles this)
+			'custom-properties': true, // Enable CSS custom properties
+			'logical-properties-and-values': true, // Enable logical properties
+			'color-function': true, // Enable modern color functions (color(), oklab(), etc.)
+			'cascade-layers': false, // Disable @layer (not widely supported yet)
+			'has-pseudo-class': false // Disable :has() (not widely supported yet)
+		},
+		autoprefixer: {
+			cascade: false // Match existing autoprefixer config
+		}
+	} )
+];
 
 function CSS_Task( args ) {
 
@@ -51,9 +72,7 @@ function CSS_Task( args ) {
 
 	stream = stream
 		.pipe( sassCompiler( sass_settings ).on( 'error', sassCompiler.logError ) )
-		.pipe( autoprefixer( {
-			cascade: false
-		} ) );
+		.pipe( postcss( postcssPlugins ) );
 
 	// Minify CSS if needed (only if not already compressed by Sass)
 	if ( shouldMinify && sass_settings.outputStyle !== 'compressed' ) {
@@ -105,9 +124,7 @@ function RTL_CSS_Task( args ) {
 
 	stream = stream
 		.pipe( sassCompiler( sass_settings ).on( 'error', sassCompiler.logError ) )
-		.pipe( autoprefixer( {
-			cascade: false
-		} ) )
+		.pipe( postcss( postcssPlugins ) )
 		.pipe( rtlcss() );
 
 	// Minify CSS if needed (only if not already compressed by Sass)
@@ -266,6 +283,100 @@ gulp.task( 'lint:css', async function() {
 		stylelint.on( 'error', ( error ) => {
 			reject( error );
 		} );
+	} );
+} );
+
+// Analyze CSS files for optimization opportunities
+// Run via CLI: npx analyze-css style.css
+// Or: npx gulp analyze:css
+gulp.task( 'analyze:css', async function() {
+	const { spawn } = await import( 'node:child_process' );
+	const { readdir } = await import( 'node:fs/promises' );
+	const path = await import( 'node:path' );
+
+	return new Promise( async ( resolve, reject ) => {
+		try {
+			// Find all CSS files in the theme (non-minified)
+			const cssFiles = [];
+			const cssDirs = [
+				{ path: './', pattern: /^[^\.].*\.css$/ }, // Root CSS files (not .min.css)
+				{ path: './inc/modules/blog-layouts/assets/css/', pattern: /^blog-layouts-module\.css$/ },
+				{ path: './inc/modules/woo/assets/css/', pattern: /^woo-module\.css$/ },
+				{ path: './assets/css/', pattern: /.*\.css$/ }
+			];
+
+			for ( const dir of cssDirs ) {
+				try {
+					const files = await readdir( dir.path );
+					const cssInDir = files
+						.filter( file => dir.pattern.test( file ) && !file.endsWith( '.min.css' ) )
+						.map( file => path.join( dir.path, file ) );
+					cssFiles.push( ...cssInDir );
+				} catch ( err ) {
+					// Directory might not exist, skip
+					console.log( `Skipping ${dir.path} (not found)` );
+				}
+			}
+
+			if ( cssFiles.length === 0 ) {
+				console.log( 'No CSS files found to analyze.' );
+				resolve();
+				return;
+			}
+
+			console.log( `\n📊 Analyzing ${cssFiles.length} CSS file(s)...\n` );
+			console.log( 'Files to analyze:', cssFiles.join( ', ' ), '\n' );
+
+			// Analyze files one by one (analyze-css processes one file at a time)
+			let completed = 0;
+			let hasErrors = false;
+
+			for ( const file of cssFiles ) {
+				await new Promise( ( fileResolve ) => {
+					console.log( `\n🔍 Analyzing: ${file}\n` );
+					const analyzeProcess = spawn( 'npx', [
+						'analyze-css',
+						'--file',
+						file,
+						'--pretty'
+					], {
+						stdio: 'inherit',
+						shell: true,
+						cwd: process.cwd()
+					} );
+
+					analyzeProcess.on( 'close', ( code ) => {
+						completed++;
+						if ( code !== 0 ) {
+							hasErrors = true;
+						}
+						if ( completed === cssFiles.length ) {
+							if ( hasErrors ) {
+								console.log( '\n⚠️  Analysis completed with some warnings/errors' );
+							} else {
+								console.log( '\n✅ CSS analysis complete!' );
+							}
+							resolve();
+						} else {
+							fileResolve();
+						}
+					} );
+
+					analyzeProcess.on( 'error', ( error ) => {
+						console.error( `Error analyzing ${file}:`, error.message );
+						hasErrors = true;
+						completed++;
+						if ( completed === cssFiles.length ) {
+							resolve();
+						} else {
+							fileResolve();
+						}
+					} );
+				} );
+			}
+		} catch ( error ) {
+			reject( error );
+		}
 	} );
 } );
 

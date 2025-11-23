@@ -86,6 +86,7 @@ label.inline input[type=checkbox] + span::after, .star-rating::before, .star-rat
   cursor: pointer;
   text-align: center;
   text-transform: uppercase;
+  -webkit-text-decoration: none;
   text-decoration: none;
   border: none;
   border-radius: 3px;
@@ -369,13 +370,13 @@ select.orderby {
   padding: 0;
   text-align: center;
 }
-.woocommerce-pagination ul.page-numbers li .page-numbers:not(.prev, .next) {
+.woocommerce-pagination ul.page-numbers li .page-numbers:not(.prev):not(.next) {
   height: 33px;
   width: 33px;
   border-radius: 3px;
   border: 1px solid #ebeced;
 }
-.woocommerce-pagination ul.page-numbers li .page-numbers:not(.prev, .next):hover, .woocommerce-pagination ul.page-numbers li .page-numbers:not(.prev, .next).current {
+.woocommerce-pagination ul.page-numbers li .page-numbers:not(.prev):not(.next):hover, .woocommerce-pagination ul.page-numbers li .page-numbers:not(.prev):not(.next).current {
   background-color: #ebeced;
 }
 .woocommerce-pagination ul.page-numbers li .page-numbers.next {
@@ -491,6 +492,7 @@ select.orderby {
   width: 1em;
   text-indent: -999em;
   display: inline-block;
+  -webkit-text-decoration: none;
   text-decoration: none;
   color: #e7e8e8;
 }
@@ -707,6 +709,7 @@ label.inline input[type=checkbox]:checked + span::after {
   top: 30px;
 }
 .woocommerce-store-notice .woocommerce-store-notice__dismiss-link:hover {
+  -webkit-text-decoration: underline;
   text-decoration: underline;
 }
 
@@ -1593,6 +1596,7 @@ ul.products.columns--6 li.product {
 .woocommerce-account .woocommerce .woocommerce-MyAccount-content mark {
   background-color: transparent;
   font-style: normal;
+  -webkit-text-decoration: none;
   text-decoration: none;
   border: none;
 }
@@ -1813,6 +1817,7 @@ table.woocommerce-table--order-downloads.shop_table tbody tr td.download-file .b
 .woocommerce-loop-category__title .count {
   font-style: normal;
   background: transparent;
+  -webkit-text-decoration: none;
   text-decoration: none;
   border: none;
 }
@@ -2849,7 +2854,7 @@ ol.commentlist li + li {
 }
 
 .woocommerce.widget {
-  padding: 25px 30px 30px 30px;
+  padding: 25px 30px 30px;
   border: 1px solid #ebeced;
   border-radius: 3px;
 }
