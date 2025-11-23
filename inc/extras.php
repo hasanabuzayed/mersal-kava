@@ -117,7 +117,7 @@ function kava_render_icons_callback( array $matches ): string {
 	}
 
 	if ( empty( $matches[1] ) ) {
-		// Default to solid style for Font Awesome 6
+		// Default to solid style for FontAwesome
 		return sprintf( '<i class="fa-solid fa-%s"></i>', $matches[2] );
 	}
 

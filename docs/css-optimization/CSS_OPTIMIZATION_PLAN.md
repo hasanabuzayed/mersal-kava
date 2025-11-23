@@ -78,6 +78,10 @@ This plan outlines the optimization and modernization strategy for the Kava v3 t
 #### 1.2 CSS Purging (Unused CSS Removal)
 **Objective:** Remove unused CSS to reduce file sizes by 10-20%
 
+**Status:** 🚧 In Progress - Phase 1 Complete - See `PURGECSS_PHASE_1_PROGRESS.md` for details
+
+**Scope:** Limited, phased approach for safe implementation
+
 **Tasks:**
 - [ ] Install `gulp-purgecss` or `purgecss`
 - [ ] Configure content paths (PHP templates, JS files)
@@ -86,10 +90,26 @@ This plan outlines the optimization and modernization strategy for the Kava v3 t
 - [ ] Verify no critical styles removed
 - [ ] Compare before/after file sizes
 
+**Implementation Plan:**
+See `PURGECSS_PLAN.md` for:
+- ✅ Limited scope definition (4 phases)
+- ✅ Comprehensive safelist strategy
+- ✅ Content paths configuration
+- ✅ Risk mitigation approach
+- ✅ Testing strategy
+- ✅ Rollback plan
+
+**Phased Approach:**
+1. **Phase 1:** `blog-layouts-module.css` (147KB - largest, isolated)
+2. **Phase 2:** `woo-module.css` (85KB - WooCommerce only)
+3. **Phase 3:** `theme.css` (53KB - core theme)
+4. **Phase 4:** `style.css` (24KB - main stylesheet, most careful)
+
 **Expected Results:**
-- Smaller CSS files
+- Smaller CSS files (10-20% reduction per file)
 - Faster page load times
 - Better performance scores
+- **Total Potential Savings:** 25-49KB (8-16% of total CSS)
 
 **Tools:**
 - `gulp-purgecss` - Gulp integration
@@ -97,10 +117,11 @@ This plan outlines the optimization and modernization strategy for the Kava v3 t
 - **Note:** Requires careful configuration to avoid removing needed styles
 
 **Configuration Considerations:**
-- Safelist dynamic classes (e.g., `wp-*`, `elementor-*`)
+- Safelist dynamic classes (e.g., `wp-*`, `elementor-*`, `jet-*`, `woocommerce-*`)
 - Scan PHP template files
 - Scan JavaScript files for class usage
 - Test on multiple page types
+- **Comprehensive safelist:** WordPress, plugins, theme classes, dynamic classes
 
 #### 1.3 Source Maps ✅
 **Objective:** Improve debugging experience

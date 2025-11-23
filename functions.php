@@ -376,8 +376,8 @@ if ( ! class_exists( 'Kava_Theme_Setup' ) ) {
 		 * @since 1.0.0
 		 */
 		public function register_assets(): void {
-			// Register Font Awesome 6 exclusively via CDN
-			// CDN provides: Font Awesome 6 Free (solid/regular), Font Awesome 6 Brands, and legacy FontAwesome font-face
+			// Register Font Awesome 7 exclusively via CDN
+			// CDN provides: Font Awesome 7 Free (solid/regular), Font Awesome 7 Brands, and legacy FontAwesome font-face
 			// The legacy FontAwesome font-family is used for CSS pseudo-elements (::before, ::after) with Unicode content
 			wp_register_style(
 				'font-awesome',

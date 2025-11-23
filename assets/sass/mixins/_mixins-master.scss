@@ -75,12 +75,12 @@
 }
 
 // Font-awesome icon
-// Font Awesome 7 CDN: Use "Font Awesome 7 Free" with font-weight 900 for solid icons
+// Font Awesome 7 CDN: Use "FontAwesome" with font-weight 900 for solid icons
 // This works with CSS pseudo-elements (::before, ::after) and Unicode codes
 @mixin font-awesome-icon {
 	display: inline-block;
-	font-family: "Font Awesome 7 Free"; // Font Awesome 7 Free for solid icons
-	font-weight: 900; // Solid icons use weight 900
+	font-family: "FontAwesome";
+	font-weight: 900;
 	font-style: normal;
 	font-variant: normal;
 	text-rendering: auto;

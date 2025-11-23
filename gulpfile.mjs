@@ -12,6 +12,8 @@ import livereload from 'gulp-livereload';
 import checktextdomain from 'gulp-checktextdomain';
 import cleanCSS from 'gulp-clean-css';
 import sourcemaps from 'gulp-sourcemaps';
+import purgecss from 'gulp-purgecss';
+// PurgeCSS config will be loaded dynamically in the task
 
 const sassCompiler = sassPlugin(sass);
 
@@ -378,6 +380,68 @@ gulp.task( 'analyze:css', async function() {
 			reject( error );
 		}
 	} );
+} );
+
+// PurgeCSS task for blog-layouts-module.css (Phase 1)
+// This is a separate task to allow testing before integrating into main build
+gulp.task( 'purgecss:blog-layouts', async function() {
+	// Load PurgeCSS config dynamically
+	const purgecssConfigModule = await import( './purgecss.config.mjs' );
+	const purgecssConfig = purgecssConfigModule.default || purgecssConfigModule;
+
+	// Ensure blog-layouts-module.css exists first
+	return gulp.src( './inc/modules/blog-layouts/assets/css/blog-layouts-module.css' )
+		.pipe(
+			plumber( {
+				errorHandler: function( error ) {
+					console.log( '=================ERROR=================' );
+					console.log( error.message );
+					this.emit( 'end' );
+				}
+			} )
+		)
+		.pipe(
+			purgecss( {
+				content: purgecssConfig.content,
+				safelist: [
+					// Combine all safelist patterns
+					...purgecssConfig.safelist.standard,
+					...purgecssConfig.safelist.deep,
+					...purgecssConfig.safelist.greedy,
+					// Preserve ALL selectors with pseudo-elements (::before, ::after) - Font Awesome uses these
+					/::before/,
+					/::after/,
+					/:before/,
+					/:after/,
+					// Preserve blog layout selectors that use Font Awesome icons
+					/\.btn-icon/,
+					/\.btn-text-icon/,
+					/\.swiper-button/,
+					/\.comments-link/,
+					/\.justify-item/,
+					/\.grid-item/,
+					/\.masonry-item/,
+					/\.creative-item/,
+					/\.posts-list/,
+					/\.posts-list__item/,
+					// Preserve any selector containing Font Awesome font-family (via function)
+					// This is handled by preserving all :before/:after selectors above
+				],
+				fontFace: purgecssConfig.fontFace,
+				keyframes: purgecssConfig.keyframes,
+				variables: purgecssConfig.variables,
+				defaultExtractor: purgecssConfig.defaultExtractor,
+				// Preserve CSS rules containing Font Awesome font-family
+				// This is a custom option - we'll handle it via post-processing if needed
+			} )
+		)
+		.pipe( cleanCSS( {
+			compatibility: 'ie8',
+			level: 2
+		} ) ) // Minify after purging
+		.pipe( rename( 'blog-layouts-module.css' ) )
+		.pipe( gulp.dest( './inc/modules/blog-layouts/assets/css/' ) )
+		.pipe( notify( 'Purged blog-layouts-module.css. Done!' ) );
 } );
 
 // Production build task (minified)
