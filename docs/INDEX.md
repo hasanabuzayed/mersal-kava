@@ -37,6 +37,11 @@ Quick reference guide to all project documentation.
    - Optimization rules catalog
    - Stage 4-5 progress reports + checkpoint validations
 
+8. **[jQuery Replacement](jquery-replacement/)** - 2 files
+   - Complete jQuery removal plan
+   - Vanilla JavaScript migration strategy
+   - Lightbox, WooCommerce, and admin script modernization
+
 ## Quick Links
 
 - **Main Guide**: [MODERNIZATION.md](overview/MODERNIZATION.md)
@@ -55,5 +60,6 @@ All documentation has been organized into logical categories:
 - `docs/wordpress-6.8/` - WordPress 6.8 compatibility
 - `docs/css-optimization/` - CSS optimization plans
 - `docs/html-optimization/` - HTML optimization plans
+- `docs/jquery-replacement/` - jQuery replacement and vanilla JS migration
 
 See [README.md](README.md) for detailed directory structure and file naming conventions.
