@@ -67,11 +67,12 @@ if ( ! class_exists( 'Kava_Post_Formats_Module' ) ) {
 		 * Register module assets
 		 */
 		public function register_assets(): void {
+			// GLightbox - Vanilla JS lightbox (no jQuery dependency)
 			wp_register_script(
-				'magnific-popup',
-				get_theme_file_uri( 'assets/lib/magnific-popup/jquery.magnific-popup.min.js' ),
-				[ 'jquery' ],
-				'1.1.0',
+				'glightbox',
+				'https://cdn.jsdelivr.net/npm/glightbox@3.2.0/dist/js/glightbox.min.js',
+				[], // No dependencies
+				'3.2.0',
 				true
 			);
 
@@ -85,10 +86,10 @@ if ( ! class_exists( 'Kava_Post_Formats_Module' ) ) {
 			);
 
 			wp_register_style(
-				'magnific-popup',
-				get_theme_file_uri( 'assets/lib/magnific-popup/magnific-popup.min.css' ),
+				'glightbox',
+				'https://cdn.jsdelivr.net/npm/glightbox@3.2.0/dist/css/glightbox.min.css',
 				[],
-				'1.1.0'
+				'3.2.0'
 			);
 
 			// Swiper v12 - Using CDN (standard CSS, no SCSS)
@@ -109,7 +110,7 @@ if ( ! class_exists( 'Kava_Post_Formats_Module' ) ) {
 		 */
 		public function add_depends_scripts( array $depends_scripts = [] ): array {
 			if ( is_singular( 'post' ) ) {
-				array_push( $depends_scripts, 'magnific-popup', 'swiper' );
+				array_push( $depends_scripts, 'glightbox', 'swiper' );
 			}
 
 			return $depends_scripts;
@@ -124,7 +125,7 @@ if ( ! class_exists( 'Kava_Post_Formats_Module' ) ) {
 		 */
 		public function add_depends_styles( array $depends_styles = [] ): array {
 			if ( is_singular( 'post' ) ) {
-				array_push( $depends_styles, 'magnific-popup', 'swiper' );
+				array_push( $depends_styles, 'glightbox', 'swiper' );
 			}
 
 			return $depends_styles;

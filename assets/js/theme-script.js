@@ -124,7 +124,7 @@ const Kava_Theme_JS = {
 		this.pagePreloaderInit();
 		this.toTopInit();
 		this.responsiveMenuInit();
-		this.magnificPopupInit();
+		this.lightboxInit();
 		this.swiperInit();
 	},
 
@@ -210,12 +210,24 @@ const Kava_Theme_JS = {
 		}
 	},
 
-	magnificPopupInit() {
-		// Magnific Popup requires jQuery, so we check for it
-		if (typeof window.jQuery !== 'undefined' && typeof window.jQuery.magnificPopup !== 'undefined') {
-			const $ = window.jQuery;
-			$('[data-popup="magnificPopup"]').magnificPopup({
-				type: 'image'
+	lightboxInit() {
+		// GLightbox - Vanilla JS lightbox (no jQuery dependency)
+		if (typeof GLightbox !== 'undefined') {
+			const lightbox = GLightbox({
+				selector: '[data-popup="magnificPopup"]',
+				touchNavigation: true,
+				loop: true,
+				autoplayVideos: false,
+				openEffect: 'fade',
+				closeEffect: 'fade',
+				slideEffect: 'slide',
+				moreText: '',
+				moreLength: 60,
+				closeButton: true,
+				touchFollowAxis: true,
+				keyboardNavigation: true,
+				closeOnOutsideClick: true,
+				startAt: 0
 			});
 		}
 	},
