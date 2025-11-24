@@ -15,7 +15,7 @@ if ( ! function_exists( 'kava_post_excerpt' ) ) :
 	 */
 	function kava_post_excerpt( array $args = [] ): ?string {
 		$default_args = [
-			'before' => '<div class="entry-content">',
+			'before' => '<div class="entry-summary" itemprop="description">',
 			'after'  => '</div>',
 			'echo'   => true
 		];
@@ -77,7 +77,7 @@ if ( ! function_exists( 'kava_posted_on' ) ) :
 
 			if( $post_publish_date_enable ) {
 
-				$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
+				$time_string = '<time class="entry-date published updated" datetime="%1$s" itemprop="datePublished" content="%1$s">%2$s</time>';
 
 				$time_string = sprintf( $time_string,
 					esc_attr( get_the_date( 'c' ) ),
@@ -283,13 +283,15 @@ if ( ! function_exists( 'kava_get_post_author' ) ) :
 			if ( $args['prefix'] ) {
 				$author_output .= $args['prefix'] . ' ';
 			}
+			$author_output .= '<span itemprop="author" itemscope itemtype="https://schema.org/Person">';
 			if ( $args['link'] ) {
-				$author_output .= '<a href="' . esc_url( get_author_posts_url( $author_id ) ) . '">';
+				$author_output .= '<a href="' . esc_url( get_author_posts_url( $author_id ) ) . '" itemprop="url">';
 			}
-			$author_output .= esc_html( get_the_author_meta( 'display_name' , $author_id ) );
+			$author_output .= '<span itemprop="name">' . esc_html( get_the_author_meta( 'display_name' , $author_id ) ) . '</span>';
 			if ( $args['link'] ) {
 				$author_output .= '</a>';
 			}
+			$author_output .= '</span>';
 		$author_output .= $args['after'];
 
 		$author_output = apply_filters(
@@ -453,11 +455,11 @@ function kava_post_thumbnail( string $image_size = 'post-thumbnail', array $args
 		$image_size
 	);
 
-	$thumb = '<figure class="' . $args['class'] . '">';
+	$thumb = '<figure class="' . $args['class'] . '" itemprop="image" itemscope itemtype="https://schema.org/ImageObject">';
 		if ( $args['link'] ) {
-			$thumb .= '<a class="' . $args['link-class'] . '" href="' . get_permalink() .'" aria-hidden="true">';
+			$thumb .= '<a class="' . $args['link-class'] . '" href="' . get_permalink() .'" aria-hidden="true" itemprop="url">';
 		}
-			$thumb .= get_the_post_thumbnail( null, $image_size );
+			$thumb .= get_the_post_thumbnail( null, $image_size, [ 'itemprop' => 'image' ] );
 		if ( $args['link'] ) {
 			$thumb .= '</a>';
 		}
@@ -520,7 +522,7 @@ function kava_get_page_preloader(): void {
 	if ( $page_preloader && filter_var( $enable_theme_js, FILTER_VALIDATE_BOOLEAN ) ) {
 		echo  apply_filters(
 			'kava-theme/page/preloader',
-			'<div class="page-preloader-cover">
+			'<div class="page-preloader-cover" aria-hidden="true" aria-label="' . esc_attr__( 'Page loading', 'kava' ) . '">
 				<div class="page-preloader"></div>
 			</div>'
 		);
@@ -537,16 +539,29 @@ if ( ! function_exists( 'kava_header_logo' ) ) :
  */
 function kava_header_logo(): void {
 	if ( has_custom_logo() ) {
+		$logo_id = get_theme_mod( 'custom_logo' );
+		$logo_url = wp_get_attachment_image_url( $logo_id, 'full' );
+		$site_name = get_bloginfo( 'name' );
+		
+		echo '<div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">';
 		the_custom_logo();
+		if ( $logo_url ) {
+			echo '<meta itemprop="url" content="' . esc_url( $logo_url ) . '">';
+		}
+		if ( $site_name ) {
+			echo '<meta itemprop="name" content="' . esc_attr( $site_name ) . '">';
+		}
+		echo '</div>';
 	} else {
 		$logo = get_bloginfo( 'name' );
+		$site_url = home_url( '/' );
 
 		$format = apply_filters(
 			'kava-theme/header/logo-format',
-			'<h1 class="site-logo"><a class="site-logo__link" href="%1$s" rel="home">%2$s</a></h1>'
+			'<h1 class="site-logo" itemprop="name"><a class="site-logo__link" href="%1$s" rel="home" itemprop="url">%2$s</a></h1>'
 		);
 
-		printf( $format, esc_url( home_url( '/' ) ), $logo );
+		printf( $format, esc_url( $site_url ), esc_html( $logo ) );
 	}
 }
 endif;
@@ -612,7 +627,7 @@ function kava_footer_copyright(): void {
 	$copyright = kava_theme()->customizer->get_value( 'footer_copyright' );
 	$format    = apply_filters(
 		'kava-theme/footer/copyright-format',
-		'<div class="footer-copyright">%s</div>'
+		'<div class="footer-copyright" itemprop="copyrightHolder" itemscope itemtype="https://schema.org/Organization"><span itemprop="name">%s</span></div>'
 	);
 
 	if ( empty( $copyright ) ) {

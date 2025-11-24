@@ -20,7 +20,7 @@ $has_post_thumbnail_class = $has_post_thumbnail ? 'invert' : '';
 						<div class="overlay-thumbnail" <?php kava_post_overlay_thumbnail( 'kava-thumb-xl' ); ?>></div>
 					<?php endif; ?>
 					<div class="entry-header-top">
-						<div class="entry-meta"><?php
+						<div class="entry-meta" aria-label="<?php esc_attr_e( 'Entry metadata', 'kava' ); ?>"><?php
 							kava_posted_in( [
 								'delimiter' => '',
 								'before'    => '<span class="cat-links btn-style">',

@@ -5,7 +5,7 @@
 
 do_action( 'kava-theme/blog/before' );
 
-?><div <?php kava_posts_list_class(); ?>><?php
+?><section <?php kava_posts_list_class(); ?> aria-label="<?php esc_attr_e( 'Posts list', 'kava' ); ?>" itemscope itemtype="https://schema.org/Blog"><?php
 
 	while ( have_posts() ) : the_post();
 
@@ -18,7 +18,7 @@ do_action( 'kava-theme/blog/before' );
 
 	endwhile;
 
-?></div><?php
+?></section><?php
 
 do_action( 'kava-theme/blog/after' );
 

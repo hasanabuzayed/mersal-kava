@@ -29,7 +29,7 @@
 		<?php kava_post_excerpt(); ?>
 
 		<footer class="entry-footer">
-			<div class="entry-meta"><?php
+			<div class="entry-meta" aria-label="<?php esc_attr_e( 'Entry footer metadata', 'kava' ); ?>"><?php
 				kava_posted_in();
 				kava_posted_by();
 				kava_posted_on( [

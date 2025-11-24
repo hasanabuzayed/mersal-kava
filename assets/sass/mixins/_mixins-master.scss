@@ -79,7 +79,7 @@
 // This works with CSS pseudo-elements (::before, ::after) and Unicode codes
 @mixin font-awesome-icon {
 	display: inline-block;
-	font-family: "Font Awesome 7 Free"; // Font Awesome 7 Free for solid icons
+	font-family: "FontAwesome";
 	font-weight: 900; // Solid icons use weight 900
 	font-style: normal;
 	font-variant: normal;

@@ -13,7 +13,7 @@
 		<div class="col-xs-12 col-lg-8 col-lg-push-2">
 			<header class="entry-header">
 				<?php the_title( '<h1 class="entry-title h2-style">', '</h1>' ); ?>
-				<div class="entry-meta">
+				<div class="entry-meta" aria-label="<?php esc_attr_e( 'Entry metadata', 'kava' ); ?>">
 					<?php
 						kava_posted_by();
 						kava_posted_in( [

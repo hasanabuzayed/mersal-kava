@@ -18,7 +18,7 @@
 				kava_sticky_label();
 				the_title( '<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a>' );
 			?></h4>
-			<div class="entry-meta">
+			<div class="entry-meta" aria-label="<?php esc_attr_e( 'Entry metadata', 'kava' ); ?>">
 				<?php
 				kava_posted_by();
 				kava_posted_in( [
@@ -33,7 +33,7 @@
 	</header><!-- .entry-header -->
 	<?php kava_post_excerpt(); ?>
 	<footer class="entry-footer">
-		<div class="entry-meta">
+		<div class="entry-meta" aria-label="<?php esc_attr_e( 'Entry footer metadata', 'kava' ); ?>">
 			<?php
 			kava_post_tags();
 

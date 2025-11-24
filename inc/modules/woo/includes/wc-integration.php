@@ -162,18 +162,21 @@ if ( ! function_exists( 'kava_wc_cart_link' ) ) {
 	 * @return void
 	 */
 	function kava_wc_cart_link(): void {
+		$item_count = WC()->cart->get_cart_contents_count();
+		$item_count_text = sprintf(
+			/* translators: number of items in the mini cart. */
+			esc_html__( '%d', 'kava' ),
+			$item_count
+		);
+		$aria_label = sprintf(
+			/* translators: %d: number of items in cart */
+			esc_attr__( 'View your shopping cart (%d items)', 'kava' ),
+			$item_count
+		);
 		?>
-			<a class="header-cart__link" href="#" title="<?php esc_attr_e( 'View your shopping cart', 'kava' ); ?>">
-		  <?php
-		  $item_count_text = sprintf(
-		  /* translators: number of items in the mini cart. */
-			  esc_html__( '%d', 'kava' ),
-			  WC()->cart->get_cart_contents_count()
-		  );
-
-		  ?>
-				<i class="header-cart__link-icon"></i>
-				<span class="header-cart__link-count"><?php echo esc_html( $item_count_text ); ?></span>
+			<a class="header-cart__link" href="<?php echo esc_url( wc_get_cart_url() ); ?>" aria-label="<?php echo $aria_label; ?>" title="<?php esc_attr_e( 'View your shopping cart', 'kava' ); ?>">
+				<i class="header-cart__link-icon" aria-hidden="true"></i>
+				<span class="header-cart__link-count" aria-hidden="true"><?php echo esc_html( $item_count_text ); ?></span>
 			</a>
 		<?php
 	}
@@ -192,11 +195,11 @@ if ( ! function_exists( 'kava_wc_header_cart' ) ) {
 			$class = '';
 		}
 		?>
-			<div class="header-cart">
+			<div class="header-cart" aria-label="<?php esc_attr_e( 'Shopping cart', 'kava' ); ?>">
 				<div class="header-cart__link-wrap <?php echo esc_attr( $class ); ?>">
 			<?php kava_wc_cart_link(); ?>
 				</div>
-				<div class="header-cart__content">
+				<div class="header-cart__content" aria-label="<?php esc_attr_e( 'Cart contents', 'kava' ); ?>">
 			<?php
 			$instance = [ 'title' => esc_html__( 'My cart', 'kava' ) ];
 			the_widget( 'WC_Widget_Cart', $instance );
@@ -219,13 +222,18 @@ if ( ! function_exists( 'kava_wc_pagination' ) ) {
 	 * @return mixed
 	 */
 	function kava_wc_pagination( array $args ): array {
-		$args['prev_text'] = sprintf( '
-		<span class="nav-icon icon-prev"></span><span>%1$s</span>',
-			esc_html__( 'Prev', 'kava' ) );
+		$prev_text = esc_html__( 'Prev', 'kava' );
+		$next_text = esc_html__( 'Next', 'kava' );
+		
+		$args['prev_text'] = sprintf(
+			'<span class="nav-icon icon-prev" aria-hidden="true"></span><span>%1$s</span>',
+			$prev_text
+		);
 
-		$args['next_text'] = sprintf( '
-		<span>%1$s</span><span class="nav-icon icon-next"></span>',
-			esc_html__( 'Next', 'kava' ) );
+		$args['next_text'] = sprintf(
+			'<span>%1$s</span><span class="nav-icon icon-next" aria-hidden="true"></span>',
+			$next_text
+		);
 
 		return $args;
 	}

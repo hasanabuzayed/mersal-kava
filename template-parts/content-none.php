@@ -9,9 +9,9 @@
 
 ?>
 
-<section class="no-results not-found">
-	<header class="page-header">
-		<h1 class="page-title"><?php esc_html_e( 'Nothing Found', 'kava' ); ?></h1>
+<section class="no-results not-found" aria-label="<?php esc_attr_e( 'No results found', 'kava' ); ?>" itemscope itemtype="https://schema.org/WebPage">
+	<header class="page-header" itemscope itemtype="https://schema.org/WPHeader">
+		<h1 class="page-title" itemprop="headline"><?php esc_html_e( 'Nothing Found', 'kava' ); ?></h1>
 	</header><!-- .page-header -->
 
 	<div class="page-content">

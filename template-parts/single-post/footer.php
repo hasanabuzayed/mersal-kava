@@ -9,8 +9,8 @@
 
 ?>
 
-<footer class="entry-footer">
-	<div class="entry-meta"><?php
+<footer class="entry-footer" itemscope itemtype="https://schema.org/WPFooter">
+	<div class="entry-meta" aria-label="<?php esc_attr_e( 'Entry footer metadata', 'kava' ); ?>" itemprop="keywords"><?php
 		kava_post_tags ( [
 			'prefix'    => __( 'Tags:', 'kava' ),
 			'delimiter' => ''

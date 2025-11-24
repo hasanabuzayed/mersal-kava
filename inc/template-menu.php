@@ -18,7 +18,7 @@ function kava_main_menu(): void {
 	$classes[] = 'main-navigation';
 
 	?>
-	<nav id="site-navigation" class="<?php echo join( ' ', $classes ); ?>" role="navigation">
+	<nav id="site-navigation" class="<?php echo join( ' ', $classes ); ?>" aria-label="<?php esc_attr_e( 'Main navigation', 'kava' ); ?>">
 		<div class="main-navigation-inner">
 		<?php
 			$args = apply_filters( 'kava-theme/menu/main-menu-args', [
@@ -43,7 +43,7 @@ function kava_main_menu(): void {
  * @return void
  */
 function kava_footer_menu(): void { ?>
-	<nav id="footer-navigation" class="footer-menu" role="navigation">
+	<nav id="footer-navigation" class="footer-menu" aria-label="<?php esc_attr_e( 'Footer navigation', 'kava' ); ?>">
 	<?php
 		$args = apply_filters( 'kava-theme/menu/footer-menu-args', [
 			'theme_location'   => 'footer',
@@ -84,8 +84,9 @@ function kava_get_social_list( string $context, string $type = 'icon' ): string 
 
 	$args = apply_filters( 'kava-theme/social/list-args', [
 		'theme_location'   => 'social',
-		'container'        => 'div',
+		'container'        => 'nav',
 		'container_class'  => join( ' ', $container_class ),
+		'container_id'     => "social-list-{$instance}",
 		'menu_id'          => "social-list-{$instance}",
 		'menu_class'       => 'social-list__items inline-list',
 		'depth'            => 1,
@@ -95,8 +96,23 @@ function kava_get_social_list( string $context, string $type = 'icon' ): string 
 		'fallback_cb'      => 'kava_set_nav_menu',
 		'fallback_message' => esc_html__( 'Set social menu', 'kava' ),
 	], $context, $type );
-
+	
 	$menu = wp_nav_menu( $args );
+	
+	// Add aria-label to social navigation if menu exists
+	if ( ! empty( $menu ) && is_string( $menu ) ) {
+		$aria_label = sprintf( 
+			esc_attr__( 'Social links%s', 'kava' ),
+			! empty( $context ) ? ' ' . esc_attr( $context ) : ''
+		);
+		// Add aria-label to nav element
+		$menu = preg_replace(
+			'/(<nav[^>]*class="[^"]*' . preg_quote( join( ' ', $container_class ), '/' ) . '[^"]*")/',
+			'$1 aria-label="' . $aria_label . '"',
+			$menu,
+			1
+		);
+	}
 
 	// Ensure we always return a string, even if wp_nav_menu returns false or null
 	return is_string( $menu ) ? $menu : '';

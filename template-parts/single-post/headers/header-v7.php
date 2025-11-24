@@ -35,7 +35,7 @@ $has_post_thumbnail_class = $has_post_thumbnail ? 'invert' : '';
 					<?php the_title( '<h1 class="entry-title h3-style">', '</h1>' ); ?>
 				</header><!-- .entry-header -->
 				<div class="entry-header-bottom">
-					<div class="entry-meta"><?php
+					<div class="entry-meta" aria-label="<?php esc_attr_e( 'Entry metadata', 'kava' ); ?>"><?php
 						kava_post_tags ( [
 							'prefix'    => '<i class="fa-solid fa-tag" aria-hidden="true"></i>',
 						]);

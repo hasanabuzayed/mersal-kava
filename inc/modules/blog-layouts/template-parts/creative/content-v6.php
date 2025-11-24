@@ -29,7 +29,7 @@
 
 		<div class="creative-item__content-wrapper">
 			<header class="entry-header">
-				<div class="entry-meta">
+				<div class="entry-meta" aria-label="<?php esc_attr_e( 'Entry metadata', 'kava' ); ?>">
 					<?php
 						kava_posted_by();
 						kava_posted_in( [
@@ -46,7 +46,7 @@
 			<?php kava_post_excerpt(); ?>
 
 			<footer class="entry-footer">
-				<div class="entry-meta"><?php
+				<div class="entry-meta" aria-label="<?php esc_attr_e( 'Entry footer metadata', 'kava' ); ?>"><?php
 					kava_post_tags( [
 						'prefix' => __( 'Tags:', 'kava' )
 					]);

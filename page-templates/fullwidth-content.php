@@ -12,13 +12,15 @@ get_header();
 
 	while ( have_posts() ) : the_post();
 
-		?><article id="post-<?php the_ID(); ?>" <?php post_class(); ?>><?php
+		?><article id="post-<?php the_ID(); ?>" <?php post_class(); ?> itemscope itemtype="https://schema.org/WebPage"><?php
 			if ( ! kava_theme()->do_location( 'single' ) ) {
-				the_content();
+				?><div class="entry-content" itemprop="text"><?php
+					the_content();
+				?></div><?php
 			}
 			wp_link_pages( [
-				'before'      => '<div class="page-links">' . esc_html__( 'Pages:', 'kava' ),
-				'after'       => '</div>',
+				'before'      => '<nav class="page-links" aria-label="' . esc_attr__( 'Page links', 'kava' ) . '" itemscope itemtype="https://schema.org/SiteNavigationElement"><span class="page-links-title">' . esc_html__( 'Pages:', 'kava' ) . '</span>',
+				'after'       => '</nav>',
 				'link_before' => '<span>',
 				'link_after'  => '</span>',
 			] );

@@ -23,10 +23,10 @@
 <?php kava_body_open(); ?>
 <?php do_action( 'kava-theme/site/page-start' ); ?>
 <?php kava_get_page_preloader(); ?>
-<div id="page" class="site">
+<div id="page" class="site" itemscope itemtype="https://schema.org/WebPage">
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'kava' ); ?></a>
-	<header id="masthead" <?php echo kava_get_container_classes( 'site-header' ); ?>>
+	<header id="masthead" <?php echo kava_get_container_classes( 'site-header' ); ?> itemscope itemtype="https://schema.org/WPHeader" role="banner">
 		<?php kava_theme()->do_location( 'header', 'template-parts/header' ); ?>
 	</header><!-- #masthead -->
 	<?php do_action( 'kava-theme/site/breadcrumbs-area' ); ?>
-	<div id="content" <?php echo kava_get_container_classes( 'site-content' ); ?>>
+	<div id="content" <?php echo kava_get_container_classes( 'site-content' ); ?> role="main">

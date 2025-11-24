@@ -9,14 +9,14 @@
 
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class('posts-list__item default-item'); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class('posts-list__item default-item'); ?> itemscope itemtype="https://schema.org/BlogPosting">
 
 	<header class="entry-header">
 		<h3 class="entry-title"><?php 
 			kava_sticky_label();
-			the_title( '<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a>' );
+			the_title( '<a href="' . esc_url( get_permalink() ) . '" rel="bookmark" itemprop="url"><span itemprop="headline">', '</span></a>' );
 		?></h3>
-		<div class="entry-meta">
+		<div class="entry-meta" aria-label="<?php esc_attr_e( 'Entry metadata', 'kava' ); ?>">
 			<?php
 				kava_posted_by();
 				kava_posted_in( [
@@ -34,7 +34,7 @@
 	<?php kava_post_excerpt(); ?>
 
 	<footer class="entry-footer">
-		<div class="entry-meta">
+		<div class="entry-meta" aria-label="<?php esc_attr_e( 'Entry footer metadata', 'kava' ); ?>">
 			<?php
 				kava_post_tags( [
 					'prefix' => __( 'Tags:', 'kava' )

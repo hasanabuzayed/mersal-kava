@@ -25,7 +25,7 @@
 	<div class="default-item__content">
 
 		<header class="entry-header">
-			<div class="entry-meta"><?php
+			<div class="entry-meta" aria-label="<?php esc_attr_e( 'Entry metadata', 'kava' ); ?>"><?php
 				kava_posted_by();
 				kava_posted_on( [
 					'prefix' => __( 'Posted', 'kava' )
@@ -34,7 +34,7 @@
 					'prefix' => __( 'Tags:', 'kava' )
 				]);
 			?></div><!-- .entry-meta -->
-			<h3 class="entry-title"><?php 
+			<h3 class="entry-title" aria-label="<?php esc_attr_e( 'Entry metadata', 'kava' ); ?>"><?php 
 				kava_sticky_label();
 				the_title( '<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a>' );
 			?></h3>
@@ -43,7 +43,7 @@
 		<?php kava_post_excerpt(); ?>
 
 		<footer class="entry-footer">
-			<div class="entry-meta">
+			<div class="entry-meta" aria-label="<?php esc_attr_e( 'Entry footer metadata', 'kava' ); ?>">
 				<?php
 					kava_post_link( [
 						'class'  => 'invert-button'

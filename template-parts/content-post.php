@@ -3,7 +3,7 @@
  * Post content template (fallback for single location)
  */
 ?>
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>><?php
+<article id="post-<?php the_ID(); ?>" <?php post_class(); ?> itemscope itemtype="https://schema.org/BlogPosting"><?php
 
 	get_template_part( 'template-parts/single-post/headers/header-v1', get_post_format() );
 	get_template_part( 'template-parts/single-post/content', get_post_format() );

@@ -24,12 +24,12 @@ get_header();
 
 				<?php do_action( 'kava-theme/site/main-before', 'index' ); ?>
 
-				<main id="main" class="site-main"><?php
+				<main id="main" class="site-main" role="main" itemscope itemtype="https://schema.org/Blog"><?php
 					if ( have_posts() ) :
 
 						if ( is_home() && ! is_front_page() ) : ?>
-							<header>
-								<h1 class="page-title screen-reader-text"><?php single_post_title(); ?></h1>
+							<header class="page-header" itemscope itemtype="https://schema.org/WPHeader">
+								<h1 class="page-title screen-reader-text" itemprop="headline"><?php single_post_title(); ?></h1>
 							</header>
 
 						<?php endif;

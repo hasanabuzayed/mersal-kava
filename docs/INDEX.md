@@ -30,10 +30,12 @@ Quick reference guide to all project documentation.
 6. **[CSS Optimization](css-optimization/)** - 8 files
    - CSS/SCSS optimization and modernization plan
 
-7. **[HTML Optimization](html-optimization/)** - 4 files
+7. **[HTML Optimization](html-optimization/)** - 10 files
    - HTML optimization and modernization plan
    - Sequential optimization framework with feedback loops
    - Workflow diagrams and metrics templates
+   - Optimization rules catalog
+   - Stage 4-5 progress reports + checkpoint validations
 
 ## Quick Links
 

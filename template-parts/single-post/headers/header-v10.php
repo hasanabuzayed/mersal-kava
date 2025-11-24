@@ -20,7 +20,7 @@ $has_post_thumbnail_class = $has_post_thumbnail ? 'has-post-thumbnail' : '';
 				<header class="entry-header">
 					<?php the_title( '<h1 class="entry-title h3-style">', '</h1>' ); ?>
 					<div class="entry-header-bottom">
-						<div class="entry-meta"><?php
+						<div class="entry-meta" aria-label="<?php esc_attr_e( 'Entry metadata', 'kava' ); ?>"><?php
 							if ( kava_theme()->customizer->get_value( 'single_post_author' ) ) : ?>
 								<span class="post-author">
 									<span class="post-author__avatar"><?php
@@ -39,7 +39,7 @@ $has_post_thumbnail_class = $has_post_thumbnail ? 'has-post-thumbnail' : '';
 									'prefix'  => __( 'Posted', 'kava' ),
 								] );
 						?></div><!-- .entry-meta -->
-						<div class="entry-meta"><?php
+						<div class="entry-meta" aria-label="<?php esc_attr_e( 'Entry comments', 'kava' ); ?>"><?php
 							kava_post_comments( [
 								'prefix' => '<i class="fa-solid fa-comment" aria-hidden="true"></i>',
 								'class'  => 'comments-button'

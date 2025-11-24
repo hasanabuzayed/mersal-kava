@@ -7,7 +7,7 @@
  * @package Kava
  */
 
-echo '<div class="post-navigation-container">';
+echo '<nav class="post-navigation-container" aria-label="' . esc_attr__( 'Post navigation', 'kava' ) . '" itemscope itemtype="https://schema.org/SiteNavigationElement">';
 
 the_post_navigation( [
 	'prev_text' => sprintf( '
@@ -28,4 +28,4 @@ the_post_navigation( [
 	),
 ] );
 
-echo '</div>';
+echo '</nav>';

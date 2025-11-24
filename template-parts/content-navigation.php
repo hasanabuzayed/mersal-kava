@@ -7,7 +7,7 @@
 
 do_action( 'kava-theme/blog/posts-navigation-before' );
 
-echo '<div class="posts-list-navigation">';
+echo '<nav class="posts-list-navigation" aria-label="' . esc_attr__( 'Posts navigation', 'kava' ) . '" itemscope itemtype="https://schema.org/SiteNavigationElement">';
 
 $navigation_type = kava_theme()->customizer->get_value( 'blog_navigation_type' );
 
@@ -44,6 +44,6 @@ match ( $navigation_type ) {
 	default => null,
 };
 
-echo '</div>';
+echo '</nav>';
 
 do_action( 'kava-theme/blog/posts-navigation-after' );

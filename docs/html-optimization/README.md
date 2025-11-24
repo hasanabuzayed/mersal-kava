@@ -35,6 +35,13 @@ Complete documentation for HTML optimization and modernization of the Kava v3 th
    - Cross-group pattern analysis
    - JSON templates for data collection
 
+5. **[HTML_OPTIMIZATION_RULES.md](HTML_OPTIMIZATION_RULES.md)**
+   - Complete rules catalog
+   - Pattern descriptions and actions
+   - Success rates and validation
+   - Application instructions
+   - Auto-apply status
+
 ---
 
 ## Choosing Your Approach

@@ -42,7 +42,7 @@ $invert_class = $has_post_thumbnail ? 'invert' : '';
 						]);
 					?></div>
 				<?php endif; ?>
-				<div class="entry-meta"><?php
+				<div class="entry-meta" aria-label="<?php esc_attr_e( 'Entry metadata', 'kava' ); ?>"><?php
 					kava_posted_on( [
 						'prefix'  => '<i class="fa-regular fa-clock" aria-hidden="true"></i> ' . __( 'Posted', 'kava' ),
 					]);

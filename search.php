@@ -20,11 +20,11 @@ get_header();
 
 				<?php do_action( 'kava-theme/site/main-before', 'search' ); ?>
 
-				<main id="main" class="site-main"><?php
+				<main id="main" class="site-main" role="main" itemscope itemtype="https://schema.org/SearchResultsPage"><?php
 					if ( have_posts() ) : ?>
 
-						<header class="page-header">
-							<h1 class="page-title"><?php
+						<header class="page-header" itemscope itemtype="https://schema.org/WPHeader">
+							<h1 class="page-title" itemprop="headline"><?php
 								/* translators: %s: search query. */
 								printf( esc_html__( 'Search Results for: %s', 'kava' ), '<span>' . get_search_query() . '</span>' );
 							?></h1>

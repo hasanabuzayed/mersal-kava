@@ -9,25 +9,25 @@
 
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class(); ?> itemscope itemtype="https://schema.org/WebPage">
 
 	<?php
 	$show_page_title = kava_theme()->customizer->get_value( 'show_page_title' );
 
 	if ( filter_var( $show_page_title, FILTER_VALIDATE_BOOLEAN ) ) : ?>
-		<header class="page-header">
-			<?php the_title( '<h1 class="page-title">', '</h1>' ); ?>
+		<header class="page-header" itemscope itemtype="https://schema.org/WPHeader">
+			<?php the_title( '<h1 class="page-title" itemprop="headline">', '</h1>' ); ?>
 		</header><!-- .page-header -->
 	<?php endif; ?>
 
 	<?php kava_post_thumbnail(); ?>
 
-	<div class="page-content">
+	<div class="page-content" itemprop="text">
 		<?php
 			the_content();
 			wp_link_pages( [
-				'before'      => '<div class="page-links">' . esc_html__( 'Pages:', 'kava' ),
-				'after'       => '</div>',
+				'before'      => '<nav class="page-links" aria-label="' . esc_attr__( 'Page links', 'kava' ) . '"><span class="page-links-title">' . esc_html__( 'Pages:', 'kava' ) . '</span>',
+				'after'       => '</nav>',
 				'link_before' => '<span>',
 				'link_after'  => '</span>',
 			] );

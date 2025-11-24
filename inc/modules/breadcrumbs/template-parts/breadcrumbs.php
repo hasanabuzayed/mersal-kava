@@ -22,12 +22,12 @@ if ( ! $breadcrumbs_front_visibillity && is_front_page() ) {
 
 do_action( 'kava-theme/breadcrumbs/breadcrumbs-before-render' );
 
-?><div <?php echo kava_get_container_classes( 'site-breadcrumbs' ); ?>>
+?><nav <?php echo kava_get_container_classes( 'site-breadcrumbs' ); ?> aria-label="<?php esc_attr_e( 'Breadcrumb navigation', 'kava' ); ?>" itemscope itemtype="https://schema.org/BreadcrumbList">
 	<div <?php kava_breadcrumbs_class(); ?>>
 		<?php do_action( 'kava-theme/breadcrumbs/before' ); ?>
 		<?php do_action( 'cx_breadcrumbs/render' ); ?>
 		<?php do_action( 'kava-theme/breadcrumbs/after' ); ?>
 	</div>
-</div><?php
+</nav><?php
 
 do_action( 'kava-theme/breadcrumbs/breadcrumbs-after-render' );

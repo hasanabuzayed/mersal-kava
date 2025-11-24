@@ -9,9 +9,9 @@
 
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class('search-item'); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class('search-item'); ?> itemscope itemtype="https://schema.org/BlogPosting">
 	<header class="entry-header">
-		<div class="entry-meta"><?php
+		<div class="entry-meta" aria-label="<?php esc_attr_e( 'Entry metadata', 'kava' ); ?>"><?php
 			kava_posted_by();
 			kava_posted_in( [
 				'prefix' => __( 'In', 'kava' ),
@@ -20,10 +20,10 @@
 				'prefix' => __( 'Posted', 'kava' )
 			] );
 		?></div><!-- .entry-meta -->
-		<?php the_title( '<h4 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h4>' ); ?>
+		<?php the_title( '<h4 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark" itemprop="url"><span itemprop="headline">', '</span></a></h4>' ); ?>
 	</header><!-- .entry-header -->
 
-	<div class="entry-content">
+	<div class="entry-content" itemprop="description">
 		<?php the_excerpt(); ?>
 	</div><!-- .entry-content -->
 

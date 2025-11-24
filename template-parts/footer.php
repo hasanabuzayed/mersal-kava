@@ -8,7 +8,7 @@
 
 <?php do_action( 'kava-theme/widget-area/render', 'footer-area' ); ?>
 
-<div <?php kava_footer_class(); ?>>
+<div <?php kava_footer_class(); ?> itemscope itemtype="https://schema.org/WPFooter">
 	<div class="space-between-content"><?php
 		kava_footer_copyright();
 		kava_social_list( 'footer' );

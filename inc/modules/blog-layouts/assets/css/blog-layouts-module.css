@@ -1888,7 +1888,7 @@ body:not(.sidebar_enabled) .list-style-v3 .default-item {
 }
 .posts-list.posts-list--grid .grid-item .comments-link:before {
   display: inline-block;
-  font-family: "Font Awesome 7 Free";
+  font-family: "FontAwesome";
   font-weight: 900;
   font-style: normal;
   font-feature-settings: normal;
@@ -2896,7 +2896,7 @@ body:not(.sidebar_enabled) .list-style-v3 .default-item {
 }
 .posts-list__item.justify-item .comments-link:before {
   display: inline-block;
-  font-family: "Font Awesome 7 Free";
+  font-family: "FontAwesome";
   font-weight: 900;
   font-style: normal;
   font-feature-settings: normal;
@@ -4127,7 +4127,7 @@ body:not(.sidebar_enabled) .list-style-v3 .default-item {
 }
 .posts-list.posts-list--masonry .masonry-item .comments-link:before {
   display: inline-block;
-  font-family: "Font Awesome 7 Free";
+  font-family: "FontAwesome";
   font-weight: 900;
   font-style: normal;
   font-feature-settings: normal;

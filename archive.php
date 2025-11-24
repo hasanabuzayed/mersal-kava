@@ -17,14 +17,14 @@ get_header();
 		$show_archive_desc  = kava_theme()->customizer->get_value( 'show_archive_desc' );
 
 		if ( filter_var( $show_archive_title, FILTER_VALIDATE_BOOLEAN ) || filter_var( $show_archive_desc, FILTER_VALIDATE_BOOLEAN ) ) : ?>
-			<header class="page-header">
+			<header class="page-header" itemscope itemtype="https://schema.org/WPHeader">
 				<?php
 					if ( filter_var( $show_archive_title, FILTER_VALIDATE_BOOLEAN ) ) {
-						the_archive_title( '<h1 class="page-title">', '</h1>' );
+						the_archive_title( '<h1 class="page-title" itemprop="headline">', '</h1>' );
 					}
 
 					if ( filter_var( $show_archive_desc, FILTER_VALIDATE_BOOLEAN ) ) {
-						the_archive_description( '<div class="archive-description">', '</div>' );
+						the_archive_description( '<div class="archive-description" itemprop="description">', '</div>' );
 					}
 				?>
 			</header><!-- .page-header -->
@@ -38,7 +38,7 @@ get_header();
 
 				<?php do_action( 'kava-theme/site/main-before', 'archive' ); ?>
 
-				<main id="main" class="site-main"><?php
+				<main id="main" class="site-main" role="main" itemscope itemtype="https://schema.org/CollectionPage"><?php
 					if ( have_posts() ) :
 
 						kava_theme()->do_location( 'archive', 'template-parts/posts-loop' );

@@ -22,7 +22,7 @@ if ( post_password_required() ) {
 
 <?php do_action( 'kava-theme/comments/comments-area-before' ); ?>
 
-<div id="comments" class="comments-area"><?php
+<section id="comments" class="comments-area" aria-label="<?php esc_attr_e( 'Comments', 'kava' ); ?>" itemscope itemtype="https://schema.org/UserComments"><?php
 	// You can start editing here -- including this comment!
 	if ( have_comments() ) : ?>
 
@@ -39,7 +39,7 @@ if ( post_password_required() ) {
 
 		<?php do_action( 'kava-theme/comments/comment-list-before' ); ?>
 
-		<ol class="comment-list">
+		<ol class="comment-list" aria-label="<?php esc_attr_e( 'Comment list', 'kava' ); ?>" itemscope itemtype="https://schema.org/ItemList">
 			<?php
 			wp_list_comments( [
 				'style'       => 'ol',
@@ -52,7 +52,14 @@ if ( post_password_required() ) {
 
 		<?php do_action( 'kava-theme/comments/comments-navigation-before' ); ?>
 
-		<?php the_comments_navigation();
+		<?php
+		// Wrap comments navigation in nav element
+		ob_start();
+		the_comments_navigation();
+		$comments_nav = ob_get_clean();
+		if ( ! empty( $comments_nav ) ) {
+			echo '<nav class="comments-navigation" aria-label="' . esc_attr__( 'Comments navigation', 'kava' ) . '">' . $comments_nav . '</nav>';
+		}
 
 		// If comments are closed and there are comments, let's leave a little note, shall we?
 		if ( ! comments_open() ) : ?>
@@ -65,6 +72,6 @@ if ( post_password_required() ) {
 	do_action( 'kava-theme/comments/comment-form-before' );
 
 	comment_form();
-?></div><!-- #comments -->
+?></section><!-- #comments -->
 
 <?php do_action( 'kava-theme/comments/comments-area-after' ); ?>

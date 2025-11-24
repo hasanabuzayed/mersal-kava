@@ -35,7 +35,7 @@
 				<?php kava_post_link(); ?>
 			</div><!-- .justify-item-wrap__animated-->
 			<footer class="entry-footer">
-				<div class="entry-meta">
+				<div class="entry-meta" aria-label="<?php esc_attr_e( 'Entry footer metadata', 'kava' ); ?>">
 					<?php
 					kava_posted_by();
 					kava_posted_on( [

@@ -11,7 +11,7 @@ if ( !is_shop() && !is_product_taxonomy() ){
 
 ?>
 
-<header class="woocommerce-products-header container">
+<header class="woocommerce-products-header container" aria-label="<?php esc_attr_e( 'Products header', 'kava' ); ?>" itemscope itemtype="https://schema.org/WPHeader">
 	<?php
 			echo wp_kses_post( $title );
 			woocommerce_taxonomy_archive_description();

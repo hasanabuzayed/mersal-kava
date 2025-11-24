@@ -19,7 +19,7 @@ $author_block_class = $is_author_block_enabled ? 'with_author_block' : '';
 				<header class="entry-header">
 					<?php get_template_part( 'template-parts/single-post/author-bio' ); ?>
 					<?php the_title( '<h1 class="entry-title h2-style">', '</h1>' ); ?>
-					<div class="entry-meta"><?php
+					<div class="entry-meta" aria-label="<?php esc_attr_e( 'Entry metadata', 'kava' ); ?>"><?php
 						kava_posted_in( [
 							'prefix'  => __( 'In', 'kava' ),
 						]);

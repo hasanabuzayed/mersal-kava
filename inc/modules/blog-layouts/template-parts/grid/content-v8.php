@@ -14,7 +14,7 @@
 		<?php kava_post_thumbnail( 'kava-thumb-s-2' ); ?>
 		<div class="grid-item-wrap__content">
 			<header class="entry-header">
-				<div class="entry-meta">
+				<div class="entry-meta" aria-label="<?php esc_attr_e( 'Entry metadata', 'kava' ); ?>">
 					<?php
 					kava_posted_by();
 					kava_posted_in( [
@@ -33,7 +33,7 @@
 			</header><!-- .entry-header -->
 			<?php kava_post_excerpt(); ?>
 			<footer class="entry-footer">
-				<div class="entry-meta">
+				<div class="entry-meta" aria-label="<?php esc_attr_e( 'Entry footer metadata', 'kava' ); ?>">
 					<?php
 					kava_post_tags();
 

@@ -11,7 +11,7 @@ add_action( 'woocommerce_before_shop_loop', 'kava_wc_loop_products_panel_open', 
 add_action( 'woocommerce_before_shop_loop', 'kava_wc_loop_products_panel_close', 50 );
 add_filter( 'woocommerce_product_loop_start', 'kava_wc_product_loop_start' );
 
-if ( ! function_exists( 'kava_wc_loop_products_panel_open' ) ) {
+	if ( ! function_exists( 'kava_wc_loop_products_panel_open' ) ) {
 
 	/**
 	 * Archive products panel wrapper open
@@ -21,12 +21,12 @@ if ( ! function_exists( 'kava_wc_loop_products_panel_open' ) ) {
 			return;
 		}
 
-		echo '<div class="woocommerce-products__panel">';
+		echo '<nav class="woocommerce-products__panel" aria-label="' . esc_attr__( 'Products navigation', 'kava' ) . '" itemscope itemtype="https://schema.org/SiteNavigationElement">';
 	}
 
 }
 
-if ( ! function_exists( 'kava_wc_loop_products_panel_close' ) ) {
+	if ( ! function_exists( 'kava_wc_loop_products_panel_close' ) ) {
 
 	/**
 	 * Archive products panel wrapper close
@@ -36,7 +36,7 @@ if ( ! function_exists( 'kava_wc_loop_products_panel_close' ) ) {
 			return;
 		}
 
-		echo '</div>';
+		echo '</nav>';
 	}
 
 }
@@ -79,12 +79,13 @@ if ( ! function_exists( 'kava_wc_product_loop_start' ) ) {
 
 		if ( is_shop() || is_product_taxonomy() || is_product() ) {
 			$ob_get_clean = sprintf(
-				'<ul class="products products-grid columns-xs-%1$s columns-sm-%2$s columns-md-%3$s columns-lg-%4$s columns-xl-%5$s">',
+				'<ul class="products products-grid columns-xs-%1$s columns-sm-%2$s columns-md-%3$s columns-lg-%4$s columns-xl-%5$s" aria-label="%6$s" itemscope itemtype="https://schema.org/ItemList">',
 				esc_attr( $columns['xs'] ),
 				esc_attr( $columns['sm'] ),
 				esc_attr( $columns['md'] ),
 				esc_attr( $columns['lg'] ),
-				esc_attr( $columns['xl'] )
+				esc_attr( $columns['xl'] ),
+				esc_attr__( 'Products list', 'kava' )
 			);
 		}
 

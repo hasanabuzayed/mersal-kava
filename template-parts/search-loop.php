@@ -2,6 +2,7 @@
 /**
  * Search loop template
  */
+?><section class="search-results" aria-label="<?php esc_attr_e( 'Search results', 'kava' ); ?>" itemscope itemtype="https://schema.org/ItemList"><?php
 while ( have_posts() ) : the_post();
 
 	/**
@@ -12,5 +13,7 @@ while ( have_posts() ) : the_post();
 	get_template_part( 'template-parts/content', 'search' );
 
 endwhile;
+
+?></section><?php
 
 get_template_part( 'template-parts/content', 'navigation' );

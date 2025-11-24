@@ -13,7 +13,7 @@
 
 	</div><!-- #content -->
 
-	<footer id="colophon" <?php echo kava_get_container_classes( 'site-footer' ); ?>>
+	<footer id="colophon" <?php echo kava_get_container_classes( 'site-footer' ); ?> itemscope itemtype="https://schema.org/WPFooter" role="contentinfo">
 		<?php kava_theme()->do_location( 'footer', 'template-parts/footer' ); ?>
 	</footer><!-- #colophon -->
 

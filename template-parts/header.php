@@ -10,10 +10,10 @@
 
 <?php get_template_part( 'template-parts/top-panel' ); ?>
 
-<div <?php kava_header_class(); ?>>
+<div <?php kava_header_class(); ?> itemscope itemtype="https://schema.org/Organization">
 	<?php do_action( 'kava-theme/header/before' ); ?>
 	<div class="space-between-content">
-		<div <?php kava_site_branding_class(); ?>>
+		<div <?php kava_site_branding_class(); ?> itemscope itemtype="https://schema.org/Organization">
 			<?php kava_header_logo(); ?>
 		</div>
 		<?php kava_main_menu(); ?>

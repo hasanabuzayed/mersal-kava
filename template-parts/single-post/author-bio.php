@@ -15,16 +15,16 @@ if ( ! $is_enabled ) {
 }
 
 ?>
-<div class="post-author-bio">
-	<div class="post-author__avatar"><?php
+<aside class="post-author-bio" aria-label="<?php esc_attr_e( 'Author information', 'kava' ); ?>" role="complementary" itemscope itemtype="https://schema.org/Person">
+	<div class="post-author__avatar" itemprop="image"><?php
 		kava_get_post_author_avatar();
 	?></div>
 	<div class="post-author__content">
 		<h4 class="post-author__title"><?php
 			kava_get_post_author();
 		?></h4>
-		<div class="post-author__content"><?php
+		<div class="post-author__content" itemprop="description"><?php
 			kava_get_author_meta();
 		?></div>
 	</div>
-</div>
+</aside>

@@ -1,0 +1,759 @@
+{
+  "$schema": "https://json.schemastore.org/htmloptimization",
+  "version": "1.0.0",
+  "rules": {
+    "nav-aria-label-001": {
+      "enabled": true,
+      "category": "accessibility",
+      "severity": "error",
+      "pattern": {
+        "selector": "nav",
+        "conditions": [
+          "navigation element",
+          "missing aria-label"
+        ]
+      },
+      "action": {
+        "add": [
+          {
+            "attribute": "aria-label",
+            "value": "{{context}} navigation",
+            "required": true
+          }
+        ],
+        "remove": [
+          {
+            "attribute": "role",
+            "value": "navigation",
+            "reason": "redundant - nav element already implies navigation role"
+          }
+        ]
+      },
+      "examples": {
+        "before": "<nav id=\"site-navigation\" class=\"main-navigation\" role=\"navigation\">",
+        "after": "<nav id=\"site-navigation\" class=\"main-navigation\" aria-label=\"Main navigation\">"
+      },
+      "exceptions": [
+        "WordPress core navigation (wp_nav_menu may handle ARIA)",
+        "Navigation already has proper ARIA labels",
+        "Custom navigation with special requirements"
+      ],
+      "autoApply": true,
+      "minSuccessRate": 0.8
+    },
+    "nav-semantic-001": {
+      "enabled": true,
+      "category": "semantic_html",
+      "severity": "error",
+      "pattern": {
+        "selector": "div",
+        "conditions": [
+          "contains navigation links",
+          "not layout container",
+          "not WordPress core element"
+        ],
+        "classPatterns": [
+          "nav",
+          "navigation",
+          "menu",
+          "social-list"
+        ]
+      },
+      "action": {
+        "replace": [
+          {
+            "from": "div",
+            "to": "nav",
+            "preserveAttributes": true,
+            "preserveClasses": true
+          }
+        ],
+        "add": [
+          {
+            "attribute": "aria-label",
+            "value": "{{context}} navigation",
+            "required": true
+          }
+        ]
+      },
+      "examples": {
+        "before": "<div class=\"social-list\">",
+        "after": "<nav class=\"social-list\" aria-label=\"Social links\">"
+      },
+      "exceptions": [
+        "Layout containers (must remain div)",
+        "Content wrappers (must remain div)",
+        "WordPress core elements that require div"
+      ],
+      "autoApply": true,
+      "minSuccessRate": 0.8
+    },
+    "decorative-aria-hidden-001": {
+      "enabled": true,
+      "category": "accessibility",
+      "severity": "warning",
+      "pattern": {
+        "selector": "*",
+        "conditions": [
+          "decorative element",
+          "loading indicator",
+          "visual-only element",
+          "no important content"
+        ],
+        "classPatterns": [
+          "preloader",
+          "spinner",
+          "loading",
+          "decorative",
+          "icon.*decorative"
+        ]
+      },
+      "action": {
+        "add": [
+          {
+            "attribute": "aria-hidden",
+            "value": "true",
+            "required": true
+          },
+          {
+            "attribute": "aria-label",
+            "value": "{{context}}",
+            "required": false,
+            "condition": "element visible during loading"
+          }
+        ]
+      },
+      "examples": {
+        "before": "<div class=\"page-preloader-cover\">",
+        "after": "<div class=\"page-preloader-cover\" aria-hidden=\"true\" aria-label=\"Page loading\">"
+      },
+      "exceptions": [
+        "Elements with important content",
+        "Interactive elements",
+        "Form elements",
+        "Error messages"
+      ],
+      "autoApply": true,
+      "minSuccessRate": 0.8
+    },
+    "complementary-role-001": {
+      "enabled": true,
+      "category": "accessibility",
+      "severity": "error",
+      "pattern": {
+        "selector": "div, aside",
+        "conditions": [
+          "complementary content",
+          "sidebar",
+          "related content",
+          "widget area"
+        ],
+        "classPatterns": [
+          "sidebar",
+          "top-panel",
+          "bottom-panel",
+          "widget-area",
+          "related",
+          "complementary"
+        ]
+      },
+      "action": {
+        "add": [
+          {
+            "attribute": "role",
+            "value": "complementary",
+            "required": true
+          },
+          {
+            "attribute": "aria-label",
+            "value": "{{context}}",
+            "required": true
+          }
+        ],
+        "prefer": [
+          {
+            "element": "aside",
+            "condition": "sidebar content",
+            "reason": "semantic HTML5 element"
+          }
+        ]
+      },
+      "examples": {
+        "before": "<div class=\"top-panel container\">",
+        "after": "<div class=\"top-panel container\" role=\"complementary\" aria-label=\"Top Panel\">",
+        "preferred": "<aside class=\"sidebar\" role=\"complementary\" aria-label=\"Sidebar\">"
+      },
+      "exceptions": [
+        "Main content areas (use <main>)",
+        "Navigation areas (use <nav>)",
+        "Headers/footers (use semantic elements)"
+      ],
+      "autoApply": true,
+      "minSuccessRate": 0.8
+    },
+    "entry-meta-aria-label-001": {
+      "enabled": true,
+      "category": "accessibility",
+      "severity": "error",
+      "pattern": {
+        "selector": "div.entry-meta",
+        "conditions": [
+          "post metadata wrapper",
+          "header or footer context",
+          "missing aria-label"
+        ],
+        "filePatterns": [
+          "inc/modules/blog-layouts/template-parts/**/content*.php",
+          "template-parts/content*.php",
+          "template-parts/single-post/**/*.php"
+        ]
+      },
+      "action": {
+        "add": [
+          {
+            "attribute": "aria-label",
+            "value": "{{context}}",
+            "required": true,
+            "contextMap": {
+              "header": "Entry metadata",
+              "footer": "Entry footer metadata",
+              "comments": "Entry comments metadata"
+            }
+          }
+        ]
+      },
+      "examples": {
+        "before": "<div class=\"entry-meta\">",
+        "after": "<div class=\"entry-meta\" aria-label=\"Entry metadata\">"
+      },
+      "exceptions": [
+        "Entry meta that already exposes aria-label",
+        "Programmatic wrappers handled by WordPress core filters"
+      ],
+      "autoApply": true,
+      "minSuccessRate": 0.85
+    },
+    "schema-org-webpage-001": {
+      "enabled": true,
+      "category": "seo",
+      "severity": "warning",
+      "pattern": {
+        "selector": "div#page",
+        "conditions": [
+          "page container",
+          "missing schema markup"
+        ]
+      },
+      "action": {
+        "add": [
+          {
+            "attribute": "itemscope",
+            "value": "",
+            "required": true
+          },
+          {
+            "attribute": "itemtype",
+            "value": "https://schema.org/WebPage",
+            "required": true
+          }
+        ]
+      },
+      "examples": {
+        "before": "<div id=\"page\" class=\"site\">",
+        "after": "<div id=\"page\" class=\"site\" itemscope itemtype=\"https://schema.org/WebPage\">"
+      },
+      "exceptions": [],
+      "autoApply": true,
+      "minSuccessRate": 0.9
+    },
+    "schema-org-header-001": {
+      "enabled": true,
+      "category": "seo",
+      "severity": "warning",
+      "pattern": {
+        "selector": "header#masthead, header.site-header",
+        "conditions": [
+          "site header",
+          "missing schema markup and role"
+        ]
+      },
+      "action": {
+        "add": [
+          {
+            "attribute": "itemscope",
+            "value": "",
+            "required": true
+          },
+          {
+            "attribute": "itemtype",
+            "value": "https://schema.org/WPHeader",
+            "required": true
+          },
+          {
+            "attribute": "role",
+            "value": "banner",
+            "required": true
+          }
+        ]
+      },
+      "examples": {
+        "before": "<header id=\"masthead\" class=\"site-header\">",
+        "after": "<header id=\"masthead\" class=\"site-header\" itemscope itemtype=\"https://schema.org/WPHeader\" role=\"banner\">"
+      },
+      "exceptions": [],
+      "autoApply": true,
+      "minSuccessRate": 0.9
+    },
+    "schema-org-footer-001": {
+      "enabled": true,
+      "category": "seo",
+      "severity": "warning",
+      "pattern": {
+        "selector": "footer#colophon, footer.site-footer",
+        "conditions": [
+          "site footer",
+          "missing schema markup and role"
+        ]
+      },
+      "action": {
+        "add": [
+          {
+            "attribute": "itemscope",
+            "value": "",
+            "required": true
+          },
+          {
+            "attribute": "itemtype",
+            "value": "https://schema.org/WPFooter",
+            "required": true
+          },
+          {
+            "attribute": "role",
+            "value": "contentinfo",
+            "required": true
+          }
+        ]
+      },
+      "examples": {
+        "before": "<footer id=\"colophon\" class=\"site-footer\">",
+        "after": "<footer id=\"colophon\" class=\"site-footer\" itemscope itemtype=\"https://schema.org/WPFooter\" role=\"contentinfo\">"
+      },
+      "exceptions": [],
+      "autoApply": true,
+      "minSuccessRate": 0.9
+    },
+    "schema-org-organization-001": {
+      "enabled": true,
+      "category": "seo",
+      "severity": "warning",
+      "pattern": {
+        "selector": "div.site-branding, div.header-container",
+        "conditions": [
+          "site branding or header container",
+          "missing organization schema"
+        ]
+      },
+      "action": {
+        "add": [
+          {
+            "attribute": "itemscope",
+            "value": "",
+            "required": true
+          },
+          {
+            "attribute": "itemtype",
+            "value": "https://schema.org/Organization",
+            "required": true
+          }
+        ]
+      },
+      "examples": {
+        "before": "<div class=\"site-branding\">",
+        "after": "<div class=\"site-branding\" itemscope itemtype=\"https://schema.org/Organization\">"
+      },
+      "exceptions": [],
+      "autoApply": true,
+      "minSuccessRate": 0.9
+    },
+    "schema-org-blogposting-001": {
+      "enabled": true,
+      "category": "seo",
+      "severity": "warning",
+      "pattern": {
+        "selector": "article.post, article[class*='post']",
+        "conditions": [
+          "blog post article",
+          "missing BlogPosting schema"
+        ],
+        "filePatterns": [
+          "template-parts/content*.php",
+          "template-parts/single-post/**/*.php"
+        ]
+      },
+      "action": {
+        "add": [
+          {
+            "attribute": "itemscope",
+            "value": "",
+            "required": true
+          },
+          {
+            "attribute": "itemtype",
+            "value": "https://schema.org/BlogPosting",
+            "required": true
+          }
+        ]
+      },
+      "examples": {
+        "before": "<article id=\"post-123\" class=\"post-default\">",
+        "after": "<article id=\"post-123\" class=\"post-default\" itemscope itemtype=\"https://schema.org/BlogPosting\">"
+      },
+      "exceptions": [],
+      "autoApply": true,
+      "minSuccessRate": 0.9
+    },
+    "schema-org-blogposting-props-001": {
+      "enabled": true,
+      "category": "seo",
+      "severity": "warning",
+      "pattern": {
+        "selector": "article[itemtype*='BlogPosting']",
+        "conditions": [
+          "BlogPosting article",
+          "missing microdata properties"
+        ]
+      },
+      "action": {
+        "add": [
+          {
+            "attribute": "itemprop",
+            "value": "headline",
+            "target": "h1.entry-title, h2.entry-title, h3.entry-title",
+            "required": false
+          },
+          {
+            "attribute": "itemprop",
+            "value": "url",
+            "target": "a[rel='bookmark']",
+            "required": false
+          },
+          {
+            "attribute": "itemprop",
+            "value": "description",
+            "target": ".entry-summary, .entry-excerpt",
+            "required": false
+          },
+          {
+            "attribute": "itemprop",
+            "value": "datePublished",
+            "target": "time.entry-date",
+            "required": false
+          },
+          {
+            "attribute": "itemprop",
+            "value": "author",
+            "target": ".byline, .author",
+            "required": false
+          },
+          {
+            "attribute": "itemprop",
+            "value": "image",
+            "target": ".post-thumbnail figure, .post-thumbnail img",
+            "required": false
+          }
+        ]
+      },
+      "examples": {
+        "before": "<h3 class=\"entry-title\"><a href=\"...\" rel=\"bookmark\">Title</a></h3>",
+        "after": "<h3 class=\"entry-title\"><a href=\"...\" rel=\"bookmark\" itemprop=\"url\"><span itemprop=\"headline\">Title</span></a></h3>"
+      },
+      "exceptions": [],
+      "autoApply": true,
+      "minSuccessRate": 0.85
+    },
+    "schema-org-blog-001": {
+      "enabled": true,
+      "category": "seo",
+      "severity": "warning",
+      "pattern": {
+        "selector": "main.site-main, section.posts-list",
+        "conditions": [
+          "blog listing container",
+          "missing Blog schema"
+        ],
+        "filePatterns": [
+          "index.php",
+          "template-parts/posts-loop.php",
+          "archive.php"
+        ]
+      },
+      "action": {
+        "add": [
+          {
+            "attribute": "itemscope",
+            "value": "",
+            "required": true
+          },
+          {
+            "attribute": "itemtype",
+            "value": "https://schema.org/Blog",
+            "required": true
+          }
+        ]
+      },
+      "examples": {
+        "before": "<main id=\"main\" class=\"site-main\">",
+        "after": "<main id=\"main\" class=\"site-main\" itemscope itemtype=\"https://schema.org/Blog\">"
+      },
+      "exceptions": [],
+      "autoApply": true,
+      "minSuccessRate": 0.9
+    },
+    "aria-role-main-001": {
+      "enabled": true,
+      "category": "accessibility",
+      "severity": "error",
+      "pattern": {
+        "selector": "main#main, main.site-main, div#content",
+        "conditions": [
+          "main content container",
+          "missing role=\"main\""
+        ]
+      },
+      "action": {
+        "add": [
+          {
+            "attribute": "role",
+            "value": "main",
+            "required": true
+          }
+        ]
+      },
+      "examples": {
+        "before": "<main id=\"main\" class=\"site-main\">",
+        "after": "<main id=\"main\" class=\"site-main\" role=\"main\">"
+      },
+      "exceptions": [
+        "Elements that already have implicit main role"
+      ],
+      "autoApply": true,
+      "minSuccessRate": 0.9
+    },
+    "schema-org-person-001": {
+      "enabled": true,
+      "category": "seo",
+      "severity": "warning",
+      "pattern": {
+        "selector": ".byline, .author, span.author",
+        "conditions": [
+          "author metadata",
+          "missing Person schema"
+        ]
+      },
+      "action": {
+        "add": [
+          {
+            "attribute": "itemprop",
+            "value": "author",
+            "required": true
+          },
+          {
+            "attribute": "itemscope",
+            "value": "",
+            "required": true
+          },
+          {
+            "attribute": "itemtype",
+            "value": "https://schema.org/Person",
+            "required": true
+          }
+        ]
+      },
+      "examples": {
+        "before": "<span class=\"byline\"><a href=\"...\">Author Name</a></span>",
+        "after": "<span class=\"byline\" itemprop=\"author\" itemscope itemtype=\"https://schema.org/Person\"><a href=\"...\" itemprop=\"url\"><span itemprop=\"name\">Author Name</span></a></span>"
+      },
+      "exceptions": [],
+      "autoApply": true,
+      "minSuccessRate": 0.85
+    },
+    "schema-org-imageobject-001": {
+      "enabled": true,
+      "category": "seo",
+      "severity": "warning",
+      "pattern": {
+        "selector": "figure.post-thumbnail, .post-thumbnail figure",
+        "conditions": [
+          "post thumbnail",
+          "missing ImageObject schema"
+        ]
+      },
+      "action": {
+        "add": [
+          {
+            "attribute": "itemprop",
+            "value": "image",
+            "required": true
+          },
+          {
+            "attribute": "itemscope",
+            "value": "",
+            "required": true
+          },
+          {
+            "attribute": "itemtype",
+            "value": "https://schema.org/ImageObject",
+            "required": true
+          }
+        ]
+      },
+      "examples": {
+        "before": "<figure class=\"post-thumbnail\"><a href=\"...\"><img src=\"...\" /></a></figure>",
+        "after": "<figure class=\"post-thumbnail\" itemprop=\"image\" itemscope itemtype=\"https://schema.org/ImageObject\"><a href=\"...\" itemprop=\"url\"><img src=\"...\" itemprop=\"image\" /></a></figure>"
+      },
+      "exceptions": [],
+      "autoApply": true,
+      "minSuccessRate": 0.85
+    },
+    "schema-org-sitenavigation-001": {
+      "enabled": true,
+      "category": "seo",
+      "severity": "warning",
+      "pattern": {
+        "selector": "nav.posts-list-navigation, nav.page-links",
+        "conditions": [
+          "content navigation",
+          "missing SiteNavigationElement schema"
+        ]
+      },
+      "action": {
+        "add": [
+          {
+            "attribute": "itemscope",
+            "value": "",
+            "required": true
+          },
+          {
+            "attribute": "itemtype",
+            "value": "https://schema.org/SiteNavigationElement",
+            "required": true
+          }
+        ]
+      },
+      "examples": {
+        "before": "<nav class=\"posts-list-navigation\" aria-label=\"Posts navigation\">",
+        "after": "<nav class=\"posts-list-navigation\" aria-label=\"Posts navigation\" itemscope itemtype=\"https://schema.org/SiteNavigationElement\">"
+      },
+      "exceptions": [],
+      "autoApply": true,
+      "minSuccessRate": 0.9
+    }
+  },
+  "ruleCategories": {
+    "accessibility": {
+      "enabled": true,
+      "priority": "low",
+      "description": "ARIA attributes, roles, screen reader support"
+    },
+    "semantic_html": {
+      "enabled": true,
+      "priority": "high",
+      "description": "Element replacement, semantic structure"
+    },
+    "performance": {
+      "enabled": true,
+      "priority": "high",
+      "description": "Optimization, minification, loading"
+    },
+    "seo": {
+      "enabled": true,
+      "priority": "high",
+      "description": "Structured data, meta tags, schema markup"
+    }
+  },
+  "settings": {
+    "autoApply": {
+      "enabled": true,
+      "minSuccessRate": 0.8,
+      "requireValidation": true
+    },
+    "validation": {
+      "html": true,
+      "accessibility": true,
+      "performance": false
+    },
+    "reporting": {
+      "level": "error",
+      "format": "detailed"
+    }
+  },
+  "patterns": {
+    "navigation": {
+      "ariaLabelFormat": "{{context}} navigation",
+      "contexts": [
+        "Main",
+        "Footer",
+        "Social",
+        "Post",
+        "Comment",
+        "Archive",
+        "Search"
+      ]
+    },
+    "decorative": {
+      "ariaLabelFormat": "{{context}}",
+      "contexts": [
+        "Page loading",
+        "Content loading",
+        "Image loading"
+      ]
+    },
+    "complementary": {
+      "ariaLabelFormat": "{{context}}",
+      "contexts": [
+        "Top Panel",
+        "Sidebar",
+        "Related Content",
+        "Widget Area"
+      ]
+    },
+    "structured_data": {
+      "schemaTypes": [
+        "WebPage",
+        "WPHeader",
+        "WPFooter",
+        "Organization",
+        "Blog",
+        "BlogPosting",
+        "Person",
+        "ImageObject",
+        "SiteNavigationElement",
+        "WebPage"
+      ],
+      "microdataProperties": [
+        "headline",
+        "url",
+        "description",
+        "text",
+        "datePublished",
+        "author",
+        "name",
+        "image",
+        "logo",
+        "copyrightHolder"
+      ]
+    }
+  },
+  "ignore": {
+    "files": [
+      "node_modules/**",
+      "vendor/**",
+      "framework/**"
+    ],
+    "patterns": [
+      "WordPress core elements",
+      "Third-party plugin output"
+    ]
+  }
+}
+

@@ -20,7 +20,7 @@ get_header();
 
 				<?php do_action( 'kava-theme/site/main-before', 'single' ); ?>
 
-				<main id="main" class="site-main"><?php
+				<main id="main" class="site-main" role="main" itemscope itemtype="https://schema.org/Blog"><?php
 					while ( have_posts() ) : the_post();
 
 						kava_theme()->do_location( 'single', 'template-parts/content-post' );

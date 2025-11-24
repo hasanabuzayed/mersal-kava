@@ -12,7 +12,7 @@ if ( ! kava_is_top_panel_visible() ) {
 	return;
 } ?>
 
-<div class="top-panel container">
+<div class="top-panel container" role="complementary" aria-label="<?php esc_attr_e( 'Top Panel', 'kava' ); ?>" itemscope itemtype="https://schema.org/WPSideBar">
 	<div class="space-between-content">
 		<div class="top-panel-content__left">
 				<?php do_action( 'kava-theme/top-panel/elements-left' ); ?>

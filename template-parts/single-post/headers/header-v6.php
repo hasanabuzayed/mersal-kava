@@ -13,7 +13,7 @@ $author_block_enabled = kava_theme()->customizer->get_value( 'single_author_bloc
 
 <div class="single-header-6">
 	<header class="entry-header">
-		<div class="entry-meta">
+		<div class="entry-meta" aria-label="<?php esc_attr_e( 'Entry metadata', 'kava' ); ?>">
 			<?php
 				kava_posted_in( [
 					'delimiter' => '',

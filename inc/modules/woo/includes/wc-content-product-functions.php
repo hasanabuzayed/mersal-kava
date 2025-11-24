@@ -25,13 +25,13 @@ add_filter( 'woocommerce_loop_add_to_cart_link', 'kava_wc_loop_add_to_cart_link'
 add_action( 'woocommerce_before_subcategory', 'kava_wc_loop_category_content_open', 1 );
 add_action( 'woocommerce_after_subcategory', 'kava_wc_loop_category_content_close', 40 );
 
-if ( ! function_exists( 'kava_wc_loop_product_content_open' ) ) {
+	if ( ! function_exists( 'kava_wc_loop_product_content_open' ) ) {
 
 	/**
 	 * Content product wrapper open
 	 */
 	function kava_wc_loop_product_content_open() {
-		echo '<div class="product-content">';
+		echo '<div class="product-content" aria-label="' . esc_attr__( 'Product content', 'kava' ) . '" itemscope itemtype="https://schema.org/Product">';
 	}
 
 }
@@ -47,13 +47,13 @@ if ( ! function_exists( 'kava_wc_loop_product_content_close' ) ) {
 
 }
 
-if ( ! function_exists( 'kava_wc_template_loop_product_title' ) ) {
+	if ( ! function_exists( 'kava_wc_template_loop_product_title' ) ) {
 
 	/**
 	 * Show the product title in the product loop. By default this is an H2.
 	 */
 	function kava_wc_template_loop_product_title() {
-		echo '<h2 class="woocommerce-loop-product__title"><a href="' . esc_url( get_the_permalink() ) . '">' . get_the_title() . '</a></h2>';
+		echo '<h2 class="woocommerce-loop-product__title"><a href="' . esc_url( get_the_permalink() ) . '" aria-label="' . esc_attr__( 'View product:', 'kava' ) . ' ' . esc_attr( get_the_title() ) . '" itemprop="url"><span itemprop="name">' . get_the_title() . '</span></a></h2>';
 	}
 }
 
@@ -70,12 +70,43 @@ if ( ! function_exists( 'kava_wc_loop_add_to_cart_link' ) ) {
 	 * @return string
 	 */
 	function kava_wc_loop_add_to_cart_link( $html, $product, $args ) {
+		$product_title = $product->get_name();
+		$add_to_cart_text = $product->add_to_cart_text();
+		$aria_label = sprintf(
+			/* translators: %1$s: product name, %2$s: add to cart text */
+			esc_attr__( '%1$s: %2$s', 'kava' ),
+			esc_attr( $product_title ),
+			esc_attr( $add_to_cart_text )
+		);
+		
+		$attributes = $args['attributes'] ?? '';
+		
+		// Convert array attributes to string format if needed
+		if ( is_array( $attributes ) ) {
+			$attributes_string = '';
+			foreach ( $attributes as $key => $value ) {
+				if ( is_string( $key ) && is_string( $value ) ) {
+					$attributes_string .= ' ' . esc_attr( $key ) . '="' . esc_attr( $value ) . '"';
+				}
+			}
+			$attributes = trim( $attributes_string );
+		}
+		
+		// Ensure attributes is a string
+		$attributes = is_string( $attributes ) ? $attributes : '';
+		
+		if ( ! empty( $attributes ) && strpos( $attributes, 'aria-label' ) === false ) {
+			$attributes .= ' aria-label="' . $aria_label . '"';
+		} elseif ( empty( $attributes ) ) {
+			$attributes = 'aria-label="' . $aria_label . '"';
+		}
+		
 		$html = sprintf( '<a href="%s" data-quantity="%s" class="%s" %s><span class="button-text">%s</span></a>',
 			esc_url( $product->add_to_cart_url() ),
 			esc_attr( $args['quantity'] ?? 1 ),
 			esc_attr( $args['class'] ?? 'button' ),
-			$args['attributes'] ?? '',
-			esc_html( $product->add_to_cart_text() )
+			$attributes,
+			esc_html( $add_to_cart_text )
 		);
 
 		return $html;
@@ -83,13 +114,13 @@ if ( ! function_exists( 'kava_wc_loop_add_to_cart_link' ) ) {
 
 }
 
-if ( ! function_exists( 'kava_wc_loop_category_content_open' ) ) {
+	if ( ! function_exists( 'kava_wc_loop_category_content_open' ) ) {
 
 	/**
 	 * Content category wrapper open
 	 */
 	function kava_wc_loop_category_content_open() {
-		echo '<div class="category-content">';
+		echo '<div class="category-content" aria-label="' . esc_attr__( 'Product category content', 'kava' ) . '">';
 	}
 
 }

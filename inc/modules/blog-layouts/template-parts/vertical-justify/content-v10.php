@@ -21,7 +21,7 @@
 	</div><!-- .justify-item-inner-->
 	<div class="justify-item-wrap">
 		<header class="entry-header">
-			<div class="entry-meta">
+			<div class="entry-meta" aria-label="<?php esc_attr_e( 'Entry metadata', 'kava' ); ?>">
 				<?php
 				kava_posted_by();
 				kava_posted_in( [
@@ -40,7 +40,7 @@
 		</header><!-- .entry-header -->
 		<?php kava_post_excerpt(); ?>
 		<footer class="entry-footer">
-			<div class="entry-meta">
+			<div class="entry-meta" aria-label="<?php esc_attr_e( 'Entry footer metadata', 'kava' ); ?>">
 				<?php
 				$post_more_btn_enabled = strlen( kava_theme()->customizer->get_value( 'blog_read_more_text' ) ) > 0 ? true : false;
 
